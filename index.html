@@ -24,30 +24,6 @@
         </div>
     </header>
 
-    <section class="search-tools">
-        <div class="search-tools-container">
-            <div class="search-dropdown" id="manufacturerDropdown">
-                <div class="search-options" id="manufacturerOptions"></div>
-            </div>
-            <div class="search-dropdown" id="fuelTypeDropdown">
-                <div class="search-options" id="fuelTypeOptions"></div>
-            </div>
-            <div class="search-dropdown" id="vehicleTypeDropdown">
-                <div class="search-options" id="vehicleTypeOptions"></div>
-            </div>
-            <label for="priceRange">Price Range:</label>
-            <input type="range" id="priceRange" name="priceRange" min="0" max="100000" value="0">
-            <span id="priceRangeMin"></span> <!-- Display minimum price here -->
-            <span id="priceRangeValue">0</span>
-
-            <label for="mileageRange">Mileage Range:</label>
-            <input type="range" id="mileageRange" name="mileageRange" min="0" max="200000" value="0" step="1000">
-            <span id="mileageRangeMin"></span> <!-- Display minimum mileage here -->
-            <span id="mileageRangeValue">0</span>
-
-        </div>
-    </section>
-
     <section class="listings-info">
         <div class="listing-count" id="listingCount">Loading...</div>
         <div class="sort-dropdown">
@@ -84,18 +60,6 @@
             }));
         }
 
-        function renderOptions(containerId, options) {
-            const searchOptions = document.getElementById(containerId);
-            searchOptions.innerHTML = '';
-            options.forEach(option => {
-                const optionElement = document.createElement('label');
-                optionElement.innerHTML = `
-                    <input type="checkbox" name="${containerId}" value="${option}" checked> ${option}
-                `;
-                searchOptions.appendChild(optionElement);
-            });
-        }
-
         document.addEventListener('DOMContentLoaded', async () => {
             const carsData = await fetchCarsData();
 
@@ -127,86 +91,16 @@
                 }
             });
 
-            const uniqueManufacturers = [...new Set(carsData.map(car => car.Manufacturer))];
-            const uniqueFuelTypes = [...new Set(carsData.map(car => car.Fuel))];
-            const uniqueVehicleTypes = [...new Set(carsData.map(car => car.Car))];
-
-            renderOptions('manufacturerOptions', uniqueManufacturers);
-            renderOptions('fuelTypeOptions', uniqueFuelTypes);
-            renderOptions('vehicleTypeOptions', uniqueVehicleTypes);
-
-            const calculateRange = (data, property) => {
-                const values = data.map(car => parseFloat(car[property]));
-                const minValue = Math.ceil(Math.min(...values) / 1000) * 1000;
-                const maxValue = Math.ceil(Math.max(...values) / 1000) * 1000;
-                return { minValue, maxValue };
-            };
-
-            const { minValue: minPrice, maxValue: roundedMaxPrice } = calculateRange(carsData, 'Price');
-            const { minValue: minMileage, maxValue: roundedMaxMileage } = calculateRange(carsData, 'Mileage');
-
-            const priceRange = document.getElementById('priceRange');
-            setupRangeSlider(priceRange, minPrice, roundedMaxPrice);
-
-            const mileageRange = document.getElementById('mileageRange');
-            setupRangeSlider(mileageRange, minMileage, roundedMaxMileage);
-
-            document.getElementById('priceRangeMin').textContent = minPrice;
-            document.getElementById('mileageRangeMin').textContent = minMileage;
-
-            document.addEventListener('input', event => {
-                const { target } = event;
-                if (
-                    target.matches('input[type="checkbox"]') ||
-                    target.matches('#priceRange') ||
-                    target.matches('#mileageRange') ||
-                    target.matches('#sortOptions')
-                ) {
-                    renderCarListings(carsData);
-                }
-            });
-
-            priceRange.addEventListener('input', () => {
-                updateRangeValueDisplay(priceRange, 'priceRangeValue');
-            });
-
-            mileageRange.addEventListener('input', () => {
-                updateRangeValueDisplay(mileageRange, 'mileageRangeValue');
-            });
-
             renderCarListings(carsData);
         });
-
-        function setupRangeSlider(rangeElement, minValue, maxValue) {
-            rangeElement.setAttribute('min', minValue);
-            rangeElement.setAttribute('max', maxValue);
-            rangeElement.setAttribute('step', '1000');
-            rangeElement.value = maxValue;
-        }
-
-        function updateRangeValueDisplay(rangeElement, displayElementId) {
-            const rangeValueDisplay = document.getElementById(displayElementId);
-            rangeValueDisplay.textContent = rangeElement.value;
-        }
 
         function renderCarListings(carsData) {
             const container = document.getElementById('carListings');
             container.innerHTML = '';
 
-            const selectedManufacturers = getSelectedOptions('manufacturerOptions');
-            const selectedFuelTypes = getSelectedOptions('fuelTypeOptions');
-            const selectedVehicleTypes = getSelectedOptions('vehicleTypeOptions');
-            const maxPrice = parseFloat(document.getElementById('priceRange').value) || Infinity;
-            const maxMileage = parseFloat(document.getElementById('mileageRange').value) || Infinity;
             const sortOption = document.getElementById('sortLabel').textContent.split(': ')[1].trim();
 
-            let filteredCars = carsData.filter(car =>
-                selectedManufacturers.includes(car.Manufacturer) &&
-                selectedFuelTypes.includes(car.Fuel) &&
-                selectedVehicleTypes.includes(car.Car) &&
-                car.Price <= maxPrice &&
-                car.Mileage <= maxMileage
-            );
+            let filteredCars = [...carsData];
 
             if (sortOption === 'Lowest Price') {
                 filteredCars.sort((a, b) => a.Price - b.Price);
@@ -227,7 +121,7 @@
 
             filteredCars.forEach(car => {
                 const title = `${car.Manufacturer} ${car.Model} ${car.Year}`;
-                const imageUrl = `images/${car.Reference.toLowerCase()}/cover.jpg`;
+                const imageUrl = `images/${car.Reference}/cover.jpg`;
 
                 const details = Object.entries(car)
                     .filter(([key]) => ['Mileage', 'Transmission', 'Engine', 'Power', 'Fuel', 'Color'].includes(key))
@@ -239,7 +133,6 @@
                     `).join('');
 
                 const financePrice = calculateFinancePrice(car.Price);
-                const monthlyPayment = calculateMonthlyPayment(car.Price);
 
                 const carElement = `
                     <a href="car-details.html?id=${car.Reference}" class="car-container">
@@ -271,26 +164,7 @@
 
             return financePrice;
         }
-
-        function calculateMonthlyPayment(price) {
-            const financePrice = calculateFinancePrice(price);
-            const loanTermMonths = 60;
-
-            const monthlyPayment = financePrice / loanTermMonths;
-            return monthlyPayment;
-        }
-
-        function getSelectedOptions(containerId) {
-            const checkboxes = document.querySelectorAll(`input[name="${containerId}"]:checked`);
-            return Array.from(checkboxes).map(input => input.value);
-        }
     </script>
 </body>
 
 </html>
-
-
-
-
-
-

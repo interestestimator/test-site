@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        #carDetailsContainer {
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: auto;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #f8f8f8;
+        }
+        #carImage {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        #carInfoContainer {
+            color: #333;
+        }
+        h2 {
+            color: #007bff;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="carDetailsContainer">
+        <div id="carImageContainer"></div>
+        <div id="carInfoContainer"></div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const carReference = urlParams.get('id');
+
+            if (carReference) {
+                const carDetails = await fetchCarDetails(carReference);
+
+                if (carDetails) {
+                    renderCarDetails(carDetails);
+                }
+            }
+        });
+
+        async function fetchCarDetails(reference) {
+            try {
+                const [carResponse, imageResponse] = await Promise.all([
+                    fetch(`images/${reference}/data.json`),
+                    fetch(`images/${reference}/cover.jpg`)
+                ]);
+
+                const carData = await carResponse.json();
+                const imageUrl = URL.createObjectURL(await imageResponse.blob());
+
+                return { ...carData, imageUrl };
+            } catch (error) {
+                console.error('Error fetching car details:', error);
+                return null;
+            }
+        }
+
+        function renderCarDetails(car) {
+            const carInfoContainer = document.getElementById('carInfoContainer');
+            const carImageContainer = document.getElementById('carImageContainer');
+
+            // Render car image
+            const carImage = document.createElement('img');
+            carImage.src = car.imageUrl;
+            carImage.alt = `${car.Manufacturer} ${car.Model}`;
+            carImage.id = 'carImage';
+            carImageContainer.appendChild(carImage);
+
+            // Render car information
+            let carDetailsHTML = `
+                <h2>${car.Manufacturer} ${car.Model} ${car.Year}</h2>
+                <p>Price: ${car.Price}</p>
+                <p>Mileage: ${car.Mileage}</p>
+            `;
+
+            // Loop through all properties in the car object (excluding imageUrl)
+            for (const property in car) {
+                if (car.hasOwnProperty(property) && property !== 'imageUrl') {
+                    carDetailsHTML += `<p><strong>${property}:</strong> ${car[property]}</p>`;
+                }
+            }
+
+            carInfoContainer.innerHTML = carDetailsHTML;
+        }
+    </script>
+</body>
+</html>
+
+

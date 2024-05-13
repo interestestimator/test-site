@@ -51,18 +51,24 @@
     <section class="listings-info">
         <div class="listing-count" id="listingCount">Loading...</div>
         <div class="sort-dropdown">
-            <label for="sortOptions">
+            <label id="sortLabel" class="sort-label">
                 <object type="image/svg+xml" data="icons/sort-icon.svg" width="20" height="20">
                     Your browser does not support SVG
-                </object> Sort
+                </object> Sort: Relevance
             </label>
-            <select id="sortOptions">
-                <option value="relevance">Relevance</option>
-                <option value="price-asc">Lowest Price</option>
-                <option value="price-desc">Highest Price</option>
-                <option value="mileage-asc">Lowest Mileage</option>
-                <option value="mileage-desc">Highest Mileage</option>
-            </select>
+            <div class="sort-popup" id="sortPopup" style="display: none;">
+                <div class="popup-title">
+                    <div class="sort-text">Sort</div>
+                    <button class="close-button" id="closeSortPopup">Close</button>
+                </div>
+                <div class="sort-options-container">
+                    <div class="sort-option" data-value="relevance">Relevance</div>
+                    <div class="sort-option" data-value="price-asc">Lowest Price</div>
+                    <div class="sort-option" data-value="price-desc">Highest Price</div>
+                    <div class="sort-option" data-value="mileage-asc">Lowest Mileage</div>
+                    <div class="sort-option" data-value="mileage-desc">Highest Mileage</div>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -84,14 +90,42 @@
             options.forEach(option => {
                 const optionElement = document.createElement('label');
                 optionElement.innerHTML = `
-            <input type="checkbox" name="${containerId}" value="${option}" checked> ${option}
-        `;
+                    <input type="checkbox" name="${containerId}" value="${option}" checked> ${option}
+                `;
                 searchOptions.appendChild(optionElement);
             });
         }
 
         document.addEventListener('DOMContentLoaded', async () => {
             const carsData = await fetchCarsData();
+
+            const sortLabel = document.getElementById('sortLabel');
+            const sortPopup = document.getElementById('sortPopup');
+            const closeSortPopupButton = document.getElementById('closeSortPopup');
+
+            sortLabel.addEventListener('click', () => {
+                // Toggle visibility of sort popup
+                sortPopup.style.display = sortPopup.style.display === 'none' ? 'block' : 'none';
+            });
+
+            closeSortPopupButton.addEventListener('click', () => {
+                // Close the sort popup
+                sortPopup.style.display = 'none';
+            });
+
+            sortPopup.addEventListener('click', (event) => {
+                if (event.target.classList.contains('sort-option')) {
+                    const selectedValue = event.target.getAttribute('data-value');
+                    // Update displayed text on the label (without removing SVG)
+                    const labelText = sortLabel.querySelector('object').outerHTML; // Preserve SVG
+                    sortLabel.innerHTML = `${labelText} Sort: ${event.target.textContent}`;
+
+                    // Hide the sort popup
+                    sortPopup.style.display = 'none';
+                    // Trigger re-rendering of car listings based on selected sort option
+                    renderCarListings(carsData);
+                }
+            });
 
             const uniqueManufacturers = [...new Set(carsData.map(car => car.Manufacturer))];
             const uniqueFuelTypes = [...new Set(carsData.map(car => car.Fuel))];
@@ -103,7 +137,7 @@
 
             const calculateRange = (data, property) => {
                 const values = data.map(car => parseFloat(car[property]));
-                const minValue = Math.floor(Math.min(...values) / 1000) * 1000;
+                const minValue = Math.ceil(Math.min(...values) / 1000) * 1000;
                 const maxValue = Math.ceil(Math.max(...values) / 1000) * 1000;
                 return { minValue, maxValue };
             };
@@ -155,78 +189,77 @@
             rangeValueDisplay.textContent = rangeElement.value;
         }
 
-        <!-- Inside the renderCarListings function in index.html -->
-function renderCarListings(carsData) {
-    const container = document.getElementById('carListings');
-    container.innerHTML = '';
+        function renderCarListings(carsData) {
+            const container = document.getElementById('carListings');
+            container.innerHTML = '';
 
-    const selectedManufacturers = getSelectedOptions('manufacturerOptions');
-    const selectedFuelTypes = getSelectedOptions('fuelTypeOptions');
-    const selectedVehicleTypes = getSelectedOptions('vehicleTypeOptions');
-    const maxPrice = parseFloat(document.getElementById('priceRange').value) || Infinity;
-    const maxMileage = parseFloat(document.getElementById('mileageRange').value) || Infinity;
-    const sortOption = document.getElementById('sortOptions').value;
+            const selectedManufacturers = getSelectedOptions('manufacturerOptions');
+            const selectedFuelTypes = getSelectedOptions('fuelTypeOptions');
+            const selectedVehicleTypes = getSelectedOptions('vehicleTypeOptions');
+            const maxPrice = parseFloat(document.getElementById('priceRange').value) || Infinity;
+            const maxMileage = parseFloat(document.getElementById('mileageRange').value) || Infinity;
+            const sortOption = document.getElementById('sortLabel').textContent.split(': ')[1].trim();
 
-    let filteredCars = carsData.filter(car =>
-        selectedManufacturers.includes(car.Manufacturer) &&
-        selectedFuelTypes.includes(car.Fuel) &&
-        selectedVehicleTypes.includes(car.Car) &&
-        car.Price <= maxPrice &&
-        car.Mileage <= maxMileage
-    );
+            let filteredCars = carsData.filter(car =>
+                selectedManufacturers.includes(car.Manufacturer) &&
+                selectedFuelTypes.includes(car.Fuel) &&
+                selectedVehicleTypes.includes(car.Car) &&
+                car.Price <= maxPrice &&
+                car.Mileage <= maxMileage
+            );
 
-    if (sortOption === 'price-desc') {
-        filteredCars.sort((a, b) => b.Price - a.Price);
-    } else if (sortOption === 'price-asc') {
-        filteredCars.sort((a, b) => a.Price - b.Price);
-    } else if (sortOption === 'mileage-desc') {
-        filteredCars.sort((a, b) => b.Mileage - a.Mileage);
-    } else if (sortOption === 'mileage-asc') {
-        filteredCars.sort((a, b) => a.Mileage - b.Mileage);
-    }
+            if (sortOption === 'Lowest Price') {
+                filteredCars.sort((a, b) => a.Price - b.Price);
+            } else if (sortOption === 'Highest Price') {
+                filteredCars.sort((a, b) => b.Price - a.Price);
+            } else if (sortOption === 'Lowest Mileage') {
+                filteredCars.sort((a, b) => a.Mileage - b.Mileage);
+            } else if (sortOption === 'Highest Mileage') {
+                filteredCars.sort((a, b) => b.Mileage - a.Mileage);
+            }
 
-    const formatter = new Intl.NumberFormat('eu', {
-        style: 'currency',
-        currency: 'EUR',
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 0,
-    });
+            const formatter = new Intl.NumberFormat('eu', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+            });
 
-    filteredCars.forEach(car => {
-        const title = `${car.Manufacturer} ${car.Model} ${car.Year}`;
-        const imageUrl = `images/${car.Reference.toLowerCase()}/cover.jpg`;
+            filteredCars.forEach(car => {
+                const title = `${car.Manufacturer} ${car.Model} ${car.Year}`;
+                const imageUrl = `images/${car.Reference.toLowerCase()}/cover.jpg`;
 
-        const details = Object.entries(car)
-            .filter(([key]) => ['Mileage', 'Transmission', 'Engine', 'Power', 'Fuel', 'Color'].includes(key))
-            .map(([key, value]) => `
-                <div class="detail-box">
-                    <img class="detail-icon" src="icons/${key.toLowerCase()}.png">
-                    <span>${value}</span>
-                </div>
-            `).join('');
+                const details = Object.entries(car)
+                    .filter(([key]) => ['Mileage', 'Transmission', 'Engine', 'Power', 'Fuel', 'Color'].includes(key))
+                    .map(([key, value]) => `
+                        <div class="detail-box">
+                            <img class="detail-icon" src="icons/${key.toLowerCase()}.png">
+                            <span>${value}</span>
+                        </div>
+                    `).join('');
 
-        const financePrice = calculateFinancePrice(car.Price);
-        const monthlyPayment = calculateMonthlyPayment(car.Price);
+                const financePrice = calculateFinancePrice(car.Price);
+                const monthlyPayment = calculateMonthlyPayment(car.Price);
 
-        const carElement = `
-            <a href="car-details.html/${car.Reference}" class="car-container">
-                <img class="car-image" src="${imageUrl}" alt="${title}">
-                <div class="car-description-container">
-                    <div class="car-title">${title}</div>
-                    <div class="car-details-container">${details}</div>
-                </div>
-                <div class="price-container">
-                    <div class="price">${formatter.format(car.Price)}</div>
-                    <div class="finance-price">${formatter.format(financePrice)}/mo</div>
-                </div>
-            </a>
-        `;
-        container.insertAdjacentHTML('beforeend', carElement);
-    });
+                const carElement = `
+                    <a href="car-details.html?id=${car.Reference}" class="car-container">
+                        <img class="car-image" src="${imageUrl}" alt="${title}">
+                        <div class="car-description-container">
+                            <div class="car-title">${title}</div>
+                            <div class="car-details-container">${details}</div>
+                        </div>
+                        <div class="price-container">
+                            <div class="price">${formatter.format(car.Price)}</div>
+                            <div class="finance-price">${formatter.format(financePrice)}/mo</div>
+                        </div>
+                    </a>
+                `;
+                container.insertAdjacentHTML('beforeend', carElement);
+            });
 
-    const listingCount = document.getElementById('listingCount');
-    listingCount.textContent = `${filteredCars.length} listings`;
-}
+            const listingCount = document.getElementById('listingCount');
+            listingCount.textContent = `${filteredCars.length} listings`;
+        }
 
         function calculateFinancePrice(price) {
             const deposit = 0;
@@ -255,4 +288,5 @@ function renderCarListings(carsData) {
 </body>
 
 </html>
+
 

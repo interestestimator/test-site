@@ -189,77 +189,97 @@
             rangeValueDisplay.textContent = rangeElement.value;
         }
 
-        function renderCarListings(carsData) {
-            const container = document.getElementById('carListings');
-            container.innerHTML = '';
+        async function renderCarListings(carsData) {
+    const container = document.getElementById('carListings');
+    container.innerHTML = '';
 
-            const selectedManufacturers = getSelectedOptions('manufacturerOptions');
-            const selectedFuelTypes = getSelectedOptions('fuelTypeOptions');
-            const selectedVehicleTypes = getSelectedOptions('vehicleTypeOptions');
-            const maxPrice = parseFloat(document.getElementById('priceRange').value) || Infinity;
-            const maxMileage = parseFloat(document.getElementById('mileageRange').value) || Infinity;
-            const sortOption = document.getElementById('sortLabel').textContent.split(': ')[1].trim();
+    const selectedManufacturers = getSelectedOptions('manufacturerOptions');
+    const selectedFuelTypes = getSelectedOptions('fuelTypeOptions');
+    const selectedVehicleTypes = getSelectedOptions('vehicleTypeOptions');
+    const maxPrice = parseFloat(document.getElementById('priceRange').value) || Infinity;
+    const maxMileage = parseFloat(document.getElementById('mileageRange').value) || Infinity;
+    const sortOption = document.getElementById('sortLabel').textContent.split(': ')[1].trim();
 
-            let filteredCars = carsData.filter(car =>
-                selectedManufacturers.includes(car.Manufacturer) &&
-                selectedFuelTypes.includes(car.Fuel) &&
-                selectedVehicleTypes.includes(car.Car) &&
-                car.Price <= maxPrice &&
-                car.Mileage <= maxMileage
-            );
+    let filteredCars = carsData.filter(car =>
+        selectedManufacturers.includes(car.Manufacturer) &&
+        selectedFuelTypes.includes(car.Fuel) &&
+        selectedVehicleTypes.includes(car.Car) &&
+        car.Price <= maxPrice &&
+        car.Mileage <= maxMileage
+    );
 
-            if (sortOption === 'Lowest Price') {
-                filteredCars.sort((a, b) => a.Price - b.Price);
-            } else if (sortOption === 'Highest Price') {
-                filteredCars.sort((a, b) => b.Price - a.Price);
-            } else if (sortOption === 'Lowest Mileage') {
-                filteredCars.sort((a, b) => a.Mileage - b.Mileage);
-            } else if (sortOption === 'Highest Mileage') {
-                filteredCars.sort((a, b) => b.Mileage - a.Mileage);
-            }
+    if (sortOption === 'Lowest Price') {
+        filteredCars.sort((a, b) => a.Price - b.Price);
+    } else if (sortOption === 'Highest Price') {
+        filteredCars.sort((a, b) => b.Price - a.Price);
+    } else if (sortOption === 'Lowest Mileage') {
+        filteredCars.sort((a, b) => a.Mileage - b.Mileage);
+    } else if (sortOption === 'Highest Mileage') {
+        filteredCars.sort((a, b) => b.Mileage - a.Mileage);
+    }
 
-            const formatter = new Intl.NumberFormat('eu', {
-                style: 'currency',
-                currency: 'EUR',
-                minimumFractionDigits: 0,
-                maximumFractionDigits: 0,
-            });
+    const formatter = new Intl.NumberFormat('eu', {
+        style: 'currency',
+        currency: 'EUR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0,
+    });
 
-            filteredCars.forEach(car => {
-                const title = `${car.Manufacturer} ${car.Model} ${car.Year}`;
-                const imageUrl = `images/${car.Reference.toLowerCase()}/cover.jpg`;
+    // Array to hold promises for image loading
+    const imageLoadPromises = [];
 
-                const details = Object.entries(car)
-                    .filter(([key]) => ['Mileage', 'Transmission', 'Engine', 'Power', 'Fuel', 'Color'].includes(key))
-                    .map(([key, value]) => `
-                        <div class="detail-box">
-                            <img class="detail-icon" src="icons/${key.toLowerCase()}.png">
-                            <span>${value}</span>
-                        </div>
-                    `).join('');
+    filteredCars.forEach(car => {
+        const title = `${car.Manufacturer} ${car.Model} ${car.Year}`;
+        const imageUrl = `images/${car.Reference.toLowerCase()}/cover.jpg`;
 
-                const financePrice = calculateFinancePrice(car.Price);
-                const monthlyPayment = calculateMonthlyPayment(car.Price);
+        // Create a new image element to preload the image
+        const img = new Image();
+        img.src = imageUrl;
 
-                const carElement = `
-                    <a href="car-details.html?id=${car.Reference}" class="car-container">
-                        <img class="car-image" src="${imageUrl}" alt="${title}">
-                        <div class="car-description-container">
-                            <div class="car-title">${title}</div>
-                            <div class="car-details-container">${details}</div>
-                        </div>
-                        <div class="price-container">
-                            <div class="price">${formatter.format(car.Price)}</div>
-                            <div class="finance-price">${formatter.format(financePrice)}/mo</div>
-                        </div>
-                    </a>
-                `;
-                container.insertAdjacentHTML('beforeend', carElement);
-            });
+        // Create a promise that resolves when the image is loaded
+        const imageLoadPromise = new Promise((resolve, reject) => {
+            img.onload = () => resolve();
+            img.onerror = reject;
+        });
 
-            const listingCount = document.getElementById('listingCount');
-            listingCount.textContent = `${filteredCars.length} listings`;
-        }
+        imageLoadPromises.push(imageLoadPromise);
+
+        const details = Object.entries(car)
+            .filter(([key]) => ['Mileage', 'Transmission', 'Engine', 'Power', 'Fuel', 'Color'].includes(key))
+            .map(([key, value]) => `
+                <div class="detail-box">
+                    <img class="detail-icon" src="icons/${key.toLowerCase()}.png">
+                    <span>${value}</span>
+                </div>
+            `).join('');
+
+        const financePrice = calculateFinancePrice(car.Price);
+        const monthlyPayment = calculateMonthlyPayment(car.Price);
+
+        const carElement = `
+            <a href="car-details.html?id=${car.Reference}" class="car-container">
+                <img class="car-image" src="${imageUrl}" alt="${title}">
+                <div class="car-description-container">
+                    <div class="car-title">${title}</div>
+                    <div class="car-details-container">${details}</div>
+                </div>
+                <div class="price-container">
+                    <div class="price">${formatter.format(car.Price)}</div>
+                    <div class="finance-price">${formatter.format(financePrice)}/mo</div>
+                </div>
+            </a>
+        `;
+        container.insertAdjacentHTML('beforeend', carElement);
+    });
+
+    // After all images are loaded, update the listing count
+    Promise.all(imageLoadPromises).then(() => {
+        const listingCount = document.getElementById('listingCount');
+        listingCount.textContent = `${filteredCars.length} listings`;
+    }).catch(error => {
+        console.error('Error preloading images:', error);
+    });
+}
 
         function calculateFinancePrice(price) {
             const deposit = 0;
@@ -288,5 +308,7 @@
 </body>
 
 </html>
+
+
 
 

@@ -370,6 +370,8 @@ a {
 }
 
 .popup-option {
+    display: flex;
+    align-items: center;
     cursor: pointer;
     padding: 10px;
     transition: background-color 0.3s ease;
@@ -377,6 +379,10 @@ a {
 
 .popup-option:hover {
     background-color: #f0f0f0;
+}
+
+.popup-option img {
+    margin-right: 10px; /* Adds space between the icon and the text */
 }
 
 
@@ -465,3 +471,10 @@ a {
 .car-status.vendido {
     background: linear-gradient(#edecec 0,#D3D3D3 100%);
 }
+
+
+
+
+
+
+

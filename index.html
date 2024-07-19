@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Used Cars Listings</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="icons/favicon.ico" type="image/x-icon"> <!-- Add this line -->
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
 </head>
-
 <body>
     <div id="header-container"></div>
     <div id="overlay" class="overlay"></div>
@@ -54,7 +52,6 @@
     <script src="loanCalculator.js" defer></script>
     <script src="myPopups.js" defer></script>
 
-
     <script defer>
         async function loadHeader() {
             const response = await fetch('header.html');
@@ -76,15 +73,13 @@
         });
 
         async function fetchCarsData() {
-            const listingsFolder = 'listings/';
+            const listingsFile = 'listings.json';
             try {
-                const response = await fetch(listingsFolder);
-                const html = await response.text();
-                const carFolderNames = Array.from(new DOMParser().parseFromString(html, 'text/html').querySelectorAll('a'))
-                    .map(link => link.href.split('/').filter(Boolean).pop())
-                    .filter(name => name.startsWith('CAR') && /^\d+$/.test(name.slice(3)));
+                const response = await fetch(listingsFile);
+                const data = await response.json();
+                const carFolderNames = data.carFolders;
 
-                return (await Promise.all(carFolderNames.map(folderName => fetchCarData(folderName, listingsFolder))))
+                return (await Promise.all(carFolderNames.map(folderName => fetchCarData(folderName))))
                     .filter(Boolean);
             } catch (error) {
                 console.error('Error fetching car overview data:', error);
@@ -92,9 +87,9 @@
             }
         }
 
-        async function fetchCarData(folderName, listingsFolder) {
+        async function fetchCarData(folderName) {
             try {
-                const response = await fetch(`${listingsFolder}${folderName}/data.json`);
+                const response = await fetch(`${folderName}/data.json`);
                 const jsonData = await response.json();
                 const cc = jsonData.MotorYTransmision.Cilindrada.CC;
                 return {
@@ -221,5 +216,4 @@
         }
     </script>
 </body>
-
 </html>

@@ -356,6 +356,14 @@ a {
     z-index: 1000; /* Ensure pop-up appears above other content */
 }
 
+@media (max-width: 768px) {
+    .popup-container {
+        width: 90%;
+        top: 1rem;
+        left: 50%;
+        transform: translateX(-50%); /* Only translate horizontally */
+    }
+}
 .popup-title {
     display: flex;
     justify-content: space-between;

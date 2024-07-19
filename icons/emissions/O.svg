@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="1 1 222 222">
+  <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+    <circle cx="111" cy="111" r="111" fill="#7AB6CE"/>
+    <rect width="57" height="42.518" x="137" y="111.801" fill="#FFF" rx="6"/>
+    <text fill="#262626" font-family="SegoeUI-Bold, Segoe UI" font-size="130" font-weight="bold">
+      <tspan x="35" y="149">0</tspan>
+    </text>
+    <rect width="48" height="47.242" x="137" y="57" fill="#FFF" rx="6"/>
+  </g>
+</svg>

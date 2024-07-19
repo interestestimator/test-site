@@ -104,6 +104,7 @@
                     make: jsonData.CaracteristicasGenerales.Marca,
                     model: jsonData.CaracteristicasGenerales.Modelo,
                     version: jsonData.CaracteristicasGenerales.Versión,
+                    emissions: jsonData.ConsumoYEmisiones.Etiqueta,
                     capacityCC: `${cc}cc`,
                     capacityLiters: `${(Math.ceil(cc / 100) / 10).toFixed(1)}L`,
                     technology: jsonData.MotorYTransmision.Combustible.Tecnología,
@@ -165,7 +166,7 @@
             container.innerHTML = '';
 
             cars.forEach(car => {
-                const { id, status, photoCount, make, model, version, capacityLiters, technology, colour, body, doors, year, transmission, kilometres, fuel, kilowatts, horsepower, price } = car;
+                const { id, status, photoCount, make, model, version, emissions, capacityLiters, technology, colour, body, doors, year, transmission, kilometres, fuel, kilowatts, horsepower, price } = car;
                 const imageUrl = `listings/${id.toUpperCase()}/images/1.jpg`;
 
                 const vehicleDeposit = price * 0.1; // Deposit is 10%
@@ -179,12 +180,16 @@
                     0.0
                 );
 
-                container.insertAdjacentHTML('beforeend', `
+                // Construct the HTML for each car listing
+                let html = `
                     <a href="car-details.html?id=${id}" class="car-container">
                         <div class="car-image-container">
                             <div class="car-status ${status.toLowerCase()}">${status}</div>
                             <img class="car-image" src="${imageUrl}" alt="${make} ${model}">
-                             <label id="photoCountLabel" class="photo-count-label">
+                            ${emissions !== "" ? `<label id="emissionsLabel" class="emissions-label">
+                                <img src="icons/emissions/${emissions}.svg" alt="Emissions Icon" width="25" height="25">
+                            </label>` : ''}
+                            <label id="photoCountLabel" class="photo-count-label">
                                 <img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${photoCount}
                             </label>
                         </div>
@@ -194,7 +199,7 @@
                         </div>
                         <div class="price-details-container">
                             <div class="price">Precio al contado</div>
-                            <div class="finance-price">Precio financiado: ${formatCurrency(price)}</div>
+                            <div class="finance-price-full">Precio financiado: ${formatCurrency(price)}</div>
                         </div>
                         <div class="price-container">
                             <div class="price">${formatCurrency(price)}</div>
@@ -207,7 +212,9 @@
                             </span> with Santander
                         </div>
                     </a>
-                `);
+                `;
+                
+                container.insertAdjacentHTML('beforeend', html);
             });
 
             document.getElementById('listingCount').textContent = `${cars.length} listings`;
@@ -216,6 +223,3 @@
 </body>
 
 </html>
-
-</html>
-

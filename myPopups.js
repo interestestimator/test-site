@@ -1,6 +1,6 @@
 function setupEventListeners() {
     const popupConfigs = [
-        { labelId: 'filterLabel', popupId: 'filterPopup', closeId: 'closeFilterPopup', action: filterCarsByMake },
+        { labelId: 'filterLabel', popupId: 'filterPopup', closeId: 'closeFilterPopup', action: null },
         { labelId: 'sortLabel', popupId: 'sortPopup', closeId: 'closeSortPopup', action: applySort }
     ];
 
@@ -9,25 +9,25 @@ function setupEventListeners() {
         document.getElementById(config.closeId).onclick = () => hidePopup(config.popupId);
     });
 
-    document.getElementById('manufacturerOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', 'Filter', filterCarsByMake);
-    document.getElementById('sortPopup').onclick = event => handleOptionClick(event, 'sortLabel', 'sortPopup', 'sort-icon', 'Sort', applySort);
-}
+    // Event listener for filter options (manufacturer, fuel, and body)
+    document.getElementById('makeOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', value => filterCars('make', value));
+    document.getElementById('fuelOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', value => filterCars('fuel', value));
+    document.getElementById('bodyOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', value => filterCars('body', value));
 
-function setupPopupToggle(labelId, popupId) {
-    const label = document.getElementById(labelId);
-    const popup = document.getElementById(popupId);
-    const overlay = document.getElementById('overlay');
+    // Event listener for sort options
+    document.getElementById('sortPopup').onclick = event => handleOptionClick(event, 'sortLabel', 'sortPopup', 'sort-icon', applySort);
+}Sort:
 
-    label.onclick = () => {
-        const isPopupVisible = popup.style.display === 'block';
-        hideAllPopups();
-        if (!isPopupVisible) {
-            showPopup(popupId);
+        function setupPopupToggle(labelId, popupId) {
+            const label = document.getElementById(labelId);
+            const popup = document.getElementById(popupId);
+
+            label.addEventListener('click', () => {
+                const isVisible = popup.style.display === 'block';
+                popup.style.display = isVisible ? 'none' : 'block';
+                document.getElementById('overlay').style.display = isVisible ? 'none' : 'block';
+            });
         }
-    };
-
-    overlay.onclick = hideAllPopups;
-}
 
 function hidePopup(popupId) {
     document.getElementById(popupId).style.display = 'none';
@@ -38,10 +38,10 @@ function hideAllPopups() {
     ['filterPopup', 'sortPopup', 'loanPopup'].forEach(hidePopup);
 }
 
-function handleOptionClick(event, labelId, popupId, icon, type, action) {
+function handleOptionClick(event, labelId, popupId, icon, action) {
     if (event.target.classList.contains('popup-option')) {
         const selectedValue = event.target.getAttribute('data-value');
-        document.getElementById(labelId).innerHTML = `<img src="icons/${icon}.svg" alt="${type} Icon" width="20" height="20"> ${type}: ${event.target.textContent}`;
+        document.getElementById(labelId).innerHTML = `<img src="icons/${icon}.svg" alt="${event.target.textContent} Icon" width="20" height="20"> ${event.target.textContent}`;
         hidePopup(popupId);
         action(selectedValue);
     }

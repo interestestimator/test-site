@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,6 +8,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
 </head>
+
 <body>
     <div id="header-container"></div>
     <div id="overlay" class="overlay"></div>
@@ -14,21 +16,23 @@
 
     <section class="listings-info filter-dropdown">
         <label id="filterLabel" class="filter-label">
-            <img src="icons/filter-icon.svg" alt="Filter Icon" width="20" height="20"> Filter: All
+            <img src="icons/filter-icon.svg" alt="Filter Icon" width="20" height="20"> All filters
         </label>
         <div id="filterPopup" class="popup-container" style="display: none;">
             <div class="popup-title">
-                <div class="filter-text">Filter</div>
+                <div class="filter-text">All filters</div>
                 <button id="closeFilterPopup" class="close-button">Close</button>
             </div>
-            <div id="manufacturerOptions" class="filter-options-container"></div>
+            <div id="makeOptions" class="filter-options-container"></div>
+            <div id="fuelOptions" class="filter-options-container"></div>
+            <div id="bodyOptions" class="filter-options-container"></div> <!-- Added body options -->
         </div>
     </section>
 
     <section class="listings-info sort-dropdown">
         <div class="listing-count" id="listingCount">Loading...</div>
         <label id="sortLabel" class="sort-label">
-            <img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Sort: Relevance
+            <img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Relevance
         </label>
         <div id="sortPopup" class="popup-container" style="display: none;">
             <div class="popup-title">
@@ -67,7 +71,7 @@
         document.addEventListener('DOMContentLoaded', async () => {
             carsData = await fetchCarsData();
             filteredCars = [...carsData];
-            renderManufacturerOptions();
+            renderFilterOptions();
             setupEventListeners();
             displayCarListings(filteredCars);
         });
@@ -78,8 +82,6 @@
                 const response = await fetch(listingsFile);
                 const data = await response.json();
                 const carFolderNames = data.carFolders;
-
-                console.log(carFolderNames)
 
                 return (await Promise.all(carFolderNames.map(folderName => fetchCarData(folderName))))
                     .filter(Boolean);
@@ -122,23 +124,40 @@
             }
         }
 
-        function renderManufacturerOptions() {
-            const uniqueManufacturers = [...new Set(carsData.map(car => car.make))];
-            const manufacturerOptions = document.getElementById('manufacturerOptions');
-            manufacturerOptions.innerHTML = `
-                <div class="popup-option" data-value="All">All (${carsData.length})</div>
-                ${uniqueManufacturers.map(manufacturer => `
-                    <div class="popup-option" data-value="${manufacturer}">
-                        ${manufacturer} (${filteredCars.filter(car => car.make === manufacturer).length})
-                    </div>
-                `).join('')}
-            `;
-        }
+        function renderFilterOptions() {
+    const filterConfigs = [
+        { type: 'make', containerId: 'makeOptions', getUniqueValues: car => car.make },
+        { type: 'fuel', containerId: 'fuelOptions', getUniqueValues: car => car.fuel },
+        { type: 'body', containerId: 'bodyOptions', getUniqueValues: car => car.body }
+    ];
 
-        function filterCarsByMake(selectedMake) {
-            filteredCars = (selectedMake === 'All') ? [...carsData] : carsData.filter(car => car.make === selectedMake);
+    filterConfigs.forEach(config => {
+        const uniqueValues = [...new Set(carsData.map(config.getUniqueValues))];
+        const optionsContainer = document.getElementById(config.containerId);
+
+        optionsContainer.innerHTML = `
+            <div class="popup-option" data-value="All">All (${carsData.length})</div>
+            ${uniqueValues.map(value => `
+                <div class="popup-option" data-value="${value}">
+                    <img src="icons/${config.type}/${value}.svg" alt="${value} icon" width="20" height="20"/>
+                    ${value} (${filteredCars.filter(car => config.getUniqueValues(car) === value).length})
+                </div>
+            `).join('')}
+        `;
+    });
+}
+
+        function filterCars(filterType, selectedValue) {
+            if (filterType === 'make') {
+                filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.make === selectedValue);
+            } else if (filterType === 'fuel') {
+                filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.fuel === selectedValue);
+            } else if (filterType === 'body') {
+                filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.body === selectedValue);
+            }
+
             // Change sort label text to "Sort: Relevance"
-            document.getElementById('sortLabel').innerHTML = `<img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Sort: Relevance`;
+            document.getElementById('sortLabel').innerHTML = `<img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Relevance`;
             displayCarListings(filteredCars);
         }
 
@@ -210,7 +229,7 @@
                         </div>
                     </a>
                 `;
-                
+
                 container.insertAdjacentHTML('beforeend', html);
             });
 
@@ -218,4 +237,5 @@
         }
     </script>
 </body>
+
 </html>

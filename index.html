@@ -139,7 +139,7 @@
             <div class="popup-option" data-value="All">All (${carsData.length})</div>
             ${uniqueValues.map(value => `
                 <div class="popup-option" data-value="${value}">
-                    <img src="icons/${config.type}/${value}.svg" alt="${value} icon" width="20" height="20"/>
+                    <img src="icons/${config.type}/${value.toLowerCase()}.svg" alt="${value} icon" width="20" height="20"/>
                     ${value} (${filteredCars.filter(car => config.getUniqueValues(car) === value).length})
                 </div>
             `).join('')}

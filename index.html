@@ -79,6 +79,8 @@
                 const data = await response.json();
                 const carFolderNames = data.carFolders;
 
+                console.log(carFolderNames)
+
                 return (await Promise.all(carFolderNames.map(folderName => fetchCarData(folderName))))
                     .filter(Boolean);
             } catch (error) {

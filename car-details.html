@@ -1,108 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Car Details</title>
+    <title>Car details</title>
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-        }
         #carDetailsContainer {
             display: flex;
-            flex-direction: column;
-            max-width: 600px;
+            max-width: 1000px;
             margin: auto;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            border-radius: 8px;
-            background-color: #f8f8f8;
+            flex-wrap: wrap; /* Allow wrapping to the next line */
         }
-        #carImage {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
+
+
         #carInfoContainer {
+            width: 66.666667%;
+            overflow: hidden;
+        }
+        
+
+        #carImage {
+            border-radius: 1rem 1rem 0 0; /* Apply border-radius only to top corners */
+        }
+
+        #carFinanceContainer {
+            flex: 1;
             color: #333;
+            position: sticky;
+    background: #F7F8F8;
+    margin-left: 1rem;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-top: 5.5rem;
+    border-radius: 1rem;
+  
+}
+
+#carTitle {
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 1.2em; /* Improved line height */
+    padding-top: 1.5rem;
+    padding-bottom: .5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-transform: uppercase; /* Transform text to uppercase */
+}
+
+        #carImageGallery {
+            width: 66.666667%;
+            overflow: hidden;
         }
-        h2 {
-            color: #007bff;
+
+        #carImageContainer {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+            touch-action: pan-y;
         }
+
+.navButtonContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 1rem); /* Adjust width to account for inset margins */
+    padding: 0.5rem; /* Adjust padding to create space on both sides */
+}
+
+.navButton {
+    background-color:  #FFFFFF;
+    color: #141414;
+    border: none;
+    width: 2rem; /* Set width */
+    height: 2rem; /* Set height */
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0.4; /* Initial opacity */
+    transition: opacity 0.3s ease; /* Smooth transition */
+    display: flex; /* Optional: center content */
+    align-items: center; /* Optional: center content */
+    justify-content: center; /* Optional: center content */
+    font-size: 1rem; /* Increase size of Unicode characters */
+    font-weight: bold; /* Optional: Increase font weight if needed */
+    box-sizing: border-box; /* Ensure padding and border are included in the total width and height */
+}
+
+
+#thumbnailContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.1rem;
+    overflow: hidden;
+    border-radius: 0 0 1rem 1rem; /* Apply border-radius only to top corners */
+}
+
+.thumbnail {
+    width: calc(25% - 0.25rem);
+    height: auto; /* Allow the height to adjust based on the image's aspect ratio */
+    object-fit: cover; /* Ensure the image covers the entire container */
+    aspect-ratio: 16/9; /* Set the desired aspect ratio (optional, CSS property supported in modern browsers) */
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+        .thumbnail.active {
+            opacity: 1;
+        }
+
         p {
             margin-bottom: 10px;
         }
+
+        #carFinanceContainer {
+            position: sticky;
+            top: 0;
+
+        }
+
+        .tabs {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .tab {
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            background-color: #F7F8F8;
+        }
+
+        .tab.active {
+            background-color: #FFFFFF;
+            border-bottom: 1px solid #FFFFFF;
+            border-top: 0.3rem solid #55A0D7;
+            color:#D6B156
+        }
+
+        .tab-content {
+            padding: 20px;
+            background-color: #FFFFFF;
+        }
+
+        .content {
+            display: none;
+        }
+
+        .content.active {
+            display: block;
+        }
+
+
+
+
+        #financeContent {
+        text-align: center; /* Center-aligns text */
+        }
+
+        
+#financeSliders input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 8px;
+    background: linear-gradient(to right, #55A0D7 0%, #F7F8F8 0%);
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Custom handle styling */
+#financeSliders input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, #55A0D7 30%, #FFFFFF 20%, #FFFFFF 50%, #55A0D7 50%);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+#financeSliders input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    background: radial-gradient(circle, #55A0D7 30%, #FFFFFF 20%, #FFFFFF 50%, #55A0D7 50%);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Remove outline */
+#financeSliders input[type="range"]::-webkit-slider-runnable-track {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+#financeSliders input[type="range"]::-moz-range-track {
+    background: transparent;
+    border: none;
+}
+
+/* Additional styling for Firefox */
+#financeSliders input[type="range"]::-moz-range-progress {
+    background: #55A0D7;
+    height: 8px;
+    border-radius: 5px;
+}
+
+#overview {
+    font-weight: bold;
+    padding: 1rem;
+}
+
+.h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
     </style>
 </head>
+
 <body>
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <img src="icons/mart-logo.png" alt="Logo">
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
     <div id="carDetailsContainer">
-        <div id="carImageContainer"></div>
-        <div id="carInfoContainer"></div>
+        <div id="carImageGallery">
+            <div id="carTitle"></div> <!-- Car title goes here -->
+            <div id="carImageContainer">
+                <img id="carImage" class="car-image" alt="Car Image">
+                <div class="navButtonContainer" id="navButtons">
+                    <button class="navButton" id="prevImage">&lt;</button>
+                    <button class="navButton" id="nextImage">&gt;</button>
+                </div>
+            </div>
+            <div id="thumbnailContainer"></div>
+
+        </div>
+
+        <div id="carFinanceContainer">
+            <!-- Basic Car Information -->
+            <div class="section" id="overview"></div>
+
+            <!-- Tabs for Finance and Payment Information -->
+            <div class="price-tabs-contain">
+                    <div class="tabs">
+                        <div class="tab" id="tabFinan" onclick="showTab('finance')">
+                            <div>
+                                <small>Financiación desde</small>
+                                <span class="h3" id="preFin">240€/mes</span>
+                            </div>
+                        </div>
+                        <div class="tab active" id="tabInfo" onclick="showTab('normal')">
+                            <div class="text-left">
+                                <small>Precio al contado</small>
+                                <span class="h3" id="preContado"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-content">
+                        <!-- Finance Information Tab -->
+                        <div id="financeContent" class="content" style="display:none;">
+                            <div id="financeSliders">
+                                <div>
+                                    <label for="depositSlider">Entrada Inicial</label>
+                                    <div id="selectedDeposit">12.000 €</div> <!-- Changed to a div for a new line -->
+                                    <input type="range" id="depositSlider" min="0" max="100000" step="1000" value="0">
+                                </div>
+                                <div>
+                                    <label for="yearsSlider">Select Years:</label>
+                                    <input type="range" id="yearsSlider" min="0" max="10" value="0">
+                                    <span id="selectedYears">0 Year</span>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Basic Payment Information Tab -->
+                        <div id="normalContent" class="content" style="display:block;">
+                            <!-- Basic Payment Information Content -->
+                            <!-- Example: Discounts, Delivery Options, Final Price Calculation -->
+                            <p>Normal Payment Information Content here...</p>
+                        </div>
+                    </div>
+            </div>
+            
+        </div>
+        <div id="carInfoContainer">
+            <div class="section" id="carroceria"></div>
+            <div class="section" id="motorYTransmision"></div>
+            <div class="section" id="consumoYEmisiones"></div>
+            <div class="section" id="garantiaContainer"></div>
+            
+            <div class="section" id="equipamiento"></div>
+
+        </div>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const carReference = urlParams.get('id');
+            const state = {
+                currentImageIndex: 0,
+                thumbnailStartIndex: 0,
+                thumbnailCount: 4,
+                imageUrls: [],
+                carReference: null,
+                carData: null
+            };
 
-            if (carReference) {
-                const carDetails = await fetchCarDetails(carReference);
-
-                if (carDetails) {
-                    renderCarDetails(carDetails);
+            async function fetchCarDetails(reference) {
+                try {
+                    const response = await fetch(`listings/${reference}/data.json`);
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    state.carData = await response.json();
+                    console.log('Car data:', state.carData);  // Log the car data here
+                    return state.carData;
+                } catch (error) {
+                    console.error('Error fetching car details:', error);
+                    return null;
                 }
             }
+
+            function getQueryParameter(name) {
+                const urlParams = new URLSearchParams(window.location.search);
+                return urlParams.get(name);
+            }
+
+            async function renderCarDetails(car) {
+                const carTitle = document.getElementById('carTitle');
+                const carImage = document.getElementById('carImage');
+                const thumbnailContainer = document.getElementById('thumbnailContainer');
+                const overviewContainer = document.getElementById('overview');
+                const carroceriaContainer = document.getElementById('carroceria');
+                const motorYTransmisionContainer = document.getElementById('motorYTransmision');
+                const consumoYEmisionesContainer = document.getElementById('consumoYEmisiones');
+                const garantiaContainer = document.getElementById('garantiaContainer');
+                const equipamientoContainer = document.getElementById('equipamiento');
+
+                // Set car title
+                document.title = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Versión} ${car.MotorYTransmision.Combustible.Tipo} - ${car.CaracteristicasGenerales.Color} ${car.Carroceria.Tipo} (${car.Carroceria.Puertas}p)`;
+                carTitle.textContent = document.title;
+
+                // Set initial car image
+                carImage.src = state.imageUrls[state.currentImageIndex];
+                carImage.alt = `${car.CaracteristicasGenerales.Marka} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año}`;
+
+                // Render car information
+                overviewContainer.innerHTML = `
+                    ${car.CaracteristicasGenerales.Año} | ${car.MotorYTransmision.Transmision.Caja} | ${car.CaracteristicasGenerales.Kilometraje} km ${car.MotorYTransmision.Combustible.Tipo} | ${car.MotorYTransmision.Potencia.KW} kW (${car.MotorYTransmision.Potencia.KW} CV)
+                `;
+
+                carroceriaContainer.innerHTML = `
+                    <h2>Carroceria</h2>
+                    <p>VIN: ${car.CaracteristicasGenerales.Bastidor}</p>
+                    <p>Type: ${car.Carroceria.Tipo}</p>
+                    <p>Seats: ${car.Carroceria.Plazas}</p>
+                    <p>Doors: ${car.Carroceria.Puertas}</p>
+                    <p>Max Weight: ${car.Carroceria.PesoMaximo} kg</p>
+                    <p>Dimensions: ${car.Carroceria.Dimensiones.Largo} x ${car.Carroceria.Dimensiones.Ancho} x ${car.Carroceria.Dimensiones.Alto} mm</p>
+                `;
+
+                motorYTransmisionContainer.innerHTML = `
+                    <h2>Motor y Transmisión</h2>
+                    <p>Tipo de Combustible: ${car.MotorYTransmision.Combustible.Tipo}</p>
+                    <p>Tecnología: ${car.MotorYTransmision.Combustible.Tecnología}</p>
+                    <p>Capacidad: ${car.MotorYTransmision.Cilindrada.Cilindros} cilindros, ${car.MotorYTransmision.Cilindrada.CC} cc</p>
+                    <p>Transmisión: ${car.MotorYTransmision.Transmision.Caja}, ${car.MotorYTransmision.Transmision.Marchas} marchas</p>
+                    <p>Potencia: ${car.MotorYTransmision.Potencia.CV} CV (${car.MotorYTransmision.Potencia.KW} KW)</p>
+                    <p>Par: ${car.MotorYTransmision.Par} Nm</p>
+                    <p>Velocidad Máxima: ${car.MotorYTransmision.Rendimiento.VelocidadMáxima} km/h</p>
+                    <p>0-100 km/h: ${car.MotorYTransmision.Rendimiento.Aceleración}s</p>
+                `;
+
+                consumoYEmisionesContainer.innerHTML = `
+                    <h2>Consumo y Emisiones</h2>
+                    <p>Consumo Medio: ${car.ConsumoYEmisiones.Consumo.Medio} l/100km</p>
+                    <p>Consumo Urbano: ${car.ConsumoYEmisiones.Consumo.Urbano} l/100km</p>
+                    <p>Consumo Carretera: ${car.ConsumoYEmisiones.Consumo.Carretera} l/100km</p>
+                    <p>CO2 Emissions: ${car.ConsumoYEmisiones.EmisionesCO2} g/km</p>
+                    <p>Environmental Classification: ${car.ConsumoYEmisiones.Etiqueta}</p>
+                    <p>Depósito: ${car.ConsumoYEmisiones.Depósito} L</p>
+                `;
+
+                garantiaContainer.innerHTML = `
+                    <h2>Garantía</h2>
+                    <p>${car.Garantía.Descripción}</p>
+                    <p>Garantía Estándar: ${car.Garantía.GarantíaEstándar} año(s)</p>
+                    <p>Garantía VIP: ${car.Garantía.GarantíaVIP} año(s)</p>
+                `;
+
+                equipamientoContainer.innerHTML = `
+                    <h2>Equipamiento</h2>
+                    <h3>Exterior</h3>
+                    <ul>${car.Equipamiento.Exterior.map(item => `<li>${item}</li>`).join('')}</ul>
+                    <h3>Interior</h3>
+                    <ul>${car.Equipamiento.Interior.map(item => `<li>${item}</li>`).join('')}</ul>
+                `;
+
+                // Render thumbnails
+                thumbnailContainer.innerHTML = '';
+                for (let i = state.thumbnailStartIndex; i < state.thumbnailStartIndex + state.thumbnailCount; i++) {
+                    if (i < state.imageUrls.length) {
+                        const thumbnail = document.createElement('img');
+                        thumbnail.src = state.imageUrls[i];
+                        thumbnail.alt = `${car.CaracteristicasGenerales.Marka} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año} Thumbnail ${i + 1}`;
+                        thumbnail.classList.add('thumbnail');
+                        if (i === state.currentImageIndex) {
+                            thumbnail.classList.add('active');
+                        }
+                        thumbnail.addEventListener('click', () => showImage(i));
+                        thumbnailContainer.appendChild(thumbnail);
+                    }
+                }
+            }
+
+            function formatPropertyName(propertyName) {
+                return propertyName.charAt(0).toUpperCase() + propertyName.slice(1);
+            }
+
+            function preloadImages(imageUrls) {
+                imageUrls.forEach(url => {
+                    const img = new Image();
+                    img.src = url;
+                });
+            }
+
+            function updateImage() {
+                const carImage = document.getElementById('carImage');
+                carImage.src = state.imageUrls[state.currentImageIndex];
+                const thumbnails = document.querySelectorAll('.thumbnail');
+                thumbnails.forEach((thumb, index) => {
+                    if (index === state.currentImageIndex) {
+                        thumb.classList.add('active');
+                    } else {
+                        thumb.classList.remove('active');
+                    }
+                });
+
+                // Adjust thumbnail start index if necessary to keep the current image in view
+                if (state.currentImageIndex < state.thumbnailStartIndex) {
+                    state.thumbnailStartIndex = state.currentImageIndex;
+                } else if (state.currentImageIndex >= state.thumbnailStartIndex + state.thumbnailCount) {
+                    state.thumbnailStartIndex = state.currentImageIndex - state.thumbnailCount + 1;
+                }
+
+                // Re-render thumbnails
+                renderCarDetails(state.carData);
+            }
+
+            function showImage(index) {
+                state.currentImageIndex = index;
+                updateImage();
+            }
+
+            function showPrevImage() {
+                if (state.currentImageIndex > 0) {
+                    state.currentImageIndex--;
+                } else {
+                    state.currentImageIndex = state.imageUrls.length - 1;
+                }
+                updateImage();
+            }
+
+            function showNextImage() {
+                if (state.currentImageIndex < state.imageUrls.length - 1) {
+                    state.currentImageIndex++;
+                } else {
+                    state.currentImageIndex = 0;
+                }
+                updateImage();
+            }
+
+            state.carReference = getQueryParameter('id');
+
+            if (!state.carReference) {
+                document.getElementById('carDetailsContainer').innerHTML = '<p>No car reference provided.</p>';
+                return;
+            }
+
+            const carDetails = await fetchCarDetails(state.carReference);
+
+            if (carDetails) {
+                const imagesCount = carDetails.JavaScriptInfo.cantidadImágenes || 5;
+                state.imageUrls = Array.from({ length: imagesCount }, (_, i) => `listings/${state.carReference}/images/${i + 1}.jpg`);
+                preloadImages(state.imageUrls);
+                await renderCarDetails(carDetails);
+
+                document.getElementById('prevImage').addEventListener('click', showPrevImage);
+                document.getElementById('nextImage').addEventListener('click', showNextImage);
+            }
+
+            // Event listeners for navigation buttons
+            const prevImageBtn = document.getElementById('prevImage');
+            const nextImageBtn = document.getElementById('nextImage');
+
+            prevImageBtn.addEventListener('mouseenter', () => {
+                prevImageBtn.style.opacity = 0.8; // Full opacity on hover
+            });
+
+            prevImageBtn.addEventListener('mouseleave', () => {
+                prevImageBtn.style.opacity = 0.4; // Reduced opacity on leave
+            });
+
+            nextImageBtn.addEventListener('mouseenter', () => {
+                nextImageBtn.style.opacity = 0.8; // Full opacity on hover
+            });
+
+            nextImageBtn.addEventListener('mouseleave', () => {
+                nextImageBtn.style.opacity = 0.4; // Reduced opacity on leave
+            });
+
+
+            // Fetch initial price data here
+        const precioContado = state.carData.CaracteristicasGenerales.PrecioNuevo;
+        document.getElementById('preContado').textContent = `${precioContado.toLocaleString('es-ES')}€`;
+
+
+
+            // Event listeners for finance sliders
+            yearsSlider.addEventListener('input', () => {
+                selectedYears.textContent = `${yearsSlider.value} Year${yearsSlider.value > 1 ? 's' : ''}`;
+            });
+
+            depositSlider.addEventListener('input', () => {
+                selectedDeposit.textContent = `$${depositSlider.value}`;
+            });
+
+
+
+    
         });
 
-        async function fetchCarDetails(reference) {
-            try {
-                const [carResponse, imageResponse] = await Promise.all([
-                    fetch(`images/${reference}/data.json`),
-                    fetch(`images/${reference}/cover.jpg`)
-                ]);
+        function showTab(tabName) {
+            // Hide all contents
+            document.getElementById('financeContent').style.display = 'none';
+            document.getElementById('normalContent').style.display = 'none';
 
-                const carData = await carResponse.json();
-                const imageUrl = URL.createObjectURL(await imageResponse.blob());
+            // Remove active class from all tabs
+            document.getElementById('tabFinan').classList.remove('active');
+            document.getElementById('tabInfo').classList.remove('active');
 
-                return { ...carData, imageUrl };
-            } catch (error) {
-                console.error('Error fetching car details:', error);
-                return null;
+            // Show the selected content and add active class to the selected tab
+            if (tabName === 'finance') {
+                document.getElementById('financeContent').style.display = 'block';
+                document.getElementById('tabFinan').classList.add('active');
+            } else if (tabName === 'normal') {
+                document.getElementById('normalContent').style.display = 'block';
+                document.getElementById('tabInfo').classList.add('active');
             }
         }
 
-        function renderCarDetails(car) {
-            const carInfoContainer = document.getElementById('carInfoContainer');
-            const carImageContainer = document.getElementById('carImageContainer');
-
-            // Render car image
-            const carImage = document.createElement('img');
-            carImage.src = car.imageUrl;
-            carImage.alt = `${car.Manufacturer} ${car.Model}`;
-            carImage.id = 'carImage';
-            carImageContainer.appendChild(carImage);
-
-            // Render car information
-            let carDetailsHTML = `
-                <h2>${car.Manufacturer} ${car.Model} ${car.Year}</h2>
-                <p>Price: ${car.Price}</p>
-                <p>Mileage: ${car.Mileage}</p>
-            `;
-
-            // Loop through all properties in the car object (excluding imageUrl)
-            for (const property in car) {
-                if (car.hasOwnProperty(property) && property !== 'imageUrl') {
-                    carDetailsHTML += `<p><strong>${property}:</strong> ${car[property]}</p>`;
-                }
-            }
-
-            carInfoContainer.innerHTML = carDetailsHTML;
-        }
+        // Initialize the default tab
+        document.addEventListener('DOMContentLoaded', function () {
+            showTab('normal'); // Show the normal price content by default
+        });
     </script>
 </body>
+
 </html>
-
-

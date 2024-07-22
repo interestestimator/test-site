@@ -49,7 +49,7 @@
     }
   },
   "ConsumoYEmisiones": {
-    "Etiqueta": "O",
+    "Etiqueta": "0",
     "EmisionesCO2": 115,
     "Depósito": 50,
     "Consumo": {

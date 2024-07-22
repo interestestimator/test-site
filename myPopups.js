@@ -9,25 +9,34 @@ function setupEventListeners() {
         document.getElementById(config.closeId).onclick = () => hidePopup(config.popupId);
     });
 
-    // Event listener for filter options (manufacturer, fuel, and body)
+    // Event listener for filter options (manufacturer, fuel, body, emissions)
     document.getElementById('makeOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', value => filterCars('make', value));
     document.getElementById('fuelOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', value => filterCars('fuel', value));
     document.getElementById('bodyOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', value => filterCars('body', value));
+    document.getElementById('emissionsOptions').onclick = event => handleOptionClick(event, 'filterLabel', 'filterPopup', 'filter-icon', value => filterCars('emissions', value));
 
     // Event listener for sort options
     document.getElementById('sortPopup').onclick = event => handleOptionClick(event, 'sortLabel', 'sortPopup', 'sort-icon', applySort);
-}Sort:
 
-        function setupPopupToggle(labelId, popupId) {
-            const label = document.getElementById(labelId);
-            const popup = document.getElementById(popupId);
+    // Event listener for overlay click
+    document.getElementById('overlay').addEventListener('click', () => hideAllPopups());
+}
 
-            label.addEventListener('click', () => {
-                const isVisible = popup.style.display === 'block';
-                popup.style.display = isVisible ? 'none' : 'block';
-                document.getElementById('overlay').style.display = isVisible ? 'none' : 'block';
-            });
+function setupPopupToggle(labelId, popupId) {
+    const label = document.getElementById(labelId);
+    const popup = document.getElementById(popupId);
+
+    label.addEventListener('click', () => {
+        const isVisible = popup.style.display === 'block';
+        popup.style.display = isVisible ? 'none' : 'block';
+        document.getElementById('overlay').style.display = isVisible ? 'none' : 'block';
+        
+        // Reset scroll position to the top when opening
+        if (!isVisible) {
+            popup.scrollTop = 0;
         }
+    });
+}
 
 function hidePopup(popupId) {
     document.getElementById(popupId).style.display = 'none';
@@ -56,8 +65,12 @@ function hideOverlay() {
 }
 
 function showPopup(popupId) {
-    document.getElementById(popupId).style.display = 'block';
+    const popup = document.getElementById(popupId);
+    popup.style.display = 'block';
     showOverlay();
+    
+    // Reset scroll position to the top
+    popup.scrollTop = 0;
 }
 
 function showLoanInfo(event, loanLengthMonths, vehiclePrice, vehicleDeposit, annualRateTIN, commissionRate, pmt, annualRateTAE) {
@@ -96,7 +109,7 @@ function showLoanInfo(event, loanLengthMonths, vehiclePrice, vehicleDeposit, ann
                     La información, precios, cuotas de financiación, imágenes y otros contenidos relativos a los vehículos incluidos en el 
                     Portal son proporcionados por terceros por lo que pueden no ser exactos, precisos y completos o estar actualizados en 
                     cada momento. Por ello, Coches.net no asume responsabilidad respecto de los contenidos proporcionados por los 
-                    concesionarios, las entidades de financiación, los intermediarios de estas, por terceros o aquellos incluidos por los
+                    concesionarios, las entidades de financiación, los intermediarios de estas, por terceros o aquellos incluidos por los 
                     propios usuarios y que puedan ser incorrectos, erróneos, falsos, incompletos o contrarios a la ley o al orden público, 
                     salvo que el error sea imputable a una acción u omisión de coches.net.
                 </p>

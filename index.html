@@ -213,7 +213,7 @@ function filterCars(filterType, selectedValue) {
                             <div class="car-status ${status.toLowerCase()}">${status}</div>
                             <img class="car-image" src="${imageUrl}" alt="${make} ${model}">
                             ${emissions !== "" ? `<label id="emissionsLabel" class="emissions-label">
-                                <img src="icons/emissions/${emissions}.svg" alt="Emissions Icon" width="25" height="25">
+                                <img src="icons/emissions/${emissions.toLowerCase()}.svg" alt="Emissions Icon" width="25" height="25">
                             </label>` : ''}
                             <label id="photoCountLabel" class="photo-count-label">
                                 <img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${photoCount}

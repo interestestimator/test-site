@@ -29,8 +29,15 @@ function setupPopupToggle(labelId, popupId) {
     label.addEventListener('click', () => {
         const isVisible = popup.style.display === 'block';
         popup.style.display = isVisible ? 'none' : 'block';
-        document.getElementById('overlay').style.display = isVisible ? 'none' : 'block';
-        
+        const overlay = document.getElementById('overlay');
+        overlay.style.display = isVisible ? 'none' : 'block';
+
+        if (!isVisible) {
+            showOverlay();
+        } else {
+            hideOverlay();
+        }
+
         // Reset scroll position to the top when opening
         if (!isVisible) {
             popup.scrollTop = 0;
@@ -41,6 +48,8 @@ function setupPopupToggle(labelId, popupId) {
 function hidePopup(popupId) {
     document.getElementById(popupId).style.display = 'none';
     hideOverlay();
+    // Remove no-scroll class from body
+    document.body.classList.remove('no-scroll');
 }
 
 function hideAllPopups() {
@@ -57,11 +66,16 @@ function handleOptionClick(event, labelId, popupId, icon, action) {
 }
 
 function showOverlay() {
-    document.getElementById('overlay').style.display = 'block';
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'block';
+    // Add no-scroll class to body
+    document.body.classList.add('no-scroll');
 }
 
 function hideOverlay() {
     document.getElementById('overlay').style.display = 'none';
+    // Remove no-scroll class from body
+    document.body.classList.remove('no-scroll');
 }
 
 function showPopup(popupId) {

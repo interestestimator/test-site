@@ -482,3 +482,39 @@ a {
 .car-status.vendido {
     background: linear-gradient(#edecec 0,#D3D3D3 100%);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.close-button {
+    background: none; /* Remove default button background */
+    border: none;     /* Remove default button border */
+    cursor: pointer;  /* Change cursor to pointer on hover */
+    padding: 0;       /* Remove default padding */
+    margin: 0;        /* Remove default margin */
+    display: flex;    /* Use flexbox to center align the SVG */
+    align-items: center; /* Center align vertically */
+    justify-content: center; /* Center align horizontally */
+    transition: filter 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.close-button img {
+    display: block;   /* Ensure SVG image is block level for proper sizing */
+    width: 24px;      /* Set width of the SVG */
+    height: 24px;     /* Set height of the SVG */
+}
+
+.close-button:hover img {
+    filter: brightness(0.5) invert(0.5); /* Example filter to change color slightly on hover */
+}

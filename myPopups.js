@@ -87,7 +87,9 @@ function showLoanInfo(event, loanLengthMonths, vehiclePrice, vehicleDeposit, ann
     const content = `
         <div class="popup-title">
             <div class="finance-text">Offer details</div>
-            <button class="close-button" id="closeFinancePopup">Close</button>
+            <button id="closeFinancePopup" class="close-button">Close</button>
+                <img src="icons/close-icon.svg" alt="Close" width="20" height="20">
+            </button>
         </div>
         <div class="finance-details-container">
             ${formatDetail("Cuota mensual*", formatCurrency(pmt))}

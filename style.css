@@ -518,3 +518,12 @@ a {
 .close-button:hover img {
     filter: brightness(0.5) invert(0.5); /* Example filter to change color slightly on hover */
 }
+
+
+
+/* CSS to prevent body scrolling */
+.no-scroll {
+    overflow: hidden;
+    position: fixed;
+    width: 100%;
+}

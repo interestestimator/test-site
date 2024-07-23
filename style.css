@@ -2,50 +2,44 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
 
 /* Reset and General Styles */
-
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Figtree', Arial, sans-serif; /* Use Figtree font as the primary font */
-    background-color: #FAFAFA; /* Light gray background for the body */
+    font-family: 'Figtree', Arial, sans-serif;
+    background-color: #FAFAFA;
 }
 
 /* Container for Car Listings */
-
 .car-listings {
     max-width: 80rem;
     margin: 0 auto;
-    padding: 0 1rem;
+    padding: 1em 1rem 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: flex-start; /* Align items to the left of each row */
-    gap: 1rem; /* Add spacing between flex items */
-    padding-top: 1em;
+    justify-content: flex-start;
+    gap: 1rem;
 }
 
-.car-image-container {
+.car-image-container, .car-container {
     position: relative;
 }
 
 .car-container {
     background-color: #FFFFFF;
     margin-bottom: 1.5rem;
-    width: calc(25% - 0.75em); /* Adjust width with margin */
+    width: calc(25% - 0.75em);
     box-sizing: border-box;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     border-radius: 1rem;
     overflow: hidden;
-    transition: box-shadow 0.3s; /* Smooth transition for the box shadow change */
+    transition: box-shadow 0.3s;
 }
 
-/* Hover effect to change border and box shadow */
 .car-container:hover {
-    border-color: grey; /* Change border color on hover */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.5); /* Multiple box shadows */
-    color: inherit; /* Maintain the text color */
+    border-color: grey;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.5);
+    color: inherit;
 }
-
-
 
 @media (max-width: 768px) {
     .car-container {
@@ -58,37 +52,33 @@ body {
         width: 100%;
     }
     .sort-popup {
-        width: 85%!important;
+        width: 85% !important;
     }
 }
 
 /* Car Title */
-
-/* Desktop styles */
 .car-title {
     font-size: 15px;
     font-weight: 800;
-    line-height: 1.2em; /* Improved line height */
-    padding-bottom: .5rem;
+    line-height: 1.2em;
+    padding-bottom: 0.25rem;
     overflow: hidden;
     text-overflow: ellipsis;
     text-transform: uppercase;
     display: -webkit-box;
-    -webkit-line-clamp: 2; /* Limits text to 2 lines */
+    -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
 }
 
-/* Mobile styles */
 @media (max-width: 768px) {
     .car-title {
-        line-height: 1.5em; /* Adjust line-height for better readability on smaller screens */
-        display: block; /* Resetting to block to handle different text sizes */
-        overflow: visible; /* Allow text to be fully visible */
-        white-space: normal; /* Ensure text wraps naturally */
+        display: block;
+        overflow: visible;
+        white-space: normal;
     }
 }
-/* Car Details Container */
 
+/* Car Details Container */
 .car-description-container {
     padding: 0.5rem;
 }
@@ -102,32 +92,38 @@ body {
     height: 2.4em;
 }
 
+.extra {
+    color: #9cd755;
+}
 
 /* Car Image */
 .car-image {
     width: 100%;
-    max-width: 100%; /* Ensure image does not exceed its container's width */
-    height: auto; /* Allow the height to adjust based on the image's aspect ratio */
-    object-fit: cover; /* Ensure the image covers the entire container */
-    aspect-ratio: 9/6; /* Set the desired aspect ratio (optional, CSS property supported in modern browsers) */
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 9/6;
 }
-
-
 
 /* Price Container */
-
 .price-container {
     background: #F8F8F8;
-    padding-bottom: .5rem;
-    padding-top: .15rem;
-    padding-left: .5rem;
-    padding-right: .5rem;
+    padding: 0rem 0.5rem 0.25rem;
     font-weight: 700;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.15rem;
 }
 
+.finance-price {
+    font-weight: bold;
+    text-align: right;
+    white-space: nowrap;
+    color: #D6B156;
+}
 
 /* Header Section */
-
 header {
     background-color: #061F34;
     color: white;
@@ -152,7 +148,7 @@ header {
 }
 
 nav ul {
-    list-style-type: none;
+    list-style: none;
     margin: 0;
     padding: 0;
     display: flex;
@@ -162,27 +158,17 @@ nav ul li {
     margin-right: 15px;
 }
 
-
-
-
-
-
 /* Search Tools Section */
-
 .search-tools {
     background-color: #1C371C;
-
 }
-
-/* Search Dropdowns */
 
 .search-tools-container {
     max-width: 80rem;
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 0 1rem; /* Add padding to the container */
-    padding: 20px;
+    margin: 0 auto;
+    padding: 20px 1rem;
     display: flex;
-    flex-wrap: wrap; /* Ensure proper wrapping on smaller screens */
+    flex-wrap: wrap;
 }
 
 .search-options {
@@ -192,25 +178,13 @@ nav ul li {
     background-color: #061F34;
 }
 
-
-
-
-
-
-
-
-
-
-
-
 .listings-info {
     max-width: 80rem;
-    margin: 0 auto; /* Center the container horizontally */
-    padding: 0 1rem; /* Add padding to the container */
+    margin: 0 auto;
+    padding: 1em 1rem 0;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    padding-top: 1em;
     font-size: 1.5rem;
 }
 
@@ -218,75 +192,39 @@ nav ul li {
     font-weight: 700;
 }
 
-/* Optional: Adjust spacing */
 .sort-dropdown label {
     display: flex;
-    justify-content: right; /* Center horizontally */
+    justify-content: flex-end;
     font-size: 1rem;
     font-weight: 500;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-.price-container {
-    display: flex;
-    justify-content: space-between; /* Align children with space between them */
-    align-items: center; /* Align items vertically center */
-}
-
-.finance-price {
-    font-weight: bold; /* Optionally, make finance-price text bold */
-    text-align: right; /* Align finance price to the right */
-    white-space: nowrap; /* Prevent line breaks within the finance price */
-    color: #D6B156; /* Set the font color of finance price to red */
-}
-
-
-
-
-
-/* Remove underline and color from all links */
+/* Links */
 a {
-    text-decoration: none; /* Removes underline */
-    color: inherit; /* Use the inherited color (usually black) */
+    text-decoration: none;
+    color: inherit;
 }
 
-
-
-
+/* Finance Details */
 .price-details-container {
     display: flex;
-    justify-content: space-between; /* Align children with space between them */
-    align-items: center; /* Align items vertically center */;
+    justify-content: space-between;
+    align-items: center;
     background: #F8F8F8;
-  padding-left: .5rem;
-  padding-right: .5rem;
-  font-weight: 700;
-    font-size:0.5rem;
+    padding: 0.25rem 0.5rem 0rem;
+    font-weight: 700;
+    font-size: 0.5rem;
     line-height: 1rem;
-    text-align: center; /* Centers the text horizontally */
+    text-align: center;
 }
-
-
 
 .finance-details {
-    background-color: #F8F8F8;;
-    font-size:0.5rem;
+    background-color: #F8F8F8;
+    font-size: 0.5rem;
     line-height: 1rem;
-    text-align: center; /* Centers the text horizontally */
+    text-align: center;
+    border-top: 1px solid #eef0f4;
 }
-
-
 
 .apr-example {
     font-weight: bold;
@@ -294,65 +232,30 @@ a {
     cursor: pointer;
 }
 
-
 .apr-example:hover {
-  color:#55A0D7
+    color: #55A0D7;
 }
 
-
-
-
+/* Overlay */
 .overlay {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black */
-    z-index: 999; /* Ensure the overlay appears below the popup */
-    display: none; /* Initially hide the overlay */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    display: none;
 }
-
 
 .show-overlay {
-    display: block; /* Display the overlay when the popup is shown */
+    display: block;
 }
 
-
-.finance-details-container {
-    padding-top: 1rem;
-    display: grid;
-    gap: 10px; /* Adjust the gap between label and value */
-    font-size: 0.9rem;
-}
-
-.finance-details-item {
-    display: grid;
-    grid-template-columns: max-content auto;
-    align-items: center;
-}
-
-.detail-label {
-    font-weight: 500;
-}
-
-.detail-value {
-    font-weight: 700;
-    margin-left: auto; /* Push value to the right */
-}
-
-.legal-conditions {
-    font-size: 0.6rem;
-    font-weight: 400;
-    line-height: 0.8rem;
-}
-
-
-    
-
+/* Popup Container */
 .popup-container {
     width: 32rem;
-    max-height: 80vh; /* Ensure popup height is responsive to viewport height */
+    max-height: 80vh;
     border-radius: 1rem;
     font-size: 1rem;
     font-weight: 600;
@@ -364,8 +267,8 @@ a {
     background-color: #fff;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     padding: 20px;
-    z-index: 1000; /* Ensure pop-up appears above other content */
-    overflow-y: auto; /* Enable vertical scrolling */
+    z-index: 1000;
+    overflow-y: auto;
 }
 
 @media (max-width: 768px) {
@@ -373,14 +276,14 @@ a {
         width: 90%;
         top: 1rem;
         left: 50%;
-        transform: translateX(-50%); /* Only translate horizontally */
+        transform: translateX(-50%);
     }
 }
 
 .popup-title {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 10px; /* Adds space below the title */
+    margin-bottom: 10px;
 }
 
 .popup-option {
@@ -396,43 +299,28 @@ a {
 }
 
 .popup-option img {
-    margin-right: 10px; /* Adds space between the icon and the text */
+    margin-right: 10px;
 }
-
 
 .car-image-container {
-    position: relative;
-    display: inline-block; /* Ensure inline display for overlay positioning */
+    display: inline-block;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
+/* Emissions Label */
 .emissions-label {
     border-radius: 1rem;
-    top: 0.5rem;
+    bottom: 0.6rem;
     display: flex;
-    left: 0.55rem;
+    right: 0.3rem;
     position: absolute;
     box-shadow: 0 3px 10px -5px rgba(0,0,0,1);
 }
 
 .emissions img {
-    margin-right: 14px; /* Margin between the icon and text */
+    margin-right: 14px;
 }
 
-
-
-
+/* Photo Count Label */
 .photo-count-label {
     position: absolute;
     bottom: 4px;
@@ -447,12 +335,10 @@ a {
 }
 
 .photo-count-label img {
-    margin-right: 4px; /* Margin between the icon and text */
+    margin-right: 4px;
 }
 
-
-
-
+/* Car Status */
 .car-status {
     font-size: 11px;
     font-weight: bold;
@@ -460,70 +346,84 @@ a {
     text-align: center;
     line-height: 22px;
     transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
     width: 125px;
-    box-shadow: 0 3px 10px -5px rgba(0,0,0,1);
+    box-shadow: 0 3px 10px -5px rgba(0,0,0,0.5);
     position: absolute;
     top: 22px;
     right: -30px;
 }
 
 .car-status.disponible {
-    display: none; /* Hide the banner if status is "disponable" */
+    display: none;
 }
+
 .car-status.nuevo {
-    background: linear-gradient(#8bbde1 0,#55A0D7 100%);
+    background: #7AB6CE;
 }
 
 .car-status.reservado {
-    background: linear-gradient(#dbc489 0,#D6B156 100%);
+    background: #F5E87D;
 }
 
 .car-status.vendido {
-    background: linear-gradient(#edecec 0,#D3D3D3 100%);
+    background: #D3D3D3;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Close Button */
 .close-button {
-    background: none; /* Remove default button background */
-    border: none;     /* Remove default button border */
-    cursor: pointer;  /* Change cursor to pointer on hover */
-    padding: 0;       /* Remove default padding */
-    margin: 0;        /* Remove default margin */
-    display: flex;    /* Use flexbox to center align the SVG */
-    align-items: center; /* Center align vertically */
-    justify-content: center; /* Center align horizontally */
-    transition: filter 0.3s ease; /* Smooth transition for hover effect */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.3s ease;
 }
 
 .close-button img {
-    display: block;   /* Ensure SVG image is block level for proper sizing */
-    width: 24px;      /* Set width of the SVG */
-    height: 24px;     /* Set height of the SVG */
+    display: block;
+    width: 24px;
+    height: 24px;
 }
 
 .close-button:hover img {
-    filter: brightness(0.5) invert(0.5); /* Example filter to change color slightly on hover */
+    filter: brightness(0.5) invert(0.5);
 }
 
-
-
-/* CSS to prevent body scrolling */
+/* Prevent body scrolling */
 .no-scroll {
     overflow: hidden;
     position: fixed;
     width: 100%;
+}
+
+/* Finance Details Container */
+.finance-details-container {
+    padding-top: 1rem;
+    display: grid;
+    gap: 10px;
+    font-size: 0.9rem;
+}
+
+.finance-details-item {
+    display: grid;
+    grid-template-columns: max-content auto;
+    align-items: center;
+}
+
+.detail-label {
+    font-weight: 500;
+}
+
+.detail-value {
+    font-weight: 700;
+    margin-left: auto;
+}
+
+.legal-conditions {
+    font-size: 0.6rem;
+    font-weight: 400;
+    line-height: 0.8rem;
 }

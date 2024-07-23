@@ -59,7 +59,7 @@ function hideAllPopups() {
 function handleOptionClick(event, labelId, popupId, icon, action) {
     if (event.target.classList.contains('popup-option')) {
         const selectedValue = event.target.getAttribute('data-value');
-        document.getElementById(labelId).innerHTML = `<img src="icons/${icon}.svg" alt="${event.target.textContent} Icon" width="20" height="20"> ${event.target.textContent}`;
+        document.getElementById(labelId).innerHTML = `<img src="icons/${icon}.svg" alt="${event.target.textContent} Icon"> ${event.target.textContent}`;
         hidePopup(popupId);
         action(selectedValue);
     }
@@ -118,7 +118,7 @@ function showLoanInfo(event, loanLengthMonths, vehiclePrice, vehicleDeposit, ann
             ${formatDetail("Financiación provista por", "Santander")}
         </div>
         <div class="finance-conditions">
-            <h2>Condiciones de financiación</h2>
+            <h2 class="legal-conditions-title">Condiciones de financiación</h2>
             <div class="legal-conditions">
                 <h3>Condiciones legales Adevinta</h3>
                 <p>

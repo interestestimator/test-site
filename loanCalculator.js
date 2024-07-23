@@ -115,7 +115,7 @@ function formatCurrency(amount) {
     const formatter = new Intl.NumberFormat('eu', {
         style: 'currency',
         currency: 'EUR',
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 0,
         maximumFractionDigits: 2,
     });
     return formatter.format(amount);
@@ -158,3 +158,4 @@ function calculateRate(loanLengthYears, LoanAmount, initialDeposit, annualRateTI
         monthlyPaymentWithCosts: monthlyPaymentWithCosts.toFixed(2)
     };
 }
+

@@ -14,28 +14,30 @@
     <div id="overlay" class="overlay"></div>
     <div id="loanPopup" class="popup-container" style="display: none;"></div>
 
-    <section class="listings-info filter-dropdown">
-        <label id="filterLabel" class="filter-label">
-            <img src="icons/filter-icon.svg" alt="Filter Icon" width="20" height="20"> All filters
-        </label>
-        <div id="filterPopup" class="popup-container" style="display: none;">
-            <div class="popup-title">
-                <div class="filter-text">All filters</div>
-                <button id="closeFilterPopup" class="close-button">
-                    <img src="icons/close-icon.svg" alt="Close" width="20" height="20">
-                </button>
+    <section class="filter-dropdown">
+        <div class="listings-info">
+            <label id="filterLabel" class="filter-label">
+                <img src="icons/filter-icon.svg" alt="Filter Icon"> All filters
+            </label>
+            <div id="filterPopup" class="popup-container" style="display: none;">
+                <div class="popup-title">
+                    <div class="filter-text">All filters</div>
+                    <button id="closeFilterPopup" class="close-button">
+                        <img src="icons/close-icon.svg" alt="Close" width="20" height="20">
+                    </button>
+                </div>
+                <div id="makeOptions" class="filter-options-container"></div>
+                <div id="fuelOptions" class="filter-options-container"></div>
+                <div id="bodyOptions" class="filter-options-container"></div> <!-- Added body options -->
+                <div id="emissionsOptions" class="filter-options-container"></div>
             </div>
-            <div id="makeOptions" class="filter-options-container"></div>
-            <div id="fuelOptions" class="filter-options-container"></div>
-            <div id="bodyOptions" class="filter-options-container"></div> <!-- Added body options -->
-            <div id="emissionsOptions" class="filter-options-container"></div>
         </div>
     </section>
 
     <section class="listings-info sort-dropdown">
         <div class="listing-count" id="listingCount">Loading...</div>
         <label id="sortLabel" class="sort-label">
-            <img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Relevance
+            <img src="icons/sort-icon.svg" alt="Sort Icon"> Relevance
         </label>
         <div id="sortPopup" class="popup-container" style="display: none;">
             <div class="popup-title">
@@ -148,11 +150,21 @@
         const optionsContainer = document.getElementById(config.containerId);
 
         optionsContainer.innerHTML = `
-            <div class="popup-option" data-value="All">All (${carsData.length})</div>
+            <div class="popup-option" data-value="All">
+                All (${carsData.length})
+            </div>
             ${uniqueValues.map(value => `
                 <div class="popup-option" data-value="${value}">
-                    <img src="icons/${config.type}/${value.toLowerCase()}.svg" alt="${value} icon" width="20" height="20"/>
-                    ${value} (${filteredCars.filter(car => config.getUniqueValues(car) === value).length})
+                    <img 
+                        src="icons/${config.type}/${value.toLowerCase()}.svg" 
+                        alt="${value} icon" 
+                        width="20" 
+                        height="20"
+                    />
+                    <span class="option-label">${value}</span>
+                    <span class="option-value">
+                        (${filteredCars.filter(car => config.getUniqueValues(car) === value).length})
+                    </span>
                 </div>
             `).join('')}
         `;
@@ -224,7 +236,7 @@ function filterCars(filterType, selectedValue) {
                             </label>
                         </div>
                         <div class="car-description-container">
-                            <div class="car-title">${make} ${model} ${version} ${capacityLiters} ${technology} - ${colour} ${body} (${doors}p)</div>
+                            <div class="car-title">${make} ${model} ${version} ${capacityLiters} ${technology} ${colour} ${body} (${doors}p)</div>
                             <div class="car-details-container">${year} | ${transmission} | ${kilometres} km | ${fuel} | ${kilowatts} kW (${horsepower} CV)</div>
                         </div>
                         <div class="price-details-container">

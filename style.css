@@ -2,14 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
 
 /* Reset and General Styles */
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     width: 100%;
     overflow-x: hidden;
     font-family: 'Figtree', Arial, sans-serif;
     background-color: #FAFAFA;
-  }
+}
 
 /* Container for Car Listings */
 .car-listings {
@@ -22,7 +23,8 @@ html, body {
     gap: 1rem;
 }
 
-.car-image-container, .car-container {
+.car-image-container,
+.car-container {
     position: relative;
 }
 
@@ -54,6 +56,7 @@ html, body {
         margin-bottom: 0.5rem;
         width: 100%;
     }
+
     .sort-popup {
         width: 85% !important;
     }
@@ -92,12 +95,14 @@ html, body {
     font-weight: 500;
     flex-wrap: wrap;
     justify-content: space-between;
-    height: 2.4em; /* Set default height for larger screens */
+    height: 2.4em;
+    /* Set default height for larger screens */
 }
 
 @media (max-width: 768px) {
     .car-details-container {
-        height: auto; /* Remove fixed height on smaller screens */
+        height: auto;
+        /* Remove fixed height on smaller screens */
     }
 }
 
@@ -132,24 +137,7 @@ html, body {
     color: #D6B156;
 }
 
-/* Header Section */
-header {
-    background-color: #2D3B5B;
-    color: white;
-    padding: 1rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-bottom: 0.4rem solid #57627C;
-}
 
-.header-content {
-    max-width: 80em;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
 
 .listings-info {
     max-width: 80rem;
@@ -158,7 +146,8 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    align-items: center; /* Center items vertically */
+    align-items: center;
+    /* Center items vertically */
     font-size: 1.5rem;
 }
 
@@ -237,7 +226,7 @@ a {
     display: flex;
     right: 0.3rem;
     position: absolute;
-    box-shadow: 0 3px 10px -5px rgba(0,0,0,1);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
 }
 
 .emissions img {
@@ -271,7 +260,7 @@ a {
     line-height: 22px;
     transform: rotate(45deg);
     width: 125px;
-    box-shadow: 0 3px 10px -5px rgba(0,0,0,0.5);
+    box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 22px;
     right: -30px;
@@ -379,20 +368,26 @@ a {
 
 @media (max-width: 768px) {
     .popup-container {
-        width: calc(100% - 2rem); /* 100% width minus 1rem on each side */
+        width: calc(100% - 2rem);
+        /* 100% width minus 1rem on each side */
     }
 }
 
 .popup-title {
-    position: sticky; /* Make the title stick to the top of the container */
-    top: 0; /* Stick to the top */
-    background-color: #fff; /* Background color to ensure visibility over content */
-    z-index: 1; /* Ensure it stays above other content */
+    position: sticky;
+    /* Make the title stick to the top of the container */
+    top: 0;
+    /* Stick to the top */
+    background-color: #fff;
+    /* Background color to ensure visibility over content */
+    z-index: 1;
+    /* Ensure it stays above other content */
     display: flex;
     justify-content: space-between;
     padding: 1rem;
     font-size: 1.25rem;
-    border-bottom: 1px solid #ddd; /* Optional: Add a border to visually separate title from content */
+    border-bottom: 1px solid #ddd;
+    /* Optional: Add a border to visually separate title from content */
 }
 
 .popup-option {
@@ -423,21 +418,7 @@ a {
     pointer-events: none;
 }
 
-.filter-dropdown {
-    background-color: #1C2437;
-}
 
-
-.filter-label {
-    display: flex;    
-    align-items: center;  
-    background-color: #2D3B5B;
-    justify-content: flex-start;
-  padding: 0.5rem;
-  width: 100%;
-  border-radius: 3rem;
-  color: #FAFAFA;
-}
 
 
 
@@ -446,8 +427,72 @@ a {
     width: 20px;
 }
 
+
+.previous-price {
+    text-decoration: line-through;
+}
+
+
+.popup-buttons {
+    display: flex;
+    justify-content: flex-end;
+    /* Aligns button to the right */
+    margin-top: 2rem;
+    /* Adjust spacing as needed */
+}
+
+
+.acknowledge-button {
+    text-align: right;
+    background: #000E23;
+    /* Dark background color */
+    color: #fff;
+    /* White text color */
+    border-radius: 1.5rem;
+    /* Rounded corners */
+    cursor: pointer;
+    /* Pointer cursor on hover */
+    padding: 0.5rem 1rem;
+    /* Padding for button size */
+    font-size: 0.9rem;
+    /* Font size */
+    font-weight: 600;
+    /* Font weight */
+    font-family: 'Figtree', Arial, sans-serif;
+    /* Font family */
+    border: 2px solid #000e23;
+    /* Border color to match background initially */
+    transition: background 0.3s ease, border-color 0.3s ease;
+    /* Smooth transition for background and border color */
+}
+
+.acknowledge-button:hover {
+    background: #242F44;
+    /* Lighter background color on hover */
+    border-color: #242F44;
+    /* Lighter border color on hover */
+}
+
+.filter-dropdown {
+    background-color: #1C2437;
+}
+
+.filter-label {
+    display: flex;
+    align-items: center;
+    background-color: #2D3B5B;
+    justify-content: space-between;
+    /* Distribute space between the text and the icon */
+    padding: 0.25rem;
+    width: 100%;
+    border-radius: 3rem;
+    color: #FAFAFA;
+    padding-left: 1.25rem;
+}
+
 .filter-label img {
     height: 40px;
     width: 40px;
-    padding-right: 0.5rem;
 }
+
+

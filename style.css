@@ -158,6 +158,7 @@ header {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: center; /* Center items vertically */
     font-size: 1.5rem;
 }
 
@@ -377,10 +378,7 @@ a {
 
 @media (max-width: 768px) {
     .popup-container {
-        width: 90%;
-        top: 1rem;
-        left: 50%;
-        transform: translateX(-50%);
+        width: calc(100% - 2rem); /* 100% width minus 1rem on each side */
     }
 }
 

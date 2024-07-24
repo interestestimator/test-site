@@ -35,8 +35,8 @@
       "CC": 1368
     },
     "Potencia": {
-      "CV": 150,
-      "KW": 110
+      "CV": 100,
+      "KW": 80
     },
     "Par": 320,
     "Transmision": {

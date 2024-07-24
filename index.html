@@ -54,6 +54,10 @@
                 <div class="popup-option" data-value="kilometres-desc">Highest Kilometres</div>
                 <div class="popup-option" data-value="newest">Newest</div>
                 <div class="popup-option" data-value="oldest">Oldest</div>
+                <div class="popup-option" data-value="cc-asc">Lowest Engine Capacity (cc)</div>
+                <div class="popup-option" data-value="cc-desc">Highest Engine Capacity (cc)</div>
+                <div class="popup-option" data-value="kw-asc">Lowest Power (kW)</div>
+                <div class="popup-option" data-value="kw-desc">Highest Power (kW)</div>
             </div>
         </div>
     </section>
@@ -102,7 +106,8 @@
             try {
                 const response = await fetch(`${folderName}/data.json`);
                 const jsonData = await response.json();
-                const cc = jsonData.MotorYTransmision.Cilindrada.CC;
+                const cc = parseInt(jsonData.MotorYTransmision.Cilindrada.CC, 10); // Parse cc as a number
+                const kilowatts = parseFloat(jsonData.MotorYTransmision.Potencia.KW); // Parse kilowatts as a number
                 return {
                     id: jsonData.JavaScriptInfo.id,
                     photoCount: jsonData.JavaScriptInfo.cantidadImágenes,
@@ -111,7 +116,7 @@
                     model: jsonData.CaracteristicasGenerales.Modelo,
                     version: jsonData.CaracteristicasGenerales.Versión,
                     emissions: jsonData.ConsumoYEmisiones.Etiqueta,
-                    capacityCC: `${cc}cc`,
+                    capacityCC: cc, // Store as a numeric value
                     capacityLiters: `${(Math.ceil(cc / 100) / 10).toFixed(1)}L`,
                     technology: jsonData.MotorYTransmision.Combustible.Tecnología,
                     colour: jsonData.CaracteristicasGenerales.Color,
@@ -121,7 +126,7 @@
                     transmission: jsonData.MotorYTransmision.Transmision.Caja,
                     kilometres: new Intl.NumberFormat('es-ES').format(jsonData.CaracteristicasGenerales.Kilometraje),
                     fuel: jsonData.MotorYTransmision.Combustible.Tipo,
-                    kilowatts: jsonData.MotorYTransmision.Potencia.KW,
+                    kilowatts: kilowatts, // Store as a numeric value
                     horsepower: jsonData.MotorYTransmision.Potencia.CV,
                     price: parseFloat(jsonData.CaracteristicasGenerales.PrecioNuevo),
                 };
@@ -132,24 +137,24 @@
         }
 
         function renderFilterOptions() {
-    const filterConfigs = [
-        { type: 'make', containerId: 'makeOptions', getUniqueValues: car => car.make },
-        { type: 'fuel', containerId: 'fuelOptions', getUniqueValues: car => car.fuel },
-        { type: 'body', containerId: 'bodyOptions', getUniqueValues: car => car.body },
-        { type: 'emissions', containerId: 'emissionsOptions', getUniqueValues: car => car.emissions }
-    ];
+            const filterConfigs = [
+                { type: 'make', containerId: 'makeOptions', getUniqueValues: car => car.make },
+                { type: 'fuel', containerId: 'fuelOptions', getUniqueValues: car => car.fuel },
+                { type: 'body', containerId: 'bodyOptions', getUniqueValues: car => car.body },
+                { type: 'emissions', containerId: 'emissionsOptions', getUniqueValues: car => car.emissions }
+            ];
 
-    filterConfigs.forEach(config => {
-        let uniqueValues = [...new Set(carsData.map(config.getUniqueValues))];
+            filterConfigs.forEach(config => {
+                let uniqueValues = [...new Set(carsData.map(config.getUniqueValues))];
 
-        // Exclude empty values for emissions filter
-        if (config.type === 'emissions') {
-            uniqueValues = uniqueValues.filter(value => value.trim() !== "");
-        }
+                // Exclude empty values for emissions filter
+                if (config.type === 'emissions') {
+                    uniqueValues = uniqueValues.filter(value => value.trim() !== "");
+                }
 
-        const optionsContainer = document.getElementById(config.containerId);
+                const optionsContainer = document.getElementById(config.containerId);
 
-        optionsContainer.innerHTML = `
+                optionsContainer.innerHTML = `
             <div class="popup-option" data-value="All">
                 All (${carsData.length})
             </div>
@@ -168,24 +173,24 @@
                 </div>
             `).join('')}
         `;
-    });
-}
+            });
+        }
 
-function filterCars(filterType, selectedValue) {
-    if (filterType === 'make') {
-        filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.make === selectedValue);
-    } else if (filterType === 'fuel') {
-        filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.fuel === selectedValue);
-    } else if (filterType === 'body') {
-        filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.body === selectedValue);
-    } else if (filterType === 'emissions') {
-        filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.emissions === selectedValue);
-    }
+        function filterCars(filterType, selectedValue) {
+            if (filterType === 'make') {
+                filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.make === selectedValue);
+            } else if (filterType === 'fuel') {
+                filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.fuel === selectedValue);
+            } else if (filterType === 'body') {
+                filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.body === selectedValue);
+            } else if (filterType === 'emissions') {
+                filteredCars = (selectedValue === 'All') ? [...carsData] : carsData.filter(car => car.emissions === selectedValue);
+            }
 
-    // Change sort label text to "Sort: Relevance"
-    document.getElementById('sortLabel').innerHTML = `<img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Relevance`;
-    displayCarListings(filteredCars);
-}
+            // Change sort label text to "Sort: Relevance"
+            document.getElementById('sortLabel').innerHTML = `<img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Relevance`;
+            displayCarListings(filteredCars);
+        }
 
         function applySort(sortOption) {
             const sortCriteria = {
@@ -196,6 +201,10 @@ function filterCars(filterType, selectedValue) {
                 'kilometres-desc': (a, b) => b.kilometres - a.kilometres,
                 'newest': (a, b) => b.year - a.year,
                 'oldest': (a, b) => a.year - b.year,
+                'cc-asc': (a, b) => a.capacityCC - b.capacityCC, // Sort by engine capacity (cc) ascending
+                'cc-desc': (a, b) => b.capacityCC - a.capacityCC, // Sort by engine capacity (cc) descending
+                'kw-asc': (a, b) => a.kilowatts - b.kilowatts, // Sort by power (kW) ascending
+                'kw-desc': (a, b) => b.kilowatts - a.kilowatts // Sort by power (kW) descending
             };
 
             const sortFunction = sortCriteria[sortOption];

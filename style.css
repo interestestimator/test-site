@@ -374,6 +374,7 @@ a {
     background-color: #fff;
     z-index: 1000;
     overflow-y: auto;
+    padding-block-end: 1rem;
 }
 
 @media (max-width: 768px) {

@@ -2,12 +2,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap');
 
 /* Reset and General Styles */
-body {
+html, body {
     margin: 0;
     padding: 0;
+    width: 100%;
+    overflow-x: hidden;
     font-family: 'Figtree', Arial, sans-serif;
     background-color: #FAFAFA;
-}
+  }
 
 /* Container for Car Listings */
 .car-listings {
@@ -49,6 +51,7 @@ body {
 
 @media (max-width: 480px) {
     .car-container {
+        margin-bottom: 0.5rem;
         width: 100%;
     }
     .sort-popup {
@@ -406,16 +409,19 @@ a {
 }
 
 .popup-option img {
+    pointer-events: none;
     margin-right: 10px;
 }
 
 .option-label {
     font-weight: 600;
+    pointer-events: none;
 }
 
 .option-value {
     font-weight: 500;
     margin-left: auto;
+    pointer-events: none;
 }
 
 .filter-dropdown {

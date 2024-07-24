@@ -59,12 +59,14 @@ function hideAllPopups() {
 function handleOptionClick(event, labelId, popupId, icon, action) {
     if (event.target.classList.contains('popup-option')) {
         const selectedValue = event.target.getAttribute('data-value');
-        document.getElementById(labelId).innerHTML = `<img src="icons/${icon}.svg" alt="${event.target.textContent} Icon"> ${event.target.textContent}`;
+        document.getElementById(labelId).innerHTML = `
+            <span class="filter-text">${event.target.textContent}</span>
+            <img src="icons/${icon}.svg" alt="${event.target.textContent} Icon" class="filter-icon">
+        `;
         hidePopup(popupId);
         action(selectedValue);
     }
 }
-
 function showOverlay() {
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'block';
@@ -149,12 +151,18 @@ function showLoanInfo(event, loanLengthMonths, vehiclePrice, vehicleDeposit, ann
                     ***Financiación ofrecida por Santander Consumer, S.A. sujeto a estudio y aprobación por parte de la entidad financiera. 
                     Oferta válida hasta el //31/12/2023 para vehículos ofertados por concesionarios que publiquen en Coches.net.
                 </p>
+                <div class="popup-buttons">
+                    <button id="acknowledgeButton" class="acknowledge-button">Entendido</button>
+                </div>
             </div>
+
         </div>
     `;
 
     popup.innerHTML = content;
     showPopup('loanPopup');
 
+    // Add event listeners to buttons
     document.getElementById('closeFinancePopup').addEventListener('click', () => hidePopup('loanPopup'));
+    document.getElementById('acknowledgeButton').addEventListener('click', () => hidePopup('loanPopup'));
 }

@@ -17,7 +17,8 @@
     <section class="filter-dropdown">
         <div class="listings-info">
             <label id="filterLabel" class="filter-label">
-                <img src="icons/filter-icon.svg" alt="Filter Icon"> All filters
+                <span class="filter-text">All filters</span>
+                <img src="icons/filter-icon.svg" alt="Filter Icon" class="filter-icon">
             </label>
             <div id="filterPopup" class="popup-container" style="display: none;">
                 <div class="popup-title">
@@ -68,6 +69,12 @@
     <script src="myPopups.js" defer></script>
 
     <script defer>
+        function toggleheaderMenu() {
+            const navList = document.getElementById('navList');
+            navList.classList.toggle('active');
+        }
+        
+        
         async function loadHeader() {
             const response = await fetch('header.html');
             const headerHTML = await response.text();
@@ -129,6 +136,7 @@
                     kilowatts: kilowatts, // Store as a numeric value
                     horsepower: jsonData.MotorYTransmision.Potencia.CV,
                     price: parseFloat(jsonData.CaracteristicasGenerales.PrecioNuevo),
+                    previousPrice: parseFloat(jsonData.CaracteristicasGenerales.PrecioAnterior),
                 };
             } catch (error) {
                 console.error(`Error fetching data for ${folderName}:`, error);
@@ -213,63 +221,68 @@
         }
 
         function displayCarListings(cars) {
-            const container = document.getElementById('carListings');
-            container.innerHTML = '';
+    const container = document.getElementById('carListings');
+    container.innerHTML = '';
 
-            cars.forEach(car => {
-                const { id, status, photoCount, make, model, version, emissions, capacityLiters, technology, colour, body, doors, year, transmission, kilometres, fuel, kilowatts, horsepower, price } = car;
-                const imageUrl = `listings/${id.toUpperCase()}/images/1.jpg`;
+    cars.forEach(car => {
+        const { id, status, photoCount, make, model, version, emissions, capacityLiters, technology, colour, body, doors, year, transmission, kilometres, fuel, kilowatts, horsepower, price, previousPrice } = car;
+        const imageUrl = `listings/${id.toUpperCase()}/images/1.jpg`;
 
-                const vehicleDeposit = price * 0.1; // Deposit is 10%
-                const { annualRateTIN, loanLengthMonths, commissionRate } = setLoanParameters(price, year, kilometres);
-                const result = calculateRate(
-                    loanLengthMonths / 12,
-                    price,
-                    vehicleDeposit,
-                    annualRateTIN / 100,
-                    commissionRate / 100,
-                    0.0
-                );
+        const vehicleDeposit = price * 0.1; // Deposit is 10%
+        const { annualRateTIN, loanLengthMonths, commissionRate } = setLoanParameters(price, year, kilometres);
+        const result = calculateRate(
+            loanLengthMonths / 12,
+            price,
+            vehicleDeposit,
+            annualRateTIN / 100,
+            commissionRate / 100,
+            0.0
+        );
 
-                // Construct the HTML for each car listing
-                let html = `
-                    <a href="car-details.html?id=${id}" class="car-container">
-                        <div class="car-image-container">
-                            <div class="car-status ${status.toLowerCase()}">${status}</div>
-                            <img class="car-image" src="${imageUrl}" alt="${make} ${model}">
-                            ${emissions !== "" ? `<label id="emissionsLabel" class="emissions-label">
-                                <img src="icons/emissions/${emissions.toLowerCase()}.svg" alt="Emissions Icon" width="25" height="25">
-                            </label>` : ''}
-                            <label id="photoCountLabel" class="photo-count-label">
-                                <img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${photoCount}
-                            </label>
-                        </div>
-                        <div class="car-description-container">
-                            <div class="car-title">${make} ${model} ${version} ${capacityLiters} ${technology} ${colour} ${body} (${doors}p)</div>
-                            <div class="car-details-container">${year} | ${transmission} | ${kilometres} km | ${fuel} | ${kilowatts} kW (${horsepower} CV)</div>
-                        </div>
-                        <div class="price-details-container">
-                            <div class="price">Precio al contado</div>
-                            <div class="finance-price-full">Precio financiado: ${formatCurrency(price)}</div>
-                        </div>
-                        <div class="price-container">
-                            <div class="price">${formatCurrency(price)}</div>
-                            <div class="finance-price">${formatCurrency(Math.abs(result.pmt))}/mes</div>
-                        </div>
-                        <div class="finance-details">
-                            *Sin entrada ${loanLengthMonths} meses
-                            <span class="apr-example" onclick="showLoanInfo(event, ${loanLengthMonths}, ${price}, ${vehicleDeposit}, ${annualRateTIN}, ${commissionRate}, ${Math.abs(result.pmt)}, ${result.annualRateTAE})">
-                                Ver ejemplo TAE ${result.annualRateTAE}%
-                            </span> con Santander
-                        </div>
-                    </a>
-                `;
 
-                container.insertAdjacentHTML('beforeend', html);
-            });
+        // Construct the HTML for each car listing
+        let html = `
+            <a href="car-details.html?id=${id}" class="car-container">
+                <div class="car-image-container">
+                    <div class="car-status ${status.toLowerCase()}">${status}</div>
+                    <img class="car-image" src="${imageUrl}" alt="${make} ${model}">
+                    ${emissions !== "" ? `<label id="emissionsLabel" class="emissions-label">
+                        <img src="icons/emissions/${emissions.toLowerCase()}.svg" alt="Emissions Icon" width="25" height="25">
+                    </label>` : ''}
+                    <label id="photoCountLabel" class="photo-count-label">
+                        <img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${photoCount}
+                    </label>
+                </div>
+                <div class="car-description-container">
+                    <div class="car-title">${make} ${model} ${version} ${capacityLiters} ${technology} ${colour} ${body} (${doors}p)</div>
+                    <div class="car-details-container">${year} | ${transmission} | ${kilometres} km | ${fuel} | ${kilowatts} kW (${horsepower} CV)</div>
+                </div>
+                <div class="price-details-container">
+                    ${previousPrice !== price ? `
+                        <div class="price">
+                            Precio al contado: <span class="previous-price">${formatCurrency(previousPrice)}</span>
+                        </div>
+                    ` : '<div class="price">Precio al contado: </div>'}
+                    <div class="finance-price-full">Precio financiado: ${formatCurrency(price)}</div>
+                </div>
+                <div class="price-container">
+                    <div class="price">${formatCurrency(price)}</div>
+                    <div class="finance-price">${formatCurrency(Math.abs(result.pmt))}/mes</div>
+                </div>
+                <div class="finance-details">
+                    *Sin entrada ${loanLengthMonths} meses
+                    <span class="apr-example" onclick="showLoanInfo(event, ${loanLengthMonths}, ${price}, ${vehicleDeposit}, ${annualRateTIN}, ${commissionRate}, ${Math.abs(result.pmt)}, ${result.annualRateTAE})">
+                        Ver ejemplo TAE ${result.annualRateTAE}%
+                    </span> con Santander
+                </div>
+            </a>
+        `;
 
-            document.getElementById('listingCount').textContent = `${cars.length} listings`;
-        }
+        container.insertAdjacentHTML('beforeend', html);
+    });
+
+    document.getElementById('listingCount').textContent = `${cars.length} listings`;
+}
     </script>
 </body>
 

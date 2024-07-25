@@ -11,7 +11,8 @@
             display: flex;
             max-width: 1000px;
             margin: auto;
-            flex-wrap: wrap; /* Allow wrapping to the next line */
+            flex-wrap: wrap;
+            /* Allow wrapping to the next line */
         }
 
 
@@ -19,46 +20,50 @@
             width: 66.666667%;
             overflow: hidden;
         }
-        
+
 
         #carImage {
-            border-radius: 1rem 1rem 0 0; /* Apply border-radius only to top corners */
+            border-radius: 1rem 1rem 0 0;
+            /* Apply border-radius only to top corners */
         }
 
         #carFinanceContainer {
             flex: 1;
             color: #333;
             position: sticky;
-    background: #F7F8F8;
-    margin-left: 1rem;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin-top: 5.5rem;
-    border-radius: 1rem;
-  
-}
+            background: #F7F8F8;
+            margin-left: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 5.5rem;
+            border-radius: 1rem;
 
-#carTitle {
-    font-size: 1.5rem;
-    font-weight: 800;
-    line-height: 1.2em; /* Improved line height */
-    padding-top: 1.5rem;
-    padding-bottom: .5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    text-transform: uppercase; /* Transform text to uppercase */
-}
-#carImageGallery {
-    width: 66.666667%;
-    overflow: hidden;
-}
+        }
 
-@media (max-width: 768px) {
-    #carImageGallery {
-        width: 100%;
-    }
-}
+        #carTitle {
+            font-size: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2em;
+            /* Improved line height */
+            padding-top: 1.5rem;
+            padding-bottom: .5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            text-transform: uppercase;
+            /* Transform text to uppercase */
+        }
+
+        #carImageGallery {
+            width: 66.666667%;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            #carImageGallery {
+                width: 100%;
+            }
+        }
 
         #carImageContainer {
             position: relative;
@@ -68,52 +73,68 @@
             touch-action: pan-y;
         }
 
-.navButtonContainer {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 1rem); /* Adjust width to account for inset margins */
-    padding: 0.5rem; /* Adjust padding to create space on both sides */
-}
+        .navButtonContainer {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: calc(100% - 1rem);
+            /* Adjust width to account for inset margins */
+            padding: 0.5rem;
+            /* Adjust padding to create space on both sides */
+        }
 
-.navButton {
-    background-color:  #FFFFFF;
-    color: #141414;
-    border: none;
-    width: 2rem; /* Set width */
-    height: 2rem; /* Set height */
-    cursor: pointer;
-    border-radius: 50%;
-    opacity: 0.4; /* Initial opacity */
-    transition: opacity 0.3s ease; /* Smooth transition */
-    display: flex; /* Optional: center content */
-    align-items: center; /* Optional: center content */
-    justify-content: center; /* Optional: center content */
-    font-size: 1rem; /* Increase size of Unicode characters */
-    font-weight: bold; /* Optional: Increase font weight if needed */
-    box-sizing: border-box; /* Ensure padding and border are included in the total width and height */
-}
+        .navButton {
+            background-color: #FFFFFF;
+            color: #141414;
+            border: none;
+            width: 2rem;
+            /* Set width */
+            height: 2rem;
+            /* Set height */
+            cursor: pointer;
+            border-radius: 50%;
+            opacity: 0.4;
+            /* Initial opacity */
+            transition: opacity 0.3s ease;
+            /* Smooth transition */
+            display: flex;
+            /* Optional: center content */
+            align-items: center;
+            /* Optional: center content */
+            justify-content: center;
+            /* Optional: center content */
+            font-size: 1rem;
+            /* Increase size of Unicode characters */
+            font-weight: bold;
+            /* Optional: Increase font weight if needed */
+            box-sizing: border-box;
+            /* Ensure padding and border are included in the total width and height */
+        }
 
 
-#thumbnailContainer {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 0.1rem;
-    overflow: hidden;
-    border-radius: 0 0 1rem 1rem; /* Apply border-radius only to top corners */
-}
+        #thumbnailContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.1rem;
+            overflow: hidden;
+            border-radius: 0 0 1rem 1rem;
+            /* Apply border-radius only to top corners */
+        }
 
-.thumbnail {
-    width: calc(25% - 0.25rem);
-    height: auto; /* Allow the height to adjust based on the image's aspect ratio */
-    object-fit: cover; /* Ensure the image covers the entire container */
-    aspect-ratio: 16/9; /* Set the desired aspect ratio (optional, CSS property supported in modern browsers) */
-    cursor: pointer;
-    opacity: 0.6;
-    transition: opacity 0.3s ease;
-}
+        .thumbnail {
+            width: calc(25% - 0.25rem);
+            height: auto;
+            /* Allow the height to adjust based on the image's aspect ratio */
+            object-fit: cover;
+            /* Ensure the image covers the entire container */
+            aspect-ratio: 16/9;
+            /* Set the desired aspect ratio (optional, CSS property supported in modern browsers) */
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
 
         .thumbnail.active {
             opacity: 1;
@@ -144,7 +165,7 @@
             background-color: #FFFFFF;
             border-bottom: 1px solid #FFFFFF;
             border-top: 0.3rem solid #55A0D7;
-            color:#D6B156
+            color: #D6B156
         }
 
         .tab-content {
@@ -164,89 +185,136 @@
 
 
         #financeContent {
-        text-align: center; /* Center-aligns text */
+            text-align: center;
+            /* Center-aligns text */
         }
 
-        
-#financeSliders input[type="range"] {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 100%;
-    height: 8px;
-    background: linear-gradient(to right, #55A0D7 0%, #F7F8F8 0%);
-    outline: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
 
-/* Custom handle styling */
-#financeSliders input[type="range"]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 24px;
-    height: 24px;
-    background: radial-gradient(circle, #55A0D7 30%, #FFFFFF 20%, #FFFFFF 50%, #55A0D7 50%);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-}
+        #financeSliders input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            background: linear-gradient(to right, #55A0D7 0%, #F7F8F8 0%);
+            outline: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
 
-#financeSliders input[type="range"]::-moz-range-thumb {
-    width: 24px;
-    height: 24px;
-    background: radial-gradient(circle, #55A0D7 30%, #FFFFFF 20%, #FFFFFF 50%, #55A0D7 50%);
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    position: relative;
-}
+        /* Custom handle styling */
+        #financeSliders input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, #55A0D7 30%, #FFFFFF 20%, #FFFFFF 50%, #55A0D7 50%);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+        }
 
-/* Remove outline */
-#financeSliders input[type="range"]::-webkit-slider-runnable-track {
-    -webkit-appearance: none;
-    appearance: none;
-}
+        #financeSliders input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            background: radial-gradient(circle, #55A0D7 30%, #FFFFFF 20%, #FFFFFF 50%, #55A0D7 50%);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            position: relative;
+        }
 
-#financeSliders input[type="range"]::-moz-range-track {
-    background: transparent;
-    border: none;
-}
+        /* Remove outline */
+        #financeSliders input[type="range"]::-webkit-slider-runnable-track {
+            -webkit-appearance: none;
+            appearance: none;
+        }
 
-/* Additional styling for Firefox */
-#financeSliders input[type="range"]::-moz-range-progress {
-    background: #55A0D7;
-    height: 8px;
-    border-radius: 5px;
-}
+        #financeSliders input[type="range"]::-moz-range-track {
+            background: transparent;
+            border: none;
+        }
 
-#overview {
-    font-weight: bold;
-    padding: 1rem;
-}
+        /* Additional styling for Firefox */
+        #financeSliders input[type="range"]::-moz-range-progress {
+            background: #55A0D7;
+            height: 8px;
+            border-radius: 5px;
+        }
 
-.h3 {
-    font-size: 1.5rem;
-    font-weight: bold;
-}
+        #overview {
+            font-weight: bold;
+            padding: 1rem;
+        }
+
+        .h3 {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+    </style>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            overflow-x: hidden;
+            font-family: 'Figtree', Arial, sans-serif;
+            background-color: #FAFAFA;
+        }
+
+        .details-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            padding-top: 2rem;
+        }
+
+        @media (max-width: 480px) {
+            .details-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .more-details {
+            display: flex;
+            align-items: center;
+        }
+
+        .more-details img {
+            margin-right: 10px;
+        }
+
+        .detail-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .detail-result {
+            font-weight: bold;
+        }
+
+        .detail-title {
+            color: #555;
+        }
+
+        .more-information {
+            display: flex;
+            align-items: center;
+            font-size: 12px;
+            color: #007BFF;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .more-information img {
+            margin-right: 5px;
+        }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="header-content">
-            <div class="logo">
-                <img src="icons/mart-logo.png" alt="Logo">
-            </div>
-            <nav>
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <div id="header-container"></div>
 
     <div id="carDetailsContainer">
         <div id="carImageGallery">
@@ -268,58 +336,77 @@
 
             <!-- Tabs for Finance and Payment Information -->
             <div class="price-tabs-contain">
-                    <div class="tabs">
-                        <div class="tab" id="tabFinan" onclick="showTab('finance')">
+                <div class="tabs">
+                    <div class="tab" id="tabFinan" onclick="showTab('finance')">
+                        <div>
+                            <small>Financiación desde</small>
+                            <span class="h3" id="preFin">240€/mes</span>
+                        </div>
+                    </div>
+                    <div class="tab active" id="tabInfo" onclick="showTab('normal')">
+                        <div class="text-left">
+                            <small>Precio al contado</small>
+                            <span class="h3" id="preContado"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab-content">
+                    <!-- Finance Information Tab -->
+                    <div id="financeContent" class="content" style="display:none;">
+                        <div id="financeSliders">
                             <div>
-                                <small>Financiación desde</small>
-                                <span class="h3" id="preFin">240€/mes</span>
+                                <label for="depositSlider">Entrada Inicial</label>
+                                <div id="selectedDeposit">12.000 €</div> <!-- Changed to a div for a new line -->
+                                <input type="range" id="depositSlider" min="0" max="100000" step="1000" value="0">
                             </div>
-                        </div>
-                        <div class="tab active" id="tabInfo" onclick="showTab('normal')">
-                            <div class="text-left">
-                                <small>Precio al contado</small>
-                                <span class="h3" id="preContado"></span>
+                            <div>
+                                <label for="yearsSlider">Select Years:</label>
+                                <input type="range" id="yearsSlider" min="0" max="10" value="0">
+                                <span id="selectedYears">0 Year</span>
                             </div>
                         </div>
                     </div>
-                    <div class="tab-content">
-                        <!-- Finance Information Tab -->
-                        <div id="financeContent" class="content" style="display:none;">
-                            <div id="financeSliders">
-                                <div>
-                                    <label for="depositSlider">Entrada Inicial</label>
-                                    <div id="selectedDeposit">12.000 €</div> <!-- Changed to a div for a new line -->
-                                    <input type="range" id="depositSlider" min="0" max="100000" step="1000" value="0">
-                                </div>
-                                <div>
-                                    <label for="yearsSlider">Select Years:</label>
-                                    <input type="range" id="yearsSlider" min="0" max="10" value="0">
-                                    <span id="selectedYears">0 Year</span>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- Basic Payment Information Tab -->
-                        <div id="normalContent" class="content" style="display:block;">
-                            <!-- Basic Payment Information Content -->
-                            <!-- Example: Discounts, Delivery Options, Final Price Calculation -->
-                            <p>Normal Payment Information Content here...</p>
-                        </div>
+                    <!-- Basic Payment Information Tab -->
+                    <div id="normalContent" class="content" style="display:block;">
+                        <!-- Basic Payment Information Content -->
+                        <!-- Example: Discounts, Delivery Options, Final Price Calculation -->
+                        <p>Normal Payment Information Content here...</p>
                     </div>
+                </div>
             </div>
-            
+
         </div>
         <div id="carInfoContainer">
+            <div id="container" class="details-container"></div>
+
+
             <div class="section" id="carroceria"></div>
             <div class="section" id="motorYTransmision"></div>
             <div class="section" id="consumoYEmisiones"></div>
             <div class="section" id="garantiaContainer"></div>
-            
+
             <div class="section" id="equipamiento"></div>
 
         </div>
     </div>
 
     <script>
+
+        function toggleheaderMenu() {
+            const navList = document.getElementById('navList');
+            navList.classList.toggle('active');
+        }
+
+
+        async function loadHeader() {
+            const response = await fetch('header.html');
+            const headerHTML = await response.text();
+            document.getElementById('header-container').innerHTML = headerHTML;
+        }
+
+        loadHeader();
+
+
         document.addEventListener('DOMContentLoaded', async () => {
             const state = {
                 currentImageIndex: 0,
@@ -372,38 +459,6 @@
                 // Render car information
                 overviewContainer.innerHTML = `
                     ${car.CaracteristicasGenerales.Año} | ${car.MotorYTransmision.Transmision.Caja} | ${car.CaracteristicasGenerales.Kilometraje} km ${car.MotorYTransmision.Combustible.Tipo} | ${car.MotorYTransmision.Potencia.KW} kW (${car.MotorYTransmision.Potencia.KW} CV)
-                `;
-
-                carroceriaContainer.innerHTML = `
-                    <h2>Carroceria</h2>
-                    <p>VIN: ${car.CaracteristicasGenerales.Bastidor}</p>
-                    <p>Type: ${car.Carroceria.Tipo}</p>
-                    <p>Seats: ${car.Carroceria.Plazas}</p>
-                    <p>Doors: ${car.Carroceria.Puertas}</p>
-                    <p>Max Weight: ${car.Carroceria.PesoMaximo} kg</p>
-                    <p>Dimensions: ${car.Carroceria.Dimensiones.Largo} x ${car.Carroceria.Dimensiones.Ancho} x ${car.Carroceria.Dimensiones.Alto} mm</p>
-                `;
-
-                motorYTransmisionContainer.innerHTML = `
-                    <h2>Motor y Transmisión</h2>
-                    <p>Tipo de Combustible: ${car.MotorYTransmision.Combustible.Tipo}</p>
-                    <p>Tecnología: ${car.MotorYTransmision.Combustible.Tecnología}</p>
-                    <p>Capacidad: ${car.MotorYTransmision.Cilindrada.Cilindros} cilindros, ${car.MotorYTransmision.Cilindrada.CC} cc</p>
-                    <p>Transmisión: ${car.MotorYTransmision.Transmision.Caja}, ${car.MotorYTransmision.Transmision.Marchas} marchas</p>
-                    <p>Potencia: ${car.MotorYTransmision.Potencia.CV} CV (${car.MotorYTransmision.Potencia.KW} KW)</p>
-                    <p>Par: ${car.MotorYTransmision.Par} Nm</p>
-                    <p>Velocidad Máxima: ${car.MotorYTransmision.Rendimiento.VelocidadMáxima} km/h</p>
-                    <p>0-100 km/h: ${car.MotorYTransmision.Rendimiento.Aceleración}s</p>
-                `;
-
-                consumoYEmisionesContainer.innerHTML = `
-                    <h2>Consumo y Emisiones</h2>
-                    <p>Consumo Medio: ${car.ConsumoYEmisiones.Consumo.Medio} l/100km</p>
-                    <p>Consumo Urbano: ${car.ConsumoYEmisiones.Consumo.Urbano} l/100km</p>
-                    <p>Consumo Carretera: ${car.ConsumoYEmisiones.Consumo.Carretera} l/100km</p>
-                    <p>CO2 Emissions: ${car.ConsumoYEmisiones.EmisionesCO2} g/km</p>
-                    <p>Environmental Classification: ${car.ConsumoYEmisiones.Etiqueta}</p>
-                    <p>Depósito: ${car.ConsumoYEmisiones.Depósito} L</p>
                 `;
 
                 garantiaContainer.innerHTML = `
@@ -504,40 +559,79 @@
 
             const carDetails = await fetchCarDetails(state.carReference);
 
+            const carID = state.carReference
+
+            console.log(`Car ID: ${carID}`);
+
             if (carDetails) {
                 const imagesCount = carDetails.JavaScriptInfo.cantidadImágenes || 5;
                 state.imageUrls = Array.from({ length: imagesCount }, (_, i) => `listings/${state.carReference}/images/${i + 1}.jpg`);
                 preloadImages(state.imageUrls);
                 await renderCarDetails(carDetails);
 
-                document.getElementById('prevImage').addEventListener('click', showPrevImage);
-                document.getElementById('nextImage').addEventListener('click', showNextImage);
+                const prevImageBtn = document.getElementById('prevImage');
+                const nextImageBtn = document.getElementById('nextImage');
+
+                // Click event listeners
+                prevImageBtn.addEventListener('click', showPrevImage);
+                nextImageBtn.addEventListener('click', showNextImage);
+
+                // Touch event listeners
+                let startX, startY, endX, endY;
+
+                function handleTouchStart(event) {
+                    const touch = event.touches[0];
+                    startX = touch.pageX;
+                    startY = touch.pageY;
+                }
+
+                function handleTouchMove(event) {
+                    // Optional: Handle touch move if needed
+                }
+
+                function handleTouchEnd(event) {
+                    const touch = event.changedTouches[0];
+                    endX = touch.pageX;
+                    endY = touch.pageY;
+                    const deltaX = endX - startX;
+                    const deltaY = endY - startY;
+
+                    if (Math.abs(deltaX) > Math.abs(deltaY)) { // Horizontal swipe
+                        if (deltaX > 0) {
+                            showPrevImage(); // Swipe right
+                        } else {
+                            showNextImage(); // Swipe left
+                        }
+                    }
+                }
+
+                prevImageBtn.addEventListener('touchstart', handleTouchStart);
+                nextImageBtn.addEventListener('touchstart', handleTouchStart);
+                prevImageBtn.addEventListener('touchend', handleTouchEnd);
+                nextImageBtn.addEventListener('touchend', handleTouchEnd);
+
+                // Mouse enter/leave events for desktop
+                prevImageBtn.addEventListener('mouseenter', () => {
+                    prevImageBtn.style.opacity = 0.8; // Full opacity on hover
+                });
+
+                prevImageBtn.addEventListener('mouseleave', () => {
+                    prevImageBtn.style.opacity = 0.4; // Reduced opacity on leave
+                });
+
+                nextImageBtn.addEventListener('mouseenter', () => {
+                    nextImageBtn.style.opacity = 0.8; // Full opacity on hover
+                });
+
+                nextImageBtn.addEventListener('mouseleave', () => {
+                    nextImageBtn.style.opacity = 0.4; // Reduced opacity on leave
+                });
             }
-
-            // Event listeners for navigation buttons
-            const prevImageBtn = document.getElementById('prevImage');
-            const nextImageBtn = document.getElementById('nextImage');
-
-            prevImageBtn.addEventListener('mouseenter', () => {
-                prevImageBtn.style.opacity = 0.8; // Full opacity on hover
-            });
-
-            prevImageBtn.addEventListener('mouseleave', () => {
-                prevImageBtn.style.opacity = 0.4; // Reduced opacity on leave
-            });
-
-            nextImageBtn.addEventListener('mouseenter', () => {
-                nextImageBtn.style.opacity = 0.8; // Full opacity on hover
-            });
-
-            nextImageBtn.addEventListener('mouseleave', () => {
-                nextImageBtn.style.opacity = 0.4; // Reduced opacity on leave
-            });
 
 
             // Fetch initial price data here
-        const precioContado = state.carData.CaracteristicasGenerales.PrecioNuevo;
-        document.getElementById('preContado').textContent = `${precioContado.toLocaleString('es-ES')}€`;
+            const precioContado = state.carData.CaracteristicasGenerales.PrecioNuevo;
+            document.getElementById('preContado').textContent = `${precioContado.toLocaleString('es-ES')}€`;
 
 
 
@@ -552,7 +646,130 @@
 
 
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            async function fetchCarData(folderName) {
+
+                try {
+                    const response = await fetch(`listings/${folderName}/data.json`);
+                    const jsonData = await response.json();
+                    const cc = parseInt(jsonData.MotorYTransmision.Cilindrada.CC, 10); // Parse cc as a number
+                    const kilowatts = parseFloat(jsonData.MotorYTransmision.Potencia.KW); // Parse kilowatts as a number
+                    return {
+                        id: jsonData.JavaScriptInfo.id,
+                        photoCount: jsonData.JavaScriptInfo.cantidadImágenes,
+                        status: jsonData.JavaScriptInfo.estado,
+                        make: jsonData.CaracteristicasGenerales.Marca,
+                        model: jsonData.CaracteristicasGenerales.Modelo,
+                        version: jsonData.CaracteristicasGenerales.Versión,
+                        emissions: jsonData.ConsumoYEmisiones.Etiqueta,
+                        emissionsAmount: jsonData.ConsumoYEmisiones.EmisionesCO2,
+                        capacityCC: cc, // Store as a numeric value
+                        capacityLiters: `${(Math.ceil(cc / 100) / 10).toFixed(1)}L`,
+                        technology: jsonData.MotorYTransmision.Combustible.Tecnología,
+                        colour: jsonData.CaracteristicasGenerales.Color,
+                        body: jsonData.Carroceria.Tipo,
+                        doors: jsonData.Carroceria.Puertas,
+                        seats: jsonData.Carroceria.Plazas,
+                        year: jsonData.CaracteristicasGenerales.Año,
+                        transmission: jsonData.MotorYTransmision.Transmision.Caja,
+                        gears: jsonData.MotorYTransmision.Transmision.Marchas,
+                        kilometres: new Intl.NumberFormat('es-ES').format(jsonData.CaracteristicasGenerales.Kilometraje),
+                        fuel: jsonData.MotorYTransmision.Combustible.Tipo,
+                        consumption: new Intl.NumberFormat('es-ES').format(jsonData.ConsumoYEmisiones.Consumo.Medio),
+                        kilowatts: kilowatts, // Store as a numeric value
+                        horsepower: jsonData.MotorYTransmision.Potencia.CV,
+                        price: parseFloat(jsonData.CaracteristicasGenerales.PrecioNuevo),
+                        previousPrice: parseFloat(jsonData.CaracteristicasGenerales.PrecioAnterior),
+                    };
+                } catch (error) {
+                    console.error(`Error fetching data for ${folderName}:`, error);
+                    return null;
+                }
+            }
+
+            function createDetailDiv(containerId, icon, detailValue, detailTitle, moreInfoText) {
+                const container = document.getElementById(containerId);
+
+                // Create the outer div
+                const moreDetailsDiv = document.createElement('div');
+                moreDetailsDiv.className = 'more-details';
+
+                // Create the image element
+                const img = document.createElement('img');
+                img.src = `icons/details/${icon}.svg`;
+                img.alt = detailTitle;
+                img.width = 48;
+                img.height = 48;
+
+                // Create the detail text div
+                const detailTextDiv = document.createElement('div');
+                detailTextDiv.className = 'detail-text';
+
+                // Create the detail result span
+                const detailResultSpan = document.createElement('span');
+                detailResultSpan.className = 'detail-result';
+                detailResultSpan.textContent = detailValue;
+
+                // Create the detail title span
+                const detailTitleSpan = document.createElement('span');
+                detailTitleSpan.className = 'detail-title';
+                detailTitleSpan.textContent = detailTitle;
+
+                // Append spans to the detail text div
+                detailTextDiv.appendChild(detailResultSpan);
+                detailTextDiv.appendChild(detailTitleSpan);
+
+                // Optionally create the more information label
+                if (moreInfoText) {
+                    const moreInfoLabel = document.createElement('label');
+                    moreInfoLabel.className = 'more-information';
+                    moreInfoLabel.innerHTML = `<img src="icons/more-information.svg" alt="More information" width="12" height="12">${moreInfoText}`;
+                    detailTextDiv.appendChild(moreInfoLabel);
+                }
+
+                // Append image and detail text div to the outer div
+                moreDetailsDiv.appendChild(img);
+                moreDetailsDiv.appendChild(detailTextDiv);
+
+                // Append the outer div to the container
+                container.appendChild(moreDetailsDiv);
+            }
+
+            // Example usage
+            fetchCarData(carID).then(carData => {
+                if (carData) {
+                    createDetailDiv('container', 'kilometres', `${carData.kilometres} km`, 'Kilometres');
+                    createDetailDiv('container', 'horsepower', `${carData.horsepower} CV`, 'Horsepower');
+                    createDetailDiv('container', 'fuel', carData.fuel, 'Fuel Type');
+                    createDetailDiv('container', 'transmission', `${carData.transmission}`, 'Transmission');
+                    createDetailDiv('container', 'gears', `${carData.gears}`, 'Nº Gears');
+                    createDetailDiv('container', 'registration', `${carData.year}`, 'Car Registered'); // MAKE SURE TO UPDATE INCLUDING MONTH
+                    createDetailDiv('container', 'doors', carData.doors, 'Nº doors');
+                    createDetailDiv('container', 'seats', carData.seats, 'Nº Seats');
+                    createDetailDiv('container', 'colour', carData.colour, 'Colour Exterior');
+                    createDetailDiv('container', 'consumption', `${carData.consumption} l/100`, 'Fuel Consumption', 'See All'); // POPUP INFO
+                    createDetailDiv('container', 'emissions', `${carData.emissionsAmount} g/km`, 'Emissions CO2', 'More Information'); // MAKE SURE TO UPDATE BADGE TO SUIT EMMISIONS DATA MONTH + POPUP INFO
+                }
+            });
+
+
+
+
         });
 
         function showTab(tabName) {
@@ -579,6 +796,11 @@
             showTab('normal'); // Show the normal price content by default
         });
     </script>
+
+
+
 </body>
+
+</html>
 
 </html>

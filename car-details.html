@@ -1,44 +1,165 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car details</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            overflow-x: hidden;
-            font-family: 'Figtree', Arial, sans-serif;
-            background-color: #FAFAFA;
+        /* Common Styles */
+        #carDetailsContainer {
+            display: flex;
+            max-width: 1000px;
+            margin: auto;
+            flex-wrap: wrap;
         }
+
+        #carInfoContainer, #carImageGallery {
+            width: 66.6667%;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            #carInfoContainer, #carImageGallery {
+                width: 100%;
+            }
+        }
+
+        #carImage {
+            border-radius: 1rem 1rem 0 0;
+        }
+
+        #carFinanceContainer {
+            flex: 1;
+            color: #333;
+            position: sticky;
+            background: #F7F8F8;
+            margin-left: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-top: 5.5rem;
+            border-radius: 1rem;
+        }
+
+        #carTitle {
+            font-size: 1.5rem;
+            font-weight: 800;
+            line-height: 1.2em;
+            padding: 1.5rem 0 0.5rem;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+            text-transform: uppercase;
+        }
+
+        #carImageContainer {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
+            touch-action: pan-y;
+        }
+
+        .navButtonContainer {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            width: calc(100% - 1rem);
+            padding: 0.5rem;
+        }
+
+        .navButton {
+            background-color: #FFFFFF;
+            color: #141414;
+            border: none;
+            width: 2rem;
+            height: 2rem;
+            cursor: pointer;
+            border-radius: 50%;
+            opacity: 0.4;
+            transition: opacity 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: bold;
+            box-sizing: border-box;
+        }
+
+        .navButton:hover {
+            opacity: 0.8;
+        }
+
+        #thumbnailContainer {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 0.1rem;
+            overflow: hidden;
+            border-radius: 0 0 1rem 1rem;
+        }
+
+        .thumbnail {
+            width: calc(25% - 0.25rem);
+            height: auto;
+            object-fit: cover;
+            aspect-ratio: 16/9;
+            cursor: pointer;
+            opacity: 0.6;
+            transition: opacity 0.3s ease;
+        }
+
+        .thumbnail.active {
+            opacity: 1;
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+
+        #overview {
+            font-weight: bold;
+            padding: 1rem;
+        }
+
         .details-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 10px;
+            padding-top: 2rem;
         }
+
         @media (max-width: 480px) {
             .details-container {
                 grid-template-columns: repeat(2, 1fr);
             }
         }
+
         .more-details {
             display: flex;
             align-items: center;
         }
+
         .more-details img {
             margin-right: 10px;
         }
+
         .detail-text {
             display: flex;
             flex-direction: column;
         }
+
         .detail-result {
             font-weight: bold;
         }
+
         .detail-title {
             color: #555;
         }
+
         .more-information {
             display: flex;
             align-items: center;
@@ -47,118 +168,260 @@
             cursor: pointer;
             margin-top: 5px;
         }
+
         .more-information img {
             margin-right: 5px;
         }
     </style>
 </head>
+
 <body>
-    <div id="container" class="details-container"></div>
-
-    <script>
-        async function fetchCarData(folderName) {
-            try {
-                const response = await fetch(`listings/${folderName}/data.json`);
-                const jsonData = await response.json();
-                const cc = parseInt(jsonData.MotorYTransmision.Cilindrada.CC, 10); // Parse cc as a number
-                const kilowatts = parseFloat(jsonData.MotorYTransmision.Potencia.KW); // Parse kilowatts as a number
-                return {
-                    id: jsonData.JavaScriptInfo.id,
-                    photoCount: jsonData.JavaScriptInfo.cantidadImágenes,
-                    status: jsonData.JavaScriptInfo.estado,
-                    make: jsonData.CaracteristicasGenerales.Marca,
-                    model: jsonData.CaracteristicasGenerales.Modelo,
-                    version: jsonData.CaracteristicasGenerales.Versión,
-                    emissions: jsonData.ConsumoYEmisiones.Etiqueta,
-                    emissionsAmount: jsonData.ConsumoYEmisiones.EmisionesCO2,
-                    capacityCC: cc, // Store as a numeric value
-                    capacityLiters: `${(Math.ceil(cc / 100) / 10).toFixed(1)}L`,
-                    technology: jsonData.MotorYTransmision.Combustible.Tecnología,
-                    colour: jsonData.CaracteristicasGenerales.Color,
-                    body: jsonData.Carroceria.Tipo,
-                    doors: jsonData.Carroceria.Puertas,
-                    seats: jsonData.Carroceria.Plazas,
-                    year: jsonData.CaracteristicasGenerales.Año,
-                    transmission: jsonData.MotorYTransmision.Transmision.Caja,
-                    gears: jsonData.MotorYTransmision.Transmision.Marchas,
-                    kilometres: new Intl.NumberFormat('es-ES').format(jsonData.CaracteristicasGenerales.Kilometraje),
-                    fuel: jsonData.MotorYTransmision.Combustible.Tipo,
-                    consumption: new Intl.NumberFormat('es-ES').format(jsonData.ConsumoYEmisiones.Consumo.Medio),
-                    kilowatts: kilowatts, // Store as a numeric value
-                    horsepower: jsonData.MotorYTransmision.Potencia.CV,
-                    price: parseFloat(jsonData.CaracteristicasGenerales.PrecioNuevo),
-                    previousPrice: parseFloat(jsonData.CaracteristicasGenerales.PrecioAnterior),
-                };
-            } catch (error) {
-                console.error(`Error fetching data for ${folderName}:`, error);
-                return null;
-            }
-        }
-
-        function createDetailDiv(containerId, icon, detailValue, detailTitle, moreInfoText) {
-            const container = document.getElementById(containerId);
-
-            // Create the outer div
-            const moreDetailsDiv = document.createElement('div');
-            moreDetailsDiv.className = 'more-details';
-
-            // Create the image element
-            const img = document.createElement('img');
-            img.src = `icons/details/${icon}.svg`;
-            img.alt = detailTitle;
-            img.width = 48;
-            img.height = 48;
-
-            // Create the detail text div
-            const detailTextDiv = document.createElement('div');
-            detailTextDiv.className = 'detail-text';
-
-            // Create the detail result span
-            const detailResultSpan = document.createElement('span');
-            detailResultSpan.className = 'detail-result';
-            detailResultSpan.textContent = detailValue;
-
-            // Create the detail title span
-            const detailTitleSpan = document.createElement('span');
-            detailTitleSpan.className = 'detail-title';
-            detailTitleSpan.textContent = detailTitle;
-
-            // Append spans to the detail text div
-            detailTextDiv.appendChild(detailResultSpan);
-            detailTextDiv.appendChild(detailTitleSpan);
-
-            // Optionally create the more information label
-            if (moreInfoText) {
-                const moreInfoLabel = document.createElement('label');
-                moreInfoLabel.className = 'more-information';
-                moreInfoLabel.innerHTML = `<img src="icons/more-information.svg" alt="More information" width="12" height="12">${moreInfoText}`;
-                detailTextDiv.appendChild(moreInfoLabel);
-            }
-
-            // Append image and detail text div to the outer div
-            moreDetailsDiv.appendChild(img);
-            moreDetailsDiv.appendChild(detailTextDiv);
-
-            // Append the outer div to the container
-            container.appendChild(moreDetailsDiv);
-        }
-
-        // Example usage
-        fetchCarData('CAR001').then(carData => {
-            if (carData) {
-                createDetailDiv('container', 'kilometres', `${carData.kilometres} km`, 'Kilometres');
-                createDetailDiv('container', 'horsepower', `${carData.horsepower} CV`, 'Horsepower');
-                createDetailDiv('container', 'fuel', carData.fuel, 'Fuel Type');
-                createDetailDiv('container', 'transmission', `${carData.transmission}`, 'Transmission');
-                createDetailDiv('container', 'gears', `${carData.gears}`, 'Nº Gears');
-                createDetailDiv('container', 'registration', `${carData.year}`, 'Car Registered'); // MAKE SURE TO UPDATE INCLUDING MONTH
-                createDetailDiv('container', 'doors', carData.doors, 'Nº doors');
-                createDetailDiv('container', 'seats', carData.seats, 'Nº Seats');
-                createDetailDiv('container', 'colour', carData.colour, 'Colour Exterior');
-                createDetailDiv('container', 'consumption', `${carData.consumption} l/100`, 'Fuel Consumption', 'See All'); // POPUP INFO
-                createDetailDiv('container', 'emissions', `${carData.emissionsAmount} g/km`, 'Emissions CO2', 'More Information'); // MAKE SURE TO UPDATE BADGE TO SUIT EMMISIONS DATA MONTH + POPUP INFO
-            }
-        });
-    </script>
+    <div id="header-container"></div>
+    <div class="car-listings">
+        <div id="carDetailsContainer">
+            <div id="carImageGallery">
+                <div id="carTitle"></div>
+                <div id="carImageContainer">
+                    <img id="carImage" class="car-image" alt="Car Image">
+                    <div class="navButtonContainer" id="navButtons">
+                        <button class="navButton" id="prevImage">&lt;</button>
+                        <button class="navButton" id="nextImage">&gt;</button>
+                    </div>
+                    <label id="photoCountLabel" class="photo-count-label">
+                        <img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">
+                    </label>
+                </div>
+                <div id="thumbnailContainer"></div>
+            </div>
+            <div id="carFinanceContainer">
+                <div class="section" id="overview"></div>
+            </div>
+            <div id="carInfoContainer">
+                <div id="container" class="details-container"></div>
+                <div class="section" id="carroceria"></div>
+                <div class="section" id="motorYTransmision"></div>
+                <div class="section" id="consumoYEmisiones"></div>
+                <div class="section" id="garantiaContainer"></div>
+                <div class="section" id="equipamiento"></div>
+            </div>
+        </div>
+    </div>
 </body>
+
+<script>
+
+async function loadHeader() {
+    const response = await fetch('header.html');
+    const headerHTML = await response.text();
+    document.getElementById('header-container').innerHTML = headerHTML;
+}
+
+function toggleHeaderMenu() {
+    document.getElementById('navList').classList.toggle('active');
+}
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const state = {
+        currentImageIndex: 0,
+        thumbnailStartIndex: 0,
+        thumbnailCount: 4,
+        imageUrls: [],
+        carReference: getQueryParameter('id'),
+        carData: null
+    };
+
+    if (!state.carReference) {
+        document.getElementById('carDetailsContainer').innerHTML = '<p>No car reference provided.</p>';
+        return;
+    }
+
+    loadHeader();
+
+    const carDetails = await fetchCarDetails();
+    if (carDetails) {
+        state.imageUrls = Array.from({ length: carDetails.JavaScriptInfo.cantidadImágenes || 5 }, (_, i) => `listings/${state.carReference}/images/${i + 1}.webp`);
+        preloadImages(state.imageUrls);
+        await renderCarDetails(carDetails);
+
+        setupEventListeners();
+    }
+
+    async function fetchCarDetails() {
+        try {
+            const response = await fetch(`listings/${state.carReference}/data.json`);
+            if (!response.ok) {
+                throw new Error(`Failed to fetch car details: ${response.status} ${response.statusText}`);
+            }
+            const carData = await response.json();
+            state.carData = carData;
+            return carData;
+        } catch (error) {
+            console.error('Error fetching car details:', error);
+            return null;
+        }
+    }
+
+    function getQueryParameter(name) {
+        return new URLSearchParams(window.location.search).get(name);
+    }
+
+    function preloadImages(imageUrls) {
+        imageUrls.forEach(url => new Image().src = url);
+    }
+
+    function setupEventListeners() {
+        document.getElementById('prevImage').addEventListener('click', showPrevImage);
+        document.getElementById('nextImage').addEventListener('click', showNextImage);
+        const carImageContainer = document.getElementById('carImageContainer');
+        carImageContainer.addEventListener('touchstart', handleTouchStart);
+        carImageContainer.addEventListener('touchend', handleTouchEnd);
+
+        const navButtons = [document.getElementById('prevImage'), document.getElementById('nextImage')];
+        navButtons.forEach(button => {
+            button.addEventListener('mouseenter', () => button.style.opacity = 0.8);
+            button.addEventListener('mouseleave', () => button.style.opacity = 0.4);
+        });
+    }
+
+    function renderCarDetails(car) {
+        const carTitle = document.getElementById('carTitle');
+        const carImage = document.getElementById('carImage');
+        const thumbnailContainer = document.getElementById('thumbnailContainer');
+        const overviewContainer = document.getElementById('overview');
+        const garantiaContainer = document.getElementById('garantiaContainer');
+        const equipamientoContainer = document.getElementById('equipamiento');
+        const photoCountLabel = document.getElementById('photoCountLabel');
+
+        document.title = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Versión} ${car.MotorYTransmision.Combustible.Tipo} - ${car.CaracteristicasGenerales.Color} ${car.Carroceria.Tipo} (${car.Carroceria.Puertas}p)`;
+        carTitle.textContent = document.title;
+
+        carImage.src = state.imageUrls[state.currentImageIndex];
+        carImage.alt = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año}`;
+
+        const photoCount = car.JavaScriptInfo.cantidadImágenes;
+        photoCountLabel.innerHTML = `<img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${state.currentImageIndex + 1} of ${photoCount}`;
+
+        overviewContainer.innerHTML = `
+            ${car.CaracteristicasGenerales.Año} | ${car.MotorYTransmision.Transmision.Caja} | ${car.CaracteristicasGenerales.Kilometraje} km ${car.MotorYTransmision.Combustible.Tipo} | ${car.MotorYTransmision.Potencia.KW} kW (${car.MotorYTransmision.Potencia.KW} CV)
+        `;
+
+        garantiaContainer.innerHTML = `
+            <h2>Garantía</h2>
+            <p>${car.Garantía.Descripción}</p>
+            <p>Garantía Estándar: ${car.Garantía.GarantíaEstándar} año(s)</p>
+            <p>Garantía VIP: ${car.Garantía.GarantíaVIP} año(s)</p>
+        `;
+
+        equipamientoContainer.innerHTML = `
+            <h2>Equipamiento</h2>
+            <h3>Exterior</h3>
+            <ul>${car.Equipamiento.Exterior.map(item => `<li>${item}</li>`).join('')}</ul>
+            <h3>Interior</h3>
+            <ul>${car.Equipamiento.Interior.map(item => `<li>${item}</li>`).join('')}</ul>
+        `;
+
+        thumbnailContainer.innerHTML = '';
+        for (let i = state.thumbnailStartIndex; i < state.thumbnailStartIndex + state.thumbnailCount; i++) {
+            if (i < state.imageUrls.length) {
+                const thumbnail = document.createElement('img');
+                thumbnail.src = state.imageUrls[i];
+                thumbnail.alt = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año} Thumbnail ${i + 1}`;
+                thumbnail.classList.add('thumbnail', ...(i === state.currentImageIndex ? ['active'] : []));
+                thumbnail.addEventListener('click', () => showImage(i));
+                thumbnailContainer.appendChild(thumbnail);
+            }
+        }
+    }
+
+    function updateImage() {
+        const carImage = document.getElementById('carImage');
+        carImage.src = state.imageUrls[state.currentImageIndex];
+        document.querySelectorAll('.thumbnail').forEach((thumb, index) => {
+            thumb.classList.toggle('active', index === state.currentImageIndex);
+        });
+
+        if (state.currentImageIndex < state.thumbnailStartIndex) {
+            state.thumbnailStartIndex = state.currentImageIndex;
+        } else if (state.currentImageIndex >= state.thumbnailStartIndex + state.thumbnailCount) {
+            state.thumbnailStartIndex = state.currentImageIndex - state.thumbnailCount + 1;
+        }
+
+        renderCarDetails(state.carData);
+    }
+
+    function showImage(index) {
+        state.currentImageIndex = index;
+        updateImage();
+    }
+
+    function showPrevImage() {
+        state.currentImageIndex = (state.currentImageIndex > 0) ? state.currentImageIndex - 1 : state.imageUrls.length - 1;
+        updateImage();
+    }
+
+    function showNextImage() {
+        state.currentImageIndex = (state.currentImageIndex < state.imageUrls.length - 1) ? state.currentImageIndex + 1 : 0;
+        updateImage();
+    }
+
+    function handleTouchStart(event) {
+        const touch = event.touches[0];
+        state.startX = touch.pageX;
+        state.startY = touch.pageY;
+    }
+
+    function handleTouchEnd(event) {
+        const touch = event.changedTouches[0];
+        const deltaX = touch.pageX - state.startX;
+        const deltaY = touch.pageY - state.startY;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) {
+            deltaX > 0 ? showPrevImage() : showNextImage();
+        }
+    }
+
+    async function fetchCarData() {
+        const response = await fetch(`listings/${state.carReference}/data.json`);
+        const carData = await response.json();
+        return carData;
+    }
+
+    function createDetailDiv(containerId, icon, detailValue, detailTitle, moreInfoText) {
+        const container = document.getElementById(containerId);
+        const moreDetailsDiv = document.createElement('div');
+        moreDetailsDiv.className = 'more-details';
+
+        moreDetailsDiv.innerHTML = `
+            <img src="icons/details/${icon}.svg" alt="${detailTitle}" width="48" height="48">
+            <div class="detail-text">
+                <span class="detail-result">${detailValue}</span>
+                <span class="detail-title">${detailTitle}</span>
+                ${moreInfoText ? `<label class="more-information"><img src="icons/more-information.svg" alt="More information" width="12" height="12">${moreInfoText}</label>` : ''}
+            </div>
+        `;
+
+        container.appendChild(moreDetailsDiv);
+    }
+
+    fetchCarData().then(carData => {
+        if (carData) {
+            createDetailDiv('container', 'kilometres', `${new Intl.NumberFormat('es-ES').format(carData.CaracteristicasGenerales.Kilometraje)} km`, 'Kilometres');
+            createDetailDiv('container', 'horsepower', `${carData.MotorYTransmision.Potencia.CV} CV`, 'Horsepower');
+            createDetailDiv('container', 'fuel', carData.MotorYTransmision.Combustible.Tipo, 'Fuel Type');
+            createDetailDiv('container', 'transmission', carData.MotorYTransmision.Transmision.Caja, 'Transmission');
+            createDetailDiv('container', 'gears', carData.MotorYTransmision.Transmision.Marchas, 'Nº Gears');
+            createDetailDiv('container', 'registration', carData.CaracteristicasGenerales.Año, 'Car Registered');
+            createDetailDiv('container', 'doors', carData.Carroceria.Puertas, 'Nº doors');
+            createDetailDiv('container', 'seats', carData.Carroceria.Plazas, 'Nº Seats');
+            createDetailDiv('container', 'colour', carData.CaracteristicasGenerales.Color, 'Colour Exterior');
+            createDetailDiv('container', 'consumption', `${new Intl.NumberFormat('es-ES').format(carData.ConsumoYEmisiones.Consumo.Medio)} l/100`, 'Fuel Consumption', 'See All');
+            createDetailDiv('container', 'emissions', `${carData.ConsumoYEmisiones.EmisionesCO2} g/km`, 'Emissions CO2', 'More Information');
+        }
+    });
+});
+
+</script>
+
+</body>
+
 </html>

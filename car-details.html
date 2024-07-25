@@ -417,12 +417,10 @@
                 carData: null
             };
 
-            async function fetchCarDetails(reference) {
+            async function fetchCarDetails(folderName) {
                 try {
-                    const response = await fetch(`listings/${reference}/data.json`);
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
+                    const response = await fetch(`listings/${folderName}/data.json`);
+                    if (!response.ok) throw new Error('Network response was not ok');
                     state.carData = await response.json();
                     console.log('Car data:', state.carData);  // Log the car data here
                     return state.carData;
@@ -442,9 +440,6 @@
                 const carImage = document.getElementById('carImage');
                 const thumbnailContainer = document.getElementById('thumbnailContainer');
                 const overviewContainer = document.getElementById('overview');
-                const carroceriaContainer = document.getElementById('carroceria');
-                const motorYTransmisionContainer = document.getElementById('motorYTransmision');
-                const consumoYEmisionesContainer = document.getElementById('consumoYEmisiones');
                 const garantiaContainer = document.getElementById('garantiaContainer');
                 const equipamientoContainer = document.getElementById('equipamiento');
 
@@ -454,27 +449,27 @@
 
                 // Set initial car image
                 carImage.src = state.imageUrls[state.currentImageIndex];
-                carImage.alt = `${car.CaracteristicasGenerales.Marka} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año}`;
+                carImage.alt = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año}`;
 
                 // Render car information
                 overviewContainer.innerHTML = `
-                    ${car.CaracteristicasGenerales.Año} | ${car.MotorYTransmision.Transmision.Caja} | ${car.CaracteristicasGenerales.Kilometraje} km ${car.MotorYTransmision.Combustible.Tipo} | ${car.MotorYTransmision.Potencia.KW} kW (${car.MotorYTransmision.Potencia.KW} CV)
-                `;
+            ${car.CaracteristicasGenerales.Año} | ${car.MotorYTransmision.Transmision.Caja} | ${car.CaracteristicasGenerales.Kilometraje} km ${car.MotorYTransmision.Combustible.Tipo} | ${car.MotorYTransmision.Potencia.KW} kW (${car.MotorYTransmision.Potencia.KW} CV)
+        `;
 
                 garantiaContainer.innerHTML = `
-                    <h2>Garantía</h2>
-                    <p>${car.Garantía.Descripción}</p>
-                    <p>Garantía Estándar: ${car.Garantía.GarantíaEstándar} año(s)</p>
-                    <p>Garantía VIP: ${car.Garantía.GarantíaVIP} año(s)</p>
-                `;
+            <h2>Garantía</h2>
+            <p>${car.Garantía.Descripción}</p>
+            <p>Garantía Estándar: ${car.Garantía.GarantíaEstándar} año(s)</p>
+            <p>Garantía VIP: ${car.Garantía.GarantíaVIP} año(s)</p>
+        `;
 
                 equipamientoContainer.innerHTML = `
-                    <h2>Equipamiento</h2>
-                    <h3>Exterior</h3>
-                    <ul>${car.Equipamiento.Exterior.map(item => `<li>${item}</li>`).join('')}</ul>
-                    <h3>Interior</h3>
-                    <ul>${car.Equipamiento.Interior.map(item => `<li>${item}</li>`).join('')}</ul>
-                `;
+            <h2>Equipamiento</h2>
+            <h3>Exterior</h3>
+            <ul>${car.Equipamiento.Exterior.map(item => `<li>${item}</li>`).join('')}</ul>
+            <h3>Interior</h3>
+            <ul>${car.Equipamiento.Interior.map(item => `<li>${item}</li>`).join('')}</ul>
+        `;
 
                 // Render thumbnails
                 thumbnailContainer.innerHTML = '';
@@ -482,7 +477,7 @@
                     if (i < state.imageUrls.length) {
                         const thumbnail = document.createElement('img');
                         thumbnail.src = state.imageUrls[i];
-                        thumbnail.alt = `${car.CaracteristicasGenerales.Marka} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año} Thumbnail ${i + 1}`;
+                        thumbnail.alt = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año} Thumbnail ${i + 1}`;
                         thumbnail.classList.add('thumbnail');
                         if (i === state.currentImageIndex) {
                             thumbnail.classList.add('active');
@@ -491,10 +486,6 @@
                         thumbnailContainer.appendChild(thumbnail);
                     }
                 }
-            }
-
-            function formatPropertyName(propertyName) {
-                return propertyName.charAt(0).toUpperCase() + propertyName.slice(1);
             }
 
             function preloadImages(imageUrls) {
@@ -509,11 +500,7 @@
                 carImage.src = state.imageUrls[state.currentImageIndex];
                 const thumbnails = document.querySelectorAll('.thumbnail');
                 thumbnails.forEach((thumb, index) => {
-                    if (index === state.currentImageIndex) {
-                        thumb.classList.add('active');
-                    } else {
-                        thumb.classList.remove('active');
-                    }
+                    thumb.classList.toggle('active', index === state.currentImageIndex);
                 });
 
                 // Adjust thumbnail start index if necessary to keep the current image in view
@@ -533,21 +520,35 @@
             }
 
             function showPrevImage() {
-                if (state.currentImageIndex > 0) {
-                    state.currentImageIndex--;
-                } else {
-                    state.currentImageIndex = state.imageUrls.length - 1;
-                }
+                state.currentImageIndex = (state.currentImageIndex > 0) ? state.currentImageIndex - 1 : state.imageUrls.length - 1;
                 updateImage();
             }
 
             function showNextImage() {
-                if (state.currentImageIndex < state.imageUrls.length - 1) {
-                    state.currentImageIndex++;
-                } else {
-                    state.currentImageIndex = 0;
-                }
+                state.currentImageIndex = (state.currentImageIndex < state.imageUrls.length - 1) ? state.currentImageIndex + 1 : 0;
                 updateImage();
+            }
+
+            function handleTouchStart(event) {
+                const touch = event.touches[0];
+                state.startX = touch.pageX;
+                state.startY = touch.pageY;
+            }
+
+            function handleTouchEnd(event) {
+                const touch = event.changedTouches[0];
+                const endX = touch.pageX;
+                const endY = touch.pageY;
+                const deltaX = endX - state.startX;
+                const deltaY = endY - state.startY;
+
+                if (Math.abs(deltaX) > Math.abs(deltaY)) { // Horizontal swipe
+                    if (deltaX > 0) {
+                        showPrevImage(); // Swipe right
+                    } else {
+                        showNextImage(); // Swipe left
+                    }
+                }
             }
 
             state.carReference = getQueryParameter('id');
@@ -559,10 +560,6 @@
 
             const carDetails = await fetchCarDetails(state.carReference);
 
-            const carID = state.carReference
-
-            console.log(`Car ID: ${carID}`);
-
             if (carDetails) {
                 const imagesCount = carDetails.JavaScriptInfo.cantidadImágenes || 5;
                 state.imageUrls = Array.from({ length: imagesCount }, (_, i) => `listings/${state.carReference}/images/${i + 1}.jpg`);
@@ -571,71 +568,35 @@
 
                 const prevImageBtn = document.getElementById('prevImage');
                 const nextImageBtn = document.getElementById('nextImage');
+                const carImageContainer = document.getElementById('carImageContainer');
 
-                // Click event listeners
+                // Click event listeners for navigation buttons
                 prevImageBtn.addEventListener('click', showPrevImage);
                 nextImageBtn.addEventListener('click', showNextImage);
 
-                // Touch event listeners
-                let startX, startY, endX, endY;
+                // Touch event listeners for image container
+                carImageContainer.addEventListener('touchstart', handleTouchStart);
+                carImageContainer.addEventListener('touchend', handleTouchEnd);
 
-                function handleTouchStart(event) {
-                    const touch = event.touches[0];
-                    startX = touch.pageX;
-                    startY = touch.pageY;
-                }
-
-                function handleTouchMove(event) {
-                    // Optional: Handle touch move if needed
-                }
-
-                function handleTouchEnd(event) {
-                    const touch = event.changedTouches[0];
-                    endX = touch.pageX;
-                    endY = touch.pageY;
-                    const deltaX = endX - startX;
-                    const deltaY = endY - startY;
-
-                    if (Math.abs(deltaX) > Math.abs(deltaY)) { // Horizontal swipe
-                        if (deltaX > 0) {
-                            showPrevImage(); // Swipe right
-                        } else {
-                            showNextImage(); // Swipe left
-                        }
-                    }
-                }
-
-                prevImageBtn.addEventListener('touchstart', handleTouchStart);
-                nextImageBtn.addEventListener('touchstart', handleTouchStart);
-                prevImageBtn.addEventListener('touchend', handleTouchEnd);
-                nextImageBtn.addEventListener('touchend', handleTouchEnd);
-
-                // Mouse enter/leave events for desktop
-                prevImageBtn.addEventListener('mouseenter', () => {
-                    prevImageBtn.style.opacity = 0.8; // Full opacity on hover
-                });
-
-                prevImageBtn.addEventListener('mouseleave', () => {
-                    prevImageBtn.style.opacity = 0.4; // Reduced opacity on leave
-                });
-
-                nextImageBtn.addEventListener('mouseenter', () => {
-                    nextImageBtn.style.opacity = 0.8; // Full opacity on hover
-                });
-
-                nextImageBtn.addEventListener('mouseleave', () => {
-                    nextImageBtn.style.opacity = 0.4; // Reduced opacity on leave
-                });
+                // Mouse enter/leave events for navigation buttons
+                prevImageBtn.addEventListener('mouseenter', () => prevImageBtn.style.opacity = 0.8);
+                prevImageBtn.addEventListener('mouseleave', () => prevImageBtn.style.opacity = 0.4);
+                nextImageBtn.addEventListener('mouseenter', () => nextImageBtn.style.opacity = 0.8);
+                nextImageBtn.addEventListener('mouseleave', () => nextImageBtn.style.opacity = 0.4);
             }
 
-
             // Fetch initial price data here
-            const precioContado = state.carData.CaracteristicasGenerales.PrecioNuevo;
-            document.getElementById('preContado').textContent = `${precioContado.toLocaleString('es-ES')}€`;
-
-
+            const precioContado = state.carData?.CaracteristicasGenerales.PrecioNuevo;
+            if (precioContado) {
+                document.getElementById('preContado').textContent = `${precioContado.toLocaleString('es-ES')}€`;
+            }
 
             // Event listeners for finance sliders
+            const yearsSlider = document.getElementById('yearsSlider');
+            const depositSlider = document.getElementById('depositSlider');
+            const selectedYears = document.getElementById('selectedYears');
+            const selectedDeposit = document.getElementById('selectedDeposit');
+
             yearsSlider.addEventListener('input', () => {
                 selectedYears.textContent = `${yearsSlider.value} Year${yearsSlider.value > 1 ? 's' : ''}`;
             });
@@ -643,6 +604,24 @@
             depositSlider.addEventListener('input', () => {
                 selectedDeposit.textContent = `$${depositSlider.value}`;
             });
+
+            function showTab(tabName) {
+                document.getElementById('financeContent').style.display = 'none';
+                document.getElementById('normalContent').style.display = 'none';
+                document.getElementById('tabFinan').classList.remove('active');
+                document.getElementById('tabInfo').classList.remove('active');
+
+                if (tabName === 'finance') {
+                    document.getElementById('financeContent').style.display = 'block';
+                    document.getElementById('tabFinan').classList.add('active');
+                } else if (tabName === 'normal') {
+                    document.getElementById('normalContent').style.display = 'block';
+                    document.getElementById('tabInfo').classList.add('active');
+                }
+            }
+
+            // Initialize the default tab
+            showTab('normal'); // Show the normal price content by default
 
 
 
@@ -766,41 +745,10 @@
                     createDetailDiv('container', 'emissions', `${carData.emissionsAmount} g/km`, 'Emissions CO2', 'More Information'); // MAKE SURE TO UPDATE BADGE TO SUIT EMMISIONS DATA MONTH + POPUP INFO
                 }
             });
-
-
-
-
         });
 
-        function showTab(tabName) {
-            // Hide all contents
-            document.getElementById('financeContent').style.display = 'none';
-            document.getElementById('normalContent').style.display = 'none';
-
-            // Remove active class from all tabs
-            document.getElementById('tabFinan').classList.remove('active');
-            document.getElementById('tabInfo').classList.remove('active');
-
-            // Show the selected content and add active class to the selected tab
-            if (tabName === 'finance') {
-                document.getElementById('financeContent').style.display = 'block';
-                document.getElementById('tabFinan').classList.add('active');
-            } else if (tabName === 'normal') {
-                document.getElementById('normalContent').style.display = 'block';
-                document.getElementById('tabInfo').classList.add('active');
-            }
-        }
-
-        // Initialize the default tab
-        document.addEventListener('DOMContentLoaded', function () {
-            showTab('normal'); // Show the normal price content by default
-        });
     </script>
 
-
-
 </body>
-
-</html>
 
 </html>

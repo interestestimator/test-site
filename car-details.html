@@ -633,18 +633,13 @@
 
 
 
-
-
-
-
-
-
-
+            const carID = state.carReference
+            console.log(`Car ID: ${carID}`);
 
             async function fetchCarData(folderName) {
 
                 try {
-                    const response = await fetch(`listings/${folderName}/data.json`);
+                    const response = await fetch(`listings/CAR001/data.json`);
                     const jsonData = await response.json();
                     const cc = parseInt(jsonData.MotorYTransmision.Cilindrada.CC, 10); // Parse cc as a number
                     const kilowatts = parseFloat(jsonData.MotorYTransmision.Potencia.KW); // Parse kilowatts as a number

@@ -36,13 +36,7 @@
                 <section class="pay-details-section">
                     <div class="sidebar">
                         <div class="sidebar__prices">
-                            <div class="sidebar__discount">
-                                <label id="discountLabel" class="discount-label">
-                                    <img src="icons/discount-icon.svg" width="18" height="18" alt="Discount Icon">
-                                    <span>30% descuento</span>
-                                </label>
-                                <span>¡Te ahorras 9.120€!</span>
-                            </div>
+                            <div class="section" id="overview"></div>
                             <div class="price-items">
                                 <div class="box">
                                     <span class="medium">PVP Nuevo</span>
@@ -52,19 +46,19 @@
                                 <div class="box contrast">
                                     <span class="medium">Financiando</span>
                                     <span class="small">sujeto a financiación</span>
-                                    <span class="large">44.990€*</span>
+                                    <span id="precioFinacio" class="large"></span>
                                 </div>
                                 <div class="box">
                                     <span class="medium">Al contado</span>
                                     <span class="small">sin financiación</span>
-                                    <span class="large">47.990€*</span>
+                                    <span id="precioNuevo" class="large"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="sidebar__financing">
                             <span class="medium">Llévatelo financiado</span>
                             <div class="row">
-                                <span class="small">desde 535€/mes*</span>
+                                <span id="pmtValue" class="small">desde 535€/mes*</span>
                                 <a href="#vehicle-financing" class="vehicle-financing-calculator">Recalcular cuota</a>
                             </div>
                         </div>
@@ -76,7 +70,7 @@
                                 <div class="vehicle-price-result-container">
                                     <div id="vehicle-price-result" class="vehicle-price-result">
                                         <span class="entry__title">Precio Final</span>
-                                        <span class="entry__amount">20.290€</span>
+                                        <span id="PrecioFinal" class="entry__amount"></span>
                                     </div>
                                     <div class="vehicle-price-result__text">
                                         <small>Todo incluido. Llave en mano.</small>
@@ -105,168 +99,362 @@
         </div>
     </div>
 
+
+    <script src="loanCalculator.js" defer></script>
+
     <script type="module">
-import { preloadImages, showImage, showPrevImage, showNextImage, handleTouchStart, handleTouchEnd, renderThumbnails } from './imageFunctions.js';
+        import { preloadImages, showImage, showPrevImage, showNextImage, handleTouchStart, handleTouchEnd, renderThumbnails } from './imageFunctions.js';
 
-document.addEventListener('DOMContentLoaded', async () => {
-    const state = {
-        currentImageIndex: 0,
-        thumbnailStartIndex: 0,
-        thumbnailCount: 4,
-        imageUrls: [],
-        carReference: getQueryParameter('id'),
-        carData: null
-    };
-
-    if (!state.carReference) {
-        document.getElementById('carDetailsContainer').innerHTML = '<p>No car reference provided.</p>';
-        return;
-    }
-
-    await loadHeader();
-    state.carData = await fetchCarDetails();
-
-    if (state.carData) {
-        state.imageUrls = Array.from({ length: state.carData.JavaScriptInfo.cantidadImágenes || 5 }, (_, i) => `listings/${state.carReference}/images/${i + 1}.webp`);
-        preloadImages(state.imageUrls);
-        renderCarDetails(state.carData);
-        setupEventListeners(state);
-    }
-
-    async function loadHeader() {
-        const response = await fetch('header.html');
-        document.getElementById('header-container').innerHTML = await response.text();
-    }
-
-    async function fetchCarDetails() {
-        try {
-            const response = await fetch(`listings/${state.carReference}/data.json`);
-            if (!response.ok) throw new Error(`Failed to fetch car details: ${response.status} ${response.statusText}`);
-            return await response.json();
-        } catch (error) {
-            console.error('Error fetching car details:', error);
-            return null;
+        function formatCurrency(amount) {
+            const formatter = new Intl.NumberFormat('eu', {
+                style: 'currency',
+                currency: 'EUR',
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 2,
+            });
+            return formatter.format(amount);
         }
-    }
 
-    function getQueryParameter(name) {
-        return new URLSearchParams(window.location.search).get(name);
-    }
+        document.addEventListener('DOMContentLoaded', async () => {
+            const state = {
+                currentImageIndex: 0,
+                thumbnailStartIndex: 0,
+                thumbnailCount: 4,
+                imageUrls: [],
+                carReference: getQueryParameter('id'),
+                carData: null,
+                deliveryCost: 0, // Initialize delivery cost
+                financeCost: 0, // Initialize finance cost
+                FINANCIO_DESCUBIENTO: 0, // Placeholder for FINANCIO_DESCUBIENTO
+            };
 
-    function setupEventListeners(state) {
-        document.getElementById('prevImage').addEventListener('click', () => showPrevImage(state));
-        document.getElementById('nextImage').addEventListener('click', () => showNextImage(state));
-        const carImageContainer = document.getElementById('carImageContainer');
-        carImageContainer.addEventListener('touchstart', (event) => handleTouchStart(event, state));
-        carImageContainer.addEventListener('touchend', (event) => handleTouchEnd(event, state));
-        document.querySelectorAll('.navButton').forEach(button => {
-            button.addEventListener('mouseenter', () => button.style.opacity = 0.8);
-            button.addEventListener('mouseleave', () => button.style.opacity = 0.4);
+            if (!state.carReference) {
+                document.getElementById('carDetailsContainer').innerHTML = '<p>No car reference provided.</p>';
+                return;
+            }
+
+            await loadHeader();
+            state.carData = await fetchData(`listings/${state.carReference}/data.json`);
+
+            if (state.carData) {
+                state.imageUrls = Array.from({ length: state.carData.JavaScriptInfo.cantidadImágenes || 5 }, (_, i) => `listings/${state.carReference}/images/${i + 1}.webp`);
+                preloadImages(state.imageUrls, state);
+                setupEventListeners(state);
+            }
+
+            async function loadHeader() {
+                const response = await fetch('header.html');
+                document.getElementById('header-container').innerHTML = await response.text();
+            }
+
+            async function fetchData(url) {
+                try {
+                    const response = await fetch(url);
+                    if (!response.ok) throw new Error(`Failed to fetch data from ${url}: ${response.status} ${response.statusText}`);
+                    return await response.json();
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                    return null; // Return null or an empty array depending on your needs
+                }
+            }
+
+            function getQueryParameter(name) {
+                return new URLSearchParams(window.location.search).get(name);
+            }
+
+            function setupEventListeners(state) {
+                document.getElementById('prevImage').addEventListener('click', () => showPrevImage(state));
+                document.getElementById('nextImage').addEventListener('click', () => showNextImage(state));
+                const carImageContainer = document.getElementById('carImageContainer');
+                carImageContainer.addEventListener('touchstart', (event) => handleTouchStart(event, state));
+                carImageContainer.addEventListener('touchend', (event) => handleTouchEnd(event, state));
+                document.querySelectorAll('.navButton').forEach(button => {
+                    button.addEventListener('mouseenter', () => button.style.opacity = 0.8);
+                    button.addEventListener('mouseleave', () => button.style.opacity = 0.4);
+                });
+
+                // Set up MutationObserver to watch for dynamically added checkboxes
+                const observer = new MutationObserver((mutations) => {
+                    mutations.forEach((mutation) => {
+                        if (mutation.addedNodes.length) {
+                            const financeCheckbox = document.getElementById('financeCheckbox');
+                            if (financeCheckbox) {
+                                console.log('Finance checkbox found.');
+                                financeCheckbox.addEventListener('change', (event) => handleFinanceCheckboxChange(event));
+                            }
+
+                            const deliveryCheckbox = document.getElementById('deliveryCheckbox');
+                            if (deliveryCheckbox) {
+                                console.log('Delivery checkbox found.');
+                                deliveryCheckbox.addEventListener('change', async (event) => {
+                                    await handleDeliveryCheckboxChange(event);
+                                });
+                            }
+                        }
+                    });
+                });
+
+                observer.observe(document.getElementById('container2'), { childList: true });
+
+                async function handleDeliveryCheckboxChange(event) {
+                    console.log('Delivery checkbox state changed:', event.target.checked);
+                    const regionDropdown = document.getElementById('regionDropdown');
+                    const regionAmount = document.getElementById('regionAmount');
+                    const regionTitle = document.getElementById('deliveryLabel_title'); // Select the title element
+                    const vehiclePriceResult = document.querySelector('.vehicle-price-result'); // Select the element to animate
+
+                    if (event.target.checked) {
+                        // Show the dropdown
+                        regionDropdown.style.display = 'block';
+                        regionTitle.textContent = 'Seleccionar:'; // Update text to "Seleccionar:" when dropdown is visible
+
+                        // Populate dropdown with options
+                        const deliveryRegions = await fetchData('deliveryRegions.json');
+                        populateDropdown(regionDropdown, deliveryRegions);
+
+                        // Automatically select the first value and update regionAmount
+                        if (deliveryRegions.length > 0) {
+                            regionDropdown.value = deliveryRegions[0].value; // Select the first value
+                            updateRegionAmount(deliveryRegions[0].value, deliveryRegions);
+                            updatePrices(); // Ensure prices are updated after setting initial value
+                        }
+
+                        // Add event listener for dropdown change
+                        regionDropdown.addEventListener('change', (event) => {
+                            const selectedValue = event.target.value;
+                            updateRegionAmount(selectedValue, deliveryRegions);
+                            updatePrices(); // Update prices whenever the selection changes
+                        });
+                    } else {
+                        // Hide the dropdown
+                        regionDropdown.style.display = 'none';
+                        regionTitle.textContent = 'Entrega a domicilio'; // Revert text to "Entrega a domicilio" when dropdown is hidden
+                        regionAmount.textContent = 'Activar'; // Reset regionAmount text
+                        regionDropdown.value = ''; // Reset dropdown value
+                        state.deliveryCost = 0; // Reset delivery cost
+                        updatePrices(); // Update prices whenever delivery checkbox is unchecked
+                    }
+                }
+
+                function handleFinanceCheckboxChange(event) {
+                    // Set financeCost to FINANCIO_DESCUBIENTO when unchecked, or to 0 when checked
+                    state.financeCost = event.target.checked ? 0 : state.FINANCIO_DESCUBIENTO;
+                    updatePrices(); // Update prices whenever finance checkbox state changes
+                }
+
+                function populateDropdown(dropdown, regions) {
+                    dropdown.innerHTML = ''; // Clear existing options
+                    regions.forEach(region => {
+                        const option = document.createElement('option');
+                        option.value = region.value;
+                        option.textContent = region.label;
+                        dropdown.appendChild(option);
+                    });
+
+                    // Set default text when no option is selected
+                    const regionAmount = document.getElementById('regionAmount');
+                    regionAmount.textContent = 'Seleccionar:'; // Default text when dropdown is visible but no option selected
+                }
+
+                function updateRegionAmount(selectedValue, regions) {
+                    const regionAmount = document.getElementById('regionAmount');
+                    const selectedRegion = regions.find(region => region.value == selectedValue);
+
+                    if (selectedRegion) {
+                        if (selectedRegion.value === "CONSULTAR") {
+                            regionAmount.textContent = 'Consultar'; // Display "Consultar" when value is "CONSULTAR"
+                            state.deliveryCost = 0; // Set delivery cost to 0 if value is "CONSULTAR"
+                        } else {
+                            regionAmount.textContent = `${formatCurrency(selectedRegion.value)}`;
+                            state.deliveryCost = parseFloat(selectedRegion.value) || 0; // Convert value to number or set to 0 if invalid
+                        }
+                    } else {
+                        regionAmount.textContent = '0'; // Default to '0' if no valid region is selected
+                        state.deliveryCost = 0; // Reset delivery cost if no valid region is selected
+                    }
+                }
+
+                function updatePrices() {
+                    if (state.carData) {
+                        state.FINANCIO_DESCUBIENTO = state.carData.CaracteristicasGenerales.PrecioNuevo * 0.1; // Calculate FINANCIO_DESCUBIENTO
+                        const precioNuevo = state.carData.CaracteristicasGenerales.PrecioNuevo;
+                        const deliveryCost = state.deliveryCost || 0; // Use delivery cost from state or default to 0
+                        const financeCost = state.financeCost || 0; // Use finance cost from state or default to 0
+                        const PrecioFinal = (precioNuevo - state.FINANCIO_DESCUBIENTO) + deliveryCost + financeCost;
+
+                        const precioNuevoElement = document.getElementById('precioNuevo');
+                        const PrecioFinalElement = document.getElementById('PrecioFinal');
+
+                        if (precioNuevoElement && PrecioFinalElement) {
+                            precioNuevoElement.textContent = `${formatCurrency(precioNuevo)}*`;
+                            PrecioFinalElement.textContent = `${formatCurrency(PrecioFinal)}*`;
+                        }
+                    }
+                }
+            }
+
+
+
+
+
+            
+
+            // Move the calculation code here, after carData is loaded
+            const price = state.carData.CaracteristicasGenerales.PrecioNuevo;
+            const year = state.carData.CaracteristicasGenerales.Año;
+            const kilometres = state.carData.CaracteristicasGenerales.Kilometraje;
+            const vehicleDeposit = price * 0.1;
+
+            const { annualRateTIN, loanLengthMonths, commissionRate } = setLoanParameters(price, year, kilometres);
+            const result = calculateRate(
+                loanLengthMonths / 12,
+                price,
+                vehicleDeposit,
+                annualRateTIN / 100,
+                commissionRate / 100,
+                0.0
+            );
+
+            console.log(result.pmt);
+
+
+         // Update the <span> with the positive pmt value
+            const pmtValueElement = document.getElementById('pmtValue');
+        if (pmtValueElement) {
+            pmtValueElement.textContent = `desde ${formatCurrency(Math.abs(result.pmt))}*`;
+        }
+
+
+
+
+
+
+
+            function renderCarDetails(car) {
+                document.title = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Versión} ${car.MotorYTransmision.Combustible.Tipo} - ${car.CaracteristicasGenerales.Color} ${car.Carroceria.Tipo} (${car.Carroceria.Puertas}p)`;
+                document.getElementById('carTitle').textContent = document.title;
+
+                const carImage = document.getElementById('carImage');
+                carImage.src = state.imageUrls[state.currentImageIndex];
+                carImage.alt = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año}`;
+
+                const photoCountLabel = document.getElementById('photoCountLabel');
+                photoCountLabel.innerHTML = `<img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${state.currentImageIndex + 1} of ${state.imageUrls.length}`;
+
+                document.getElementById('overview').innerHTML = `
+                    ${car.CaracteristicasGenerales.Año} | ${car.MotorYTransmision.Transmision.Caja} | ${car.CaracteristicasGenerales.Kilometraje} km ${car.MotorYTransmision.Combustible.Tipo} | ${car.MotorYTransmision.Potencia.KW} kW (${car.MotorYTransmision.Potencia.KW} CV)
+                `;
+
+                document.getElementById('garantiaContainer').innerHTML = `
+                    <h2>Garantía</h2>
+                    <p>${car.Garantía.Descripción}</p>
+                    <p>Garantía Estándar: ${car.Garantía.GarantíaEstándar} año(s)</p>
+                    <p>Garantía VIP: ${car.Garantía.GarantíaVIP} año(s)</p>
+                `;
+
+                document.getElementById('equipamiento').innerHTML = `
+                    <h2>Equipamiento</h2>
+                    <h3>Exterior</h3>
+                    <ul>${car.Equipamiento.Exterior.map(item => `<li>${item}</li>`).join('')}</ul>
+                    <h3>Interior</h3>
+                    <ul>${car.Equipamiento.Interior.map(item => `<li>${item}</li>`).join('')}</ul>
+                `;
+
+                const FINANCIO_DESCUBIENTO = (car.CaracteristicasGenerales.PrecioNuevo * 0.1);
+
+                const financeAmountElement = document.getElementById('financeAmount');
+                if (financeAmountElement) {
+                    financeAmountElement.textContent = `-${formatCurrency(FINANCIO_DESCUBIENTO)}*`;
+                }
+
+                const precioNuevoElement = document.getElementById('precioNuevo');
+                const precioFinacioElement = document.getElementById('precioFinacio');
+                const PrecioFinalElement = document.getElementById('PrecioFinal');
+
+                if (precioNuevoElement && precioFinacioElement) {
+                    const precioNuevo = car.CaracteristicasGenerales.PrecioNuevo;
+
+                    if (precioNuevo) {
+                        const precioFinacio = precioNuevo - FINANCIO_DESCUBIENTO;
+
+                        precioNuevoElement.textContent = `${formatCurrency(precioNuevo)}*`;
+                        precioFinacioElement.textContent = `${formatCurrency(precioFinacio)}*`;
+                        PrecioFinalElement.textContent = `${formatCurrency(precioFinacio)}*`;
+                    }
+                }
+            }
+
+            function createCheckboxDiv(containerId, inputValue, inputStatus, entryText, entryID, entryValue, isLink = false, isDropdown = false) {
+                const container = document.getElementById(containerId);
+                const checkboxDiv = document.createElement('div');
+                checkboxDiv.className = 'price-group__entry checkbox-wrapper';
+
+                let innerHTML = `<input type="checkbox" id="${inputValue}" ${inputStatus}>`;
+                innerHTML += `<label for="${inputValue}"></label>`;
+                innerHTML += `<span id="${entryID}_title" class="entry__title">${entryText}</span>`;
+
+                if (isLink) {
+                    innerHTML += `<span class="entry__amount"><a href="${entryValue}" rel="nofollow">Valorar mi vehículo</a></span>`;
+                } else if (isDropdown) {
+                    innerHTML += `<select id="regionDropdown" style="display: none;"></select>`;
+                    innerHTML += `<span class="entry__amount" id="regionAmount">${entryValue}</span>`;
+                } else {
+                    innerHTML += `<span class="entry__amount" id="${entryID}">${entryValue}</span>`;
+                }
+
+                checkboxDiv.innerHTML = innerHTML;
+                container.appendChild(checkboxDiv);
+            }
+
+            function createDetailDiv(containerId, icon, detailValue, detailTitle, moreInfoText) {
+                const container = document.getElementById(containerId);
+                const moreDetailsDiv = document.createElement('div');
+                moreDetailsDiv.className = 'more-details';
+
+                moreDetailsDiv.innerHTML = `
+                    <img src="icons/details/${icon}.svg" alt="${detailTitle}" width="48" height="48">
+                    <div class="detail-text">
+                        <span class="detail-result">${detailValue}</span>
+                        <span class="detail-title">${detailTitle}</span>
+                        ${moreInfoText ? `<label class="more-information"><img src="icons/more-information.svg" alt="More information" width="12" height="12">${moreInfoText}</label>` : ''}
+                    </div>
+                `;
+
+                container.appendChild(moreDetailsDiv);
+            }
+
+            fetchData(`listings/${state.carReference}/data.json`).then(carData => {
+                if (carData) {
+                    createCheckboxDiv('container2', 'financeCheckbox', 'checked', 'Descuento por financiación', 'financeAmount', `-${formatCurrency(carData.CaracteristicasGenerales.PrecioNuevo * 0.1)}*`);
+                    createCheckboxDiv('container2', 'warrantyCheckbox', 'checked disabled', 'Garantía nacional de 12 meses', '', '0 €');
+                    createCheckboxDiv('container2', 'exchangeCheckbox', 'disabled', 'Entrega vehículo a cambio', '', '/vender-mi-coche-a-cambio', true);
+                    createCheckboxDiv('container2', 'deliveryCheckbox', '', 'Entrega a domicilio', 'deliveryLabel', 'Activar', false, true);
+
+                    createDetailDiv('container', 'kilometres', `${new Intl.NumberFormat('es-ES').format(carData.CaracteristicasGenerales.Kilometraje)} km`, 'Kilometres');
+                    createDetailDiv('container', 'horsepower', `${carData.MotorYTransmision.Potencia.CV} CV`, 'Horsepower');
+                    createDetailDiv('container', 'fuel', carData.MotorYTransmision.Combustible.Tipo, 'Fuel Type');
+                    createDetailDiv('container', 'transmission', carData.MotorYTransmision.Transmision.Caja, 'Transmission');
+                    createDetailDiv('container', 'gears', carData.MotorYTransmision.Transmision.Marchas, 'Nº Gears');
+                    createDetailDiv('container', 'registration', carData.CaracteristicasGenerales.Año, 'Car Registered');
+                    createDetailDiv('container', 'doors', carData.Carroceria.Puertas, 'Nº doors');
+                    createDetailDiv('container', 'seats', carData.Carroceria.Plazas, 'Nº Seats');
+                    createDetailDiv('container', 'colour', carData.CaracteristicasGenerales.Color, 'Colour Exterior');
+                    createDetailDiv('container', 'consumption', `${new Intl.NumberFormat('es-ES').format(carData.ConsumoYEmisiones.Consumo.Medio)} l/100`, 'Fuel Consumption', 'See All');
+                    createDetailDiv('container', 'emissions', `${carData.ConsumoYEmisiones.EmisionesCO2} g/km`, 'Emissions CO2', 'More Information');
+
+                    renderCarDetails(carData);
+                }
+            });
         });
-    }
 
-    function renderCarDetails(car) {
-        document.title = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Versión} ${car.MotorYTransmision.Combustible.Tipo} - ${car.CaracteristicasGenerales.Color} ${car.Carroceria.Tipo} (${car.Carroceria.Puertas}p)`;
-        document.getElementById('carTitle').textContent = document.title;
 
-        const carImage = document.getElementById('carImage');
-        carImage.src = state.imageUrls[state.currentImageIndex];
-        carImage.alt = `${car.CaracteristicasGenerales.Marca} ${car.CaracteristicasGenerales.Modelo} ${car.CaracteristicasGenerales.Año}`;
 
-        const photoCountLabel = document.getElementById('photoCountLabel');
-        photoCountLabel.innerHTML = `<img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${state.currentImageIndex + 1} of ${state.imageUrls.length}`;
 
-        document.getElementById('overview').innerHTML = `
-            ${car.CaracteristicasGenerales.Año} | ${car.MotorYTransmision.Transmision.Caja} | ${car.CaracteristicasGenerales.Kilometraje} km ${car.MotorYTransmision.Combustible.Tipo} | ${car.MotorYTransmision.Potencia.KW} kW (${car.MotorYTransmision.Potencia.KW} CV)
-        `;
 
-        document.getElementById('garantiaContainer').innerHTML = `
-            <h2>Garantía</h2>
-            <p>${car.Garantía.Descripción}</p>
-            <p>Garantía Estándar: ${car.Garantía.GarantíaEstándar} año(s)</p>
-            <p>Garantía VIP: ${car.Garantía.GarantíaVIP} año(s)</p>
-        `;
 
-        document.getElementById('equipamiento').innerHTML = `
-            <h2>Equipamiento</h2>
-            <h3>Exterior</h3>
-            <ul>${car.Equipamiento.Exterior.map(item => `<li>${item}</li>`).join('')}</ul>
-            <h3>Interior</h3>
-            <ul>${car.Equipamiento.Interior.map(item => `<li>${item}</li>`).join('')}</ul>
-        `;
 
-        // Call the new renderThumbnails function
-        renderThumbnails(
-            'thumbnailContainer',
-            state.imageUrls,
-            car,
-            state.currentImageIndex,
-            state.thumbnailStartIndex,
-            state.thumbnailCount,
-            (index) => showImage(index, state)
-        );
-    }
 
-    function createCheckboxDiv(containerId, inputValue, inputStatus, entryText, entryID, entryValue, isLink = false, isDropdown = false) {
-        const container = document.getElementById(containerId);
-        const checkboxDiv = document.createElement('div');
-        checkboxDiv.className = 'price-group__entry checkbox-wrapper';
 
-        let innerHTML = `<input type="checkbox" id="${inputValue}" ${inputStatus}>`;
-        innerHTML += `<label for="${inputValue}"></label>`;
-        innerHTML += `<span class="entry__title">${entryText}</span>`;
-
-        if (isLink) {
-            innerHTML += `<span class="entry__amount"><a href="${entryValue}" rel="nofollow">Valorar mi vehículo</a></span>`;
-        } else if (isDropdown) {
-            innerHTML += `<select id="regionDropdown" style="display: none;"></select>`;
-            innerHTML += `<span class="entry__amount" id="regionAmount">${entryValue}</span>`;
-        } else {
-            innerHTML += `<span class="entry__amount" id="${entryID}">${entryValue}</span>`;
-        }
-
-        checkboxDiv.innerHTML = innerHTML;
-        container.appendChild(checkboxDiv);
-    }
-
-    function createDetailDiv(containerId, icon, detailValue, detailTitle, moreInfoText) {
-        const container = document.getElementById(containerId);
-        const moreDetailsDiv = document.createElement('div');
-        moreDetailsDiv.className = 'more-details';
-
-        moreDetailsDiv.innerHTML = `
-            <img src="icons/details/${icon}.svg" alt="${detailTitle}" width="48" height="48">
-            <div class="detail-text">
-                <span class="detail-result">${detailValue}</span>
-                <span class="detail-title">${detailTitle}</span>
-                ${moreInfoText ? `<label class="more-information"><img src="icons/more-information.svg" alt="More information" width="12" height="12">${moreInfoText}</label>` : ''}
-            </div>
-        `;
-
-        container.appendChild(moreDetailsDiv);
-    }
-
-    fetchCarDetails().then(carData => {
-        if (carData) {
-            createCheckboxDiv('container2', 'financeCheckbox', 'checked', 'Descuento por financiación', 'financeAmount', '-3.000€');
-            createCheckboxDiv('container2', 'warrantyCheckbox', 'checked disabled', 'Garantía nacional de 12 meses', '', '0€');
-            createCheckboxDiv('container2', 'exchangeCheckbox', 'disabled', 'Entrega vehículo a cambio', '', '/vender-mi-coche-a-cambio', true);
-            createCheckboxDiv('container2', 'deliveryCheckbox', '', 'Entrega a domicilio', 'deliveryLabel', 'Activar', false, true);
-
-            createDetailDiv('container', 'kilometres', `${new Intl.NumberFormat('es-ES').format(carData.CaracteristicasGenerales.Kilometraje)} km`, 'Kilometres');
-            createDetailDiv('container', 'horsepower', `${carData.MotorYTransmision.Potencia.CV} CV`, 'Horsepower');
-            createDetailDiv('container', 'fuel', carData.MotorYTransmision.Combustible.Tipo, 'Fuel Type');
-            createDetailDiv('container', 'transmission', carData.MotorYTransmision.Transmision.Caja, 'Transmission');
-            createDetailDiv('container', 'gears', carData.MotorYTransmision.Transmision.Marchas, 'Nº Gears');
-            createDetailDiv('container', 'registration', carData.CaracteristicasGenerales.Año, 'Car Registered');
-            createDetailDiv('container', 'doors', carData.Carroceria.Puertas, 'Nº doors');
-            createDetailDiv('container', 'seats', carData.Carroceria.Plazas, 'Nº Seats');
-            createDetailDiv('container', 'colour', carData.CaracteristicasGenerales.Color, 'Colour Exterior');
-            createDetailDiv('container', 'consumption', `${new Intl.NumberFormat('es-ES').format(carData.ConsumoYEmisiones.Consumo.Medio)} l/100`, 'Fuel Consumption', 'See All');
-            createDetailDiv('container', 'emissions', `${carData.ConsumoYEmisiones.EmisionesCO2} g/km`, 'Emissions CO2', 'More Information');
-        }
-    });
-});
     </script>
 </body>
 

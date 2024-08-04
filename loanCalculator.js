@@ -6,7 +6,7 @@
  * @param {number} mileage - The mileage of the vehicle.
  * @return {object} An object containing annualRateTIN, loanLengthMonths, and commissionRate.
  */
-function setLoanParameters(price, year, mileage) {
+export function setLoanParameters(price, year, mileage) {
     let annualRateTIN;
     let loanLengthMonths;
     let commissionRate;
@@ -111,7 +111,7 @@ function RATE(nper, pmt, pv, fv = 0, type = 0, guess = 0.1) {
  * @param {number} amount - The amount to format.
  * @return {string} The formatted currency string.
  */
-function formatCurrency(amount) {
+export function formatCurrency(amount) {
     const formatter = new Intl.NumberFormat('eu', {
         style: 'currency',
         currency: 'EUR',
@@ -132,7 +132,7 @@ function formatCurrency(amount) {
  * @param {number} additionalMonthlyRepaymentFeeAmount - The additional monthly repayment fee amount.
  * @return {object} An object containing calculated results.
  */
-function calculateRate(loanLengthYears, LoanAmount, initialDeposit, annualRateTIN, initialFeePercentage, additionalMonthlyRepaymentFeeAmount) {
+export function calculateRate(loanLengthYears, LoanAmount, initialDeposit, annualRateTIN, initialFeePercentage, additionalMonthlyRepaymentFeeAmount) {
     const loanLengthMonths = loanLengthYears * 12;
     const totalLoanAmount = LoanAmount - initialDeposit;
     const initialFeeAmount = totalLoanAmount * initialFeePercentage;
@@ -158,4 +158,6 @@ function calculateRate(loanLengthYears, LoanAmount, initialDeposit, annualRateTI
         monthlyPaymentWithCosts: monthlyPaymentWithCosts.toFixed(2)
     };
 }
+
+
 

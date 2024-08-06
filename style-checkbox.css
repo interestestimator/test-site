@@ -378,7 +378,7 @@ p {
     top: 0; /* Align the icon to the top of the list item */
     width: 1rem; /* Width of the SVG icon */
     height: 1rem; /* Height of the SVG icon */
-    background: url('bullet-point.svg') no-repeat center center;
+    background: url('icons/bullet-point.svg') no-repeat center center;
     background-size: contain; /* Adjust size of the SVG icon */
 }
 
@@ -406,7 +406,7 @@ p {
     transition: transform 0.3s ease, filter 0.3s ease;
 }
 
-.dropdown-content2 {
+.equipamiento-dropdown-content {
     display: none;
     padding: 0.5rem;
     border-top: none;
@@ -415,7 +415,7 @@ p {
     margin: 1rem;
 }
 
-.dropdown-content2.show {
+.equipamiento-dropdown-content.show {
     display: block;
 }
 
@@ -533,4 +533,147 @@ p {
 
 #companyAdvantagesContainer .more-information img {
     margin-right: 5px;
+}
+
+
+.vehicle-price-result-container {
+    color: #FAFAFA;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Container for the button */
+.vehicle-price-result__action {
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center-align horizontally */
+    align-items: center; /* Center-align vertically (if needed) */
+    height: 100%; /* Ensure container height is sufficient for vertical centering */
+}
+
+/* Style for the button */
+.button1 {
+    background: transparent; /* No fill color */
+    border: 2px solid #FAFAFA; /* Outline color */
+    color: #FAFAFA; /* Text color */
+    padding: 8px 16px; /* Padding around text and icon */
+    border-radius: 8px; /* Rounded edges */
+    display: flex; /* Flexbox layout */
+    align-items: center; /* Align items vertically */
+    font-size: 0.9rem; /* Font size for the text */
+    font-weight: 600;
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Button icon styling */
+.btn-icon {
+    margin-right: 8px; /* Space between icon and text */
+    vertical-align: middle; /* Align icon with text */
+}
+
+/* Hover effect */
+.button1:hover {
+    background-color: #252E3C; /* Fill color on hover */
+}
+
+/* Focus effect for accessibility */
+.button1:focus {
+    outline: none; /* Remove default outline */
+    box-shadow: 0 0 0 .2rem hsla(0,0%,100%,.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Flexbox grid layout for buttons */
+.list-grid {
+    display: flex; /* Use flexbox for grid layout */
+    gap: 1rem; /* Gap between buttons */
+}
+
+/* Button base styling */
+.btn {
+    display: flex; /* Flexbox for inner content alignment */
+    width: 100%;
+    align-items: center; /* Center-align items vertically */
+    justify-content: space-between; /* Distribute space between items */
+    text-decoration: none; /* Remove underline from links */
+    padding: 12px 16px; /* Padding inside button */
+    border-radius: 8px; /* Rounded edges */
+    font-size: 14px; /* Font size */
+    font-family: Arial, sans-serif; /* Font family */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Smooth transition for background, text color, and border */
+    color: #fff; /* Text color for primary button */
+}
+
+/* Primary button styling */
+.btn-primary-action {
+    background-color: #75A833; /* Button background color */
+    border: 2px solid transparent; /* Border with transparent color */
+}
+
+.btn-primary-action .fa-arrow-right {
+    margin-left: 10px; /* Space between text and icon */
+}
+
+/* Outline button styling */
+.btn-outline-primary-action {
+    background-color: transparent; /* Transparent background */
+    border: 2px solid #75A833; /* Outline border color */
+    color: #75A833; /* Text color */
+}
+
+.btn-outline-primary-action .fa-arrow-right {
+    margin-left: 10px; /* Space between text and icon */
+}
+
+/* Hover and focus effects */
+.btn-primary-action:hover,
+.btn-outline-primary-action:hover {
+    background-color: #75A833; /* Darker background color on hover for primary button */
+    color: #fff; /* White text color on hover */
+    border-color: #75A833; /* Border color on hover for outline button */
+}
+
+.btn-outline-primary-action:hover {
+    background-color: #75A833; /* Light background color on hover for outline button */
+    color: #FAFAFA; /* Text color on hover for outline button */
+}
+
+.btn:focus {
+    outline: none; /* Remove default focus outline */
+    box-shadow: 0 0 0 4px rgba(38, 143, 255, 0.5); /* Add shadow effect on focus */
+}
+
+/* Icon styling */
+.fa-light, .fa-sharp {
+    font-size: 24px; /* Icon size */
+    margin-right: 8px; /* Space between icon and text */
+}
+
+/* Text alignment */
+.text-left {
+    text-align: left; /* Align text to the left */
 }

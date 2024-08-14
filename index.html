@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Used Cars Listings</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icons/favicon.ico" type="image/x-icon">
+</head>
+
+<body>
+    <div id="header-container"></div>
+    <div id="overlay" class="overlay"></div>
+    <div id="loanPopup" class="popup-container" style="display: none;"></div>
+
+    <section class="filter-dropdown">
+        <div class="listings-info">
+            <label id="filterLabel" class="filter-label">
+                <span class="filter-text">All filters</span>
+                <img src="icons/filter-icon.svg" alt="Filter Icon" class="filter-icon">
+            </label>
+            <div id="filterPopup" class="popup-container" style="display: none;">
+                <div class="popup-title">
+                    <div class="filter-text">All filters</div>
+                    <button id="closeFilterPopup" class="close-button">
+                        <img src="icons/close-icon.svg" alt="Close" width="20" height="20">
+                    </button>
+                </div>
+                <div id="brandOptions" class="filter-options-container"></div>
+                <div id="fuelOptions" class="filter-options-container"></div>
+                <div id="bodyOptions" class="filter-options-container"></div>
+                <div id="emissionsOptions" class="filter-options-container"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="listings-info sort-dropdown">
+        <div class="listing-count" id="listingCount">Loading...</div>
+        <label id="sortLabel" class="sort-label">
+            <img src="icons/sort-icon.svg" alt="Sort Icon"> Relevance
+        </label>
+        <div id="sortPopup" class="popup-container" style="display: none;">
+            <div class="popup-title">
+                <div class="sort-text">Sort</div>
+                <button id="closeSortPopup" class="close-button">
+                    <img src="icons/close-icon.svg" alt="Close" width="20" height="20">
+                </button>
+            </div>
+            <div class="sort-options-container">
+                <div class="popup-option" data-value="relevance">Relevance</div>
+                <div class="popup-option" data-value="price-asc">Lowest Price</div>
+                <div class="popup-option" data-value="price-desc">Highest Price</div>
+                <div class="popup-option" data-value="kilometres-asc">Lowest Kilometres</div>
+                <div class="popup-option" data-value="kilometres-desc">Highest Kilometres</div>
+                <div class="popup-option" data-value="newest">Newest</div>
+                <div class="popup-option" data-value="oldest">Oldest</div>
+                <div class="popup-option" data-value="cc-asc">Lowest Engine Capacity (cc)</div>
+                <div class="popup-option" data-value="cc-desc">Highest Engine Capacity (cc)</div>
+                <div class="popup-option" data-value="kw-asc">Lowest Power (kW)</div>
+                <div class="popup-option" data-value="kw-desc">Highest Power (kW)</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="car-listings" id="carListings"></section>
+
+    <div id="footer-container"></div>
+
+</body>
+
+<script type="module">
+    import { loadHtml } from './js/httpUtils.js';
+    import { getAllCarData } from './js/carDataFetcher.js';
+    import { formatCurrency } from './js/formatCarData.js';
+    import { getGlobalDOMElements } from './js/siteSetup.js';
+    import { setLoanParameters, calculateRate } from './js/financeCalc.js';
+    
+    import { showFilterOptions, showSortOptions, hidePopup, hideIndexPopups, showLoanInfo } from './myPopups.js';
+
+    let carsData = [];
+    let filteredCars = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const elements = { ...getGlobalDOMElements() };
+        carsData = await getAllCarData();
+        filteredCars = [...carsData];
+
+        // Defer loading header and footer
+        setTimeout(async () => {
+            await loadHtml(elements.headerContainer, 'header.html');
+            await loadHtml(elements.footerContainer, 'footer.html');
+        }, 0);
+
+        renderFilterOptions();
+        setupEventListeners();
+        displayCarListings(filteredCars);
+    });
+
+    function renderFilterOptions() {
+        const filterConfigs = [
+            { type: 'brand', containerId: 'brandOptions', getUniqueValues: carData => carData.brand },
+            { type: 'fuel', containerId: 'fuelOptions', getUniqueValues: carData => carData.fuelType },
+            { type: 'body', containerId: 'bodyOptions', getUniqueValues: carData => carData.bodyType },
+            { type: 'emissions', containerId: 'emissionsOptions', getUniqueValues: carData => carData.emissionLabel }
+        ];
+
+        filterConfigs.forEach(config => {
+            let uniqueValues = [...new Set(carsData.map(config.getUniqueValues))];
+            if (config.type === 'emissions') uniqueValues = uniqueValues.filter(value => value.trim() !== "");
+
+            const optionsContainer = document.getElementById(config.containerId);
+            const optionsHtml = uniqueValues.map(value => `
+            <div class="popup-option" data-value="${value}">
+                <img src="icons/${config.type}/${value.toLowerCase()}.svg" alt="${value} icon" width="20" height="20"/>
+                <span class="option-label">${value}</span>
+                <span class="option-value">(${filteredCars.filter(carData => config.getUniqueValues(carData) === value).length})</span>
+            </div>`).join('');
+
+            optionsContainer.innerHTML = `<div class="popup-option" data-value="All">All (${carsData.length})</div>${optionsHtml}`;
+        });
+    }
+
+    function setupEventListeners() {
+        // Setup popup event listeners
+        document.getElementById('filterLabel').addEventListener('click', showFilterOptions);
+        document.getElementById('sortLabel').addEventListener('click', showSortOptions);
+        document.getElementById('overlay').addEventListener('click', hideIndexPopups);
+
+        // Define filter options and their corresponding filter functions
+        const filterConfigs = [
+            { id: 'brandOptions', type: 'brand', iconClass: 'filter-icon' },
+            { id: 'fuelOptions', type: 'fuel', iconClass: 'filter-icon' },
+            { id: 'bodyOptions', type: 'body', iconClass: 'filter-icon' },
+            { id: 'emissionsOptions', type: 'emissions', iconClass: 'filter-icon' }
+        ];
+
+        // Add event listeners for filter options
+        filterConfigs.forEach(({ id, type, iconClass }) => {
+            document.getElementById(id).addEventListener('click', event =>
+                handleOptionClick(event, 'filterLabel', 'filterPopup', iconClass, value => filterCars(type, value))
+            );
+        });
+
+        // Add event listener for sort options
+        document.getElementById('sortPopup').addEventListener('click', event =>
+            handleOptionClick(event, 'sortLabel', 'sortPopup', 'sort-icon', applySort)
+        );
+    }
+
+    function handleOptionClick(event, labelId, popupId, icon, action) {
+        if (event.target.classList.contains('popup-option')) {
+            const selectedValue = event.target.getAttribute('data-value');
+            const labelElement = document.getElementById(labelId);
+            labelElement.innerHTML = `
+            <span class="filter-text">${event.target.textContent}</span>
+            <img src="icons/${icon}.svg" alt="${event.target.textContent} Icon" class="${icon}">
+        `;
+            hidePopup(popupId);
+            action(selectedValue);
+        }
+    }
+
+    function filterCars(filterType, selectedValue) {
+        const filterMap = {
+            'brand': carData => carData.brand,
+            'fuel': carData => carData.fuelType,
+            'body': carData => carData.bodyType,
+            'emissions': carData => carData.emissionLabel
+        };
+
+        filteredCars = selectedValue === 'All'
+            ? [...carsData]
+            : carsData.filter(carData => filterMap[filterType](carData) === selectedValue);
+
+        document.getElementById('sortLabel').innerHTML = `
+        <img src="icons/sort-icon.svg" alt="Sort Icon" width="20" height="20"> Relevance
+    `;
+        displayCarListings(filteredCars);
+    }
+
+    function applySort(sortOption) {
+        const sortMap = {
+            'relevance': (a, b) => a.carId.localeCompare(b.carId),
+            'price-asc': (a, b) => a.rawPrice - b.rawPrice,
+            'price-desc': (a, b) => b.rawPrice - a.rawPrice,
+            'kilometres-asc': (a, b) => a.rawKilometres - b.rawKilometres,
+            'kilometres-desc': (a, b) => b.rawKilometres - a.rawKilometres,
+            'newest': (a, b) => b.year - a.year,
+            'oldest': (a, b) => a.year - b.year,
+            'cc-asc': (a, b) => a.displacementCC - b.displacementCC,
+            'cc-desc': (a, b) => b.displacementCC - a.displacementCC,
+            'kw-asc': (a, b) => a.powerKW - b.powerKW,
+            'kw-desc': (a, b) => b.powerKW - a.powerKW
+        };
+
+        filteredCars = [...filteredCars].sort(sortMap[sortOption] || sortMap['relevance']);
+        displayCarListings(filteredCars);
+    }
+
+    function displayCarListings(filteredCars) {
+        const container = document.getElementById('carListings');
+        container.innerHTML = ''; // Clear previous listings
+
+        // Iterate over each car in the array
+        filteredCars.forEach((carData, index) => {
+            // Construct the URL for the first image
+            const imageUrl = `listings/${carData.carId.toUpperCase()}/images/1.webp`;
+
+            // Calculate the vehicle deposit as 10% of the raw price
+            const vehicleDeposit = carData.rawPrice * 0.1;
+
+            // Set loan parameters based on the car's price, year, and mileage
+            const { annualRateTIN, loanLengthMonths, commissionRate } = setLoanParameters(carData.rawPrice, carData.year, carData.rawKilometres);
+
+            // Calculate the monthly payment and other financial details
+            const result = calculateRate(
+                loanLengthMonths / 12,
+                carData.rawPrice,
+                vehicleDeposit,
+                annualRateTIN / 100,
+                commissionRate / 100,
+                0.0
+            );
+
+            // Construct the HTML for each car listing
+            let html = `
+            <a href="car-details.html?id=${carData.carId}" class="car-container">
+                <div class="car-image-container">
+                    <div class="car-status ${carData.availability.toLowerCase()}">${carData.availability}</div>
+                    <img class="car-image" src="${imageUrl}" alt="${carData.brand} ${carData.model}" loading="lazy">
+                    ${carData.emissionLabel ? `
+                        <label id="emissionsLabel" class="emissions-label">
+                            <img src="icons/emissions/${carData.emissionLabel.toLowerCase()}.svg" alt="Emissions Icon" width="25" height="25">
+                        </label>` : ''}
+                    <label id="imageCountLabel" class="photo-count-label">
+                        <img src="icons/photo-count.svg" alt="Photo Count Icon" width="16" height="16">${carData.imageCount}
+                    </label>
+                </div>
+                <div class="car-description-container">
+                    <div class="car-title">${carData.brand} ${carData.model} ${carData.version} ${carData.displacementLiters} ${carData.EngineTechnology} ${carData.color} ${carData.bodyType} (${carData.doors}p)</div>
+                    <div class="car-details-container">${carData.year} | ${carData.transmissionType} | ${carData.kilometres} km | ${carData.fuelType} | ${carData.powerKW} kW (${carData.powerCV} CV)</div>
+                </div>
+                <div class="price-details-container">
+                    ${carData.previousPrice !== carData.price ? `
+                        <div class="price">
+                            Precio al contado: <span class="previous-price">${carData.previousPrice}</span>
+                        </div>
+                    ` : '<div class="price">Precio al contado: </div>'}
+                    <div class="finance-price-full">Precio financiado: ${carData.price}</div>
+                </div>
+                <div class="price-container">
+                    <div class="price">${carData.price}</div>
+                    <div class="finance-price">${formatCurrency(Math.abs(result.pmt))}/mes</div>
+                </div>
+                <div class="finance-details">
+                    *Sin entrada ${loanLengthMonths} meses
+                    <span class="apr-example apr-example-${index}">
+                        Ver ejemplo TAE ${result.annualRateTAE}%
+                    </span> con Santander
+                </div>
+            </a>
+        `;
+
+            // Insert the constructed HTML into the container
+            container.insertAdjacentHTML('beforeend', html);
+
+            // Adding event listener to the apr-example span
+            document.querySelector(`.apr-example-${index}`).addEventListener('click', (event) => {
+                showLoanInfo(event, loanLengthMonths, carData.rawPrice, vehicleDeposit, annualRateTIN, commissionRate, Math.abs(result.pmt), result.annualRateTAE);
+            });
+        });
+
+        // Update the listing count
+        document.getElementById('listingCount').textContent = `${filteredCars.length} listings`;
+    }
+</script>
+
+</html>

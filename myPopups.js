@@ -1,12 +1,13 @@
 // myPopups.js
 
+let scrollPosition = 0;
+
 export function hidePopup(popupId) {
     const popup = document.getElementById(popupId);
     if (popup) {
         popup.style.display = 'none';
         hideOverlay();
-        // Remove no-scroll class from body
-        document.body.classList.remove('no-scroll');
+        restoreScrollPosition();
     } else {
         console.error(`Popup with ID "${popupId}" not found.`);
     }
@@ -23,23 +24,38 @@ function hideCarDetailsPopups() {
 export function showOverlay() {
     const overlay = document.getElementById('overlay');
     overlay.style.display = 'block';
-    // Add no-scroll class to body
-    document.body.classList.add('no-scroll');
+    captureScrollPosition();
 }
 
 export function hideOverlay() {
-    document.getElementById('overlay').style.display = 'none';
-    // Remove no-scroll class from body
-    document.body.classList.remove('no-scroll');
+    const overlay = document.getElementById('overlay');
+    overlay.style.display = 'none';
 }
 
 function showPopup(popupId) {
     const popup = document.getElementById(popupId);
     popup.style.display = 'block';
     showOverlay();
-
-    // Reset scroll position to the top
+    // Ensure the popup scrolls to the top
     popup.scrollTop = 0;
+}
+
+function captureScrollPosition() {
+    // Capture the current scroll position
+    scrollPosition = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0;
+    // Add no-scroll class to body
+    document.body.classList.add('no-scroll');
+    // Set the body's position to the captured scroll position
+    document.body.style.top = `-${scrollPosition}px`;
+}
+
+function restoreScrollPosition() {
+    // Remove no-scroll class from body
+    document.body.classList.remove('no-scroll');
+    // Restore the body's scroll position
+    window.scrollTo(0, scrollPosition);
+    // Reset the body's top style
+    document.body.style.top = '';
 }
 
 function formatDetail(label, value) {

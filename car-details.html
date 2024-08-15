@@ -307,7 +307,7 @@
 
 const printDetailsButton = `
     <span class="col-6 text-center">
-        <a href="/print-car-data.html?id=${currentCarData.carId}" rel="nofollow"> Imprimir ficha</a>
+        <a href="/test-site/print-car-data.html?id=${currentCarData.carId}" rel="nofollow"> Imprimir ficha</a>
     </span>
 `;
 printDivElement.innerHTML = printDetailsButton;
@@ -460,7 +460,7 @@ printDivElement.innerHTML = printDetailsButton;
             <input type="checkbox" id="exchangeCheckbox" disabled>
             <label for="exchangeCheckbox"></label>
             <span id="exchangeAmount_title" class="entry__title">Entrega vehículo a cambio</span>
-            <span class="entry__amount"><a href="/value-my-car.html?id=${currentCarData.carId}" rel="nofollow">Valorar mi vehículo</a></span>
+            <span class="entry__amount"><a href="/test-site/value-my-car.html?id=${currentCarData.carId}" rel="nofollow">Valorar mi vehículo</a></span>
         `;
         financeOptionsContainer.appendChild(exchangeDiv);
 

@@ -498,3 +498,84 @@ a {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Existing styles */
+.car-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 9/6;
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+/* Ensure the car-image-container has a relative position to contain absolutely positioned images */
+.car-image-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+}
+
+/* Styles for active images */
+.car-image.visible {
+    opacity: 1;
+}
+
+/* Slide transition effects */
+.car-image.slide-in {
+    transform: translateX(0);
+}
+
+.car-image.slide-out-left {
+    transform: translateX(-100%);
+}
+
+.car-image.slide-out-right {
+    transform: translateX(100%);
+}
+
+/* Additional styles for container elements */
+.car-container {
+    background-color: #FFFFFF;
+    margin-bottom: 1.5rem;
+    width: calc(25% - 0.75em);
+    box-sizing: border-box;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+    overflow: hidden;
+    transition: box-shadow 0.3s;
+}
+
+.car-container:hover {
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.car-image-container {
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+

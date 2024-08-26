@@ -1,5 +1,3 @@
-// imageNavigation.js
-
 /**
  * Preloads images by setting their `src` attribute and renders thumbnails.
  * @param {string[]} imageUrlList - The list of image URLs to preload.
@@ -25,10 +23,33 @@ function updateImage(state, carImage, photoCountLabel) {
 
     const { currentImageIdx, imageUrlList, currentCarData, thumbnailStartIdx, thumbnailLimit } = state;
 
-    carImage.src = imageUrlList[currentImageIdx];
-    carImage.alt = `${currentCarData.brand} ${currentCarData.model} ${currentCarData.year}`;
+    // Determine the direction of the slide
+    const isNext = state.previousImageIdx < currentImageIdx;
 
-    photoCountLabel.innerHTML = `<img src="icons/photo-count.svg" alt="Info Icon" width="16" height="16">${currentImageIdx + 1} of ${imageUrlList.length}`;
+    // Add appropriate classes for the slide effect
+    carImage.classList.add(isNext ? 'slide-out-left' : 'slide-out-right');
+    
+    // Set up event listener to handle transition end
+    carImage.addEventListener('transitionend', function handleTransitionEnd() {
+        // Remove the old image classes and set the new image
+        carImage.classList.remove('slide-out-left', 'slide-out-right');
+        carImage.src = imageUrlList[currentImageIdx];
+        carImage.alt = `${currentCarData.brand} ${currentCarData.model} ${currentCarData.year}`;
+        
+        // Make the new image visible and apply slide-in effect
+        carImage.classList.add('slide-in', 'visible');
+        
+        // Clean up transition classes after transition ends
+        carImage.addEventListener('transitionend', () => {
+            carImage.classList.remove('slide-in', 'visible');
+        }, { once: true });
+
+        // Clean up event listener
+        carImage.removeEventListener('transitionend', handleTransitionEnd);
+    }, { once: true });
+
+    // Update photo count label
+    photoCountLabel.innerHTML = `<img src="icons/ui/actions/photo-count.svg" alt="Info Icon" width="16" height="16">${currentImageIdx + 1} of ${imageUrlList.length}`;
 
     // Update thumbnail start index if necessary
     const maxIndex = thumbnailStartIdx + thumbnailLimit;
@@ -51,6 +72,7 @@ function updateImage(state, carImage, photoCountLabel) {
  */
 function showImage(index, state, carImage, photoCountLabel) {
     if (index >= 0 && index < state.imageUrlList.length) {
+        state.previousImageIdx = state.currentImageIdx; // Save current index
         state.currentImageIdx = index;
         updateImage(state, carImage, photoCountLabel);
     }
@@ -65,6 +87,7 @@ function showImage(index, state, carImage, photoCountLabel) {
  */
 function showPrevImage(state, carImage, photoCountLabel) {
     const { currentImageIdx, imageUrlList } = state;
+    state.previousImageIdx = currentImageIdx; // Save current index
     showImage((currentImageIdx - 1 + imageUrlList.length) % imageUrlList.length, state, carImage, photoCountLabel);
 }
 
@@ -77,6 +100,7 @@ function showPrevImage(state, carImage, photoCountLabel) {
  */
 function showNextImage(state, carImage, photoCountLabel) {
     const { currentImageIdx, imageUrlList } = state;
+    state.previousImageIdx = currentImageIdx; // Save current index
     showImage((currentImageIdx + 1) % imageUrlList.length, state, carImage, photoCountLabel);
 }
 

@@ -166,6 +166,9 @@ function setupImageEventListeners(state, elements) {
     carImageContainer?.addEventListener('touchend', event => handleTouchEnd(event, state, carImageElement, photoCountLabel));
 
     document.querySelectorAll('.navButton').forEach(button => {
+        button.addEventListener('touchstart', event => event.stopPropagation());
+        button.addEventListener('touchend', event => event.stopPropagation());
+
         button.addEventListener('mouseenter', () => button.style.opacity = 0.8);
         button.addEventListener('mouseleave', () => button.style.opacity = 0.4);
     });

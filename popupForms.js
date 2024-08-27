@@ -200,7 +200,7 @@ export function showContactForm(event, formType, carId = '', carPrice = '', fina
                     <div class="form-check form-check--required">
                         <input type="checkbox" id="vehicle_send_to_friend_legal_policy_accept" name="vehicle_send_to_friend[legal][policy_accept]" required class="form-check-input" value="1">
                         <label for="vehicle_send_to_friend_legal_policy_accept" class="required">
-                            Acepto la <a href="/privacy-policy.html" target="_blank" class="blue-link">política de privacidad</a>.
+                            Acepto la <a href="/test-site/privacy-policy.html" target="_blank" class="blue-link">política de privacidad</a>.
                         </label>
                     </div>
                     <div class="form-check form-check--optional">

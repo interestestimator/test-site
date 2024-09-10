@@ -1,0 +1,485 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;700;900&display=swap');
+
+:root {
+
+
+    --contrast-bg: #FE5100;
+    --header-bg: #111111;
+    --font-family: 'MyCustomFont', sans-serif;
+    --bg-color: #FFFFFF;
+    --sidebar-bg: #F5F5F5;
+    --sidebar-border: #F5F5F5;
+
+
+    --contrast-color: #FAFAFA;
+    --discount-bg: #75A833;
+    --price-text: #FAFAFA;
+    --border-color: #0460A7;
+
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+}
+
+.sidebar__discount {
+    display: flex;
+    justify-content: space-between; /* Align items horizontally */
+    align-items: center; /* Center items vertically */
+    padding: 1.5rem 0 0.5rem;
+}
+
+
+.price-items {
+    display: flex;
+}
+
+.box {
+    flex: 1;
+    padding: .5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.contrast {
+    background-color: var(--contrast-bg);
+    color: var(--contrast-color);
+}
+
+.vehicle-financing-calculator {
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+    border-radius: 0.35rem;
+    font-size: 0.875rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.price-group__entries {
+    display: flex;
+    flex-direction: column;
+}
+
+.price-group__entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6rem 0rem .6rem 1.5rem;
+
+    border-bottom: 1px solid var(--sidebar-border);
+}
+
+.price-group__entry .entry__amount {
+    padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+}
+
+.checkbox-wrapper input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.checkbox-wrapper label {
+    --size: 4rem;
+    cursor: pointer;
+    width: var(--size);
+    height: calc(var(--size) / 2);
+    background: #606060;
+    display: block;
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s;
+}
+
+.checkbox-wrapper label::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 5%;
+    width: calc(50% - 10%);
+    height: calc(100% - 20%);
+    background: #fff;
+    border-radius: 1rem;
+    transition: transform 0.3s;
+}
+
+.checkbox-wrapper input:checked+label {
+    background: var(--contrast-bg);
+}
+
+.checkbox-wrapper input:checked+label::after {
+    left: calc(100% - 5%);
+    transform: translateX(-100%);
+}
+
+.checkbox-wrapper input:checked+label::before {
+    content: url('data:image/svg+xml;utf8,<svg viewBox=\'-2 -5 17 21\' height=\'100%\' width=\'100%\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M11.264 0L5.26 6.004 2.103 2.847 0 4.95l5.26 5.26 8.108-8.107L11.264 0\' fill=\'%23fff\' fill-rule=\'evenodd\'/></svg>');
+    position: absolute;
+    top: 45%;
+    left: 8px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+}
+
+.checkbox-wrapper input:not(:checked)+label::before {
+    content: url('data:image/svg+xml;utf8,<svg viewBox=\'-2 -5 14 20\' height=\'100%\' width=\'100%\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M9.9 2.12L7.78 0 4.95 2.828 2.12 0 0 2.12l2.83 2.83L0 7.776 2.123 9.9 4.95 7.07 7.78 9.9 9.9 7.776 7.072 4.95 9.9 2.12\' fill=\'%23fff\' fill-rule=\'evenodd\'/></svg>');
+    position: absolute;
+    top: 40%;
+    right: 7px;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+}
+
+.sidebar__financing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 1.3rem 0rem 1.3rem 1.5rem;
+    background-color: var(--sidebar-bg);
+}
+
+/* Common Styles */
+#carDetailsContainer {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+#carImage {
+    border-radius: 1rem 1rem 0 0;
+}
+
+#carFinanceContainer {
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+#carTitle {
+    padding: 1.5rem 0 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+
+#carImageContainer {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    touch-action: pan-y;
+}
+
+.navButtonContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
+}
+
+.navButton {
+    background-color: #FFFFFF;
+    color: #141414;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.navButton:hover {
+    opacity: 0.8;
+}
+
+#thumbnailContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.1rem;
+    overflow: hidden;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.thumbnail {
+    width: calc(25% - 0.25rem);
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 9/6;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail.active {
+    opacity: 1;
+}
+
+p {
+    margin-bottom: 10px;
+}
+
+#overview {
+    padding: 1rem 1.5rem 0.75rem 1.5rem;
+    background-color: var(--sidebar-bg);
+}
+
+.container-title {
+    padding: 1rem 0 .5rem 1.5rem;
+}
+
+.custom-list {
+    list-style-type: none;
+    /* Remove default bullet points */
+    padding-left: 0;
+    /* Remove padding */
+}
+
+.custom-list li {
+    position: relative;
+    /* Required for positioning the icon */
+    padding-left: 2rem;
+    /* Space for the icon */
+    margin-bottom: 0.5rem;
+    /* Space between list items */
+}
+
+.custom-list li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    /* Position the icon to the left of the list item */
+    top: 0;
+    /* Align the icon to the top of the list item */
+    width: 1rem;
+    /* Width of the SVG icon */
+    height: 1rem;
+    /* Height of the SVG icon */
+    background: url('icons/ui/lists/bullet-point.svg') no-repeat center center;
+    background-size: contain;
+    /* Adjust size of the SVG icon */
+}
+
+.dropdown-container {
+    background: var(--sidebar-bg);
+    padding: 0 1rem 1rem 0;
+    margin: 0 0 1rem 0;
+    position: relative;
+}
+
+.dropdown {
+    padding-block-end: 1rem;
+}
+
+.dropdown-title {
+    padding-bottom: 1rem;
+}
+
+
+.equipamiento-dropdown-content {
+    display: none;
+    padding: 0.5rem;
+    background-color: #FFEDE6;
+    border-radius: 0 0 1rem 0;
+    margin: 0 1.25rem 0 0;
+}
+
+.equipamiento-dropdown-content.show {
+    display: block;
+}
+
+
+
+
+
+
+/* Car Overview Container Styles */
+
+#carOverviewContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    padding: 2rem 0rem 1.5rem 0rem;
+}
+
+@media (max-width: 480px) {
+    #carOverviewContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+#carOverviewContainer .more-details {
+    display: flex;
+}
+
+#carOverviewContainer .more-details img {
+    margin-right: 10px;
+}
+
+#carOverviewContainer .detail-text {
+    display: flex;
+    flex-direction: column;
+}
+
+#carOverviewContainer .more-information {
+    display: flex;
+    align-items: center;
+    font-size: 0.75rem;
+    color: #FE5100;
+    cursor: pointer;
+    margin-top: 0.25rem;
+}
+
+#carOverviewContainer .more-information img {
+    margin-right: 5px;
+}
+
+
+/* Company Advantages Container Styles */
+#companyAdvantagesContainer {
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    align-items: center;
+    /* Vertically center items in grid cells */
+}
+
+@media (max-width: 480px) {
+    #companyAdvantagesContainer {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+#companyAdvantagesContainer .more-details {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto;
+    gap: 10px;
+}
+
+#companyAdvantagesContainer .more-details img {
+    margin-right: 10px;
+}
+
+#companyAdvantagesContainer .detail-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+#companyAdvantagesContainer .detail-result {
+    font-weight: bold;
+}
+
+#companyAdvantagesContainer .detail-title {
+    color: #555;
+}
+
+#companyAdvantagesContainer .more-information img {
+    margin-right: 5px;
+}
+
+.vehicle-price-result-container {
+    padding: 0rem 0rem 0.75rem 0rem
+}
+
+.vehicle-price-result {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+.vehicle-price-result__action {
+    display: flex;
+    justify-content: center;
+    padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+}
+
+.vehicle-price-result__action button {
+    border: none;
+    /* Outline color */
+}
+
+/* Button icon styling */
+.btn-icon {
+    margin-right: 0.5rem;
+    /* Space between icon and text */
+}
+
+.financing-calculator__controls {
+    padding: 0 1rem 0 0;
+}
+
+.form-input {
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 16px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 10rem;
+    /* Adjust the width */
+    appearance: none;
+    /* Removes default arrow */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+
+
+
+
+.silder-container {
+    padding: 1.5rem;
+  background-color: #FFEDE6;
+  margin: 0 1.5rem 0 0;
+  color: #111111;
+}
+
+
+
+
+
+
+
+
+
+#deposit-input {
+    width: 12.3rem;
+}
+
+#deposit-input:focus {
+    outline: none;
+    border: none;
+}
+
+#term-select {
+    width: 14rem;
+}
+
+
+
+
+
+

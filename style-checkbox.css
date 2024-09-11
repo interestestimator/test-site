@@ -471,7 +471,7 @@ p {
 
 
 #deposit-input {
-    width: 12.3rem;
+    width: 8rem;
 }
 
 #deposit-input:focus {
@@ -480,7 +480,7 @@ p {
 }
 
 #term-select {
-    width: 14rem;
+    width: 9.7rem;
 }
 
 
@@ -495,7 +495,6 @@ p {
     border: 0;
     font-size: 1rem;
 }
-
 
 
 

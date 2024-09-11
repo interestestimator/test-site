@@ -20,7 +20,11 @@
 </head>
 
 <body>
+    <!-- Header -->
+    <div id="header-contact-container"></div>
     <div id="header-container"></div>
+    <div id="header-banner-container"></div>
+        
     <div id="overlay" class="overlay"></div>
     <div id="loanPopup" class="popup-container" style="display: none;"></div>
 
@@ -110,7 +114,9 @@
             filteredCars = [...carsData];
 
             await Promise.all([
+                loadHtml(elements.headerContactContainer, 'header-contact.html'),
                 loadHtml(elements.headerContainer, 'header.html'),
+                loadHtml(elements.headerBannerContainer, 'header-banner.html'),
                 loadHtml(elements.footerContainer, 'footer.html')
             ]);
 

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +31,7 @@
         }
 
         /* Navigation styling */
-        nav ul {
+        #navList {
             list-style: none;
             margin: 0;
             padding: 0;
@@ -38,24 +39,22 @@
             flex-direction: row;
         }
 
-        nav ul li {
+        #navList li {
             position: relative;
+            padding: 0 0 0 1rem;
+            text-transform: uppercase;
         }
 
-        nav ul li a {
+        #navList li a {
             color: #111111;
             text-decoration: none;
-            padding: 10px 20px;
             display: block;
             transition: border-bottom 0.3s ease;
             border-bottom: 3px solid #FFFFFF;
-
-
-            font-weight: 600;
         }
 
-        nav ul li a:hover,
-        nav ul li a:focus {
+        #navList li a:hover,
+        #navList li a:focus {
             border-bottom: 3px solid #111111;
         }
 
@@ -94,7 +93,12 @@
 
         /* Mobile styles */
         @media (max-width: 768px) {
-            nav ul {
+            .logo img {
+                max-width: 220px;
+                /* Adjusted size for mobile */
+            }
+
+            #navList {
                 display: none;
                 flex-direction: column;
                 width: 100%;
@@ -104,11 +108,11 @@
                 left: 0;
             }
 
-            nav ul.active {
+            #navList.active {
                 display: flex;
             }
 
-            nav ul li {
+            #navList li {
                 width: 100%;
                 text-align: center;
             }
@@ -118,7 +122,6 @@
                 cursor: pointer;
                 color: #111111;
                 font-size: 1.5rem;
-                padding: 10px 20px;
             }
 
             .dropdown-content {
@@ -128,9 +131,6 @@
                 z-index: 100;
             }
 
-            .dropdown-content a {
-                padding: 10px;
-            }
         }
 
         @media (min-width: 769px) {
@@ -144,6 +144,7 @@
         }
     </style>
 </head>
+
 <body>
     <header>
         <div class="header-content">
@@ -154,7 +155,7 @@
             </div>
             <nav>
                 <div class="menu-toggle" onclick="toggleheaderMenu()">☰</div>
-                <ul id="navList">
+                <ul id="navList" class="h4 font-bold">
                     <li><a href="#">Nuevos</a></li>
                     <li><a href="coches-segunda-mano.html">Segunda Mano</a></li>
                     <li><a href="#">Ofertas</a></li>
@@ -173,4 +174,5 @@
         }
     </script>
 </body>
+
 </html>

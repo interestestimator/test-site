@@ -484,9 +484,12 @@ p {
 
 
 #regionDropdown {
-    width: 40%;
+    width: 35%;
+    padding: .7rem;
+    border-radius: 1.5rem;
+    border: 0;
+    font-size: 1rem;
 }
-
 
 
 

@@ -1,8 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;700;900&display=swap');
 
 :root {
-
-
     --contrast-bg: #FE5100;
     --header-bg: #111111;
     --font-family: 'MyCustomFont', sans-serif;
@@ -18,22 +16,18 @@
 
 }
 
-html,
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    font-family: var(--font-family);
-    background-color: var(--bg-color);
-}
+
+
+
+
+
+
 
 .sidebar__discount {
     display: flex;
-    justify-content: space-between; /* Align items horizontally */
     align-items: center; /* Center items vertically */
     padding: 1.5rem 0 0.5rem;
 }
-
 
 .price-items {
     display: flex;
@@ -51,19 +45,6 @@ body {
     color: var(--contrast-color);
 }
 
-.vehicle-financing-calculator {
-    border: 1px solid var(--border-color);
-    font-weight: 600;
-    border-radius: 0.35rem;
-    font-size: 0.875rem;
-    padding: 0.25rem 0.5rem;
-}
-
-.price-group__entries {
-    display: flex;
-    flex-direction: column;
-}
-
 .price-group__entry {
     display: flex;
     justify-content: space-between;
@@ -76,9 +57,6 @@ body {
 .price-group__entry .entry__amount {
     padding: 0.5rem 1.5rem 0.5rem .5rem;
 }
-
-
-
 
 
 
@@ -134,28 +112,12 @@ body {
 
 
 
-
-
-
-
-
-
-
-
-
 .sidebar__financing {
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     padding: 1.3rem 0rem 1.3rem 1.5rem;
     background-color: var(--sidebar-bg);
-}
-
-/* Common Styles */
-#carDetailsContainer {
-    display: flex;
-    flex-wrap: wrap;
 }
 
 #carImage {
@@ -170,11 +132,13 @@ body {
 
 #carTitle {
     padding: 1.5rem 0 0.5rem;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
 }
+
+
+
+
+
+
 
 #carImageContainer {
     position: relative;
@@ -238,18 +202,24 @@ body {
     opacity: 1;
 }
 
-p {
-    margin-bottom: 10px;
-}
 
-#overview {
-    padding: 1rem 1.5rem 0.75rem 1.5rem;
-    background-color: var(--sidebar-bg);
-}
+
+
+
+
+
+
 
 .container-title {
     padding: 1rem 0 .5rem 1.5rem;
 }
+
+
+
+
+
+
+
 
 .custom-list {
     list-style-type: none;
@@ -358,6 +328,12 @@ p {
 }
 
 
+
+
+
+
+
+
 /* Company Advantages Container Styles */
 #companyAdvantagesContainer {
     padding-top: 2rem;
@@ -393,17 +369,16 @@ p {
     text-align: center;
 }
 
-#companyAdvantagesContainer .detail-result {
-    font-weight: bold;
-}
-
-#companyAdvantagesContainer .detail-title {
-    color: #555;
-}
-
 #companyAdvantagesContainer .more-information img {
     margin-right: 5px;
 }
+
+
+
+
+
+
+
 
 .vehicle-price-result-container {
     padding: 0rem 0rem 0.75rem 0rem
@@ -421,10 +396,7 @@ p {
     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
 }
 
-.vehicle-price-result__action button {
-    border: none;
-    /* Outline color */
-}
+
 
 /* Button icon styling */
 .btn-icon {
@@ -436,39 +408,12 @@ p {
     padding: 0 1.5rem 0 0;
 }
 
-.form-input {
-    background-color: #f0f0f0;
-    color: #333;
-    font-size: 16px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    width: 10rem;
-    /* Adjust the width */
-    appearance: none;
-    /* Removes default arrow */
-    -webkit-appearance: none;
-    -moz-appearance: none;
-}
-
-
-
-
-
 .silder-container {
     padding: 1.5rem;
-  background-color: #FFEDE6;
-  margin: 0 1.5rem 0 0;
-  color: #111111;
+    background-color: #FFEDE6;
+    margin: 0 1.5rem 0 0;
+    color: #111111;
 }
-
-
-
-
-
-
-
-
 
 #deposit-input {
     width: 8rem;
@@ -486,8 +431,6 @@ p {
 
 
 
-
-
 #regionDropdown {
     width: 35%;
     padding: .45rem;
@@ -495,7 +438,3 @@ p {
     border: 0;
     font-size: 1rem;
 }
-
-
-
-

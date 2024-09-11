@@ -20,7 +20,7 @@ function adjustLoanInfo(loanLengthMonths, rawFinancePrice, vehicleDeposit, annua
         <div class="title">
             <div class="finance-text">Detalles de la oferta</div>
         </div>
-        <div class="finance-details-container">
+        <div>
             ${formatDetail("Cuota mensual*", formatCurrency(pmtPositive))}
             ${formatDetail("Precio financiando", formatCurrency(precioFinanciando))}
             ${formatDetail("Entrada", formatCurrency(vehicleDeposit))}
@@ -30,10 +30,9 @@ function adjustLoanInfo(loanLengthMonths, rawFinancePrice, vehicleDeposit, annua
             ${formatDetail("TIN", annualRateTIN + ' %')}
             ${formatDetail("TAE", annualRateTAE + ' %')}
 
-            <button class="show-documents-button rounded-container rounded-both bg-orange h3">
-                <img class="btn-icon" src="icons/ui/lists/book.svg" alt="More information" width="12" height="12">
-                 Documentación necesaria
-            </button>
+            <div class="vehicle-price-result__action">
+                <button class="show-documents-button rounded-container rounded-both bg-orange h3">Documentación necesaria</button>
+            </div>
         </div>
         <div class="finance-conditions">
             <h2 class="legal-conditions-title">Condiciones de financiación</h2>
@@ -166,5 +165,7 @@ export {
     initializeFinanceCalcEventListeners,
     generateFinanceMessage
 };
+
+
 
 

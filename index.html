@@ -110,9 +110,9 @@
 
 <body>
     <!-- Header -->
+    <div id="header-contact-container"></div>
     <div id="header-container"></div>
-<!-- Banner -->
-    <div id="banner-container"></div>
+    <div id="header-banner-container"></div>
 
 
     <!-- Main content -->
@@ -261,8 +261,9 @@
             try {
                 // Load header and footer
                 await Promise.all([
+                    loadHtml('header-contact-container', 'header-contact.html'),
                     loadHtml('header-container', 'header.html'),
-                    loadHtml('banner-container', 'banner.html'),
+                    loadHtml('header-banner-container', 'header-banner.html'),
                     loadHtml('footer-container', 'footer.html')
                 ]);
 
@@ -279,4 +280,6 @@
 </body>
 
 </html>
+
+
 

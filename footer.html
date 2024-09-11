@@ -1,83 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Responsive Footer</title>
     <style>
+        #footer {
+            background-color: #F5F5F5;
+            padding-bottom: 5rem;
+        }
+
+        .container {
+            max-width: 80rem;
+            padding-top: 4rem;
+            margin: 0 auto;
+            
+        }
+
+        #companyTermsContainer {
+            padding: 1rem 0;
+            /* Adjust as needed */
+            display: flex;
+            justify-content: space-between;
+            /* Space between text and social media */
+            align-items: center;
+            /* Center items vertically */
+            color: #606060;
+            
+            /* Centers the element */
+            max-width: 80rem;
+        }
+
+        #companyTerms {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 10px;
+            /* Space between icons */
+        }
+
+        #companyTerms li a:hover,
+        #companyTerms li a:focus {
+            color: #111111;
+            /* Default black color */
+        }
 
 
-/* Header Section */
 
-.footer {
-    margin-top: 5rem;
-    padding-top: 1rem;
+
+
+
+
+
+
+
+
+
+
+        #threeColumns {
+    display: flex;
 }
+
+.column {
+    flex: 1;
+    background-color: #f5f5f5;
+}
+
+#twoColumns {
+    display: flex;
+}
+
+#twoColumns .column {
+    flex: 1;
+}
+
+        /* Responsive layout for mobile */
+        @media (max-width: 768px) {
+            #threeColumns {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            #threeColumns .column {
+                padding-bottom: 2rem;
+            }
+        }
     </style>
 </head>
+
 <body>
-    <footer id="footer" class="footer bg-dark text-light py-4" style="background-color: #343a40; color: #f8f9fa;">
-
+    <footer id="footer" class="footer">
         <div class="container">
-            <div class="row">
-                <!-- Company Info -->
-                <div class="col-md-3">
-                    <h5 class="footer-title">Company</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="/about" class="text-light">About Us</a></li>
-                        <li><a href="/careers" class="text-light">Careers</a></li>
-                        <li><a href="/blog" class="text-light">Blog</a></li>
-                        <li><a href="/contact" class="text-light">Contact Us</a></li>
-                    </ul>
-                </div>
 
-                <!-- Customer Service -->
-                <div class="col-md-3">
-                    <h5 class="footer-title">Customer Service</h5>
-                    <ul class="list-unstyled">
-                        <li><a href="/faq" class="text-light">FAQ</a></li>
-                        <li><a href="/returns" class="text-light">Returns</a></li>
-                        <li><a href="/shipping" class="text-light">Shipping Information</a></li>
-                        <li><a href="/terms" class="text-light">Terms & Conditions</a></li>
-                    </ul>
+            <div id="threeColumns" class="b1">
+                <!-- Column 1 -->
+                <div class="column">
+                    <span class="font-bold uppercase">CONTADO</span><br>
+                    <span>MARTINEZ LUGO</span><br>
+                    <span>Estrada de A Coruna, 50, 27003 Lugo</span><br>
+                    <br>
+                    <span class="font-bold uppercase">Llámanos</span><br>
+                    <span>982 809 090</span><br>
+                    <span>698 180 002</span><br><br>
+                    <span>SL - V: 9:00 - 13:30 y de 15:30 - 20:00</span><br>
+                    <span>Sab: 10:00 -a 13:00</span>
                 </div>
-
-                <!-- Social Media -->
-                <div class="col-md-3">
-                    <h5 class="footer-title">Follow Us</h5>
-                    <div class="social-media">
-                        <a href="https://facebook.com" class="text-light me-2" aria-label="Facebook">
-                            <i class="fab fa-facebook-f"></i>
-                        </a>
-                        <a href="https://twitter.com" class="text-light me-2" aria-label="Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="https://instagram.com" class="text-light me-2" aria-label="Instagram">
-                            <i class="fab fa-instagram"></i>
-                        </a>
-                        <a href="https://linkedin.com" class="text-light" aria-label="LinkedIn">
-                            <i class="fab fa-linkedin-in"></i>
-                        </a>
+            
+                <!-- Column 2, which contains two smaller columns -->
+                <div class="column">
+                    <div id="twoColumns">
+                        <div class="column">
+                            <span class="font-bold uppercase">CONTADO</span><br>
+                            <span>Nuevos</span><br>
+                            <span>Segunda Mano</span><br>
+                            <span>Ofertas</span><br>
+                            <span>Taller</span><br>
+                            <span>Sobre Nosotros</span><br>
+                            <span>Reseñas de clientes</span><br>
+                            <span>FAQs</span><br>
+                            <span>Contacto</span><br>
+                        </div>
+                        <div class="column">
+                            <span class="font-bold uppercase">PRINCIPAL MARCAS</span><br>
+                            <span>Peugeot</span><br>
+                            <span>Citroën</span><br>
+                            <span>Nissan</span><br>
+                            <span>SWM</span><br>
+                            <span>Mercedez-Benz</span><br>
+                            <span>BMW</span><br>
+                            <span>Toyota</span><br>
+                            <span>koda</span><br>
+                        </div>
                     </div>
                 </div>
-
-                <!-- Contact Information -->
-                <div class="col-md-3">
-                    <h5 class="footer-title">Contact Information</h5>
-                    <address>
-                        <p><i class="fas fa-map-marker-alt"></i> 123 Main Street, Anytown, USA</p>
-                        <p><i class="fas fa-phone"></i> +1 234 567 890</p>
-                        <p><i class="fas fa-envelope"></i> <a href="mailto:info@example.com"
-                                class="text-light">info@example.com</a></p>
-                    </address>
+            
+                <!-- Column 3 -->
+                <div class="column">
+                    <span class="font-bold uppercase">NEWSLETTER</span><br>
+                    <span>Subcribe to our newsletter to receive offers and discounts. newsletter to receive offers and discoun newsletter to receive offers and discoun</span><br>
+                    <form>
+                    <input type="text" id="name" placeholder="Nombre *" aria-required="true" maxlength="30" autocapitalize="none" autocorrect="off" name="name" required="">
+                    <span class="button-box">
+                        <button class="form-submit-button" type="submit" name="submit" disabled="">Enviar</button>
+                    </span>
+                </form>
                 </div>
             </div>
 
-            <div class="text-center mt-4">
-                <p class="mb-0">&copy; 2024 Your Company Name. All rights reserved.</p>
+
+            <!-- Bottom Section -->
+            <div id="companyTermsContainer">
+                <p>&copy; 2024 Martínez De Lugo, S.L.U. Todos los derechos reservados</p>
+                <nav>
+                    <ul id="companyTerms">
+                        <li><a href="#">Términos de uso</a></li>
+                        <li><a href="#">Términos de venta</a></li>
+                        <li><a href="#">Aviso Legal</a></li>
+                        <li><a href="#">Política de privacidad y cookies</a></li>
+                    </ul>
+                </nav>
             </div>
         </div>
     </footer>
-
 </body>
+
 </html>

@@ -77,6 +77,16 @@ body {
     padding: 0.5rem 1.5rem 0.5rem .5rem;
 }
 
+
+
+
+
+
+
+
+
+
+
 .checkbox-wrapper input[type=checkbox] {
     height: 0;
     width: 0;
@@ -94,49 +104,44 @@ body {
     border-radius: 2rem;
     position: relative;
     overflow: hidden;
-    transition: transform 0.3s;
+    transition: background 0.3s; /* Transition the background color */
 }
 
 .checkbox-wrapper label::after {
     content: '';
     position: absolute;
     top: 10%;
-    left: 5%;
-    width: calc(50% - 10%);
-    height: calc(100% - 20%);
+    left: 6%;
+    width: 40%; /* Adjusted for a better fit */
+    height: 80%; /* Adjusted for a better fit */
     background: #fff;
     border-radius: 1rem;
-    transition: transform 0.3s;
+    transition: transform 0.3s; /* Transition the transform property */
 }
 
-.checkbox-wrapper input:checked+label {
-    background: var(--contrast-bg);
+.checkbox-wrapper input:checked + label {
+    background: var(--contrast-bg); /* Change background color when checked */
 }
 
-.checkbox-wrapper input:checked+label::after {
-    left: calc(100% - 5%);
-    transform: translateX(-100%);
+.checkbox-wrapper input:checked + label::after {
+    transform: translateX(calc(122%)); /* Slide the switch */
 }
 
-.checkbox-wrapper input:checked+label::before {
-    content: url('data:image/svg+xml;utf8,<svg viewBox=\'-2 -5 17 21\' height=\'100%\' width=\'100%\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M11.264 0L5.26 6.004 2.103 2.847 0 4.95l5.26 5.26 8.108-8.107L11.264 0\' fill=\'%23fff\' fill-rule=\'evenodd\'/></svg>');
-    position: absolute;
-    top: 45%;
-    left: 8px;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-}
 
-.checkbox-wrapper input:not(:checked)+label::before {
-    content: url('data:image/svg+xml;utf8,<svg viewBox=\'-2 -5 14 20\' height=\'100%\' width=\'100%\' xmlns=\'http://www.w3.org/2000/svg\'><path d=\'M9.9 2.12L7.78 0 4.95 2.828 2.12 0 0 2.12l2.83 2.83L0 7.776 2.123 9.9 4.95 7.07 7.78 9.9 9.9 7.776 7.072 4.95 9.9 2.12\' fill=\'%23fff\' fill-rule=\'evenodd\'/></svg>');
-    position: absolute;
-    top: 40%;
-    right: 7px;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .sidebar__financing {
     display: flex;
@@ -485,11 +490,17 @@ p {
 
 #regionDropdown {
     width: 35%;
-    padding: .7rem;
+    padding: .45rem;
     border-radius: 1.5rem;
     border: 0;
     font-size: 1rem;
 }
+
+
+
+
+
+
 
 
 

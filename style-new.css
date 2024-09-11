@@ -105,6 +105,7 @@ body {
     justify-content: center;
     padding: 0.5rem 2.5rem 0.5rem 2.5rem;
     cursor: pointer;
+    width: 100%;
 }
 
 /* Text alignment and margin */
@@ -190,3 +191,6 @@ body {
     line-height: 1.25em;
     letter-spacing: -0.01em;
 }
+
+
+

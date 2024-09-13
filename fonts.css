@@ -1,0 +1,22 @@
+/* fonts.css */
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('fonts/FuturaPTBold.otf') format('opentype');
+    font-weight: 700; /* Numeric value for bold */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('fonts/FuturaPTBook.otf') format('opentype');
+    font-weight: 300; /* Numeric value for light weight */
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'MyCustomFont';
+    src: url('fonts/FuturaPTBoldOblique.otf') format('opentype');
+    font-weight: 700; /* Numeric value for bold */
+    font-style: italic;
+}

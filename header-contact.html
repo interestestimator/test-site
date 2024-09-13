@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Banner Top</title>
+    <style>
+        #contactBannerTopContainer {
+            min-height: 52px;
+            background-color: #F5F5F5;
+            padding-top: 12px;
+        }
+
+        /* Navigation styling */
+        #contactBannerTop {
+            list-style: none;
+            margin: 0 auto; /* Centers the element */
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* Aligns items to the right */
+            max-width: 80rem;
+        }
+
+        #contactBannerTop li a {
+            padding: .4rem 0 0 1.25rem;
+            display: block;
+        }
+
+        #contactBannerTop li a img {
+            background-color: #111111; /* Default black color */
+            transition: color 0.3s ease; /* Smooth transition for hover */
+        }
+
+        #contactBannerTop li a img:hover,
+        #contactBannerTop li a img:focus {
+            background-color: #FE5100; /* Change color to orange on hover */
+        }
+
+        #contactBannerTop li a img {
+            width: 26px;
+            height: 26px;
+        }
+
+
+        /* Hide the banner on mobile */
+        @media (max-width: 768px) {
+            #contactBannerTopContainer {
+                position: fixed;
+                bottom: 0;
+                width: 100%; /* Ensure it spans the full width */
+                z-index: 1000; /* Ensures it stays on top of other content */
+                background-color: #0A0A0A;
+
+            }
+            #contactBannerTop {
+                justify-content: center; /* Aligns items to the right */
+            }
+
+            #contactBannerTop li a {
+                padding: .2rem 0 0 1.25rem;
+                display: block;
+            }
+
+            #contactBannerTop li a img:hover,
+            #contactBannerTop li a img:focus {
+                background-color: #01AEFF; /* Change color to orange on hover */
+            }
+
+            #contactBannerTop li a img {
+                width: 36px;
+                height: 36px;
+                filter: invert(100%); /* Inverts the colors */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="contactBannerTopContainer">
+        <nav>
+            <ul id="contactBannerTop">
+                <li>
+                    <a href="tel:+1234567890">
+                        <img src="icons/ui/actions/header-contact/phone-icon.svg" alt="Phone Icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="https://wa.me/34677585804?text=Hola%20me%20gustaría%20saber%20más" target="_blank">
+                        <img src="icons/ui/actions/header-contact/whatsapp-icon.svg" alt="Whatsapp Icon">
+                    </a>
+                </li>
+                <li>
+                    <a id="contactUsBtn" href="">
+                        <img src="icons/ui/actions/header-contact/email-icon.svg" alt="Email Icon">
+                    </a>
+                </li>
+                <li>
+                    <a href="#googleMaps">
+                        <img src="icons/ui/actions/header-contact/maps-icon.svg" alt="Maps Icon">
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+</body>
+
+</html>
+
+

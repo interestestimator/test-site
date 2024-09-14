@@ -148,7 +148,7 @@
     import { showContactForm, FORM_TYPES } from './popupForms.js';
 
 
-    import {initializeHeader, initializeBanner} from './header-banner.js';
+    import { initializeHeader, initializeBanner } from './header-banner.js';
 
 
     document.addEventListener('DOMContentLoaded', async () => {
@@ -182,16 +182,17 @@
             preloadImages(state.imageUrlList, state, elements.thumbnailContainer);
             setupImageEventListeners(state, elements);
 
+            populateCarSections(elements, currentCarData);
+
             // Populate and initialize UI components 
             renderCarDetails(state, elements, currentCarData);
 
-
-            populateCarSections(elements, currentCarData);
-            setupEventListeners(state, elements);
             initializeCheckboxes(currentCarData);
+            setupEventListeners(state, elements);
+
             initializeDetails(currentCarData);
 
-           
+
         }
     });
 
@@ -207,7 +208,7 @@
 
         // Set up event listeners and MutationObserver
         setupButtonEventListener(carId, carReference, currentCarData);
-        setupCheckboxMutationObserver(state, rawPrice, rawFinancePrice);
+        setupCheckboxEventListeners(state, rawPrice, rawFinancePrice);
     }
 
     /**
@@ -217,56 +218,73 @@
      * @param {Object} currentCarData - The current car data object.
      */
     function setupButtonEventListener(carId, carReference, currentCarData) {
-        // Event listeners for different form types
-        document.getElementById('priceAlertBtn').addEventListener('click', (event) => showContactForm(event, FORM_TYPES.PRICE_ALERT, currentCarData.carId, carReference, currentCarData.financePrice, currentCarData.price));
-        document.getElementById('testDriveBtn').addEventListener('click', (event) => showContactForm(event, FORM_TYPES.TEST_DRIVE, currentCarData.carId, carReference));
-        document.getElementById('contactUsBtn').addEventListener('click', (event) => showContactForm(event, FORM_TYPES.CONTACT_US)), currentCarData.carId;
-        // TEMPORARY     document.getElementById('requestEmailBtn').addEventListener('click', (event) => showContactForm(event, FORM_TYPES.REQUEST_EMAIL, currentCarData.carId, 'Model X - 2024')); // FINALISE OR REMOVE THIS OPTION
-        document.getElementById('requestFinanceBtn').addEventListener('click', (event) => showContactForm(event, FORM_TYPES.REQUEST_FINANCE, currentCarData.carId, carReference, '', '', generateFinanceMessage(carReference, currentCarData.financePrice)));
+        const priceAlertBtn = document.getElementById('priceAlertBtn');
+        const testDriveBtn = document.getElementById('testDriveBtn');
+        const contactUsBtn = document.getElementById('contactUsBtn');
+        const requestFinanceBtn = document.getElementById('requestFinanceBtn');
 
+        // Add event listener if the button exists
+        if (priceAlertBtn) {
+            priceAlertBtn.addEventListener('click', (event) => {
+                console.log('Price alert form button clicked:');
+                showContactForm(event, FORM_TYPES.PRICE_ALERT, currentCarData.carId, carReference, currentCarData.financePrice, currentCarData.price);
+            });
+        }
+
+        // Add event listener if the button exists
+        if (testDriveBtn) {
+            testDriveBtn.addEventListener('click', (event) => {
+                console.log('Test drive form button clicked:');
+                showContactForm(event, FORM_TYPES.TEST_DRIVE, currentCarData.carId, carReference);
+            });
+        }
+
+        // Add event listener if the button exists
+        if (contactUsBtn) {
+            contactUsBtn.addEventListener('click', (event) => {
+                console.log('Contact us form button clicked:');
+                showContactForm(event, FORM_TYPES.CONTACT_US, currentCarData.carId);
+            });
+        }
+
+        // Add event listener if the button exists
+        if (requestFinanceBtn) {
+            requestFinanceBtn.addEventListener('click', (event) => {
+                console.log('Request finance form button clicked:');
+                showContactForm(event, FORM_TYPES.REQUEST_FINANCE, currentCarData.carId, carReference, '', '', generateFinanceMessage(carReference, currentCarData.financePrice));
+            });
+        }
     }
 
     /**
-     * Sets up MutationObserver to handle dynamically added checkboxes.
+     * Adds event listeners to the finance and delivery checkboxes.
      * @param {Object} state - The state object.
      * @param {number} rawPrice - The raw price of the car.
      * @param {number} rawFinancePrice - The raw finance price of the car.
      */
-function setupCheckboxMutationObserver(state, rawPrice, rawFinancePrice) {
-    const financeOptionsContainer = document.getElementById('carFinanceOptionsContainer');
-    const observer = new MutationObserver((mutations) => {
+    function setupCheckboxEventListeners(state, rawPrice, rawFinancePrice) {
+        const financeCheckbox = document.getElementById('financeCheckbox');
+        const deliveryCheckbox = document.getElementById('deliveryCheckbox');
 
-        console.log(rawPrice)
-        console.log(rawFinancePrice)
-
-        // Ensure the correct reference for rawFinancePrice
+        // Initialize undisclosedFinanceCost once
         state.undisclosedFinanceCost = rawPrice - rawFinancePrice;
+        console.log(state.undisclosedFinanceCost);
 
-        console.log(state.undisclosedFinanceCost)
+        // Add event listeners if checkboxes exist
+        if (financeCheckbox) {
+            financeCheckbox.addEventListener('change', (event) => {
+                console.log('Finance checkbox changed:', event.target.checked);
+                handleFinanceCheckboxChange(event, state, rawPrice);
+            });
+        }
 
-
-                const financeCheckbox = document.getElementById('financeCheckbox');
-                const deliveryCheckbox = document.getElementById('deliveryCheckbox');
-
-                if (financeCheckbox) {
-                    financeCheckbox.addEventListener('change', (event) => {
-                        console.log('Finance checkbox changed:', event.target.checked);
-                        handleFinanceCheckboxChange(event, state, rawPrice, rawFinancePrice);
-                    });
-                }
-
-                if (deliveryCheckbox) {
-                    deliveryCheckbox.addEventListener('change', async (event) => {
-                        console.log('Delivery checkbox changed:', event.target.checked);
-                        await handleDeliveryCheckboxChange(event, state);
-                    });
-                }
-
-
-    });
-
-    observer.observe(financeOptionsContainer, { childList: true });
-}
+        if (deliveryCheckbox) {
+            deliveryCheckbox.addEventListener('change', async (event) => {
+                console.log('Delivery checkbox changed:', event.target.checked);
+                await handleDeliveryCheckboxChange(event, state);
+            });
+        }
+    }
 
     /**
      * Renders car details into the designated elements.
@@ -479,7 +497,7 @@ function setupCheckboxMutationObserver(state, rawPrice, rawFinancePrice) {
             ${currentCarData.color} ${currentCarData.bodyType} (${currentCarData.doors}p)
         `;
     }
-    
+
     /**
      * Inserts a discount section into a specified container element.
      * @param {HTMLElement} discountContainer - The container element to insert the discount section into.
@@ -513,9 +531,9 @@ function setupCheckboxMutationObserver(state, rawPrice, rawFinancePrice) {
      * Initialize a finance section into a specified container element.
      * @param {HTMLElement} financeSectionContainer - The container element to initialize the finance section before inserting other elements.
      */
-     function initializeFinanceSection(financeSectionContainer, financePrice, price, pmtValue) {
+    function initializeFinanceSection(financeSectionContainer, financePrice, price, pmtValue) {
         if (!financeSectionContainer) return; // Early return if the element is not found
-        
+
 
         financeSectionContainer.innerHTML = `
             <div id="priceItems" class="price-items">
@@ -577,19 +595,12 @@ function setupCheckboxMutationObserver(state, rawPrice, rawFinancePrice) {
     }
     */
 
-
-
-
-
-
-
-
     /**
      * Inserts a warranty section into a specified container element.
      * @param {HTMLElement} warrantyContainer - The container element to insert the warranty section into.
      * @param {number} guaranteePeriod - The length of the warranty in months.
      */
-     function insertWarrantyData(warrantyContainer, guaranteePeriod) {
+    function insertWarrantyData(warrantyContainer, guaranteePeriod) {
         if (!warrantyContainer) return; // Early return if the element is not found
 
         // Define VIP and standard guarantee periods
@@ -708,6 +719,9 @@ function setupCheckboxMutationObserver(state, rawPrice, rawFinancePrice) {
                 `).join('')}
             </div>
         `;
+    }
+
+</script>
     }
 
 </script>

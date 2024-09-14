@@ -7,7 +7,6 @@ export const FORM_TYPES = {
     TEST_DRIVE: 'testDrive',
     PRICE_ALERT: 'priceAlert',
     CONTACT_US: 'contactUs',
-    REQUEST_EMAIL: 'requestEmail',
     REQUEST_FINANCE: 'requestFinance'
 };
 
@@ -16,12 +15,11 @@ const FORM_ACCESS_KEYS = {
     [FORM_TYPES.TEST_DRIVE]: 'fc184b2a-7c0d-4071-a665-e807c3f4e679',
     [FORM_TYPES.PRICE_ALERT]: 'fc184b2a-7c0d-4071-a665-e807c3f4e679',
     [FORM_TYPES.CONTACT_US]: 'fc184b2a-7c0d-4071-a665-e807c3f4e679',
-    [FORM_TYPES.REQUEST_EMAIL]: 'fc184b2a-7c0d-4071-a665-e807c3f4e679',
     [FORM_TYPES.REQUEST_FINANCE]: 'fc184b2a-7c0d-4071-a665-e807c3f4e679'
 };
 
 // Helper function to generate form fields based on form type
-function getFormFields(formType, carId, carReference, financeDetails) {
+function getFormFields(formType, carId, financeDetails) {
     const baseFields = `
         <input type="hidden" id="car_id" name="car_id" value="${carId}" />
         <div class="input-box">
@@ -32,79 +30,64 @@ function getFormFields(formType, carId, carReference, financeDetails) {
             <input type="email" id="email" placeholder="Correo electrónico *" aria-required="true" maxlength="30" autocapitalize="none" autocorrect="off" name="email" required>
             <span for="email">Correo electrónico *</span>
         </div>
-    `;
-
-    const phoneField = `
         <div class="input-box">
             <input type="tel" id="phone" placeholder="Teléfono *" aria-required="true" maxlength="9" autocapitalize="none" autocorrect="off" name="phone" inputmode="numeric" pattern="[0-9]*" title="Por favor, ingresa un número de teléfono válido (solo números)" required>
             <span for="phone">Teléfono *</span>
         </div>
     `;
 
+    const radioOptions = (name, options) => options.map(option => `
+        <input type="radio" id="${option.id}" name="${name}" value="${option.value}" required${option.checked ? ' checked' : ''}>
+        <label for="${option.id}" class="button-like">${option.label}</label>
+    `).join('');
+
     const additionalFields = {
         [FORM_TYPES.TEST_DRIVE]: `
             ${baseFields}
-            ${phoneField}
             <div class="input-box">
                 <label for="days" class="form-label">¿Qué día prefieres para la prueba?</label>
                 <div class="form-options">
-                    <input type="radio" id="weekday" name="days" value="Weekday" required>
-                    <label for="weekday" class="button-like">Días de semana</label>
-                    
-                    <input type="radio" id="weekend" name="days" value="Weekend" required>
-                    <label for="weekend" class="button-like">Fin de semana</label>
-                    
-                    <input type="radio" id="any-day" name="days" value="Any Day" required checked>
-                    <label for="any-day" class="button-like">Cualquier día</label>
+                    ${radioOptions('days', [
+                        { id: 'weekday', value: 'Weekday', label: 'Días de semana' },
+                        { id: 'weekend', value: 'Weekend', label: 'Fin de semana' },
+                        { id: 'any-day', value: 'Any Day', label: 'Cualquier día', checked: true }
+                    ])}
                 </div>
             </div>
             <div class="input-box">
                 <label for="time" class="form-label">¿Cuál es tu horario preferido?</label>
                 <div class="form-options">
-                    <input type="radio" id="morning" name="time" value="Morning" required>
-                    <label for="morning" class="button-like">Por la mañana</label>
-                    
-                    <input type="radio" id="afternoon" name="time" value="Afternoon" required>
-                    <label for="afternoon" class="button-like">Por la tarde</label>
-                    
-                    <input type="radio" id="any-time" name="time" value="Any Time" required checked>
-                    <label for="any-time" class="button-like">Cualquier hora</label>
+                    ${radioOptions('time', [
+                        { id: 'morning', value: 'Morning', label: 'Por la mañana' },
+                        { id: 'afternoon', value: 'Afternoon', label: 'Por la tarde' },
+                        { id: 'any-time', value: 'Any Time', label: 'Cualquier hora', checked: true }
+                    ])}
                 </div>
             </div>
         `,
         [FORM_TYPES.PRICE_ALERT]: `
             ${baseFields}
-            ${phoneField}
             <div class="input-box">
                 <label for="price-alert" class="form-label">¿Qué tipo de alerta prefieres?</label>
                 <div class="form-options">
-                    <input type="radio" id="finance-drop" name="price-alert" value="Finance Drop" required>
-                    <label for="finance-drop" class="button-like">Financiación</label>
-                    
-                    <input type="radio" id="cash-drop" name="price-alert" value="Cash Drop" required>
-                    <label for="cash-drop" class="button-like">Al contado</label>
-                    
-                    <input type="radio" id="either" name="price-alert" value="Either" required checked>
-                    <label for="either" class="button-like">Cualquier</label>
+                    ${radioOptions('price-alert', [
+                        { id: 'finance-drop', value: 'Finance Drop', label: 'Financiación' },
+                        { id: 'cash-drop', value: 'Cash Drop', label: 'Al contado' },
+                        { id: 'either', value: 'Either', label: 'Cualquier', checked: true }
+                    ])}
                 </div>
             </div>
         `,
         [FORM_TYPES.CONTACT_US]: `
             ${baseFields}
-            ${phoneField}
             <div class="input-box">
                 <label id="char-count" for="message" class="form-label">Motivo del contacto (máx. 350 caracteres)</label>
                 <textarea id="message" name="message" class="form-textarea" placeholder="Tu mensaje" rows="4" maxlength="350" required></textarea>
             </div>
         `,
-        [FORM_TYPES.REQUEST_EMAIL]: `
-            ${baseFields}
-            <input type="hidden" id="message" name="message" class="form-input" value="I'm interested in more details about <strong>${carReference}</strong>." />
-        `,
         [FORM_TYPES.REQUEST_FINANCE]: `
             ${baseFields}
-            <input type="hidden" id="message" name="message" class="form-input" value="${financeDetails}" />
-            ${phoneField}
+            <input type="hidden" id="finance-details" name="finance-details" class="form-input" value="${financeDetails}" />
             <div class="input-box">
                 <label id="finance-char-count" for="finance-message" class="form-label">Comentarios sobre la financiación (máx. 350 caracteres)</label>
                 <textarea id="finance-message" name="finance-message" class="form-textarea" placeholder="Tus comentarios" rows="4" maxlength="350"></textarea>
@@ -118,13 +101,17 @@ function getFormFields(formType, carId, carReference, financeDetails) {
 // Function to check if all required fields in the form are filled out
 function checkFormValidity(form) {
     const requiredInputs = form.querySelectorAll('input[required], textarea[required]');
-    const radioGroups = new Set(Array.from(requiredInputs).map(input => input.name).filter(name => name.includes('radio')));
+    const radioGroups = Array.from(requiredInputs)
+        .filter(input => input.type === 'radio')
+        .map(input => input.name);
 
     const allInputsFilled = Array.from(requiredInputs).every(input => input.value.trim() !== '');
-    const allRadioSelected = Array.from(radioGroups).every(name => form.querySelector(`input[name="${name}"]:checked`));
+    const allRadioSelected = radioGroups.every(name => form.querySelector(`input[name="${name}"]:checked`));
 
     const submitButton = form.querySelector('.form-submit-button');
-    submitButton.disabled = !(allInputsFilled && allRadioSelected);
+    if (submitButton) {
+        submitButton.disabled = !(allInputsFilled && allRadioSelected);
+    }
 }
 
 // Function to check if an input field has content
@@ -143,44 +130,62 @@ function addInputListeners(form) {
     });
 }
 
+// Function to convert HTML to plain text
+function htmlToPlainText(html) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
+    return doc.body.textContent || '';
+}
+
 // Function to handle form submission
 async function handleFormSubmission(event) {
     event.preventDefault();
 
-    const formData = new FormData(event.target);
-    const formType = event.target.id.replace('Form', '');
+    const form = event.target;
+    const formData = new FormData(form);
+    const formType = form.id.replace('Form', '');
 
-    let message = `Name: ${formData.get('name')}\nEmail: ${formData.get('email')}\nCar ID: ${formData.get('car_id')}\nPhone: ${formData.get('phone')}\nComments: ${formData.get('comments')}`;
-    
+    // Build the message based on form type
+    const messageParts = [
+        `Name: ${formData.get('name')}`,
+        `Email: ${formData.get('email')}`,
+        `Car ID: ${formData.get('car_id')}`,
+        `Phone: ${formData.get('phone')}`
+    ];
+
     if (formType === FORM_TYPES.PRICE_ALERT) {
-        message += `\nPreferred Price Alert: ${formData.get('price-alert')}`;
-    }
-    if (formType !== FORM_TYPES.CONTACT_US && formType !== FORM_TYPES.REQUEST_EMAIL) {
-        message += `\nCar Reference: ${formData.get('car_reference')}`;
+        messageParts.push(`Preferred Price Alert: ${formData.get('price-alert')}`);
     }
     if (formType === FORM_TYPES.TEST_DRIVE) {
-        message += `\nPreferred Days: ${formData.get('days')}\nPreferred Time: ${formData.get('time')}`;
+        messageParts.push(`Preferred Days: ${formData.get('days')}`);
+        messageParts.push(`Preferred Time: ${formData.get('time')}`);
     }
-    if ([FORM_TYPES.CONTACT_US, FORM_TYPES.REQUEST_EMAIL].includes(formType)) {
-        message += `\nMessage: ${formData.get('message')}`;
+    if (formType === FORM_TYPES.CONTACT_US) {
+        messageParts.push(`Message: ${formData.get('message')}`);
     }
     if (formType === FORM_TYPES.REQUEST_FINANCE) {
-        message += `\nFinance Details: ${formData.get('message')}`;
+        // Clean HTML content from finance details
+        const financeDetailsHtml = formData.get('finance-details');
+        const financeDetailsPlain = htmlToPlainText(financeDetailsHtml);
+        messageParts.push(`Finance Details:\n${financeDetailsPlain}`);
+        messageParts.push(`Aditional Comments: ${formData.get('finance-message')}`);
     }
     if (formData.get('ads_accept') === '1') {
-        message += `\nPlease add this person to the subscription list at info@martinezdelugo.com`;
+        messageParts.push(`Please add this person to the subscription list at info@martinezdelugo.com`);
     }
 
     const data = {
         access_key: formData.get('access_key'),
         subject: formData.get('subject'),
         from_name: formData.get('from_name'),
-        message: message
+        message: messageParts.join('\n')
     };
 
-    const submitButton = event.target.querySelector('.form-submit-button');
-    submitButton.disabled = true;
-    submitButton.textContent = 'Submitting...';
+    const submitButton = form.querySelector('.form-submit-button');
+    if (submitButton) {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Submitting...';
+        submitButton.style.backgroundColor = '#007bff'; // Change to your desired color for submitting state
+    }
 
     try {
         const response = await fetch('https://api.web3forms.com/submit', {
@@ -194,22 +199,35 @@ async function handleFormSubmission(event) {
 
         const json = await response.json();
         if (response.ok) {
-            submitButton.textContent = '¡Enviado!';
+            if (submitButton) {
+                submitButton.textContent = '¡Enviado!';
+                submitButton.style.backgroundColor = '#28a745'; // Green color for success
+            }
             setTimeout(() => document.getElementById('closeContactPopup')?.click(), 2000);
         } else {
-            submitButton.textContent = `La presentación falló: ${json.message}`;
+            if (submitButton) {
+                submitButton.textContent = `La presentación falló: ${json.message}`;
+                submitButton.style.backgroundColor = '#dc3545'; // Red color for error
+            }
             setTimeout(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Enviar';
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = 'Enviar';
+                    submitButton.style.backgroundColor = ''; // Reset to original color
+                }
             }, 2000);
         }
     } catch (error) {
         console.error('Form submission error:', error); // Log the error
-        submitButton.textContent = '¡Algo salió mal!';
-        setTimeout(() => {
-            submitButton.disabled = false;
-            submitButton.textContent = 'Enviar';
-        }, 2000);
+        if (submitButton) {
+            submitButton.textContent = '¡Algo salió mal!';
+            submitButton.style.backgroundColor = '#dc3545'; // Red color for error
+            setTimeout(() => {
+                submitButton.disabled = false;
+                submitButton.textContent = 'Enviar';
+                submitButton.style.backgroundColor = ''; // Reset to original color
+            }, 2000);
+        }
     }
 }
 
@@ -218,7 +236,6 @@ export function showContactForm(event, formType, carId = '', carReference = '', 
         [FORM_TYPES.TEST_DRIVE]: 'Solicita una prueba de conducción',
         [FORM_TYPES.PRICE_ALERT]: 'Alerta de Rebaja de Precio',
         [FORM_TYPES.CONTACT_US]: 'Contacto',
-        [FORM_TYPES.REQUEST_EMAIL]: `Request More Info - ${carReference}`,
         [FORM_TYPES.REQUEST_FINANCE]: 'Solicitar Información de Financiación'
     };
 
@@ -226,7 +243,6 @@ export function showContactForm(event, formType, carId = '', carReference = '', 
         [FORM_TYPES.TEST_DRIVE]: `Para solicitar una prueba de conducción del <strong>${carReference}</strong>, completa el formulario a continuación. Nuestro equipo revisará tu solicitud y se pondrá en contacto contigo para coordinar una cita. Ten en cuenta que esta solicitud no es vinculante y no te compromete a realizar una compra.`,
         [FORM_TYPES.PRICE_ALERT]: `Para recibir una notificación si el precio del <strong>${carReference}</strong> baja de <strong>${cashPrice}</strong> al contado o <strong>${financePrice}</strong> en financiación, completa el formulario a continuación. Puedes elegir recibir alertas si el precio baja en financiación, al contado, o en cualquiera de las dos opciones.`,
         [FORM_TYPES.CONTACT_US]: "Completa el formulario a continuación para comunicarte con nosotros. Agradecemos tus comentarios y te responderemos lo antes posible.",
-        [FORM_TYPES.REQUEST_EMAIL]: "Provide your name and email, and we'll send you more information about this car.",
         [FORM_TYPES.REQUEST_FINANCE]: financeDetails
     };
 
@@ -244,7 +260,7 @@ export function showContactForm(event, formType, carId = '', carReference = '', 
                 <input type="hidden" name="subject" value="${formTitle}" />
                 <input type="hidden" name="from_name" value="Car Dealership" />
                 ${carReference ? `<input type="hidden" id="car_reference" name="car_reference" class="form-input" value="${carReference}" />` : ''}
-                ${getFormFields(formType, carId, carReference, financeDetails)}
+                ${getFormFields(formType, carId, financeDetails)}
                 <div class="contact-intro">
                     <div class="form-check form-check--required">
                         <input type="checkbox" id="vehicle_send_to_friend_legal_policy_accept" name="vehicle_send_to_friend[legal][policy_accept]" required class="form-check-input" value="1">
@@ -260,7 +276,13 @@ export function showContactForm(event, formType, carId = '', carReference = '', 
                     </div>
                 </div>
                 <span class="button-box">
-                    <button class="form-submit-button" type="submit" name="submit" disabled>${formType === FORM_TYPES.REQUEST_EMAIL ? 'Request Info' : 'Enviar'}</button>
+                    <button class="form-submit-button" type="submit" name="submit" disabled>
+                        ${formType === FORM_TYPES.TEST_DRIVE ? 'Solicitar Prueba de Conducción' :
+                        formType === FORM_TYPES.PRICE_ALERT ? 'Recibir Alerta de Precio' :
+                        formType === FORM_TYPES.CONTACT_US ? 'Enviar Mensaje' :
+                        formType === FORM_TYPES.REQUEST_FINANCE ? 'Solicitar Información de Financiación' :
+                        'Enviar'}
+                    </button>
                 </span>
             </form>
         </section>
@@ -295,3 +317,4 @@ function updateCharCount(textarea, charCountElement, maxLength) {
     const remaining = maxLength - textarea.value.length;
     charCountElement.textContent = `${charCountElement.getAttribute('for')} (${remaining} caracteres restantes)`;
 }
+

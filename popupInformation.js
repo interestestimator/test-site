@@ -166,7 +166,7 @@ export function showEmissionsInfo(event, currentCarData) {
 
     const getContent = () => `
         ${createPopupHeader('Distintivo de emisiones', 'emissions')}
-        <img src="icons/car/emission-types/${currentCarData.emissionLabel}.svg" alt="Emission Label" width="120" height="120" style="display: block; margin: 0 auto; padding: 1rem;">
+        <img src="../icons/car/emission-types/${currentCarData.emissionLabel}.svg" alt="Emission Label" width="120" height="120" style="display: block; margin: 0 auto; padding: 1rem;">
         ${getEmissionContent(currentCarData.emissionLabel)}
         <div>Consumos según el fabricante</div>
     `;
@@ -247,7 +247,7 @@ export function showBodyTypeInfo(event, currentCarData) {
     const svgContent = `
         <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="0 0 700 250" style="enable-background:new 0 0 700 250;" xml:space="preserve">
-            <image style="overflow:visible;" width="693" height="260" xlink:href="car-dimensions.webp" transform="matrix(1 0 0 1 3.0349 -4.9535)"></image>
+            <image style="overflow:visible;" width="693" height="260" xlink:href="../car-dimensions.webp" transform="matrix(1 0 0 1 3.0349 -4.9535)"></image>
             <text transform="matrix(1 0 0 1 219 205)" class="car-dimensions">${currentCarData.wheelbase}</text>
             <text transform="matrix(1 0 0 1 219 232)" class="car-dimensions">${currentCarData.length}</text>
             <text transform="matrix(-1.836970e-16 -1 1 -1.836970e-16 441 119)" class="car-dimensions">${currentCarData.height}</text>

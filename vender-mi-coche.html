@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Appraisal Form</title>
+
+    <link rel="stylesheet" href="style-new.css">
+    <link rel="stylesheet" href="style-popup-forms.css">
+    <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+    <style>
+        .box-wrapper {
+            background-color: #f2f2f2;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 80rem;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Header -->
+    <div id="header-contact-container"></div>
+    <div id="header-container"></div>
+    <div id="header-banner-container"></div>
+
+
+
+    <div id="valueMyCar" class="box-wrapper">
+        <form id="AppraisalForm" name="simple_appraisal" method="post" action="/simple-appraisal/simple-appraisal" class="form">
+            <div class="alert alert-danger" style="display: none"></div>
+
+            <input type="hidden" name="access_key" value="fc184b2a-7c0d-4071-a665-e807c3f4e679" />
+            <input type="hidden" name="subject" value="Value my car ADD CAR REFRENCE" />
+
+
+
+
+            <input type="hidden" id="car_id" name="car_id" value="${carId}" />
+            <div class="input-box">
+                <input type="text" id="name" placeholder="Nombre *" aria-required="true" maxlength="30" autocapitalize="none" autocorrect="off" name="name" required>
+                <span for="name">Nombre *</span>
+            </div>
+            <div class="input-box">
+                <input type="email" id="email" placeholder="Correo electrónico *" aria-required="true" maxlength="30" autocapitalize="none" autocorrect="off" name="email" required>
+                <span for="email">Correo electrónico *</span>
+            </div>
+            <div class="input-box">
+                <input type="tel" id="phone" placeholder="Teléfono *" aria-required="true" maxlength="9" autocapitalize="none" autocorrect="off" name="phone" inputmode="numeric" pattern="[0-9]*" title="Por favor, ingresa un número de teléfono válido (solo números)" required>
+                <span for="phone">Teléfono *</span>
+            </div>
+
+
+
+
+
+            <div class="input-box">
+                <label for="simple_appraisal_make">Marca *</label>
+                <select id="simple_appraisal_make" name="simple_appraisal[make]" required class="form-control">
+
+                </select>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group d-none">
+                <label for="simple_appraisal_fuel">Combustible</label>
+                <select id="simple_appraisal_fuel" name="simple_appraisal[fuel]" required
+                class="form-control">
+
+            </select>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group d-none">
+                <label for="simple_appraisal_transmission">Cambio</label>
+                    <select id="simple_appraisal_transmission" name="simple_appraisal[transmission]" required class="form-control">
+
+                    </select>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="simple_appraisal_model">Modelo y versión *</label>
+                <input type="text" id="simple_appraisal_model" name="simple_appraisal[model]" required
+                    class="form-control" placeholder="Modelo y versión *">
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="simple_appraisal_bodystyle">Carrocería *</label>
+                <select id="simple_appraisal_bodystyle" name="simple_appraisal[bodystyle]" required
+                    class="form-control">
+
+                </select>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="simple_appraisal_year">Año *</label>
+                <select id="simple_appraisal_year" name="simple_appraisal[year]" required class="form-control">
+
+                </select>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="simple_appraisal_year">Milage *</label>
+                <select id="simple_appraisal_mileage" name="simple_appraisal[mileage]" required class="form-control">
+
+                </select>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="simple_appraisal_price">Precio *</label>
+                <input type="text" id="simple_appraisal_price" name="simple_appraisal[price]" required
+                    class="form-control" placeholder="Precio *">
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="simple_appraisal_postalCode">Código postal *</label>
+                <input type="text" id="simple_appraisal_postalCode" name="simple_appraisal[postalCode]" required
+                    class="form-control" placeholder="Código postal *">
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="simple_appraisal_comments">Comentarios</label>
+                <textarea id="simple_appraisal_comments" name="simple_appraisal[comments]" class="form-control"
+                    placeholder="Comentarios"></textarea>
+                <div class="invalid-feedback"></div>
+            </div>
+
+            <div class="contact-intro">
+                <div class="form-check form-check--required">
+                    <input type="checkbox" id="vehicle_send_to_friend_legal_policy_accept" name="vehicle_send_to_friend[legal][policy_accept]" required class="form-check-input" value="1">
+                    <label for="vehicle_send_to_friend_legal_policy_accept" class="required">
+                        Acepto la <a href="/privacy-policy.html" target="_blank" class="blue-link">política de privacidad</a>.
+                    </label>
+                </div>
+                <div class="form-check form-check--optional">
+                    <input type="checkbox" id="ads_accept" name="ads_accept" class="form-check-input" value="1">
+                    <label for="ads_accept">
+                        Acepto recibir ofertas y promociones de Martínez De Lugo, S.L.U.
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" id="simple_appraisal_vehicle" name="simple_appraisal[vehicle]" value="6272">
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="simple_appraisal_email_address" name="simple_appraisal[email_address]"
+                    style="display: none;">
+            </div>
+
+            <div class="form-group">
+                <button class="btn btn-primary" type="submit">Tasar ahora</button>
+            </div>
+
+            <div class="result-message" id="result"></div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+</body>
+
+
+<script type="module">
+
+    import { loadHtml } from './js/httpUtils.js';  // Update the import path and function names
+    import { getGlobalDOMElements } from './js/siteSetup.js';
+
+    import { initializeHeader, initializeBanner } from './header-banner.js';
+
+    import { fetchResource } from './js/httpUtils.js';  // Update the import path and function names
+
+
+    const DELIVERY_REGIONS_URL = 'data/make.json';
+
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        const elements = { ...getGlobalDOMElements() };
+
+        // Load header and footer HTML content
+        await Promise.all([
+            loadHtml(elements.headerContactContainer, 'header-contact.html'),
+            loadHtml(elements.headerContainer, 'header.html'),
+            loadHtml(elements.headerBannerContainer, 'header-banner.html'),
+            loadHtml(elements.footerContainer, 'footer.html')
+        ]);
+
+        initializeHeader(); // Initialize header functionality after HTML is loaded
+        initializeBanner(); // Initialize banner functionality after HTML is loaded
+
+
+
+        initializeDropdown()
+
+    // Add event listeners to form submission
+    const form = document.getElementById(`AppraisalForm`);
+    form.addEventListener('submit', handleFormSubmission);
+
+    // Add input listeners to enable/disable the submit button
+    addInputListeners(form);
+
+    });
+
+    /**
+     * Populates a dropdown with options.
+     * @param {HTMLSelectElement} dropdown - The dropdown element to populate.
+     * @param {Array<string>} values - The list of values to use for the options.
+     */
+    function populateDropdown(dropdown, values, placeholder) {
+        dropdown.innerHTML = `<option value="" selected disabled>${placeholder}</option>` +
+            values.map(value =>
+                `<option value="${value}">${value}</option>`
+            ).join('');
+    }
+
+    // Function to check if an input field has content
+function checkInputHasContent(input) {
+    input.classList.toggle('input-has-content', input.value.trim() !== '');
+}
+
+// Event listener to monitor input changes and update input styles
+function addInputListeners(form) {
+    form.querySelectorAll('input, textarea, select').forEach(input => {
+        input.addEventListener('input', () => {
+            checkInputHasContent(input);
+            checkFormValidity(form);
+        });
+        input.addEventListener('change', () => checkFormValidity(form));
+    });
+}
+
+
+
+
+
+    // Example usage
+    async function initializeDropdown() {
+    try {
+        const response = await fetch('data/make.json'); // Correct path to your JSON file
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        const data = await response.json();
+
+        const makeDropdown = document.getElementById('simple_appraisal_make');
+        const bodystyleDropdown = document.getElementById('simple_appraisal_bodystyle');
+        const yearDropdown = document.getElementById('simple_appraisal_year');
+        const fuelDropdown = document.getElementById('simple_appraisal_fuel');
+        const transmissionDropdown = document.getElementById('simple_appraisal_transmission');
+        const mileageDropdown = document.getElementById('simple_appraisal_mileage');
+
+        populateDropdown(makeDropdown, data.make, 'Select make');
+        populateDropdown(bodystyleDropdown, data.bodystyle, 'Select bodystyle');
+        populateDropdown(yearDropdown, data.year, 'Select year');
+        populateDropdown(fuelDropdown, data.fuel, 'Select fuel');
+        populateDropdown(transmissionDropdown, data.transmission, 'Select transmission');
+        populateDropdown(mileageDropdown, data.mileage, 'Select mileage');
+    } catch (error) {
+        console.error('Error initializing dropdown:', error);
+    }
+}
+
+
+
+
+
+
+
+
+    function handleFormSubmission(event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        const form = event.target; // Get the form element
+        const formData = new FormData(form); // Create a FormData object from the form
+
+        // Extract form data
+        const make = formData.get('simple_appraisal[make]');
+        const fuel = formData.get('simple_appraisal[fuel]');
+        const transmission = formData.get('simple_appraisal[transmission]');
+        const model = formData.get('simple_appraisal[model]');
+        const bodystyle = formData.get('simple_appraisal[bodystyle]');
+        const year = formData.get('simple_appraisal[year]');
+        const mileage = formData.get('simple_appraisal[mileage]');
+        const price = formData.get('simple_appraisal[price]');
+        const name = formData.get('simple_appraisal[name]');
+        const email = formData.get('simple_appraisal[email]');
+        const phone = formData.get('simple_appraisal[phone]');
+
+        // Prepare the data to send
+        const data = {
+            access_key: formData.get('access_key'),
+            subject: formData.get('subject'),
+            from_name: formData.get('from_name'),
+            message: `Make: ${make}\nFuel: ${fuel}\nTransmission: ${transmission}\nModel: ${model}\nBodystyle: ${bodystyle}\nYear: ${year}\nMileage: ${mileage}\nPrice: ${price}\nName: ${name}\nEmail: ${email}\nPhone: ${phone}`
+        };
+
+        // Submit the form data
+        fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(async (response) => {
+                const resultDiv = document.getElementById('result'); // Assuming result div has id 'result'
+                if (response.ok) {
+                    const json = await response.json();
+                    resultDiv.innerHTML = `Submission successful: ${json.message}`;
+                } else {
+                    const json = await response.json();
+                    resultDiv.innerHTML = `Submission failed: ${json.message}`;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = "Something went wrong!";
+            });
+    }
+
+    // Attach the handler to the form's submit event
+    document.getElementById('valueMyCar').addEventListener('submit', handleFormSubmission);
+
+
+</script>
+
+</html>

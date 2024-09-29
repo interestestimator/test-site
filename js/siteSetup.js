@@ -51,8 +51,6 @@ function getGlobalDOMElements() {
         headerBannerContainer: 'header-banner-container',
 
 
-
-
         bannerContainer:'banner-container',
         footerContainer: 'footer-container'
     });
@@ -120,7 +118,6 @@ export {
     getIndexDOMElements,
     getCarDetailsDOMElements
 };
-
 
 
 

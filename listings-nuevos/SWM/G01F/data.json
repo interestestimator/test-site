@@ -1,0 +1,85 @@
+{
+  "JavaScriptInfo": {
+    "id": "SWM/G01F",
+    "cantidadImágenes": 19,
+    "estado": "Disponible"
+  },
+  "CaracteristicasGenerales": {
+    "Marca": "SWM",
+    "Modelo": "G01F",
+
+
+    
+    "Versión": "Activo",
+    "Año": 2024,
+    "Bastidor": "WAUZZZ8V8KA083639",
+    "Color": "Blanco",
+    "PrecioNuevo": 21990.00,
+    "PrecioAnterior": 21990.00,
+    "PrecioFinanciado": 20990.00,
+    "Kilometraje": 14
+  },
+  "Carroceria": {
+    "Tipo": "SUV",
+    "Plazas": 5,
+    "Puertas": 5,
+    "PesoMaximo": 1440,
+    "Dimensiones": {
+      "Largo": 4313,
+      "Ancho": 1785,
+      "Alto": 1426,
+      "Batalla": 2489,
+      "Vía": 1550
+    }
+  },
+  "MotorYTransmision": {
+    "Combustible": {
+      "Tipo": "electric",
+      "Tecnología": "BlueHDi"
+    },
+    "Cilindrada": {
+      "Cilindros": 4,
+      "CC": 1968
+    },
+    "Potencia": {
+      "CV": 140,
+      "KW": 100
+    },
+    "Par": 320,
+    "Transmision": {
+      "Caja": "Automático",
+      "Marchas": 7
+    },
+    "Rendimiento": {
+      "Aceleración": 8.10,
+      "VelocidadMáxima": 218
+    }
+  },
+  "ConsumoYEmisiones": {
+    "Etiqueta": "emission-b",
+    "EmisionesCO2": 165,
+    "Depósito": 50,
+    "Consumo": {
+      "Medio": 9.50,
+      "Urbano": 5.20,
+      "Carretera": 4
+    }
+  },
+  "GarantíaMeses": 12,
+  "Financiando": "***Cuota Mensual financiando el Vehículo con nosotros sólo 337 € /Mes SIN ENTRADA*** ¡EL MEJOR DESCUENTO EN VEHICULOS DEL MES DE JULIO! - Consigue el mejor precio financiando el 100% del valor de cualquiera de nuestros coches - ENTREGA A DOMICILIO GRATIS EN 24 HORAS - Compra 100% online en nuestra web MDL.es con un solo clic - Garantía de 1 año ampliable a 2 años - Amplio stock de vehículos totalmente revisados en nuestras instalaciones en Lugo - -También vehículos a la carta - - Todos nuestros vehículos se entregan certificados con 200 puntos de control - Recogemos tu vehículo como parte de pago- Consulta condiciones",
+  "Descripción": "*** AUDI A3 SPORTBACK 2.0 35TDI 150CV S-TRONIC SPORT *** FAROS LED *** ASIENTOS EN PIEL CALEFACTADOS *** VOLANTE MULTIFUNCION *** CONTROL DE VELOCIDAD ADAPTATIVO *** DRIVE SELECT (MODOS DE CONDUCCION) *** AUDI PRE SENSE (FRENADA DE EMERGENCIA) *** LANE ASSIST (AVISO Y AYUDA DE CAMBIO DE CARRIL) *** PANTALLA MULTIMEDIA *** NAVEGADOR *** ANDROID AUTO *** SENSORES DE APARCAMIENTO *** IVA DEDUCIBLE *** SIN ENTRADA *** PRECIO IVA INCLUIDO ***",
+  "Equipamiento": {
+    "Exterior": [
+      "Faros con lente elipsoidal, bombilla Bi-Xenón y luz larga con bombilla Bi-Xenón"
+    ],
+    "Interior": [
+      "Cinco plazas (2+3)"
+    ]
+  },
+  "Multimedia": [
+    "Ocho altavoces"
+  ],
+  "Seguridad": [
+    "Cuatro frenos de disco siendo dos ventilados"
+  ]
+  }

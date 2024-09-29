@@ -5,21 +5,36 @@ import { formatCarData } from './formatCarData.js';  // Importing the initialize
 
 /**
  * Fetches the list of car folder names from the JSON file.
+ * @param {string} filePath - The path to the JSON file.
  * @returns {Promise<string[]>} - A promise that resolves to an array of car folder names.
  */
-async function getCarFolderNames() {
-    const data = await fetchResource('../data/listings.json');
+async function getCarFolderNames(filePath) {
+    const data = await fetchResource(filePath);
     return data?.carFolders || [];
 }
 
 /**
- * Fetches detailed data for all cars listed in the JSON file.
+ * Fetches detailed data for cars listed in the specified JSON file (new or old).
+ * @param {'new' | 'old'} carType - The type of cars to fetch data for ('new' or 'old').
  * @returns {Promise<Object[]>} - A promise that resolves to an array of car data objects.
  */
-async function getAllCarData() {
-    const carFolderNames = await getCarFolderNames();
+async function getAllCarData(carType) {
+    let filePath;
+    
+    // Determine the file path based on the car type
+    if (carType === 'new') {
+        filePath = 'data/listings-new.json';
+    } else if (carType === 'used') {
+        filePath = 'data/listings.json';
+    } else {
+        throw new Error('Invalid car type. Please specify "new" or "old".');
+    }
+
+    const carFolderNames = await getCarFolderNames(filePath);
+    
     if (carFolderNames.length === 0) return [];
 
+    // Load car details for the specified folder names
     const carDetailsPromises = carFolderNames.map(loadCarDetails);
     const carDetails = await Promise.all(carDetailsPromises);
 

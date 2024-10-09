@@ -1,5 +1,5 @@
 import { initializePopup, createPopupHeader, formatDetail } from './js/popupUtils.js';
-import { generateLoanContent } from 'updateFinanceCalc.js';
+import { generateLoanContent } from 'test-site/updateFinanceCalc.js';
 
 /**
  * Shows the filter options popup.

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Header</title>
+    <style>
+        /* Header Section */
+        .header-main-content {
+            position: relative;
+            z-index: 10;
+            padding: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .header-content {
+            max-width: 80em;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Navigation styling */
+        #navList {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: row;
+        }
+
+        #navList li {
+            padding-left: 1rem;
+        }
+
+        #navList li a {
+            display: block;
+            padding: 0.5rem 0;
+            transition: border-bottom 0.3s ease;
+            border-bottom: 3px solid transparent;
+        }
+
+        #navList li a:hover,
+        #navList li a:focus {
+            border-bottom-color: #111111;
+        }
+
+        /* Mobile styles */
+        @media (max-width: 768px) {
+            .logo img {
+                max-width: 220px; /* Adjusted size for mobile */
+            }
+
+            #navList {
+                display: none;
+                flex-direction: column;
+                width: 100%;
+                background-color: #F5F5F5;
+                position: absolute;
+                top: 4rem;
+                left: 0;
+            }
+
+            #navList.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+
+            #navList li {
+                width: 100%;
+                text-align: center;
+                padding: 1rem 0;
+            }
+        }
+
+        @media (min-width: 769px) {
+            .menu-toggle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header-main-content">
+        <div class="header-content">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="icons/company/branding/mdl-logo.svg" alt="Logo" width="300" height="30">
+                </a>
+            </div>
+            <nav>
+                <div class="menu-toggle">☰</div>
+                <ul id="navList" class="h4 font-bold uppercase">
+                    <li><a href="vehiculos-nuevos.html">Nuevos</a></li>
+                    <li><a href="vehiculos-ocasion.html">Segunda Mano</a></li>
+                    <li><a href="vender-mi-vehiculo.html">Vender</a></li>
+                    <li><a href="taller.html">Taller</a></li>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="contact-us.html">Contado</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+[
+    {
+        "name": "John Doe",
+        "rating": 5,
+        "date": "September 15, 2024",
+        "text": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque ut erat nec massa fermentum aliquam."
+    },
+    {
+        "name": "Jane Smith",
+        "rating": 4,
+        "date": "September 12, 2024",
+        "text": "Suspendisse potenti. Duis fringilla, nulla sit amet scelerisque condimentum, nisi urna viverra justo."
+    },
+    {
+        "name": "Michael Johnson",
+        "rating": 5,
+        "date": "September 10, 2024",
+        "text": "Praesent scelerisque justo nec purus gravida, vel facilisis elit vehicula. Vestibulum consectetur."
+    },
+    {
+        "name": "Alice Brown",
+        "rating": 5,
+        "date": "September 8, 2024",
+        "text": "Nulla facilisi. Curabitur dictum metus ut sapien viverra, et egestas ligula vulputate."
+    },
+    {
+        "name": "Chris Wilson",
+        "rating": 5,
+        "date": "September 5, 2024",
+        "text": "Vestibulum at justo ut quam fermentum euismod. Aliquam erat volutpat."
+    },
+    {
+        "name": "Patricia Taylor",
+        "rating": 5,
+        "date": "September 2, 2024",
+        "text": "Phasellus venenatis est nec turpis fermentum, sed vestibulum libero bibendum."
+    },
+    {
+        "name": "Robert Anderson",
+        "rating": 5,
+        "date": "August 30, 2024",
+        "text": "Aliquam tincidunt risus euismod, tempor orci ut, ullamcorper eros."
+    },
+    {
+        "name": "Linda Martinez",
+        "rating": 4,
+        "date": "August 27, 2024",
+        "text": "Maecenas vitae mi sed magna tincidunt eleifend. Aenean nec est et urna faucibus sollicitudin."
+    },
+    {
+        "name": "James Lee",
+        "rating": 2,
+        "date": "August 25, 2024",
+        "text": "Fusce nec sapien interdum, pretium arcu nec, varius velit. Nulla facilisi."
+    }
+]

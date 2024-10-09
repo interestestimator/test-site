@@ -1,0 +1,207 @@
+{
+  "JavaScriptInfo": {
+    "id": "VO-00007",
+    "imágenesVehículo": 15,
+    "estado": "Disponible"
+  },
+  "CaracteristicasGenerales": {
+    "Marca": "Peugeot",
+    "Modelo": "3008",
+    "Versión": "Activo",
+    "Año": 2019,
+    "Bastidor": "WAUZZZ8V8KA083639",
+    "Color": "Blanco",
+    "PrecioNuevo": 32175.18,
+    "PrecioAnterior": 33900.00,
+    "PrecioFinanciado": 30500.00,
+    "Kilometraje": 127540
+  },
+  "Carroceria": {
+    "Tipo": "convertible",
+    "Plazas": 5,
+    "Puertas": 5,
+    "PesoMaximo": 1440,
+    "Dimensiones": {
+      "Largo": 4313,
+      "Ancho": 1785,
+      "Alto": 1426,
+      "Batalla": 2489,
+      "Vía": 1550
+    }
+  },
+  "MotorYTransmision": {
+    "Combustible": {
+      "Tipo": "electric",
+      "Tecnología": "BlueHDi"
+    },
+    "Cilindrada": {
+      "Cilindros": 4,
+      "CC": 1968
+    },
+    "Potencia": {
+      "CV": 140,
+      "KW": 100
+    },
+    "Par": 320,
+    "Transmision": {
+      "Caja": "Automático",
+      "Marchas": 7
+    },
+    "Rendimiento": {
+      "Aceleración": 8.10,
+      "VelocidadMáxima": 218
+    }
+  },
+  "ConsumoYEmisiones": {
+    "Etiqueta": "emission-b",
+    "EmisionesCO2": 165,
+    "Depósito": 50,
+    "Consumo": {
+      "Medio": 9.50,
+      "Urbano": 5.20,
+      "Carretera": 4
+    }
+  },
+  "GarantíaMeses": 12,
+  "Financiando": "***Cuota Mensual financiando el Vehículo con nosotros sólo 337 € /Mes SIN ENTRADA*** ¡EL MEJOR DESCUENTO EN VEHICULOS DEL MES DE JULIO! - Consigue el mejor precio financiando el 100% del valor de cualquiera de nuestros coches - ENTREGA A DOMICILIO GRATIS EN 24 HORAS - Compra 100% online en nuestra web MDL.es con un solo clic - Garantía de 1 año ampliable a 2 años - Amplio stock de vehículos totalmente revisados en nuestras instalaciones en Lugo - -También vehículos a la carta - - Todos nuestros vehículos se entregan certificados con 200 puntos de control - Recogemos tu vehículo como parte de pago- Consulta condiciones",
+  "Descripción": "*** AUDI A3 SPORTBACK 2.0 35TDI 150CV S-TRONIC SPORT *** FAROS LED *** ASIENTOS EN PIEL CALEFACTADOS *** VOLANTE MULTIFUNCION *** CONTROL DE VELOCIDAD ADAPTATIVO *** DRIVE SELECT (MODOS DE CONDUCCION) *** AUDI PRE SENSE (FRENADA DE EMERGENCIA) *** LANE ASSIST (AVISO Y AYUDA DE CAMBIO DE CARRIL) *** PANTALLA MULTIMEDIA *** NAVEGADOR *** ANDROID AUTO *** SENSORES DE APARCAMIENTO *** IVA DEDUCIBLE *** SIN ENTRADA *** PRECIO IVA INCLUIDO ***",
+
+
+
+  "Especificaciones": {
+    "Parámetros Básicos": [
+      { "name": "Dimensions (L*W*H)", "value": "4610×1855×1740 mm" },
+      { "name": "Wheelbase", "value": "2750 mm" },
+      { "name": "Suspension (F/R)", "value": "968/892 mm" },
+      { "name": "Track Width", "value": "1575/1575 mm" },
+      { "name": "Fuel Capacity", "value": "52 liters" },
+      { "name": "Curb Weight", "value": "1520 kg" },
+      { "name": "Top Speed", "value": "180 km/h" }
+    ],
+    "Motor": [
+      { "name": "Engine Type", "value": "SWD15T (打刻DG15T)" },
+      { "name": "Displacement", "value": "1498 cc" },
+      { "name": "Max Power", "value": "131 hp" },
+      { "name": "Max Torque", "value": "215 N·m / rpm" },
+      { "name": "Emission Standard", "value": "EURO 6 D" },
+      { "name": "Transmission", "value": "6MT" },
+      { "name": "CO2 Emissions", "value": "182 g/km" },
+      { "name": "WLTP Combined", "value": "8.03 l/100km" },
+      { "name": "WLTP - Extra High Phase", "value": "8.18 l/100km" },
+      { "name": "WLTP - High Phase", "value": "6.97 l/100km" },
+      { "name": "WLTP - Medium Phase", "value": "7.51 l/100km" },
+      { "name": "WLTP - Low Phase", "value": "10.87 l/100km" }
+    ],
+    "Chasis": [
+      { "name": "Suspension (F/R)", "value": "McPherson delantera / suspensión independiente post-multi-link" },
+      { "name": "Brakes", "value": "Freno de DISCO en las cuatro ruedas" },
+      { "name": "Traction", "value": "DELANTERA" },
+      { "name": "Parking Brake System", "value": "Freno de mano electrónico" },
+      { "name": "Steering", "value": "DIRECCION ASISTIDA ELECTRICA (EPS)" },
+      { "name": "Steering Force Adjusted in Two Levels", "value": "✓" },
+      { "name": "Tires", "value": "225/60 R18" },
+      { "name": "Spare Wheel", "value": "T155/90R17" }
+    ],
+    "Exterior": [
+      { "name": "Faro Halógeno", "value": "✓" },
+      { "name": "LED DRL (Integración de Faros)", "value": "✓" },
+      { "name": "Retardo de Luz Después de Apagar el Motor", "value": "✓" },
+      { "name": "Ajuste Eléctrico Espejo Retrovisor Exterior", "value": "✓" },
+      { "name": "Espejo con Calefacción", "value": "✓" },
+      { "name": "Retrovisor Exterior Plegable Eléctrico", "value": "✓" },
+      { "name": "Antena de Aleta de Tiburón", "value": "✓" },
+      { "name": "Rack de Techo (Tipo Hueco)", "value": "✓" },
+      { "name": "Llantas de Aleación de Aluminio Bicolor", "value": "✓" },
+      { "name": "Luz Trasera LED Arrow Tail", "value": "✓" },
+      { "name": "Señal de Giro de Flujo (Integración Luz Trasera)", "value": "✓" },
+      { "name": "Limpiador Frontal Sin Hueso (Oculto)", "value": "✓" },
+      { "name": "Limpiaparabrisas Trasero", "value": "✓" },
+      { "name": "Descongelamiento Eléctrico del Parabrisas Trasero", "value": "✓" },
+      { "name": "Cola de Escape Pulido Bilateral Moda Garganta", "value": "✓" },
+      { "name": "Panel Superior de Protección del Motor", "value": "✓" },
+      { "name": "Panel Inferior de Protección del Motor", "value": "✓" }
+    ],
+    "Interior": [
+      { "name": "Interior de Lujo Ligero (La Tira de Decoración es Tira Brillante Cromada)", "value": "✓" },
+      { "name": "Tablero Suave de Alto Nivel (Superior y Medio)", "value": "✓" },
+      { "name": "Panel de Puerta Suave de Alto Nivel (La Parte Superior del Panel de la Puerta y la Parte Superior del Apoyabrazos)", "value": "✓" },
+      { "name": "Caja de Almacenamiento en la Consola Central", "value": "✓" },
+      { "name": "Tela de Techo - Tejido de Punto de Urdidura", "value": "✓" },
+      { "name": "Medidor Combinado Deportivo (4,2 Pulgadas)", "value": "✓" },
+      { "name": "Volante de Cuero", "value": "✓" },
+      { "name": "Volante Multifunción Botón Izquierdo Grupo 2 (Con Voz)", "value": "✓" },
+      { "name": "Volante Multifunción Botón Derecho Grupo 1 (Sin Control de Crucero)", "value": "✓" },
+      { "name": "El Cabezal de Bola del Cambio Manual", "value": "✓" },
+      { "name": "Asientos del Conductor / Pasajero Delanteros Protector Solar con Espejo Cosmético", "value": "✓" },
+      { "name": "Luz de Lectura LED Delantera", "value": "✓" },
+      { "name": "Espejo Retrovisor Interior Antirreflejos Manual", "value": "✓" },
+      { "name": "Cubierta de Compartimento de Equipaje", "value": "✓" }
+    ],
+    "Dispositivos de Confort": [
+      { "name": "Techo Panorámico", "value": "✓" },
+      { "name": "Techo Panorámico Eléctrico", "value": "✓" },
+      { "name": "A / A Automático", "value": "✓" },
+      { "name": "Salida de Aire Acondicionado Trasera", "value": "✓" },
+      { "name": "Asiento de Cuero (El Tejido Principal es Cuero)", "value": "✓" },
+      { "name": "Asiento del Conductor 6 Ajuste Manual", "value": "✓" },
+      { "name": "Función de Calefacción del Asiento del Conductor", "value": "✓" },
+      { "name": "Función de Ventilación del Asiento del Conductor", "value": "✓" },
+      { "name": "Asiento del Pasajero Delantero 4 Ajuste Manual", "value": "✓" },
+      { "name": "Asientos de Segunda Fila Reposacabezas Medio", "value": "✓" },
+      { "name": "Asientos de Segunda Fila Apoyabrazos Medio", "value": "✓" },
+      { "name": "Asientos de la Segunda Fila Abajo (4/6)", "value": "✓" },
+      { "name": "Soporte Segunda Fila", "value": "✓" },
+      { "name": "Ventana Abatible con una Tecla para Cuatro Puertas", "value": "✓" },
+      { "name": "Ventana Elevadora de Una Llave para la Puerta del Conductor Principal", "value": "✓" },
+      { "name": "Función Anti-Pinch para la Unidad Principal", "value": "✓" },
+      { "name": "Apertura / Cierre de Ventana de Control Remoto con Llave", "value": "✓" },
+      { "name": "Entrada Sin Llave de PEPS + Inicio con un Botón", "value": "✓" },
+      { "name": "2 Llave Inteligente", "value": "✓" },
+      { "name": "Soporte Taza de Calefacción / Refrigeración de Primera Fila", "value": "✓" },
+      { "name": "Amortiguadores en el Capó Delantero", "value": "✓" }
+    ],
+    "Dispositivos de Seguridad": [
+      { "name": "ABS+EBD", "value": "✓" },
+      { "name": "Control Electrónico de Estabilidad del Cuerpo ESC", "value": "✓" },
+      { "name": "Sistema de Control de Tracción", "value": "✓" },
+      { "name": "HBA (Asistencia de Freno Hidráulico)", "value": "✓" },
+      { "name": "HHC (Control de Arranque en Subida)", "value": "✓" },
+      { "name": "Recuerda Automáticamente el Siguiente Coche Durante el Frenado de Emergencia (Doble Parpadeo)", "value": "✓" },
+      { "name": "Airbag Delantero Dos (Conductor / Pasajero Delantero)", "value": "✓" },
+      { "name": "Radar de Inversión Trasero", "value": "✓" },
+      { "name": "Cámara Trasera", "value": "✓" },
+      { "name": "Sistema de Control de Presión de Neumáticos (Activo)", "value": "✓" },
+      { "name": "Manija de Seguridad Trasera", "value": "✓" },
+      { "name": "Cinturón de Seguridad Limitador de Fuerza Pretensado de la Fila Delantera", "value": "✓" },
+      { "name": "Ajuste de Altura del Cinturón de Seguridad Delantero", "value": "✓" },
+      { "name": "Cinturones de Seguridad de la Fila Trasera (Ambos Lados)", "value": "✓" },
+      { "name": "Advertencia del Cinturón de Seguridad del Conductor", "value": "✓" },
+      { "name": "Advertencia del Cinturón de Seguridad del Pasajero Delantero", "value": "✓" },
+      { "name": "Sistema Anti-Pincho de Ventana del Conductor", "value": "✓" },
+      { "name": "Función de Bloqueo Automático de Funcionamiento", "value": "✓" },
+      { "name": "Advertencia de Llave Olvidada", "value": "✓" },
+      { "name": "Advertencia de Límite de Desgaste del Disco de Freno", "value": "✓" },
+      { "name": "Advertencia de Freno de Estacionamiento No Liberado", "value": "✓" },
+      { "name": "Sistema Inmovilizador Electrónico", "value": "✓" },
+      { "name": "Mando a Distancia Móvil", "value": "✓" },
+      { "name": "Sistema de Apertura con Bloqueo de Puerta de Seguridad Colisión", "value": "✓" },
+      { "name": "Dispositivo de Fijación de Seguridad para Asiento Infantil (Fijación ISO)", "value": "✓" }
+    ],
+    "Dispositivos de Entretenimiento": [
+      { "name": "Pantalla Táctil de Internet Multimedia Colorida de 10 Pulgadas", "value": "✓" },
+      { "name": "Controlador Multimedia", "value": "✓" },
+      { "name": "Coche WiFi Hotspot Compartir", "value": "✓" },
+      { "name": "Conexión Bluetooth", "value": "✓" },
+      { "name": "Encendedor de Cigarrillos de Primera Fila", "value": "✓" },
+      { "name": "Puerto USB 1 de la Fila Frontal", "value": "✓" },
+      { "name": "Puerto USB 2 de la Fila Frontal", "value": "✓" },
+      { "name": "Fila Frontal 12V", "value": "✓" },
+      { "name": "Puerto USB de la Fila Trasera", "value": "✓" },
+      { "name": "Luz del Tronco", "value": "✓" },
+      { "name": "Altavoces Hi-Fi 7", "value": "✓" },
+      { "name": "Herramientas para el Coche", "value": "✔️" },
+      { "name": "Extintor de Incendios", "value": "✔" },
+      { "name": "Señales de Advertencia Triangulares", "value": "☑" }
+    ]
+  }
+  }

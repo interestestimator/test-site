@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Reviews Raw</title>
+    <style>
+        .review-carousel {
+            position: relative;
+            width: calc(100% + 1rem);
+            /* Container takes up 100% width + 1rem */
+            overflow-x: hidden;
+            /* Hide overflow to avoid horizontal scrollbars */
+        }
+
+        .review-wrapper {
+            display: flex;
+        }
+
+        .review {
+            border: 1px solid #ddd;
+            margin: 0 1rem 0 0;
+            padding: 15px;
+            flex: 0 0 calc(25% - 1rem);
+            /* Default width for larger screens */
+            box-sizing: border-box;
+        }
+
+        @media (max-width: 768px) {
+            .review {
+                flex: 0 0 calc(33.333% - 1rem);
+                /* 50% width for iPad size */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .review {
+                flex: 0 0 calc(50% - 1rem);
+                /* 100% width for phones */
+            }
+        }
+
+        .review .rating {
+            display: flex;
+        }
+
+        .review .date {
+            color: #888;
+            font-size: 0.9em;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .review-nav-button {
+            background-color: #007bff;
+        }
+
+        .review-nav-button.disabled {
+            background-color: #d3d3d3;
+        }
+
+        #googleReviewsContainer {
+            text-align: center;
+        }
+
+        .rating-score {
+            width: 100%;
+            display: flex;
+        }
+    </style>
+</head>
+
+<section id="companyReviewsContainer">
+
+    <div class="">
+        <div class="h2">Honestidad y buen hacer</div>
+        <div class="h3">Reseñas 100% reales</div>
+        <div class="b1">
+            Porque no es lo mismo que lo digamos nosotros a que lo digan nuestros clientes.
+            Entra a ver nuestras reseñas de Google para ver opiniones real y honesta.
+        </div>
+        <div>
+            <a href="https://maps.app.goo.gl/sQnD9PTjxBvz9rxY8" class="rounded-container rounded-both bg-orange h3"
+                target="_blank" rel="noopener noreferrer nofollow">
+                Ver opiniones reales
+                <span class="fa-regular fa-arrow-right"></span>
+            </a>
+        </div>
+    </div>
+
+    <div id="googleReviewsContainer" class="">
+        <!-- Dynamic content will be inserted here -->
+    </div>
+
+    <div id="reviewsContainer" class="reviews-container">
+        <div>Customer Reviews</div>
+        <div class="review-carousel">
+            <div class="review-wrapper" id="reviewWrapper">
+                <!-- Reviews will be loaded here -->
+            </div>
+        </div>
+        <div class="button-container">
+            <button class="review-nav-button" id="reviewPrevBtn">◀ Prev</button>
+            <button class="review-nav-button" id="reviewNextBtn">Next ▶</button>
+        </div>
+    </div>
+
+</section>
+
+</html>

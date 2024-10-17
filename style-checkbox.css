@@ -1,0 +1,587 @@
+@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@300;400;700;900&display=swap');
+
+:root {
+    --font-family: 'MyCustomFont', sans-serif;
+    
+    --contrast-bg: #FE5100;
+    --header-bg: #111111;
+    --bg-color: #FFFFFF;
+    --sidebar-bg: #F5F5F5
+    
+}
+
+
+
+
+/* USED A LOT THROUGHOUT
+
+display: flex;
+align-items: center;
+
+*/
+
+
+
+.sidebar__discount {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: flex-end;
+    padding: 3.5rem 0 0.5rem;
+}
+
+.box {
+    flex: 1;
+    padding: .5rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.contrast {
+    background-color: var(--contrast-bg);
+    color: var(--bg-color);
+}
+
+.price-group__entry {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: .6rem 0rem .6rem 1.5rem;
+
+    border-bottom: 1px solid #F5F5F5;
+}
+
+.price-group__entry .entry__amount {
+    padding: 0.5rem 1.5rem 0.5rem .5rem;
+}
+
+
+
+
+
+
+
+
+.checkbox-wrapper input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    display: none;
+}
+
+.checkbox-wrapper label {
+    --size: 4rem;
+    cursor: pointer;
+    width: var(--size);
+    height: calc(var(--size) / 2);
+    background: #606060;
+    display: block;
+    border-radius: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.3s; /* Transition the background color */
+}
+
+.checkbox-wrapper label::after {
+    content: '';
+    position: absolute;
+    top: 10%;
+    left: 6%;
+    width: 40%; /* Adjusted for a better fit */
+    height: 80%; /* Adjusted for a better fit */
+    background: #fff;
+    border-radius: 1rem;
+    transition: transform 0.3s; /* Transition the transform property */
+}
+
+.checkbox-wrapper input:checked + label {
+    background: var(--contrast-bg); /* Change background color when checked */
+}
+
+.checkbox-wrapper input:checked + label::after {
+    transform: translateX(calc(122%)); /* Slide the switch */
+}
+
+
+
+
+
+
+
+
+.sidebar__financing {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.3rem 0rem 1.3rem 1.5rem;
+    background-color: var(--sidebar-bg);
+}
+
+
+
+#carFinanceContainer {
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-radius: 1rem;
+}
+
+#carTitle {
+    padding: 1.5rem 0 0.5rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Car Overview Container Styles */
+
+#carOverviewContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 0rem 1.5rem 0rem;
+}
+
+#carOverviewContainer .more-details {
+    display: flex;
+    min-height: 4.5rem;
+}
+
+@media (max-width: 480px) {
+    #carOverviewContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #carOverviewContainer .more-details {
+        min-height: 3.75rem;
+    }
+}
+
+#carOverviewContainer .more-details img {
+    margin-right: 10px;
+    height: 45px;
+    width: 45px;
+}
+
+#carOverviewContainer .detail-text {
+    display: flex;
+    flex-direction: column;
+}
+
+#carOverviewContainer .more-information {
+    display: flex;
+    align-items: center;
+    color: var(--contrast-bg);
+    cursor: pointer;
+    margin-top: 0.15rem;
+}
+
+#carOverviewContainer .more-information img {
+    margin-right: 5px;
+    height: 12px;
+    width: 12px;
+}
+
+
+
+
+
+
+
+
+/* Company Advantages Container Styles */
+#companyAdvantagesContainer {
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    align-items: center;
+    /* Vertically center items in grid cells */
+}
+
+@media (max-width: 480px) {
+    #companyAdvantagesContainer {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+#companyAdvantagesContainer .more-details {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto;
+    gap: 10px;
+}
+
+#companyAdvantagesContainer .more-details img {
+    margin-right: 10px;
+    height: 60px;
+    width: 60px;
+}
+
+#companyAdvantagesContainer .detail-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+.vehicle-price-result {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+}
+
+.vehicle-price-result__action {
+    display: flex;
+    padding: 0.5rem 1.5rem 1.25rem 1.5rem;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+
+
+/* Button icon styling */
+.btn-icon {
+    margin-right: 0.5rem;
+    /* Space between icon and text */
+}
+
+.financing-calculator__controls {
+    padding: 0 1.5rem 0 0;
+}
+
+.silder-container {
+    padding: 1.5rem;
+    background-color: #FFEDE6;
+    margin: 0 1.5rem 0 0;
+    color: #111111;
+}
+
+#deposit-input {
+    width: 8rem;
+}
+
+#deposit-input:focus {
+    outline: none;
+    border: none;
+}
+
+#term-select {
+    width: 9.7rem;
+}
+
+#regionDropdown {
+    width: 35%;
+    padding: .45rem;
+    border-radius: 1.5rem;
+    border: 0;
+}
+
+
+.rangeSlider {
+    accent-color: var(--contrast-bg);
+    width: 100%;
+}
+
+
+
+
+
+
+
+/* NEW COLUMS AND STICKY CSS */
+.content-wrapper {
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-template-rows: auto;
+    align-items: start;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+}
+
+.right-column {
+    display: flex;
+    flex-direction: column;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 1rem;
+    height: fit-content;
+}
+
+/* Layout for mobile */
+@media (max-width: 767px) {
+    .content-wrapper {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    .left-column,
+    .right-column {
+        width: 100%;
+    }
+
+    .right-column {
+        position: static;
+    }
+}
+
+
+
+
+
+
+/*////////////////////////////  REPLACE AFTER IMPLIMENTING GALLER FOR USED CARS  //////////////////////////////*/
+#carImageContainer {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    touch-action: pan-y;
+}
+
+/*////////////////////////////  REPLACE AFTER IMPLIMENTING GALLER FOR USED CARS  //////////////////////////////*/
+.navButtonContainer {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
+}
+/*////////////////////////////  REPLACE AFTER IMPLIMENTING GALLER FOR USED CARS  //////////////////////////////*/
+.navButton {
+    background-color: #FFFFFF;
+    color: #141414;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+/*////////////////////////////  REPLACE AFTER IMPLIMENTING GALLER FOR USED CARS  //////////////////////////////*/
+.navButton:hover {
+    opacity: 0.8;
+}
+/*////////////////////////////  REPLACE AFTER IMPLIMENTING GALLER FOR USED CARS  //////////////////////////////*/
+#thumbnailContainer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.1rem;
+    overflow: hidden;
+    border-radius: 0 0 1rem 1rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*////////////////////////////  GALLERY AND IMAGE STYLING //////////////////////////////*/
+
+
+
+
+/* Car Image */
+.car-image, 
+.feature-image {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 9/6;
+}
+
+#carImage {
+    border-radius: 1rem 1rem 0 0;
+}
+
+#featureImage {
+    border-radius: 0 0 1rem 1rem;
+}
+
+/* Photo Count Label */
+.photo-count-label {
+    position: absolute;
+    bottom: 4px;
+    margin: 5px;
+    padding: 4px 8px;
+    background-color: rgba(25, 28, 30, 0.7);
+    color: #fff;
+    font-size: 12px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.photo-count-label img {
+    margin-right: 4px;
+}
+
+.image-container {
+    position: relative;
+    max-width: 100%;
+    margin: auto;
+    overflow: hidden;
+    touch-action: pan-y;
+    border-radius: 1rem 1rem 0 0;
+}
+
+.nav-button-container {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 1rem);
+    padding: 0.5rem;
+}
+
+.nav-button {
+    background-color: #FFFFFF;
+    color: #141414;
+    border: none;
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    border-radius: 50%;
+    opacity: 0.4;
+    transition: opacity 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+
+.nav-button:hover {
+    opacity: 0.8;
+}
+
+.thumbnail-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 0.35rem;
+    margin-top: 0.1rem;
+    overflow: hidden;
+    border-radius: 0 0 1rem 1rem;
+}
+
+.thumbnail {
+    width: calc(25% - 0.25rem);
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 9/6;
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.3s ease;
+}
+
+.thumbnail.active {
+    opacity: 1;
+}
+
+
+
+
+/*////////////////////////////  DROPDOWN CONTENT STYLING //////////////////////////////*/
+
+
+.dropdown {
+    padding-block-end: 1rem;
+}
+
+
+/* General Dropdown Content Styling */
+.features-dropdown-content,
+.specs-dropdown-content {
+    display: none;
+    border-radius: 0 0 1rem 0;
+    margin: 0 1.25rem 0 0;
+}
+
+/* Show class for both dropdowns */
+.features-dropdown-content.show,
+.specs-dropdown-content.show {
+    display: block;
+}
+
+.custom-list {
+    list-style-type: none;
+    /* Remove bullet points */
+    padding: 0;
+    /* Remove default padding */
+}
+
+.spec-item {
+    display: flex;
+    /* Enable flexbox for the list items */
+    justify-content: space-between;
+    /* Space out child elements */
+    padding: 0.5rem 1.5rem;
+    border-bottom: 1px solid #c9c9c9;
+
+}
+
+.spec-item:nth-child(odd) {
+    background-color: #f0f0f0;
+    /* Change this to your desired color */
+}
+
+.spec-item:nth-child(even) {
+    background-color: #ffffff;
+    /* Change this to your desired color */
+}
+
+.spec-name {
+    flex: 1;
+    /* Allow feature name to take available space */
+    max-width: 50%;
+    /* //////////CHANGE IF NEEDED/////////// */
+}
+
+.spec-value {
+    text-align: right;
+    /* Align text to the right */
+    margin-left: 10px;
+    /* Optional: Add space between name and value */
+    max-width: 50%;
+    /* //////////CHANGE IF NEEDED/////////// */
+}

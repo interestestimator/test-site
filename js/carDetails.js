@@ -66,9 +66,6 @@ const initializeOverviewDetails = (currentCarData, isNewCar = false) => {
         { name: 'emissionLabel', description: 'Emisiones CO2', iconFolder: true, additionalInfo: true }
     ].filter(({ name }) => !(isNewCar && (name === 'kilometres' || name === 'registration')));
 
-    ////////////////////////////////////////////////////////////////////////////////////////////
-    ////////// RESOLVE ISSUE!!! emmissionslabel should be hidden if not defined ////////////////
-    ////////////////////////////////////////////////////////////////////////////////////////////
     // Create detail divs
     overviewDetails.forEach(({ name, description, value = currentCarData[name], iconFolder, additionalInfo }) => {
         if (!value) return; // Skip if no value is available
@@ -128,4 +125,6 @@ export {
     initializeOverviewDetails,
     initializeCompanyAdvantages
 };
+
+showBodyTypeInfo
 

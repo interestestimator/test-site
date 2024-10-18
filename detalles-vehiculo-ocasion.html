@@ -180,6 +180,14 @@
     document.addEventListener('DOMContentLoaded', async () => {
         try {
             await initializeApp();
+
+            // Load less critical functions after the main app is initialized
+            setTimeout(() => {
+                loadMapAndContactForm(); // Load map and contact form asynchronously
+                loadCompanyReviews(); // Load company reviews asynchronously
+                initializeCompanyAdvantages(); // Initialize company advantages
+            }, 0); // Delay execution to ensure main content is loaded first
+
         } catch (error) {
             console.error('Error during app initialization:', error);
         }
@@ -187,9 +195,7 @@
 
     async function initializeApp() {
         await loadHeaderAndFooter(); // Load header and footer asynchronously
-        await loadMapAndContactForm(); // Load header and footer asynchronously //.............. ADDED TODAY FOR COMPANY SECTION ..............//
-        await loadCompanyReviews() // Load company reviews asynchronously ........ ADDED TODAY FOR COMPANY SECTION ***** CSS IS DESTROYING MOBILE LAYOUT ***** ........ //
-        initializeCompanyAdvantages()
+        
         const state = createInitialSiteState(); // Create initial state
         const elements = getCarDetailsDOMElements(); // Get DOM elements specific to car details
 
@@ -209,7 +215,6 @@
         initializeCheckboxes(currentCarData);
         setupEventListeners(state, currentCarData);
         initializeOverviewDetails(currentCarData, false); // Defaults to isNewCar = false
-
         initializeImageGallery(currentCarData, 'vehicle', false, state, 'listings'); // Uses listings-nuevos
     }
 

@@ -8,37 +8,20 @@
     <style>
         .review-carousel {
             position: relative;
-            width: calc(100% + 1rem);
-            /* Container takes up 100% width + 1rem */
-            overflow-x: hidden;
-            /* Hide overflow to avoid horizontal scrollbars */
+
         }
 
         .review-wrapper {
             display: flex;
+            justify-content: space-between; /* Optional: Adds space between items */
+            overflow-x: hidden; /* Hide overflow to avoid horizontal scrollbars */
         }
 
         .review {
             border: 1px solid #ddd;
-            margin: 0 1rem 0 0;
-            padding: 15px;
-            flex: 0 0 calc(25% - 1rem);
-            /* Default width for larger screens */
             box-sizing: border-box;
-        }
-
-        @media (max-width: 768px) {
-            .review {
-                flex: 0 0 calc(33.333% - 1rem);
-                /* 50% width for iPad size */
-            }
-        }
-
-        @media (max-width: 480px) {
-            .review {
-                flex: 0 0 calc(50% - 1rem);
-                /* 100% width for phones */
-            }
+            flex: 1; /* Ensures each child gets equal width */
+            padding: 0 0.5rem; /* Optional: Adds some spacing between items */
         }
 
         .review .rating {
@@ -63,9 +46,9 @@
             background-color: #d3d3d3;
         }
 
-        #googleReviewsContainer {
+        /* #googleReviewsContainer {
             text-align: center;
-        }
+        }*/
 
         .rating-score {
             width: 100%;

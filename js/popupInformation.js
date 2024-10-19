@@ -273,7 +273,7 @@ export function showBodyTypeInfo(event, currentCarData) {
                 ${formatDetailWithIcon("dimensions-length", `${currentCarData.length} mm`, "Longitud")}
                 ${formatDetailWithIcon("dimensions-width", `${currentCarData.width} mm`, "Ancho")}
                 ${formatDetailWithIcon("dimensions-height", `${currentCarData.height} mm`, "Altura")}
-                ${formatDetailWithIcon("dimensions-trackWidth", `${currentCarData.trackWidth} mm`, "Ancho de vía")}
+                ${formatDetailWithIcon("dimensions-trackwidth", `${currentCarData.trackWidth} mm`, "Ancho de vía")}
                 ${formatDetailWithIcon("dimensions-wheelbase", `${currentCarData.wheelbase} mm`, "Distancia entre ejes")}
             </div>
 

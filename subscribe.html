@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Appraisal Form</title>
+
+
+    <link rel="preload" href="style-popup-forms.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="style-new.css" as="style" onload="this.rel='stylesheet'">
+
+
+    <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+    <style>
+        /* style-new.css */
+        .box-wrapper {
+            background-color: #f2f2f2;
+            margin: 2rem auto;
+            max-width: 80rem;
+            border-radius: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div id="header-contact-container"></div>
+        <div id="header-container"></div>
+        <div id="header-banner-container"></div>
+    </header>
+
+    <div id="company-subscription-form"></div>                             
+
+    <footer id="footer-container"></footer>
+</body>
+
+<script type="module" defer>
+    import { loadHeaderAndFooter, loadSubscriptionForm } from './js/pageSetup.js'; 
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadHeaderAndFooter(); // Load header and footer asynchronously
+        await loadSubscriptionForm(); // Load header and footer asynchronously   
+    });
+</script>
+
+</html>

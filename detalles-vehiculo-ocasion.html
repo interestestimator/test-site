@@ -239,9 +239,12 @@
             await initializeApp();
 
             // Load less critical functions after the main app is initialized
-            setTimeout(() => {
+            setTimeout(async () => {
                 loadMapAndContactForm(); // Load map and contact form asynchronously
-                loadCompanyReviews(); // Load company reviews asynchronously
+                
+                // Await the loading of company reviews to ensure reviews are properly fetched before continuing
+                await loadCompanyReviews();
+
                 initializeCompanyAdvantages(); // Initialize company advantages
             }, 0); // Delay execution to ensure main content is loaded first
 

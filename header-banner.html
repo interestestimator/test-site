@@ -1,0 +1,55 @@
+<style>
+    .banner {
+        min-height: 52px;
+        box-shadow: inset 0 -1px 0 0 #E5E5E5;
+        overflow: hidden;
+        font-size: 15px;
+    }
+
+    .message-container {
+        display: flex;
+        transition: transform 0.5s ease;
+    }
+
+    .message1 {
+        width: 100%;
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        line-height: 1;
+    }
+
+    .message1[aria-hidden="false"] {
+        opacity: 1;
+    }
+</style>
+
+<div class="banner bg-vl-grey pt-md">
+    <div class="message-container" style="transform: translateX(0%);">
+        <div class="message1" aria-hidden="false">
+            <span>Oferta de Junio:</span>
+            <span class="link pt-xsm b3">Grandes Ofertas en
+                <a href="https://example.com/cars">
+                    <u class="font-bold">Autos de Segunda Mano de Calidad</u>
+                </a>!
+            </span>
+        </div>
+        <div class="message1" aria-hidden="true">
+            <span>Oferta de Taller:</span>
+            <span class="link pt-xsm b3">Compra 2 Neumáticos,
+                <a href="https://example.com/tyres">
+                    <u class="font-bold">¡Lleva 1 Gratis!</u>
+                </a>!
+            </span>
+        </div>
+        <div class="message1" aria-hidden="true">
+            <span>¡Descubre los Nuevos Modelos de DFSK!</span>
+            <span class="link pt-xsm b3">Diseño de Vanguardia y
+                <a href="https://example.com/dfsk">
+                    <u class="font-bold">Rendimiento Inigualable</u>
+                </a>!
+            </span>
+        </div>
+    </div>
+</div>

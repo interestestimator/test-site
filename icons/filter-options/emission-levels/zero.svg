@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-<svg width="24" height="24" version="1.1" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
- <circle cx="12" cy="12" r="12" fill="#7ab6ce" stroke-width="0"/>
- <rect transform="translate(-20 -15)" x="33.4" y="21.4" width="5.6" height="4.9" fill="#f2f2f2" fill-rule="evenodd"/>
- <rect transform="translate(-20 -15)" x="33.4" y="27.7" width="7" height="4.9" fill="#f2f2f2" fill-rule="evenodd"/>
- <path transform="rotate(-90 -17.5 2.5)" d="m-32.6 27.854c0 2.1372 1.9122 4.1458 5.592 4.1458 3.6958 0 5.608-2.0086 5.608-4.1458s-1.9122-4.1458-5.592-4.1458c-3.6958 0-5.608 2.0086-5.608 4.1458zm9.4003 0c0 0.89986-1.0123 2.0568-3.7923 2.0568-2.796 0-3.8083-1.1409-3.8083-2.0568s1.0123-2.0568 3.8083-2.0568c2.7799 0 3.7923 1.157 3.7923 2.0568z" aria-label="0"/>
-</svg>

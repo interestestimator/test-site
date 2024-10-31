@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="90"
+   height="90"
+   viewBox="0 0 90 90"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="price-discount.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="px"
+     inkscape:zoom="5.6397236"
+     inkscape:cx="67.467845"
+     inkscape:cy="70.216207"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-6"
+     inkscape:window-y="-6"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="g1" />
+  <defs
+     id="defs1" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <g
+       id="g135"
+       transform="matrix(0.9448819,0,0,0.9448819,-531.53019,540.59387)">
+      <g
+         id="g77-7-0"
+         transform="matrix(1.0583304,0,0,1.0583347,78.266733,-370.12928)"
+         style="fill:#ececec;fill-opacity:1">
+        <g
+           id="g72-0-2-8"
+           transform="translate(-5.4306569,24.849881)"
+           style="fill:#ececec;fill-opacity:1">
+          <g
+             id="g68-0-9-5-8-7"
+             transform="translate(108.34109,-20.340304)"
+             style="fill:#ececec;fill-opacity:1">
+            <path
+               id="path44-6-4-7-05-6-0-4-6-8-7-8-3"
+               style="fill:#ececec;fill-opacity:1;stroke-width:0.930373"
+               inkscape:transform-center-x="-0.1984375"
+               inkscape:transform-center-y="-0.099218749"
+               d="m 392.16827,-195.37474 a 22.5,22.5 0 0 0 -21.04729,14.71073 l -13.05709,31.5221 0.0227,0.009 a 30,30 0 0 0 -3.41839,13.75781 30,30 0 0 0 29.99145,29.99972 v 5.2e-4 h 37.48815 v -0.002 a 22.5,22.5 0 0 0 0.0207,0.002 22.5,22.5 0 0 0 22.48905,-22.34747 h 0.0109 v -37.51989 h -0.009 a 15,15 0 0 0 0.009,-0.13229 15,15 0 0 0 -9.72498,-14.03789 l -32.38355,-13.41314 a 22.5,22.5 0 0 0 -10.39162,-2.5492 z" />
+          </g>
+        </g>
+      </g>
+    </g>
+    <g
+       id="g1"
+       transform="matrix(0.25,0,0,0.25,19.490303,30.766224)"
+       style="fill:#4d4d4d;fill-opacity:1">
+      <path
+         id="rect5-9-0-1-0-5-4-2-7"
+         style="fill:#4d4d4d;fill-opacity:1;fill-rule:evenodd;stroke-width:0.991848"
+         d="m 162.37294,-9.6485244 a 35.622047,35.622047 0 0 0 -28.90235,14.9414 l -6.8164,-3.17968 -0.006,0.0117 -0.004,-0.006 -107.355466,61.9804604 3,5.19727 2.31054,4.00195 38.45117,66.597654 5.31055,9.19922 9.19922,-5.31055 98.156246,-56.671864 -0.004,-0.008 0.0136,0.002 2.57422,-29.42774 a 35.622047,35.622047 0 0 0 19.69336,-31.70513 35.622047,35.622047 0 0 0 -35.6211,-35.6230504 z m 0,10.62109002 a 25.001572,25.001573 0 0 1 25.00195,25.00196038 25.001572,25.001573 0 0 1 -7.88477,18.12304 l 1.45703,-16.66016 h -0.01 l 0.004,-0.01 L 143.26342,9.8590456 A 25.001572,25.001573 0 0 1 162.3728,0.97232562 Z m -35.19532,13.10352038 1.45703,0.67968 a 35.622047,35.622047 0 0 0 -1.88476,11.21875 35.622047,35.622047 0 0 0 1.65625,10.58985 18.614174,18.614174 0 0 0 -10.4668,16.70703 18.614174,18.614174 0 0 0 18.61328,18.61328 18.614174,18.614174 0 0 0 18.61524,-18.61328 18.614174,18.614174 0 0 0 -16.07032,-18.4375 25.001572,25.001573 0 0 1 -1.72656,-8.85937 25.001572,25.001573 0 0 1 1.00586,-6.67579 l 31.33985,14.61524 -4.08985,46.75976 -93.376956,53.912104 -38.45117,-66.597644 z m 5.88282,32.00976 a 35.622047,35.622047 0 0 0 10.82812,10.26953 7.9937007,7.9937008 0 0 1 -7.33594,4.9082 7.9937007,7.9937008 0 0 1 -7.99218,-7.99218 7.9937007,7.9937008 0 0 1 4.5,-7.18555 z" />
+    </g>
+  </g>
+</svg>

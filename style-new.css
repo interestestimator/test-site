@@ -1,0 +1,298 @@
+/* styles.css */
+
+/* Import the font declarations */
+@import url('fonts.css');
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: 'MyCustomFont', sans-serif;
+    font-size: 16px;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+}
+
+/* Base styles for rounded divs */
+.rounded-container {
+    display: flex;
+    align-items: center;
+    border: none;
+}
+
+/* Background color variations */
+.bg-black {
+    background-color: #111111;
+    color: #FFFFFF;
+}
+
+/* Hover effect for .rounded-container with .bg-black */
+.rounded-container.bg-black:not(:disabled):hover {
+    background-color: #606060;
+    /* New color on hover */
+}
+
+.bg-orange {
+    background-color: #FE5100;
+    color: #FFFFFF;
+}
+
+/* Hover effect for .rounded-container with .bg-black */
+.rounded-container.bg-orange:not(:disabled):hover {
+    background-color: #FC7C49;
+    /* New color on hover */
+}
+
+/* Hover effect for .rounded-container when disabled */
+.rounded-container.bg-orange:disabled {
+    cursor: not-allowed;
+    background: #747474;
+    border: 1px solid #747474;
+  }
+  
+
+
+
+
+
+.bg-grey {
+    background-color: #606060;
+    color: #FFFFFF;
+}
+
+.bg-light-grey {
+    background-color: #B5B5B5;
+    color: #FFFFFF;
+}
+
+.bg-vl-grey {
+    background-color: #F5F5F5;
+    color: #111111;
+}
+
+.bg-white {
+    background-color: #FFFFFF;
+    color: #111111;
+}
+
+.font-bold {
+    font-weight: 700;
+}
+
+.font-medium {
+    font-weight: 500;
+    /* light weight should use 300 */
+}
+
+.font-book {
+    font-weight: 300;
+    /* light weight should use 300 */
+}
+
+.font-bold-italic {
+    font-weight: 700;
+    font-style: italic;
+}
+
+/* Border-radius and alignment for divs */
+.rounded-left {
+    border-radius: 50px 0 0 50px;
+    justify-content: flex-end;
+    padding: 0.5rem 1.5rem 0.5rem 2.5rem;
+    cursor: pointer;
+}
+
+.rounded-left-2 {
+    border-radius: 50px 0 0 50px;
+    justify-content: space-between;
+    padding: 0.25rem 1.5rem 0.25rem .2rem;
+    cursor: pointer;
+}
+
+.rounded-right {
+    border-radius: 0 75px 75px 0;
+    justify-content: space-between;
+    padding: 0.25rem .2rem 0.25rem 1.5rem;
+    cursor: pointer;
+}
+
+.rounded-right img, .rounded-left-2 img {
+    height: 35px;
+    margin-left: 1.5rem;
+}
+
+
+
+.rounded-both {
+    border-radius: 50px;
+    justify-content: center;
+    padding: 0.5rem 0 0.5rem 0;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Text alignment and margin */
+.margin-left {
+    margin-left: 50px;
+}
+
+.margin-right {
+    margin-right: 50px;
+}
+
+.txt-right {
+    text-align: right;
+}
+
+.txt-left {
+    text-align: left;
+}
+
+
+.txt-grey {
+    color: #707070
+}
+
+
+.h2 {
+    font-size: 2em;
+    font-weight: 700;
+    line-height: 1.1em;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+}
+
+.h3 {
+    font-size: 1.4em;
+    font-weight: 700;
+    line-height: 1.2em;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+}
+
+.h4 {
+    font-size: 1em;
+    line-height: 1.2em;
+    letter-spacing: -0.01em;
+}
+
+.italic {
+    font-style: italic;
+    /* Applies italic style */
+}
+
+.normal {
+    font-style: normal;
+    /* Applies normal style */
+}
+
+.uppercase {
+    text-transform: uppercase;
+    /* Applies normal style */
+}
+
+
+
+.b1 {
+    font-size: 1em;
+    line-height: 1.25em;
+    letter-spacing: -0.01em;
+}
+
+.b2 {
+    font-size: 0.85em;
+    line-height: 1.25em;
+    letter-spacing: -0.01em;
+}
+
+.b3 {
+    font-size: 0.7em;
+    line-height: 1.25em;
+    letter-spacing: -0.01em;
+}
+
+.b4 {
+    font-size: 0.6em;
+    line-height: 1.25em;
+    letter-spacing: -0.01em;
+}
+
+
+
+.flex {
+    display: flex;
+}
+
+.space-between {
+    justify-content: space-between;
+}
+
+
+
+.font-fade {
+    color: #B5B5B5
+}
+
+
+/* Small Margins */
+.mr-sm {
+    margin-right: .5rem;
+}
+
+.ml-sm {
+    margin-left: .5rem;
+}
+
+/* Medium Margins */
+.mr-md {
+    margin-right: 1rem;
+}
+
+.ml-md {
+    margin-left: 1rem;
+}
+
+/* Large Margins */
+.mr-lg {
+    margin-right: 1.5rem;
+}
+
+.ml-lg {
+    margin-left: 1.5rem;
+}
+
+
+
+
+/* Extra Small Padding */
+.pt-xsm {
+    padding-top: 0.25rem
+}
+
+.pb-xsm {
+    padding-bottom: 0.25rem
+}
+
+/* Small Padding */
+.pt-sm {
+    padding-top: 0.5rem
+}
+
+.pb-sm {
+    padding-bottom: 0.5rem
+}
+
+/* Medium Padding */
+.pt-md {
+    padding-top: 1rem
+}
+
+.pb-md {
+    padding-bottom: 1rem
+}
+
+
+.max-width {
+    max-width: 80em;
+}
+

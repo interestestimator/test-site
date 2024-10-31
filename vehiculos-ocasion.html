@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Used Cars Listings</title>
+    
+    <link rel="preload" href="style.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="style-new.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="style-popup-forms.css" as="style" onload="this.rel='stylesheet'">
+
+    <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+
+    <style>
+        .resetFilterButton {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-contact-container"></div>
+    <div id="header-container"></div>
+    <div id="header-banner-container"></div>
+
+    <div id="overlay" class="overlay" style="display: none;"></div>
+    <div id="loanPopup" class="popup-container" style="display: none;"></div>
+
+    <!-- Filter Section -->
+    <section class="bg-vl-grey">
+        <div class="listings-action-container">
+            <label id="filterLabel" class="rounded-container rounded-both bg-white space-between">
+                <div class="filter-row flex">
+                    <span id="filterLabelText" class="uppercase font-bold ml-lg">Todos los Filtros</span>
+                    <img class="ml-sm img-32 resetFilterButton popup-option" src="icons/menu-icons/filter-reset.svg" alt="Close">
+                </div>
+                <img class="img-48 mr-sm popup-option" src="icons/menu-icons/filter.svg" alt="Filter Icon">
+            </label>
+            <div id="filterPopup" class="popup-container" style="display: none;">
+                <div class="popup-title h3 bg-white">
+                    <div class="filter-text">Todos los Filtros</div>
+                    <div id="closeFilterPopup" class="close-button">
+                        <img class="img-24" src="icons/menu-icons/close.svg" alt="Close">
+                    </div>
+                </div>
+                <div id="car-manufacturers" class="ml-lg mr-lg"></div>
+                <div id="car-bodies" class="ml-lg mr-lg"></div>
+                <div id="fuel-types" class="ml-lg mr-lg"></div>
+                <div id="emission-levels" class="ml-lg mr-lg"></div>
+                <div class="resetFilterButton ml-lg mr-lg" style="width: 33%;margin-left: auto;">
+                    <div class="rounded-container rounded-both bg-black b2 font-bold">Eliminar Filtro</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sorting Section -->
+    <section id="listingDetails" class="listings-action-container flex space-between">
+        <div id="listingCount" class="h4 ml-lg font-bold uppercase">Cargando...</div>
+        <label id="sortLabel" class="popup-option flex mr-md">
+            <img class="img-24" src="icons/menu-icons/sort.svg" alt="Sort Icon">
+            <span id="sortLabelText" class="filter-text">Relevancia</span>
+        </label>
+        <div id="sortPopup" class="popup-container" style="display: none;">
+            <div class="popup-title h3 bg-white">
+                <div class="sort-text">Ordenar por</div>
+                <div id="closeSortPopup" class="close-button">
+                    <img class="img-24" src="icons/menu-icons/close.svg" alt="Close">
+                </div>
+            </div>
+            <div id="sortOptionsContainer" class="ml-lg mr-lg"></div>
+        </div>
+    </section>
+
+    <!-- Car Listings Section -->
+    <section class="car-listings" id="carListings"></section>
+
+    <!-- Footer -->
+    <div id="footer-socials-container" class="bg-vl-grey"></div>
+    <div id="footer-container" class="bg-vl-grey"></div>
+
+</body>
+
+<!-- Scripts -->
+<script type="module">
+    import { loadHeaderAndFooter } from './js/pageSetup.js';
+    import { getAllCarData } from './js/carDataFetcher.js';
+    import { renderCarListings, setFilteredCars } from './js/listingsManager.js';
+
+    let carsData = [];
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            await loadHeaderAndFooter(); // Load header and footer asynchronously
+
+            // Fetch car data and initialize filteredCars with the fetched data
+            carsData = await getAllCarData(false);
+            setFilteredCars(carsData); // Use the setter function to set filteredCars
+
+            // Call renderCarListings and pass carsData
+            renderCarListings(false, carsData); // Pass carsData
+        } catch (error) {
+            console.error('Error initializing the page:', error);
+        }
+    });
+</script>
+
+</html>

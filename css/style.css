@@ -1,0 +1,102 @@
+/* Import the font declarations */
+@import url('futura-fonts.css');
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    font-family: 'MyCustomFutura', sans-serif; 
+    font-size: 16px;
+    color: var(--black);
+    overflow-x: hidden;
+}
+
+.mw-container {
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* *********************** */
+/*      GALLERY STYLING    */
+/* *********************** */
+
+.listing-image-container,
+.gallery-image-container {
+    position: relative;
+    overflow: hidden;       
+}
+
+.listing-image,
+.gallery-image,
+.feature-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;               
+    aspect-ratio: 9 / 6;
+}
+
+@media (max-width: 480px) {
+    .gallery-image {
+        aspect-ratio: 4 / 3;
+    }
+}
+
+/* *********************** */
+/*      CAR LABELS         */
+/* *********************** */
+
+/* Common Label Styles */
+.label {
+    position: absolute; /* Common positioning for all labels */
+}
+/* Photo Count Label */
+.photo-count-label {
+    bottom: var(--xsm); /* Position from the bottom */
+}
+
+/* *********************** */
+/*      POPUP STYLING      */
+/* *********************** */
+
+/* Overlay */
+.overlay {
+    position: fixed;            /* Fixes the overlay to the viewport */
+    top: 0;                    /* Aligns to the top */
+    left: 0;                   /* Aligns to the left */
+    width: 100%;               /* Full width */
+    height: 100%;              /* Full height */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 999;              /* Positioned above most elements */
+    display: none;             /* Initially hidden */
+}
+
+/* Prevent body scrolling */
+.no-scroll {
+    overflow: hidden;          /* Prevents scrolling */
+    position: fixed;           /* Fixes the body in place */
+    width: 100%;               /* Full width to cover the viewport */
+}
+
+/* Popup Container */
+.popup-container {
+    width: calc(100% - 2rem);  /* Full width minus horizontal padding */
+    max-width: 32rem;          /* Restricts maximum width */
+    max-height: 80vh;          /* Restricts maximum height */
+    position: fixed;            /* Fixes popup in place */
+    top: 50%;                   /* Centers vertically */
+    left: 50%;                  /* Centers horizontally */
+    transform: translate(-50%, -50%); /* Adjusts for its own width/height */
+    z-index: 1000;             /* Above overlay */
+    overflow-y: auto;          /* Enables scrolling if content is too tall */
+    padding-block-end: 1rem;   /* Provides bottom padding */
+}
+
+/* Popup Title */
+.popup-title {
+    position: sticky;          /* Sticks to the top of the popup */
+    top: 0;                    /* Aligns to the top */
+    z-index: 1;                /* Sits above content but below the overlay */
+}
+
+

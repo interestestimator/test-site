@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Appraisal Form</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style-new.css">
+    <link rel="stylesheet" href="style-popup-forms.css">
+    <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+    <style>
+        .box-wrapper {
+            background-color: #f2f2f2;
+            margin: 2rem auto;
+            max-width: 80rem;
+            border-radius: 1rem;
+        }
+
+
+        #appraisalForm {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Creates 2 equal columns */
+        }
+
+        .input-row {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* Creates 2 equal columns */
+        }
+
+
+        /* Adjust for smaller screens (mobile) */
+        @media (max-width: 768px) {
+            #appraisalForm {
+                grid-template-columns: 1fr;
+                /* Changes to single column on mobile */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-contact-container"></div>
+    <div id="header-container"></div>
+    <div id="header-banner-container"></div>
+
+    <div id="valueMyCar" class="box-wrapper">
+        <form id="appraisalForm" name="appraisal" method="post" action="/simple-appraisal/simple-appraisal"
+            class="form">
+            <div class="alert alert-danger" style="display: none"></div>
+
+            <input type="hidden" name="access_key" value="fc184b2a-7c0d-4071-a665-e807c3f4e679" />
+            <input type="hidden" name="subject" value="Value my car ADD CAR REFRENCE" />
+
+            <div id="contact-details-container" class="form-column">
+                <span class="title h3">Datos de contacto</span>
+                <div class="input-box">
+                    <input type="text" id="appraisal_name" placeholder="Nombre *" aria-required="true" maxlength="30"
+                        autocapitalize="none" autocorrect="off" name="appraisal[name]" required>
+                    <span for="appraisal_name">Nombre *</span>
+                </div>
+                <div class="input-box">
+                    <input type="email" id="appraisal_email" placeholder="Correo electrónico *" aria-required="true"
+                        maxlength="30" autocapitalize="none" autocorrect="off" name="appraisal[email]" required>
+                    <span for="appraisal_email">Correo electrónico *</span>
+                </div>
+                <div class="input-box">
+                    <input type="tel" id="appraisal_phone" placeholder="Teléfono *" aria-required="true" maxlength="9"
+                        autocapitalize="none" autocorrect="off" name="appraisal[phone]" inputmode="numeric"
+                        pattern="[0-9]*" title="Por favor, ingresa un número de teléfono válido (solo números)"
+                        required>
+                    <span for="appraisal_phone">Teléfono *</span>
+                </div>
+                <div class="input-box">
+                    <label id="appraisal_char_count" for="appraisal_comments"
+                        class="form-label b1 font-book">Comentarios sobre la
+                        financiación (máx. 350 caracteres)</label>
+                    <textarea id="appraisal_comments" name="appraisal[comments]" class="form-textarea"
+                        placeholder="Tus comentarios" rows="4" maxlength="350"></textarea>
+                </div>
+            </div>
+
+            <div id="car-details-container" class="form-column">
+                <span class="title h3">Información del vehículo</span>
+                <div class="input-box">
+                    <select id="appraisal_make" name="appraisal[make]" required></select>
+                    <span for="appraisal_make">Marca *</span>
+                </div>
+                <div class="input-row">
+                    <div class="input-box">
+                        <select id="appraisal_model" name=appraisal[model]" required></select>
+                        <span for="appraisal_model">Modelo *</span>
+
+
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="appraisal_version" placeholder="Versión *" aria-required="true"
+                            maxlength="30" autocapitalize="none" autocorrect="off" name="appraisal[version]" required>
+                        <span for="name">Versión *</span>
+                    </div>
+                </div>
+
+                <div class="input-row">
+                    <div class="input-box">
+                        <select id="appraisal_year" name="appraisal[year]" required></select>
+                        <span for="appraisal_year">Año *</span>
+                    </div>
+                    <div class="input-box">
+                        <select id="appraisal_mileage" name="appraisal[mileage]" required></select>
+                        <span for="appraisal_mileage">Kilometraje *</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-box">
+                        <select id="appraisal_fuel" name="appraisal[fuel]" required></select>
+                        <span for="appraisal_fuel">Combustible *</span>
+                    </div>
+                    <div class="input-box">
+                        <select id="appraisal_transmission" name="appraisal[transmission]" required></select>
+                        <span for="appraisal_transmission">Cambio *</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-box">
+                        <select id="appraisal_bodystyle" name="appraisal[bodystyle]" required></select>
+                        <span for="appraisal_bodystyle">Carrocería *</span>
+                    </div>
+                    <div class="input-box">
+                        <select id="appraisal_color" name="appraisal[color]" required></select>
+                        <span for="appraisal_color">Color *</span>
+                    </div>
+                </div>
+                <div class="input-row">
+                    <div class="input-box">
+                        <label for="appraisal_cambio?" class="form-label">¿Desea un vehículo a cambio?</label>
+                        <div class="form-options">
+                            <input type="radio" id="yes" name="appraisal_cambio?" value="Yes" required="">
+                            <label for="yes" class="button-like">Sí cambio</label>
+
+                            <input type="radio" id="no" name="appraisal_cambio?" value="No" required="">
+                            <label for="no" class="button-like">No cambio</label>
+                        </div>
+                    </div>
+                    <div class="input-box">
+                        <input type="text" id="appraisal_model_desired" placeholder="¿Qué tipo de vehículo desea?"
+                            aria-required="true" maxlength="30" autocapitalize="none" autocorrect="off"
+                            name="appraisal[model_desired]" required>
+                        <span for="appraisal_model_desired">¿Qué tipo de vehículo desea?</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-intro">
+                <div class="form-check form-check--required">
+                    <input type="checkbox" id="vehicle_send_to_friend_legal_policy_accept"
+                        name="vehicle_send_to_friend[legal][policy_accept]" required class="form-check-input" value="1">
+                    <label for="vehicle_send_to_friend_legal_policy_accept" class="required">
+                        Acepto la <a href="/privacy-policy.html" target="_blank" class="blue-link">política de
+                            privacidad</a>.
+                    </label>
+                </div>
+                <div class="form-check form-check--optional">
+                    <input type="checkbox" id="ads_accept" name="ads_accept" class="form-check-input" value="1">
+                    <label for="ads_accept">
+                        Acepto recibir ofertas y promociones de Martínez De Lugo, S.L.U.
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" id="appraisal_vehicle" name="appraisal[vehicle]" value="6272">
+            </div>
+
+            <span class="button-box">
+                <button class="form-submit-button" type="submit" name="submit" disabled>Enviar</button>
+            </span>
+
+            <div class="result-message" id="result"></div>
+        </form>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container"></div>
+
+</body>
+
+<script type="module">
+    import { loadHeaderAndFooter } from './js/pageSetup.js';
+    import { initializeAppraisalFormDropdowns } from './js/formDropdownHandler.js';
+    import { handleFormSubmission, addInputListeners, updateCharCount } from './js/formUtils.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadHeaderAndFooter(); // Load header and footer asynchronously
+        await initializeAppraisalFormDropdowns(); // Wait for dropdown initialization to complete
+
+        // Configuration for the Appraisal Form
+        const appraisalFormConfig = {
+            apiEndpoint: 'https://api.web3forms.com/submit', // Can be changed if needed
+            additionalData: (formData) => ({
+                access_key: formData.get('access_key'),
+                subject: formData.get('subject'),
+                from_name: formData.get('from_name'),
+            }),
+            formatMessage: (formData) => `
+                **Datos de contacto**
+                - Nombre: ${formData.get('appraisal[name]')}
+                - Correo electrónico: ${formData.get('appraisal[email]')}
+                - Teléfono: ${formData.get('appraisal[phone]')}
+                - Comentarios: ${formData.get('appraisal[comments]')}
+
+                **Datos de coche**
+                - Marca: ${formData.get('appraisal[make]')}
+                - Modelo: ${formData.get('appraisal[model]')}
+                - Versión: ${formData.get('appraisal[version]')}
+                - Año: ${formData.get('appraisal[year]')}
+                - Kilometraje: ${formData.get('appraisal[mileage]')}
+                - Combustible: ${formData.get('appraisal[fuel]')}
+                - Cambio: ${formData.get('appraisal[transmission]')}
+                - Carrocería: ${formData.get('appraisal[bodystyle]')}
+                - Color: ${formData.get('appraisal[color]')}
+            `,
+            successCallback: () => window.history.back(), // Change as needed
+        };
+
+        // Add event listeners to form submission
+        const form = document.getElementById('appraisalForm');
+        form.addEventListener('submit', (event) => handleFormSubmission(event, appraisalFormConfig));
+
+        // Add input listeners to enable/disable the submit button
+        addInputListeners(form);
+
+        // Check if elements exist before adding event listeners for dynamic text updates
+        const formTextarea = document.getElementById('appraisal_comments');
+        const formCharCount = document.getElementById('appraisal_char_count');
+
+        const charCountMessage = 'Comentarios sobre la financiación' // Custom message for character count
+
+        if (formTextarea && formCharCount) {
+            formTextarea.addEventListener('input', () => updateCharCount(formTextarea, formCharCount, 350, charCountMessage));
+        }
+    });
+
+</script>
+
+</html>

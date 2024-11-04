@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Información del Vehículo</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            color: #333;
+        }
+
+        .vehicle-print__header,
+        .vehicle-print__content,
+        .vehicle-print__middle {
+            margin-bottom: 20px;
+        }
+
+        .vehicle-print__logo {
+            max-width: 150px;
+        }
+
+        .vehicle-print__company p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        .vehicle-print__title {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .vehicle-print__title-secondary {
+            font-size: 20px;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .vehicle-print__title-tertiary {
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .vehicle-print__image img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        .vehicle-print__features,
+        .vehicle-print__equipment {
+            margin-bottom: 20px;
+        }
+
+        .vehicle-print__price {
+            margin-bottom: 10px;
+        }
+
+        .vehicle-print__price .amount {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .vehicle-print__characteristics .item {
+            margin-bottom: 5px;
+        }
+
+        .vehicle-print__equipment-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .vehicle-print__equipment-item {
+            margin-bottom: 5px;
+        }
+
+        .vehicle-print__whatsapp svg {
+            vertical-align: middle;
+        }
+
+
+
+
+
+
+        /* Container for vehicle image and features */
+.vehicle-print__top {
+    display: flex; /* Use Flexbox to create a side-by-side layout */
+    gap: 20px; /* Optional: Space between the image and features */
+}
+
+/* Style for the image container */
+.vehicle-print__image {
+    flex: 1; /* Allow the image container to take up available space */
+    min-width: 50%; /* Set a maximum width for the image container */
+}
+
+/* Style for the features container */
+.vehicle-print__features {
+    flex: 2; /* Allow the features container to take up more space than the image container */
+}
+
+/* Optional: Make sure images scale properly */
+.vehicle-print__image img {
+    width: 100%; /* Make the image fill the container */
+    height: auto; /* Maintain aspect ratio */
+}
+
+
+
+        /* CSS to style the grid layout */
+        #vehicleCharacteristics {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            /* 2 columns */
+            gap: 10px;
+            /* Space between items */
+            padding: 10px;
+            /* Optional padding around the grid */
+        }
+
+        .item {
+            background-color: #f9f9f9;
+            /* Light background for items */
+            border: 1px solid #ddd;
+            /* Light border for items */
+            padding: 10px;
+            /* Padding inside each item */
+            border-radius: 4px;
+            /* Rounded corners for items */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="vehicle-print__header">
+        <div class="row">
+            <div class="col-6 d-flex justify-content-start">
+                <img src="https://www.sibuscascoche.com/build/images/logo.7672f006.svg" alt="Sibuscascoche"
+                    class="vehicle-print__logo">
+            </div>
+            <div class="col-6">
+                <div class="vehicle-print__company">
+                    <p class="company-name">Sibuscascoche</p>
+                    <p>Avenida Benigno Rivera, 53, Lugo, Lugo, 27297</p>
+                    <p>Tel: 982 871 478, WhatsApp: 676 928 315</p>
+                    <p><a href="https://www.sibuscascoche.com">https://www.sibuscascoche.com</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="vehicle-print__content">
+        <!-- Container for vehicle title -->
+        <div id="vehicleTitle" class="vehicle-print__title"></div>
+
+        <div class="vehicle-print__top">
+            <div id="vehicleImage" class="vehicle-print__image"></div>
+
+            <div class="vehicle-print__features">
+                <div class="vehicle-print__price">
+                    <div class="quota">
+                        <small>Desde</small> <span class="amount">262 <span class="symbol">€/mes</span></span>
+                    </div>
+                    <div class="price">
+                        21.990 <span class="symbol">€*</span>
+                    </div>
+                </div>
+
+                <div id="vehicleCharacteristics" class="vehicle-print__characteristics"></div>
+            </div>
+        </div>
+
+        <div class="vehicle-print__middle">
+            <p>*Precio sujeto a oferta especial por financiación. Precio al contado: 24.990<span class="symbol">€</span>
+            </p>
+            <p>
+                <svg style="height: 40px;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 224 224">
+                    <g fill="none" fill-rule="evenodd" transform="translate(1 1)">
+                        <circle cx="111" cy="111" r="111" fill="#92C46F"></circle>
+                        <rect width="56" height="42.518" x="141" y="111.801" fill="#FFF" rx="6"></rect>
+                        <text fill="#262626" font-family="SegoeUI-Bold, Segoe UI" font-size="130" font-weight="bold">
+                            <tspan x="36" y="149">C</tspan>
+                        </text>
+                        <rect width="47" height="47.242" x="141" y="57" fill="#FFF" rx="6"></rect>
+                    </g>
+                </svg>
+                Este vehículo está catalogado con etiqueta medioambiental "C" por la DGT.
+            </p>
+
+            <h2 class="vehicle-print__title-secondary">Más información</h2>
+            <p>Equipamiento destacado: Audi connect (3 meses prueba), Depósito de combustible ampliado (54 l), Llantas
+                de aleación 7,5 J x 17 diseño de 10 radios con neumáticos 225 / 50 R 17, Advanced edition</p>
+            <p>*LAS IMAGENES PUEDEN NO CORRESPONDERSE CON LA UNIDAD OFERTADA</p>
+            <p>*PRECIO VALIDO SALVO ERROR TIPOGRAFICO</p>
+
+            <h2 class="vehicle-print__title-secondary">Equipamiento</h2>
+
+            <div class="vehicle-print__equipment">
+                <h3 class="vehicle-print__title-tertiary">Extras</h3>
+                <ul class="vehicle-print__equipment-list">
+                    <li class="vehicle-print__equipment-item">Llantas de aleación 7,5 J x 17 diseño de 10 radios con
+                        neumáticos 225 / 50 R 17</li>
+                    <li class="vehicle-print__equipment-item">Advanced edition</li>
+                    <li class="vehicle-print__equipment-item">Audi connect (3 meses prueba)</li>
+                    <li class="vehicle-print__equipment-item">Depósito de combustible ampliado (54 l)</li>
+                </ul>
+            </div>
+
+            <div class="vehicle-print__equipment">
+                <h3 class="vehicle-print__title-tertiary">Seguridad</h3>
+                <ul class="vehicle-print__equipment-list">
+                    <!-- List of safety features -->
+                    <li class="vehicle-print__equipment-item">ABS</li>
+                    <li class="vehicle-print__equipment-item">Indicador de baja presión de los neumáticos</li>
+                    <li class="vehicle-print__equipment-item">Limpiaparabrisas delantero con sensor de lluvia</li>
+                    <li class="vehicle-print__equipment-item">Luces de freno, luces intermitentes laterales y Luces de
+                        día con tecnología LED</li>
+                    <li class="vehicle-print__equipment-item">Preparación Isofix</li>
+                    <li class="vehicle-print__equipment-item">Sistema de servofreno de emergencia</li>
+                    <li class="vehicle-print__equipment-item">Sujeción de carga</li>
+                    <li class="vehicle-print__equipment-item">Suspensión delantera, trasera de multibrazo (multi-link)
+                        con barra estabilizadora mediante muelle helicoidal con ruedas independientes</li>
+                    <li class="vehicle-print__equipment-item">Volante de 3 radios y regulable en altura y en profundidad
+                    </li>
+                </ul>
+            </div>
+
+            <div class="vehicle-print__equipment">
+                <h3 class="vehicle-print__title-tertiary">Confort</h3>
+                <ul class="vehicle-print__equipment-list">
+                    <!-- List of comfort features -->
+                    <li class="vehicle-print__equipment-item">Climatizador automático</li>
+                    <li class="vehicle-print__equipment-item">Control de velocidad de crucero adaptativo</li>
+                    <li class="vehicle-print__equipment-item">Cristales traseros oscurecidos</li>
+                    <li class="vehicle-print__equipment-item">Elevalunas eléctricos</li>
+                    <li class="vehicle-print__equipment-item">Asientos delanteros con ajuste de altura</li>
+                    <li class="vehicle-print__equipment-item">Volante multifunción de cuero</li>
+                </ul>
+            </div>
+
+            <div class="vehicle-print__equipment">
+                <h3 class="vehicle-print__title-tertiary">Tecnología</h3>
+                <ul class="vehicle-print__equipment-list">
+                    <!-- List of technology features -->
+                    <li class="vehicle-print__equipment-item">Sistema de navegación</li>
+                    <li class="vehicle-print__equipment-item">Sistema de audio con pantalla táctil</li>
+                    <li class="vehicle-print__equipment-item">Bluetooth</li>
+                    <li class="vehicle-print__equipment-item">Entrada USB</li>
+                    <li class="vehicle-print__equipment-item">Radio DAB</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="vehicle-print__bottom">
+            <div class="vehicle-print__contact">
+                <p>Para más información, contáctenos:</p>
+                <p><a href="tel:+982871478">Teléfono: 982 871 478</a></p>
+                <p><a href="https://wa.me/34676928315">WhatsApp: 676 928 315</a></p>
+                <p><a href="mailto:info@sibuscascoche.com">Email: info@sibuscascoche.com</a></p>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+<script>
+    document.addEventListener('DOMContentLoaded', async () => {
+        // Function to retrieve query parameters from the URL
+        function getQueryParameter(name) {
+            return new URLSearchParams(window.location.search).get(name);
+        }
+
+        // Fetch car reference from the URL
+        const carReference = getQueryParameter('id'); // Use 'id' as the query parameter name
+
+        if (!carReference) {
+            console.error('Car ID is missing in the query parameters.');
+            return;
+        }
+
+        // Log the car reference to the console
+        console.log('Car Reference:', carReference);
+
+        try {
+            // Fetch car data using the car reference
+            const carData = await fetchJson(`listings/${carReference}/data.json`);
+
+            // Log the car data to the console
+            console.log('Car Data:', carData);
+
+            populateCarData(carData);
+
+            // Trigger print dialog
+            window.print();
+
+        } catch (error) {
+            console.error('Error fetching car data:', error);
+        }
+    });
+
+    // Function to fetch JSON data from a URL
+    async function fetchJson(url) {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Failed to fetch ${url}: ${response.statusText}`);
+        }
+        return await response.json();
+    }
+
+    // Function to populate car data into the page
+    function populateCarData(carData) {
+        const titleElement = document.getElementById('vehicleTitle');
+        const imageElement = document.getElementById('vehicleImage');
+        const priceElement = document.getElementById('vehiclePrice');
+        const characteristicsElement = document.getElementById('vehicleCharacteristics');
+        const contactElement = document.getElementById('vehicleContact');
+
+        // Populate title
+        titleElement.textContent = `${carData.CaracteristicasGenerales.Año} ${carData.CaracteristicasGenerales.Marca} ${carData.CaracteristicasGenerales.Modelo} ${carData.CaracteristicasGenerales.Versión} ${carData.MotorYTransmision.Combustible.Tipo} - ${carData.CaracteristicasGenerales.Color} ${carData.Carroceria.Tipo} (${carData.Carroceria.Puertas}p)`;
+
+        // Populate image
+        imageElement.innerHTML = `<img src="listings/${carData.JavaScriptInfo.id}/images/1.webp" alt="" loading="lazy">`;
+
+        // Populate price
+        //priceElement.innerHTML = `
+        //<div class="quota">
+        //    <small>Desde</small> <span class="amount">${carData.monthlyPrice} <span class="symbol">€/mes</span></span>
+        //</div>
+        //<div class="price">
+        //    ${data.price} <span class="symbol">€*</span>
+        //</div>
+        //`;
+
+        const guaranteeMonths = carData.Garantía.GarantíaEstándar * 12
+        // Populate characteristics
+        const characteristics = `
+            <div class="item"><span class="descriptor">Año</span> ${carData.CaracteristicasGenerales.Año}</div>
+            <div class="item"><span class="descriptor">Kilómetros</span> ${carData.CaracteristicasGenerales.Kilometraje} <small>km</small></div>
+            <div class="item"><span class="descriptor">Combustible</span> ${carData.MotorYTransmision.Combustible.Tipo}</div>
+            <div class="item"><span class="descriptor">Cambio</span> ${carData.MotorYTransmision.Transmision.Caja}</div>
+            <div class="item"><span class="descriptor">Motor</span> ${carData.MotorYTransmision.Potencia.CV} <span class="symbol">cv</span> / ${carData.MotorYTransmision.Cilindrada.CC} <span class="symbol">cm<sup>3</sup></span></div>
+            <div class="item"><span class="descriptor">Garantía</span> ${guaranteeMonths} <small>meses</small></div>
+            <div class="item"><span class="descriptor">Color</span> ${carData.CaracteristicasGenerales.Color}</div>
+            <div class="item"><span class="descriptor">Consumos</span> <span class="value">${carData.ConsumoYEmisiones.Consumo.Medio}<span
+                                    class="symbol">l/100</span> / ${carData.ConsumoYEmisiones.Consumo.Urbano}<span class="symbol">l/100</span> / ${carData.ConsumoYEmisiones.Consumo.Carretera}<span
+                                    class="symbol">l/100</span></span></div>
+        `;
+        characteristicsElement.innerHTML = characteristics;
+
+        console.log(characteristics)
+
+        // Populate contact
+        //contactElement.innerHTML = `
+        //  <p>Para más información, contáctenos:</p>
+        //  <p><a href="tel:+982871478">Teléfono: ${carData.phone}</a></p>
+        //  <p><a href="https://wa.me/${carData.whatsapp}">WhatsApp: ${carData.whatsapp}</a></p>
+        //  <p><a href="mailto:${carData.email}">Email: ${carData.email}</a></p>
+        //`;
+    }
+</script>
+
+</html>

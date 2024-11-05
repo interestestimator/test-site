@@ -274,7 +274,7 @@
     opacity: 0.6;                       /* Visual effect */
 }
 
-.thumbnail.active {
+.thumbnail-image.active {
     opacity: 1;                         /* Full opacity for active thumbnail */
 }
 

@@ -20,9 +20,9 @@ const createDetailDiv = (containerId, iconPath, name, value, description, additi
         <img class="img-48 mr-sm" src="${iconPath}" alt="${description}">
         <div class="flex fd-col ml-sm">
             <span class="b2 bold upper">${value}</span>
-            <span class="b2 italic txt-dark">${description}</span>
+            <span class="b2 italic light txt-dark">${description}</span>
             ${additionalInfo ? `
-                <label class="more-information ${name} btn flex ai-center txt-accent pt-xsm b3">
+                <label class="more-information ${name} btn flex pt-xsm ai-center b3 light txt-accent">
                     <img class="img-12 mr-xsm" src="icons/ui/actions/more-info.svg" alt="More information">
                     ${additionalInfo}
                 </label>` : ''}

@@ -106,28 +106,28 @@ function initializeFinanceSection(financeSectionContainer, financePrice, price) 
 
     financeSectionContainer.innerHTML = `
         <div id="priceItems" class="price-items flex">
-            <div class="box txt-left contrast">
-                <span class="h3 italic">Financiando</span>
-                <span class="b1">sujeto a financiación</span>
+            <div class="box flex fd-col px-lg pblk-sm txt-right contrast">
+                <span class="pt-xsm h4 italic">Financiando</span>
+                <span class="b2">sujeto a financiación</span>
                 <span id="precioFinacio" class="h2">${financePrice}*</span>
             </div>
-            <div class="box txt-right">
-                <span class="h3 italic">Al contado</span>
-                <span class="b1">sin financiación</span>
+            <div class="box flex fd-col px-lg pblk-sm txt-right">
+                <span class="pt-xsm h4 italic">Al contado</span>
+                <span class="b2">sin financiación</span>
                 <span id="precioNuevo" class="h2">${price}*</span>
             </div>
         </div>
         <div id="initalFinanceValue" class="px-lg pblk-md flex jc-between ai-center bg-light"></div>
         <div id="carFinanceOptionsContainer" class="price-group"></div>
-        <div class="bg-black">
-            <div id="vehicle-price-result" class="vehicle-price-result">
-                <span class="b1">
+        <div class="pb-lg bg-black">
+            <div id="vehicle-price-result" class="flex jc-between px-lg pblk-md">
+                <span class="b1 txt-light">
                     <span class="h3">Precio Final</span><br>
                     <span>Todo incluido. Llave en mano.</span>
                 </span>
-                <span id="PrecioFinal" class="h2">${financePrice}*</span>
+                <span id="PrecioFinal" class="h2 txt-light">${financePrice}*</span>
             </div>
-            <div class="vehicle-price-result__action">
+            <div class="vehicle-price-result__action flex fd-col px-lg">
                 <div id="priceAlertBtn" class="btn round-xlg px-lg pblk-sm bg-accent center">
                     <span class="txt-light h4 italic">Avísame si baja de precio</span>
                 </div>

@@ -29,7 +29,7 @@ function renderThumbnails(state, thumbnailContainer, galleryType) {
         const thumbnail = document.createElement('img');
         thumbnail.src = imagesUrlList[index];
         thumbnail.alt = `Thumbnail ${index + 1}`;
-        thumbnail.className = `gallery-image thumbnail${index === currentImageIdx ? ' active' : ''}`;
+        thumbnail.className = `thumbnail-image${index === currentImageIdx ? ' active' : ''}`;
         fragment.appendChild(thumbnail);
     }
 
@@ -188,3 +188,5 @@ function setupImageEventListeners(state, prevImageButton, nextImageButton, carIm
 }
 
 export { preloadImages, setupImageEventListeners }; 
+
+

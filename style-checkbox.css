@@ -1,0 +1,131 @@
+
+.box { flex: 1; }
+
+
+
+/* Car Overview Container Styles */
+#carOverviewContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 2rem 0 0 0;
+}
+
+#carOverviewContainer .more-details {
+    display: flex;
+    min-height: 4.5rem;
+}
+
+@media (max-width: 480px) {
+    #carOverviewContainer {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    #carOverviewContainer .more-details {
+        min-height: 3.75rem;
+    }
+}
+
+
+
+/* Company Advantages Container Styles */
+#companyAdvantagesContainer {
+    padding-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    align-items: center;
+    /* Vertically center items in grid cells */
+}
+
+@media (max-width: 480px) {
+    #companyAdvantagesContainer {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+#companyAdvantagesContainer .more-details {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: auto;
+    gap: 10px;
+}
+
+#companyAdvantagesContainer .more-details img {
+    margin-right: 10px;
+    height: 60px;
+    width: 60px;
+}
+
+#companyAdvantagesContainer .detail-text {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+
+.silder-container {
+    padding: 1.5rem;
+    background-color: var(--light-gray);
+    margin: 0 1.5rem 1.5rem 0;
+}
+
+.rangeSlider {
+    accent-color: var(--accent);
+    width: 100%;
+}
+
+#deposit-input {
+    width: 8rem;
+}
+
+#deposit-input:focus {
+    outline: none;
+    border: none;
+}
+
+#term-select {
+    width: 9.7rem;
+}
+
+#regionDropdown {
+    border: 0;
+}
+
+
+
+/*////////////////////////////  DROPDOWN CONTENT STYLING //////////////////////////////*/
+
+
+/* General Dropdown Content Styling */
+.features-dropdown-content,
+.specs-dropdown-content {
+    display: none;
+    border-radius: 0 0 1rem 0;
+
+}
+
+/* Show class for both dropdowns */
+.features-dropdown-content.show,
+.specs-dropdown-content.show {
+    display: block;
+}
+
+.custom-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.spec-item:nth-child(odd) {
+    background-color: var(--light-gray);
+}
+
+.spec-name {
+    flex: 1;
+}
+
+.spec-value {
+    text-align: right;
+    margin-left: 10px;
+}

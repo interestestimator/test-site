@@ -1,0 +1,78 @@
+<style>
+    /* Navigation styling */
+    #navList {
+        list-style: none;
+    }
+
+    #navList li a {
+        display: block;
+        padding: 0.5rem 0;
+        transition: border-bottom 0.3s ease;
+        border-bottom: 3px solid transparent;
+    }
+
+    #navList li a:hover,
+    #navList li a:focus {
+        border-bottom-color: var(--black);
+    }
+
+    /* Mobile styles */
+    @media (max-width: 969px) {
+        .header-main-content {
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo img {
+            max-width: 220px;
+        }
+
+        #navList {
+            display: none;
+            flex-direction: column;
+            width: 100%;
+            background-color: #F5F5F5;
+            position: absolute;
+            left: 0;
+            box-shadow:
+                inset 0 -1px 0 0 #E5E5E5,
+                inset 0 1px 0 0 #E5E5E5;
+        }
+
+        #navList.active {
+            display: flex;
+        }
+
+        #navList li {
+            width: fit-content;
+            padding: .75rem 0;
+        }
+    }
+
+    @media (min-width: 969px) {
+        .menu-toggle {
+            display: none;
+        }
+    }
+</style>
+
+<div class="header-main-content flex pblk-sm">
+    <div class="mw-container flex jc-between ai-center" style="width: 100%;">
+        <a class="logo" href="index.html">
+            <img src="icons/company/branding/mdl-logo.svg" alt="Logo" width="300">
+        </a>
+        <nav>
+            <div class="menu-toggle">
+                <img class="img-24 popup-option" src="icons/menu-icons/header.svg" alt="Close">
+            </div>
+            <ul id="navList" class="flex mr-md pl-md b1 bold upper">
+                <li class="ml-md"><a href="vehiculos-nuevos.html">Nuevos</a></li>
+                <li class="ml-md"><a href="vehiculos-ocasion.html">Segunda Mano</a></li>
+                <li class="ml-md"><a href="vender-mi-vehiculo.html">Vender</a></li>
+                <li class="ml-md"><a href="taller.html">Taller</a></li>
+                <li class="ml-md"><a href="#">Sobre Nosotros</a></li>
+                <li class="ml-md"><a href="contact-us.html">Contado</a></li>
+            </ul>
+        </nav>
+    </div>
+</div>

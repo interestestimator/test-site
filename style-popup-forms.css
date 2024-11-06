@@ -1,0 +1,118 @@
+.form-submit-button {
+  border: none;
+  width: 100%
+}
+
+/* Apply styles when the button is disabled */
+.form-submit-button:disabled {
+  cursor: not-allowed; 
+  background-color: var(--dark-gray); /* Optional: Set background color for disabled state */
+}
+
+
+
+
+/* General input, select, and textarea styles */
+.input-box input,
+.input-box select,
+.input-box textarea {
+  height: var(--xlg);
+  width: 100%;
+  border: 1px solid var(--medium-gray);
+  outline: none;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+.input-box textarea {
+  min-height: 8rem;
+  overflow: auto;
+}
+
+/* Input box container positioning */
+.input-box {
+  position: relative;
+}
+
+/* Placeholder span styling */
+input+span,
+select+span,
+textarea+span {
+  display: none;
+  position: absolute;
+  transition: top 0.3s;
+  color: var(--darker-gray);
+}
+
+/* Input with content styles */
+.input-has-content {
+  padding-top: 0.75rem;
+}
+
+.input-has-content+span {
+  display: block;
+  top: 0;
+}
+
+/* Focus state */
+input:focus,
+textarea:focus {
+  border-color: var(--dark-gray);
+}
+
+
+
+
+
+
+/* Form options container styles */
+.form-options {
+  display: flex;
+  flex-wrap: wrap;
+  /* Allows buttons to wrap to the next line if needed */
+  border-radius: 1.5rem;
+  overflow: hidden;
+  /* Ensure rounded corners are respected */
+  border: 1px solid #DBDBDB;
+}
+
+/* Hide the actual radio input */
+.form-options input[type="radio"],
+.form-options select[type="radio"] {
+  display: none;
+}
+
+
+/* Style the labels to look like buttons */
+.button-like {
+  flex: 1 1 calc(33.3% - 1rem);
+  /* Adjust width to 33.3% minus the gap space */
+  padding: .75rem .5rem;
+  border-right: 1px solid #DBDBDB;
+  background-color: #FAFAFA;
+  cursor: pointer;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  user-select: none;
+  text-align: center;
+  /* Center text within the button */
+  box-sizing: border-box;
+  /* Ensures padding and border are included in the width */
+}
+
+/* Highlight the "selected" button */
+.form-options input[type="radio"]:checked+.button-like,
+.form-options select[type="radio"]:checked+.button-like {
+  background-color: #FE5100;
+  border-color: #FE5100;
+  color: white;
+}
+
+
+
+/* Change check color to accent */
+input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+
+

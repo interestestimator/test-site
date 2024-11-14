@@ -1,0 +1,82 @@
+<div class="light">
+    <div class="h3">CONTÁCTANOS PARA LO QUE QUIERAS</div>
+    <div class="pt-xsm pb-md b1">
+        Si tienes la más mínima duda sobre lo que sea, aqui tienes todas las formas de
+        contactar con nosotros.
+    </div>
+    <div class="company-details">
+        <div>
+            <span class="bold upper">CONTADO</span><br>
+            <a class="link" href="/contact-us.html">
+                Martínez De Lugo, S.L.U.<br>
+                Estrada de A Coruna, 50, 27003 Lugo
+            </a>
+        </div>
+        <div>
+            <span class="bold upper">Llámanos</span><br>
+            <a class="link" href="tel:982217403">982 21 74 03</a><br>
+            <a class="link" href="tel:982217403">982 21 74 02</a>
+        </div>
+        <div>
+            <span class="bold upper">Horario</span><br>
+            Lun - Vie: 9:00 - 13:30, 15:30 - 20:00<br>
+            Sáb: 10:00 - 13:00
+        </div>
+    </div>
+    <div class="pt-md b2 italic light txt-dark">Completa el formulario a continuación para
+        comunicarte con nosotros. Agradecemos tus comentarios y te responderemos lo
+        antes posible.
+    </div>
+</div>
+
+<form id="contactUsForm">
+    <input type="hidden" name="access_key" value="fc184b2a-7c0d-4071-a665-e807c3f4e679">
+    <input type="hidden" name="subject" value="Contacto">
+    <input type="hidden" name="from_name" value="Car Dealership">
+
+    <div class="input-box pt-sm">
+        <input class="round-sm px-md oh bg-light b3" type="text" id="name" placeholder="Nombre *" aria-required="true"
+            maxlength="30" autocapitalize="none" autocorrect="off" name="name" required="">
+        <span class="px-md pt-md b4 light" for="name">Nombre *</span>
+    </div>
+    <div class="input-box pt-sm">
+        <input class="round-sm px-md oh bg-light b3" type="email" id="email" placeholder="Correo electrónico *"
+            aria-required="true" maxlength="30" autocapitalize="none" autocorrect="off" name="email" required="">
+        <span class="px-md pt-md b4 light" for="email">Correo electrónico *</span>
+    </div>
+    <div class="input-box pt-sm">
+        <input class="round-sm px-md oh bg-light b3" type="tel" id="phone" placeholder="Teléfono *" aria-required="true"
+            maxlength="9" autocapitalize="none" autocorrect="off" name="phone" inputmode="numeric" pattern="[0-9]*"
+            title="Por favor, ingresa un número de teléfono válido (solo números)" required="">
+        <span class="px-md pt-md b4 light" for="phone">Teléfono *</span>
+    </div>
+    <div class="input-box pt-sm">
+        <label id="contact_us_char_count" for="contact_us_comments" class="b2 italic light txt-dark">
+            Motivo del contacto (máx. 350 caracteres)
+        </label>
+        <textarea id="contact_us_comments" class="mblk-xsm round-sm px-md pt-sm oh bg-light b2"
+            name="contact_us_comments" class="form-textarea" placeholder="Tu mensaje" rows="4" maxlength="350"
+            required=""></textarea>
+    </div>
+    <div class="pt-sm pb-md b2 light">
+        <div class="form-check form-check--required">
+            <input type="checkbox" id="vehicle_send_to_friend_legal_policy_accept"
+                name="vehicle_send_to_friend[legal][policy_accept]" required="" class="form-check-input" value="1">
+            <label for="vehicle_send_to_friend_legal_policy_accept" class="required">
+                Acepto la <a href="/privacy-policy.html" target="_blank" class="link">
+                    <b><u>política de privacidad.</u></b>
+                </a>
+            </label>
+        </div>
+        <div class="form-check form-check--optional">
+            <input type="checkbox" id="ads_accept" name="ads_accept" class="form-check-input" value="1">
+            <label for="ads_accept">
+                Acepto recibir ofertas y promociones de Martínez De Lugo, S.L.U.
+            </label>
+        </div>
+    </div>
+    <button class="form-submit-button round-xlg px-lg pblk-sm bg-darkist center h4 txt-light" type="submit"
+        name="submit" disabled="">
+        Enviar Mensaje
+    </button>
+</form>

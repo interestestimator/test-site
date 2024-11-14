@@ -1,0 +1,260 @@
+{
+    "id": "VO-00001",
+    "estado": "reservado",
+    "informacion": {
+      "marca": "BMW",
+      "modelo": "3008",
+      "version": "Active",
+      "color": "Blanco",
+      "ano": {
+        "fabricacion": 2015,
+        "matriculacion": 2016
+      },
+      "kilometros": 12740,
+      "precio": {
+        "actual": 9300,
+        "anterior": 9900,
+        "financiado": 8900
+      }
+    },
+    "carroceria": {
+      "tipo": "SUV",
+      "plazas": 5,
+      "puertas": 5,
+      "peso": 1440,
+      "dimensiones": {
+        "longitud": 4313,
+        "anchura": 1785,
+        "altura": 1426,
+        "ejes": 2489,
+        "via": 1550
+      }
+    },
+    "motor": {
+      "combustible": "gasolina",
+      "tecnologia": "BlueHDi",
+      "cilindrada": 1968,
+      "potencia": {
+        "cv": 140,
+        "kw": 100,
+        "par": 320
+      },
+      "cilindros": {
+        "numero": 4,
+        "tipo": "L"
+      },
+      "transmision": {
+        "tipo": "M",
+        "marchas": 7
+      },
+      "rendimiento": {
+        "aceleracion": 8.1,
+        "velocidadMax": 218
+      }
+    },
+    "emisiones": {
+      "etiqueta": "zero",
+      "co2": 165
+    },
+    "consumo": {
+      "tanque": 50,
+      "combinado": 9.5,
+      "urbano": 5.2,
+      "autopista": 4.0
+    },
+    "galerias": {
+      "general": {
+        "cantidad": 19,
+        "descripciones": []
+      },
+      "exterior": {
+        "cantidad": 5,
+        "descripciones": [
+          "Azul",
+          "Blanco",
+          "Gris Lunar",
+          "Negro",
+          "Verde"
+        ]
+      },
+      "interior": {
+        "cantidad": 5,
+        "descripciones": [
+          "Borgoña",
+          "Beige",
+          "Negro",
+          "Cámel",
+          "Marfil"
+        ]
+      }
+    },
+    "extras": {
+      "intercambio": true,
+      "entrega": true,
+      "mantenimiento": true,
+      "revision": true,
+      "devolucion": true
+    },
+    "garantia": {
+      "general": 12,
+      "motor": 12,
+      "bateria": 24
+    },
+    "historial": {
+      "propietarios": 2,
+      "mantenimiento": "15/10/2023",
+      "itv": "15/10/2023",
+      "accidentes": false,
+      "recalls": false
+    },
+    "Caracteristicas": {
+      "Sistema De Regeneracion De Frenada": {
+        "image": 1,
+        "description": "La tecnología de regeneración de energía del Seres 3 le permite recargar las baterías mientras conduce, aprovechando al máximo cada frenada y desaceleración para aumentar su autonomía de 405km y mantener su potencia de manera constante."
+      },
+      "Motor Electrico de Alta Potencia": {
+        "image": 2,
+        "value": "El Seres 3 cuenta con un motor eléctrico avanzado que entrega una aceleración suave y eficiente, asegurando un rendimiento excepcional sin comprometer el consumo de energía."
+      },
+      "Sistema De Asistencia Al Conductor": {
+        "image": 3,
+        "value": "El vehículo está equipado con un sistema de asistencia al conductor de última generación, ofreciendo alertas y asistencia activa en carretera para garantizar la seguridad y comodidad de los pasajeros."
+      }
+    },
+      "Especificaciones": {
+        "Parámetros Básicos": [
+          { "name": "Dimensiones (L*W*H)", "value": "4610×1855×1740 mm" },
+          { "name": "Distancia entre ejes", "value": "2750 mm" },
+          { "name": "Suspensión (Delante/Detrás)", "value": "968/892 mm" },
+          { "name": "Ancho de vía", "value": "1575/1575 mm" },
+          { "name": "Capacidad del tanque de combustible", "value": "52 litros" },
+          { "name": "Peso en vacío", "value": "1520 kg" },
+          { "name": "Velocidad máxima", "value": "180 km/h" }
+        ],
+        "Motor": [
+          { "name": "Engine Type", "value": "SWD15T (打刻DG15T)" },
+          { "name": "Displacement", "value": "1498 cc" },
+          { "name": "Max Power", "value": "131 hp" },
+          { "name": "Max Torque", "value": "215 N·m / rpm" },
+          { "name": "Emission Standard", "value": "EURO 6 D" },
+          { "name": "Transmission", "value": "6MT" },
+          { "name": "CO2 Emissions", "value": "182 g/km" },
+          { "name": "WLTP Combined", "value": "8.03 l/100km" },
+          { "name": "WLTP - Extra High Phase", "value": "8.18 l/100km" },
+          { "name": "WLTP - High Phase", "value": "6.97 l/100km" },
+          { "name": "WLTP - Medium Phase", "value": "7.51 l/100km" },
+          { "name": "WLTP - Low Phase", "value": "10.87 l/100km" }
+        ],
+        "Chasis": [
+          { "name": "Suspension (F/R)", "value": "McPherson delantera / suspensión independiente post-multi-link" },
+          { "name": "Brakes", "value": "Freno de DISCO en las cuatro ruedas" },
+          { "name": "Traction", "value": "DELANTERA" },
+          { "name": "Parking Brake System", "value": "Freno de mano electrónico" },
+          { "name": "Steering", "value": "DIRECCION ASISTIDA ELECTRICA (EPS)" },
+          { "name": "Steering Force Adjusted in Two Levels", "value": "✔" },
+          { "name": "Tires", "value": "225/60 R18" },
+          { "name": "Spare Wheel", "value": "T155/90R17" }
+        ],
+        "Exterior": [
+          { "name": "Faro Halógeno", "value": "✔" },
+          { "name": "LED DRL (Integración de Faros)", "value": "✔" },
+          { "name": "Retardo de Luz Después de Apagar el Motor", "value": "✔" },
+          { "name": "Ajuste Eléctrico Espejo Retrovisor Exterior", "value": "✔" },
+          { "name": "Espejo con Calefacción", "value": "✔" },
+          { "name": "Retrovisor Exterior Plegable Eléctrico", "value": "✔" },
+          { "name": "Antena de Aleta de Tiburón", "value": "✔" },
+          { "name": "Rack de Techo (Tipo Hueco)", "value": "✔" },
+          { "name": "Llantas de Aleación de Aluminio Bicolor", "value": "✔" },
+          { "name": "Luz Trasera LED Arrow Tail", "value": "✔" },
+          { "name": "Señal de Giro de Flujo (Integración Luz Trasera)", "value": "✔" },
+          { "name": "Limpiador Frontal Sin Hueso (Oculto)", "value": "✔" },
+          { "name": "Limpiaparabrisas Trasero", "value": "✔" },
+          { "name": "Descongelamiento Eléctrico del Parabrisas Trasero", "value": "✔" },
+          { "name": "Cola de Escape Pulido Bilateral Moda Garganta", "value": "✔" },
+          { "name": "Panel Superior de Protección del Motor", "value": "✔" },
+          { "name": "Panel Inferior de Protección del Motor", "value": "✔" }
+        ],
+        "Interior": [
+          { "name": "Interior de Lujo Ligero (La Tira de Decoración es Tira Brillante Cromada)", "value": "✔" },
+          { "name": "Tablero Suave de Alto Nivel (Superior y Medio)", "value": "✔" },
+          { "name": "Panel de Puerta Suave de Alto Nivel (La Parte Superior del Panel de la Puerta y la Parte Superior del Apoyabrazos)", "value": "✔" },
+          { "name": "Caja de Almacenamiento en la Consola Central", "value": "✔" },
+          { "name": "Tela de Techo - Tejido de Punto de Urdidura", "value": "✔" },
+          { "name": "Medidor Combinado Deportivo (4,2 Pulgadas)", "value": "✔" },
+          { "name": "Volante de Cuero", "value": "✔" },
+          { "name": "Volante Multifunción Botón Izquierdo Grupo 2 (Con Voz)", "value": "✔" },
+          { "name": "Volante Multifunción Botón Derecho Grupo 1 (Sin Control de Crucero)", "value": "✔" },
+          { "name": "El Cabezal de Bola del Cambio Manual", "value": "✔" },
+          { "name": "Asientos del Conductor / Pasajero Delanteros Protector Solar con Espejo Cosmético", "value": "✔" },
+          { "name": "Luz de Lectura LED Delantera", "value": "✔" },
+          { "name": "Espejo Retrovisor Interior Antirreflejos Manual", "value": "✔" },
+          { "name": "Cubierta de Compartimento de Equipaje", "value": "✔" }
+        ],
+        "Dispositivos de Confort": [
+          { "name": "Techo Panorámico", "value": "✔" },
+          { "name": "Techo Panorámico Eléctrico", "value": "✔" },
+          { "name": "A / A Automático", "value": "✔" },
+          { "name": "Salida de Aire Acondicionado Trasera", "value": "✔" },
+          { "name": "Asiento de Cuero (El Tejido Principal es Cuero)", "value": "✔" },
+          { "name": "Asiento del Conductor 6 Ajuste Manual", "value": "✔" },
+          { "name": "Función de Calefacción del Asiento del Conductor", "value": "✔" },
+          { "name": "Función de Ventilación del Asiento del Conductor", "value": "✔" },
+          { "name": "Asiento del Pasajero Delantero 4 Ajuste Manual", "value": "✔" },
+          { "name": "Asientos de Segunda Fila Reposacabezas Medio", "value": "✔" },
+          { "name": "Asientos de Segunda Fila Apoyabrazos Medio", "value": "✔" },
+          { "name": "Asientos de la Segunda Fila Abajo (4/6)", "value": "✔" },
+          { "name": "Soporte Segunda Fila", "value": "✔" },
+          { "name": "Ventana Abatible con una Tecla para Cuatro Puertas", "value": "✔" },
+          { "name": "Ventana Elevadora de Una Llave para la Puerta del Conductor Principal", "value": "✔" },
+          { "name": "Función Anti-Pinch para la Unidad Principal", "value": "✔" },
+          { "name": "Apertura / Cierre de Ventana de Control Remoto con Llave", "value": "✔" },
+          { "name": "Entrada Sin Llave de PEPS + Inicio con un Botón", "value": "✔" },
+          { "name": "2 Llave Inteligente", "value": "✔" },
+          { "name": "Soporte Taza de Calefacción / Refrigeración de Primera Fila", "value": "✔" },
+          { "name": "Amortiguadores en el Capó Delantero", "value": "✔" }
+        ],
+        "Dispositivos de Seguridad": [
+          { "name": "ABS+EBD", "value": "✔" },
+          { "name": "Control Electrónico de Estabilidad del Cuerpo ESC", "value": "✔" },
+          { "name": "Sistema de Control de Tracción", "value": "✔" },
+          { "name": "HBA (Asistencia de Freno Hidráulico)", "value": "✔" },
+          { "name": "HHC (Control de Arranque en Subida)", "value": "✔" },
+          { "name": "Recuerda Automáticamente el Siguiente Coche Durante el Frenado de Emergencia (Doble Parpadeo)", "value": "✔" },
+          { "name": "Airbag Delantero Dos (Conductor / Pasajero Delantero)", "value": "✔" },
+          { "name": "Radar de Inversión Trasero", "value": "✔" },
+          { "name": "Cámara Trasera", "value": "✔" },
+          { "name": "Sistema de Control de Presión de Neumáticos (Activo)", "value": "✔" },
+          { "name": "Manija de Seguridad Trasera", "value": "✔" },
+          { "name": "Cinturón de Seguridad Limitador de Fuerza Pretensado de la Fila Delantera", "value": "✔" },
+          { "name": "Ajuste de Altura del Cinturón de Seguridad Delantero", "value": "✔" },
+          { "name": "Cinturones de Seguridad de la Fila Trasera (Ambos Lados)", "value": "✔" },
+          { "name": "Advertencia del Cinturón de Seguridad del Conductor", "value": "✔" },
+          { "name": "Advertencia del Cinturón de Seguridad del Pasajero Delantero", "value": "✔" },
+          { "name": "Sistema Anti-Pincho de Ventana del Conductor", "value": "✔" },
+          { "name": "Función de Bloqueo Automático de Funcionamiento", "value": "✔" },
+          { "name": "Advertencia de Llave Olvidada", "value": "✔" },
+          { "name": "Advertencia de Límite de Desgaste del Disco de Freno", "value": "✔" },
+          { "name": "Advertencia de Freno de Estacionamiento No Liberado", "value": "✔" },
+          { "name": "Sistema Inmovilizador Electrónico", "value": "✔" },
+          { "name": "Mando a Distancia Móvil", "value": "✔" },
+          { "name": "Sistema de Apertura con Bloqueo de Puerta de Seguridad Colisión", "value": "✔" },
+          { "name": "Dispositivo de Fijación de Seguridad para Asiento Infantil (Fijación ISO)", "value": "✔" }
+        ],
+        "Dispositivos de Entretenimiento": [
+          { "name": "Pantalla Táctil de Internet Multimedia Colorida de 10 Pulgadas", "value": "✔" },
+          { "name": "Controlador Multimedia", "value": "✔" },
+          { "name": "Coche WiFi Hotspot Compartir", "value": "✔" },
+          { "name": "Conexión Bluetooth", "value": "✔" },
+          { "name": "Encendedor de Cigarrillos de Primera Fila", "value": "✔" },
+          { "name": "Puerto USB 1 de la Fila Frontal", "value": "✔" },
+          { "name": "Puerto USB 2 de la Fila Frontal", "value": "✔" },
+          { "name": "Fila Frontal 12V", "value": "✔" },
+          { "name": "Puerto USB de la Fila Trasera", "value": "✔" },
+          { "name": "Luz del Tronco", "value": "✔" },
+          { "name": "Altavoces Hi-Fi 7", "value": "✔" },
+          { "name": "Herramientas para el Coche", "value": "✔" },
+          { "name": "Extintor de Incendios", "value": "✔" },
+          { "name": "Señales de Advertencia Triangulares", "value": "✔" }
+        ]
+      }
+    }

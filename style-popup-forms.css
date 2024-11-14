@@ -1,0 +1,123 @@
+.popup-details {
+  display: grid;
+  gap: 1rem;
+  /* Space between items */
+}
+
+.popup-details {
+  grid-template-columns: repeat(auto-fill, minmax(8.75rem, 1fr));
+  /* Automatically adjusts columns */
+}
+
+.form-submit-button:hover:not([disabled]) {
+  filter: brightness(1.4);
+}
+
+/* General button styles */
+.form-submit-button {
+  border: none;
+  width: 100%;
+}
+
+/* Disabled button state */
+.form-submit-button:disabled {
+  cursor: not-allowed;
+  background-color: var(--medium-gray);
+  /* Optional: Set background color for disabled state */
+}
+
+/* General input, select, and textarea styles */
+.input-box input,
+.input-box select,
+.input-box textarea {
+  height: var(--xlg);
+  width: 100%;
+  border: 1px solid var(--medium-gray);
+  outline: none;
+  text-overflow: ellipsis;
+  box-sizing: border-box;
+}
+
+/* Specific textarea styles */
+.input-box textarea {
+  min-height: 8rem;
+  overflow: auto;
+}
+
+/* Input box container positioning */
+.input-box {
+  position: relative;
+}
+
+/* Placeholder span styling (combined selectors) */
+input+span,
+select+span {
+  display: none;
+  position: absolute;
+  transition: top 0.3s;
+  color: var(--darker-gray);
+}
+
+/* Input with content styles (grouped common properties) */
+input.input-has-content,
+select.input-has-content {
+  padding-top: var(--md);
+}
+
+.input-has-content+span {
+  display: block;
+  top: 0;
+}
+
+/* Focus state for inputs and textareas */
+input:focus,
+textarea:focus {
+  border-color: var(--dark-gray);
+}
+
+/* Checkbox accent color */
+input[type="checkbox"] {
+  accent-color: var(--accent);
+}
+
+
+
+
+
+
+
+/* Style the labels to look like buttons */
+.button-like {
+  flex: 1 1 calc(33.3% - 1rem);
+  border-right: 1px solid #DBDBDB;
+}
+
+/* Form options container styles */
+.form-options {
+  /* Ensure rounded corners are respected */
+  border: 1px solid #DBDBDB;
+}
+
+/* Hide the actual radio input */
+.form-options input[type="radio"],
+.form-options select[type="radio"] {
+  display: none;
+}
+
+/* Highlight the "selected" button */
+.form-options input[type="radio"]:checked+.button-like,
+.form-options select[type="radio"]:checked+.button-like {
+  background-color: #FE5100;
+  border-color: #FE5100;
+  color: white;
+}
+
+
+
+
+
+textarea {
+  font-family: 'MyCustomFutura', sans-serif;
+  font-weight: 300;
+  color: var(--black);
+}

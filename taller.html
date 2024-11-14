@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Workshop Information</title>
+
+    <!-- Load Icons -->
+    <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+    <!-- Preloading Stylesheets -->
+    <link rel="preload" href="css/root.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="css/style.css" as="style" onload="this.rel='stylesheet'">
+
+    <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+    <link rel="preload" href="style-popup-forms.css" as="style" onload="this.rel='stylesheet'">
+    <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+
+    <!-- Fallback for Non-JavaScript Users -->
+    <noscript>
+        <link rel="stylesheet" href="css/root.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style-listings.css">
+    </noscript>
+
+    <style>
+        .workshop-items {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(19.25rem, 1fr));
+            gap: .5rem;
+        }
+
+        .car-container:hover {
+            background-color: var(--accent);
+        }
+
+        /* Individual car item styling */
+        .car-container {
+            overflow: hidden;
+            /* Hides overflowing content */
+            transition: box-shadow 0.3s;
+            /* Smooth transition for shadow on hover */
+        }
+
+        .car-container:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1), 0 0 2px rgba(0, 0, 0, 0.4);
+            /* Enhanced shadow on hover */
+        }
+
+
+
+
+        .listing-image-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .listing-image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Semi-transparent black */
+            opacity: 0;
+            /* Hidden by default */
+            transition: opacity 0.3s ease;
+            /* Smooth fade-in transition */
+            z-index: 1;
+            /* Ensures overlay is above the image but below the text */
+        }
+
+        .listing-image-container:hover::before {
+            opacity: 1;
+            /* Fully opaque on hover */
+        }
+
+        .listing-image-container span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+
+            color: white;
+            z-index: 2;
+            /* Ensures text is above the overlay */
+        }
+
+        .listing-image-container:hover span {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .listing-image-container:hover+.workshop-item {
+            transition: background-color 0.3s ease;
+        }
+
+        .listing-image-container:hover+.workshop-item {
+            background-color: var(--accent);
+        }
+    </style>
+
+<body>
+    <!-- Header -->
+    <div id="header-contact-container"></div>
+    <div id="header-container"></div>
+    <div id="header-banner-container"></div>
+
+    <!-- Popup Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Popup Containers -->
+    <div id="manufacturerReviewPopup" class="popup-container round-md bg-white" style="display: none;"></div>
+
+    <div id="workshopItemPopup" class="popup-container round-md bg-white" style="display: none;"></div>
+
+
+
+    <!-- Workshop Options Section -->
+    <br><br>
+    <div class="mw-container pb-sm h3">MANTENIMIENTO</div>`
+    <section id="workshopContainer" class="workshop-items mw-container pblk-lg"></section>
+    <br><br>
+
+
+    <!-- Footer -->
+    <div id="footer-container" class="bg-light pblk-lg"></div>
+
+
+
+
+    <script type="module">
+        import { loadHeaderAndFooter } from './js/pageSetup.js';
+        import { fetchResource } from './js/httpUtils.js';
+        import { initializePopup, createPopupHeader } from './js/popupUtils.js';
+
+        import { showManufacturerReview, showOilChange, showBrakes} from './js/popupWorkshop.js'
+
+        // Define the mapping of workshop items to their corresponding popup functions
+        const popupFunctions = {
+            "REVISIÓN DEL FABRICANTE": showManufacturerReview,
+            "CAMBIO DE ACEITE": showOilChange,
+            "FRENOS": showBrakes,
+            "BATERÍA": showBattery,
+            "AMORTIGUADORES": showShockAbsorbers,
+            "LIMPIAPARABRISAS": showWindscreenWiper,
+            "CLIMATIZACIÓN": showAirConditioning,
+            "KIT DE DISTRIBUCIÓN": showDistributionKit,
+            "MONTAJE Y EQUILIBRADO": showAssemblyAndBalance,
+            "PARABRISAS": showWindshield,
+            "CONTROLES ESPECÍFICOS": showSpecificControls,
+            "BUJÍAS": showSparkPlugs,
+            "ILUMINACIÓN": showLighting,
+            "TUBO DE ESCAPE": showExhaustPipe,
+            "CARROCERÍA": showBodywork,
+            "LUNAS": showWindows,
+            "PRE-ITV": showPreMOT
+        };
+
+        // Event listener for page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await loadHeaderAndFooter(); // Load header and footer asynchronously
+
+                // Fetch workshopItems.json after the page is loaded
+                const workshopItems = await fetchResource('data/workshopItems.json');
+                console.log(workshopItems); // Log the fetched data
+
+                if (workshopItems && workshopItems.length > 0) {
+                    // Create all workshop items and add them to the DOM in one operation
+                    const workshopContainer = document.getElementById('workshopContainer');
+                    const workshopHTML = workshopItems.map(createWorkshopItem).join('');
+                    workshopContainer.innerHTML = workshopHTML;  // Insert once
+
+                    // Add event listeners to buttons
+                    workshopItems.forEach(item => {
+                        document.getElementById(item.buttonId).addEventListener('click', (event) => {
+                            handleButtonClick(item, event);
+                        });
+                    });
+                } else {
+                    console.error('No workshop items found or the JSON is empty.');
+                }
+
+            } catch (error) {
+                console.error('Error initializing the page:', error);
+            }
+        });
+
+        /**
+         * Handles click event for workshop item buttons.
+         * @param {Object} item - The clicked workshop item.
+         * @param {Event} event - The event object.
+         */
+        function handleButtonClick(item, event) {
+            const popupFunction = popupFunctions[item.title];
+            if (popupFunction) {
+                popupFunction(event); // Call the corresponding popup function
+            } else {
+                console.warn(`No handler defined for: ${item.title}`);
+            }
+        }
+
+        // Function to create HTML for each workshop item
+        function createWorkshopItem(item) {
+            return `
+                <div id="${item.buttonId}" class="car-container cont-sdw round-lg mblk-xsm oh">
+                    <div class="listing-image-container rt-md">
+                        <img class="listing-image" alt="${item.title}" src="${item.imgSrc}" loading="lazy">
+                        <span class="h2 upper bold">VER MÁS</span>
+                    </div>
+                    <div class="workshop-item bg-light p-xsm">
+                        <div class="flex jc-center pb-xsm mx-xsm upper bold">${item.title}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+
+
+
+
+
+        function showBattery(event) {
+            alert('Showing battery details');
+        }
+
+        function showShockAbsorbers(event) {
+            alert('Showing shock absorbers details');
+        }
+
+        function showWindscreenWiper(event) {
+            alert('Showing windscreen wiper details');
+        }
+
+        function showAirConditioning(event) {
+            alert('Showing air conditioning details');
+        }
+
+        function showDistributionKit(event) {
+            alert('Showing distribution kit details');
+        }
+
+        function showAssemblyAndBalance(event) {
+            alert('Showing assembly and balancing details');
+        }
+
+        function showWindshield(event) {
+            alert('Showing windshield details');
+        }
+
+        function showSpecificControls(event) {
+            alert('Showing specific controls details');
+        }
+
+        function showSparkPlugs(event) {
+            alert('Showing spark plugs details');
+        }
+
+        function showLighting(event) {
+            alert('Showing lighting details');
+        }
+
+        function showExhaustPipe(event) {
+            alert('Showing exhaust pipe details');
+        }
+
+        function showBodywork(event) {
+            alert('Showing bodywork details');
+        }
+
+        function showWindows(event) {
+            alert('Showing windows details');
+        }
+
+        function showPreMOT(event) {
+            alert('Showing pre-MOT details');
+        }
+
+    </script>
+
+
+
+</body>
+
+</html>

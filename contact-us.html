@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Appraisal Form</title>
+
+    <!-- Load Icons -->
+    <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+    <!-- Preloading Stylesheets -->
+    <link rel="preload" href="css/root.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="css/style.css" as="style" onload="this.rel='stylesheet'">
+
+    <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+    <link rel="preload" href="style-popup-forms.css" as="style" onload="this.rel='stylesheet'">
+    <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+
+    <!-- Fallback for Non-JavaScript Users -->
+    <noscript>
+        <link rel="stylesheet" href="css/root.css">
+        <link rel="stylesheet" href="css/style.css">
+    </noscript>
+
+    <style>
+        .contact-wrapper {
+            display: grid;
+            gap: 1rem; /* Space between items */
+        }
+
+        .contact-wrapper {
+            grid-template-columns: minmax(19.5rem, 44.5rem) minmax(19.5rem, 34.5rem);
+            padding-block: 3rem;
+        }
+
+        /* Layout for Mobile */
+        @media (max-width: 768px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr; /* Single column layout */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-contact-container"></div>
+    <div id="header-container"></div>
+    <div id="header-banner-container"></div>
+
+    <main id="contactUs" class="mw-container flex contact-wrapper">
+        <div id="googleMaps"></div>
+        <div id="company-contact-form"></div>
+    </main>
+
+    <!-- Footer -->
+    <div id="footer-container" class="bg-light pblk-lg"></div>
+</body>
+
+<script type="module" defer>
+    import { loadHeaderAndFooter, loadMapAndContactForm } from './js/pageSetup.js';
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        await loadHeaderAndFooter(); // Load header and footer asynchronously
+        await loadMapAndContactForm(); // Load header and footer asynchronously
+    });
+</script>
+
+</html>

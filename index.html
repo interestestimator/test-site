@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inicio - Tu Empresa de Coches</title>
+
+        <!-- Load Icons -->
+        <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+        <!-- Preloading Stylesheets -->
+        <link rel="preload" href="css/root.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="css/style.css" as="style" onload="this.rel='stylesheet'">
+        <link rel="preload" href="css/style-listings.css" as="style" onload="this.rel='stylesheet'">
+    
+        <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+        <link rel="preload" href="style-popup-forms.css" as="style" onload="this.rel='stylesheet'">
+        <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+    
+        <!-- Fallback for Non-JavaScript Users -->
+        <noscript>
+            <link rel="stylesheet" href="css/root.css">
+            <link rel="stylesheet" href="css/style.css">
+            <link rel="stylesheet" href="css/style-listings.css">
+        </noscript>
+
+
+    <style>
+        .home-hero {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 23 / 8;
+        }
+
+        /* Adjust aspect ratio for smaller screens */
+        @media (max-width: 768px) {
+            .home-hero {
+                aspect-ratio: 4 / 3;
+                /* Example ratio for mobile devices */
+            }
+        }
+
+        @media (max-width: 480px) {
+            .home-hero {
+                aspect-ratio: 3 / 4;
+                /* Example ratio for very small screens */
+            }
+        }
+
+        .home-hero__video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .home-hero__video video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            /* Cover the entire banner area */
+        }
+
+        .home-hero__video-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            /* Semi-transparent overlay */
+            pointer-events: none;
+            /* Ensure the overlay doesn't interfere with clicking */
+        }
+
+        .home-hero__content-top,
+        .home-hero__content-bottom {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .home-hero__content-top {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .home-hero__content-bottom {
+            bottom: 20px;
+        }
+
+        .home-hero__title {
+            font-size: 2.5em;
+            margin: 0;
+        }
+
+        .home-hero__subtitle {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        .home-hero__description {
+            font-size: 1em;
+            margin: 20px 0;
+        }
+
+        .home-hero__btn {
+            display: inline-block;
+            padding: 10px 20px;
+            color: #111111;
+            background-color: #FFFFFF;
+            text-decoration: none;
+            border-radius: 50px;
+            margin: 5px;
+        }
+
+        .home-hero__btn:hover {
+            background-color: #CACACB;
+        }
+    </style>
+</head>
+
+<body>
+
+
+    <div id="HeaderContainer">
+        <!-- Header -->
+        <div id="header-contact-container"></div>
+        <div id="header-container"></div>
+        <div id="header-banner-container"></div>
+    </div>
+
+    <!-- Main content -->
+    <div class="home-hero">
+        <div class="home-hero__video">
+            <video id="home-video" autoplay loop muted playsinline preload="metadata" poster="bannerFrameOne.png">
+                <source
+                    src="https://dm0qx8t0i9gc9.cloudfront.net/watermarks/video/SNv7Pyhimz0q0vg/videoblocks-642a8b821831477418f79948_hllqivub2__96a0e19fa34238b67a9703e8b6db0418__P360.mp4"
+                    type="video/mp4">
+                Tu navegador no soporta el elemento de video.
+            </video>
+            <div class="home-hero__video-overlay"></div>
+        </div>
+
+        <div class="home-hero__content-top">
+            <h1 class="home-hero__title">
+                Más de 40 concesionarios oficiales
+            </h1>
+            <p class="home-hero__subtitle">
+                Tenemos tu coche de ocasión
+            </p>
+        </div>
+
+        <div class="home-hero__content-bottom">
+            <p class="home-hero__description">
+                Más de 1.000 coches en stock con entrega en 72h. Única empresa de vehículos en España con más de 50
+                años de experiencia. Grupo Martinez.
+            </p>
+            <div>
+                <a href="https://www.sibuscascoche.com/coches-ocasion" class="home-hero__btn">
+                    <span class="fa-regular fa-cars"></span> Comprar coche
+                </a>
+                <a href="https://www.sibuscascoche.com/compramos-tu-coche" class="home-hero__btn">
+                    <span class="fa-regular fa-shield-check"></span> Vender mi coche
+                </a>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+        <a href="vehiculos-ocasion.html?fuel=electric" class="home-hero__btn">
+            <span class="fa-regular fa-shield-check"></span> Vender mi coche
+        </a>
+    </div>
+
+
+    <!-- Fuel Type Buttons -->
+    <div class="fuel-type-buttons">
+        <a href="/vehiculos-nuevos.html?brand=SERES" class="home-hero__btn">
+            SERES
+        </a>
+        <a href="/vehiculos-nuevos.html?brand=DFSK" class="home-hero__btn">
+            DFSK
+        </a>
+        <a href="/vehiculos-nuevos.html?brand=SWM" class="home-hero__btn">
+            SWM
+        </a>
+        <a href="" class="home-hero__btn">
+            Peugeot
+        </a>
+    </div>
+
+
+    <!-- Fuel Type Buttons -->
+    <div class="fuel-type-buttons">
+        <a href="vehiculos-ocasion.html?fuel=petrol" class="home-hero__btn">
+            Gasolina
+        </a>
+        <a href="vehiculos-ocasion.html?fuel=diesel" class="home-hero__btn">
+            Diésel
+        </a>
+        <a href="vehiculos-ocasion.html?fuel=hybrid" class="home-hero__btn">
+            Híbrido
+        </a>
+        <a href="vehiculos-ocasion.html?fuel=electric" class="home-hero__btn">
+            Eléctrico
+        </a>
+    </div>
+
+
+    <!-- Body Type Buttons -->
+    <div class="body-type-buttons">
+        <a href="vehiculos-ocasion.html?body=suv" class="home-hero__btn">
+            SUV
+        </a>
+        <a href="vehiculos-ocasion.html?body=sedan" class="home-hero__btn">
+            Sedán
+        </a>
+        <a href="vehiculos-ocasion.html?body=hatchback" class="home-hero__btn">
+            Hatchback
+        </a>
+        <a href="vehiculos-ocasion.html?body=coupe" class="home-hero__btn">
+            Coupé
+        </a>
+        <a href="vehiculos-ocasion.html?body=convertible" class="home-hero__btn">
+            Convertible
+        </a>
+        <a href="vehiculos-ocasion.html?body=wagon" class="home-hero__btn">
+            Familiar
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <div id="footer-container" class="bg-light pblk-lg"></div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { loadHeaderAndFooter } from './js/pageSetup.js';
+
+        async function loadHtml(containerId, url) {
+            const response = await fetch(url);
+            const html = await response.text();
+            document.getElementById(containerId).innerHTML = html;
+        }
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                await loadHeaderAndFooter(); // Load header and footer asynchronously
+
+            } catch (error) {
+                console.error('Error loading header or footer:', error);
+            }
+        });
+
+         
+    </script>
+</body>
+
+</html>

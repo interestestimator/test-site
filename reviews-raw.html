@@ -1,0 +1,62 @@
+<style>
+    .review-item {
+        box-sizing: border-box;
+        flex: 1;
+        min-height: 11rem;
+    }
+
+    /* Add margin to create gaps between items, except for the last item */
+    .review-item:not(:last-child) {
+        margin-right: var(--xsm);
+    }
+
+
+
+
+    .review-nav-button {
+        width: calc(50% - .25rem);
+    }
+
+    .review-nav-button.disabled {
+        background-color: var(--dark-gray);
+        cursor: not-allowed;
+    }
+</style>
+
+<div class="rt-md cont-sdw px-lg pblk-lg bg-light">
+    <div class="company-details light">
+        <div class="pblk-lg">
+            <div class="h3">Reseñas de Clientes</div>
+            <div class="pt-xsm pb-md b1 txt-darker">Honestidad y Confianza
+                <br>
+                <span class="pt-md b2 italic txt-dark">
+                    Porque no es lo mismo que lo digamos nosotros a que lo digan nuestros clientes.
+                    Entra a ver nuestras reseñas de Google para ver opiniones real y honesta.
+                </span>
+            </div>
+        </div>
+        <div id="googleReviewsContainer" class="flex fd-col ai-center">
+            <!-- Dynamic content will be inserted here -->
+        </div>
+    </div>
+    <div class="btn round-xlg mblk-sm px-lg pblk-sm bg-darker txt-light center">
+        <a href="https://maps.app.goo.gl/sQnD9PTjxBvz9rxY8" target="_blank" rel="noopener noreferrer nofollow">
+            <span class="h4">Ver Opiniones en Google</span>
+        </a>
+    </div>
+</div>
+<div class="flex jc-between mblk-sm">
+    <label id="reviewPrevBtn" class="review-nav-button btn-op flex rr-lg jc-between italic bg-accent ai-center">
+        <span class="px-lg h4 txt-light">Ant</span>
+        <img class="img-32 p-xsm" src="icons/ui/navigation/dropdown-closed.svg" alt="Dropdown Icon">
+    </label>
+    <label id="reviewNextBtn" class="review-nav-button btn-op flex rl-lg jc-between italic bg-accent ai-center">
+        <img class="img-32 p-xsm" src="icons/ui/navigation/dropdown-closed.svg" alt="Dropdown Icon"
+            style="transform: rotate(180deg)">
+        <span class="px-lg h4 txt-light">Sig</span>
+    </label>
+</div>
+<div id="reviewWrapper" class="thumbnail-container oh flex jc-between rb-md mblk-xsm txt-medium">
+    <!-- Reviews will be loaded here -->
+</div>
+

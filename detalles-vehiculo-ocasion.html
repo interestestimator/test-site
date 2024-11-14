@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Details</title>
+
+    <!-- Load Icons -->
+    <link rel="icon" href="icons/company/favicon.ico" type="image/x-icon">
+
+    <!-- Preloading Stylesheets -->
+    <link rel="preload" href="css/root.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="css/style.css" as="style" onload="this.rel='stylesheet'">
+    <link rel="preload" href="css/style-details.css" as="style" onload="this.rel='stylesheet'">
+
+    <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+    <link rel="preload" href="style-popup-forms.css" as="style" onload="this.rel='stylesheet'">
+    <!-- ////////////////////////////////////////////////////// //////////////////////////// -->
+
+    <!-- Fallback for Non-JavaScript Users -->
+    <noscript>
+        <link rel="stylesheet" href="css/root.css">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="css/style-details.css">
+    </noscript>
+</head>
+
+<body>
+    <!-- Header -->
+    <div id="header-contact-container"></div>
+    <div id="header-container"></div>
+    <div id="header-banner-container"></div>
+
+    <!-- Popup Overlay -->
+    <div id="overlay" class="overlay"></div>
+
+    <!-- Popup Containers -->
+    <div id="contactPopup" class="popup-container round-md bg-white" style="display: none;"></div>
+    <div id="informationPopup" class="popup-container round-md bg-white" style="display: none;"></div>
+
+
+    <div class="mw-container flex jc-between content-wrapper">
+        <div id="carTitle" class="h3 pt-lg"></div>
+        <div id="sidebarDiscountDiv" class="flex fd-col jc-end"></div>
+        <div class="flex fd-col">
+            <div id="vehicleGalleryContainer"></div>
+            <div id="carOverviewContainer" class="car-details pt-md"></div>
+        </div>
+
+        <div class="sticky-finance flex fd-col">
+            <!-- Pricing and payment information -->
+            <section id="carFinanceContainer" class="cont-sdw round-md oh"></section>
+        </div>
+
+        <div class="flex fd-col">
+            <!-- Other information about car listing -->
+            <section id="otherDetails">
+                <div id="garantiaContainer" class="section"></div>
+                <div class="light">
+                    <div class="h3">HISTORIA DEL VEHÍCULO</div>
+                    <div class="pt-xsm pb-md b1">
+                        Descubre todos los detalles del historial del vehículo, desde su mantenimiento hasta sus propietarios 
+                        anteriores, para que puedas tomar una decisión informada.
+                    </div>
+                </div>
+                <div id="carHistoryContainer" class="car-details pt-md"></div>
+                <div id="specsContainer" class="mblk-lg"></div>
+            </section>
+
+            <!-- Finance adjustment calculations -->
+            <section id="vehicle-financing" class="pblk-lg pr-md cont-sdw round-md bg-darkist">
+                <!-- Headding and description -->
+                <div class="px-md h3 txt-medium">Financiación 100% sin entrada requerida</div>
+                <div class="px-md b1 pt-xsm pb-md light txt-medium">¡Aprovecha grandes descuentos al financiar con nosotros!</div>
+
+                <!-- Controls Section -->
+                <div class="financing-calculator__controls">
+                    <!-- Initial Deposit -->
+                    <div class="pb-md">
+                        <label id="resetDepositButton" class="flex rr-lg jc-between bg-dark ai-center b2">
+                            <span class="px-lg h4 italic txt-medium">Entrada</span>
+                            <span id="financeDepositDisplay" class="value mr-sm h4 txt-light">10.000 €</span>
+                            <img id="resetDepositIcon" class="img-32 p-xsm dropdown-icon greyscale" 
+                                src="icons/ui/actions/reset-values.svg" alt="Reset Values Icon">
+                        </label>
+                        <div class="rbr-md mr-md pblk-md bg-darker">
+                            <div class="px-lg">
+                                <span class="b2 light italic txt-medium" id="max-deposit-text">Máxima: 5.400€</span>
+                                <input id="deposit-slider" class="rangeSlider btn" type="range" min="0" step="100">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Initial Term -->
+                    <div class="pb-md">
+                        <label id="resetTermButton" class="flex rr-lg jc-between bg-dark ai-center b2">
+                            <span class="px-lg h4 italic txt-medium">Duración</span>
+                            <span id="financeTermDisplay" class="value mr-sm h4 txt-light">10 años</span>
+                            <img id="resetTermIcon" class="img-32 p-xsm dropdown-icon greyscale"
+                                src="icons/ui/actions/reset-values.svg" alt="Reset Values Icon">
+                        </label>
+                        <div class="rbr-md mr-md pblk-md bg-darker">
+                            <div class="px-lg">
+                                <span class="b2 light italic txt-medium" id="max-deposit-text">Máxima: 10 años</span>
+                                <input id="term-slider" class="rangeSlider btn" type="range" min="2" max="10" step="1">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Quota Button -->
+                    <div class="btn rr-lg px-lg pblk-sm bg-accent">
+                        <span id="requestFinanceBtn" class="flex jc-between txt-light h4 italic">Consulta cuota
+                            <span id="requestFinanceBtnPmtDisplay" class="amount">347,3&nbsp;€/mes</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Summary Section -->
+                <div id="loanPopup" class="financing-calculator__summary mt-4">
+                    <!-- Popup content will be injected here by JavaScript -->
+                </div>
+
+            </section>
+
+            <section id="companyOverviewContainer">
+                <div id="company-reviews-container" class="pt-lg"></div>
+                <div id="ContactSection" class="pblk-lg">
+                    <div id="googleMaps" class="pblk-md round-md"></div>
+                    <div id="company-contact-form"></div>
+                </div>
+                <div id="companyAdvantagesContainer" class="company-details pb-lg"></div>
+            </section>
+
+        </div>
+
+    </div><br><br>
+
+    <!-- Footer -->
+    <div id="footer-container" class="bg-light pblk-lg"></div>
+</body>
+
+<script type="module" defer>
+    //import { loadHeaderAndFooter } from './js/pageSetup.js';
+    import { createInitialSiteState, getCarDetailsDOMElements } from './js/siteSetup.js';
+    import { loadCarDetails } from './js/carDataFetcher.js';
+    import { populateCarSections } from './js/populateCarSections.js';
+    import { initializeOverviewDetails, initializeHistoryDetails, initializeCompanyAdvantages } from './js/carDetails.js';
+    import { initializeCheckboxes, setupCheckboxEventListeners } from './js/checkboxRenderer.js';
+    import { fetchFinanceData } from './js/financeCalcUpdater.js';
+    import { setupButtonEventListener } from './js/formPopup.js'; // Consider renaming for clarity
+    import { initializeImageGallery } from './js/imageGallery.js';
+
+    import { loadHeaderAndFooter, loadMapAndContactForm, loadCompanyReviews } from './js/pageSetup.js'; //.............. ADDED TODAY FOR COMPANY SECTION ..............//
+
+    document.addEventListener('DOMContentLoaded', async () => {
+        try {
+            await initializeApp();
+
+            // Load less critical functions after the main app is initialized
+            setTimeout(async () => {
+                loadMapAndContactForm(); // Load map and contact form asynchronously
+
+                // Await the loading of company reviews to ensure reviews are properly fetched before continuing
+                await loadCompanyReviews();
+
+                initializeCompanyAdvantages(); // Initialize company advantages
+            }, 0); // Delay execution to ensure main content is loaded first
+
+        } catch (error) {
+            console.error('Error during app initialization:', error);
+        }
+    });
+
+    async function initializeApp() {
+        await loadHeaderAndFooter(); // Load header and footer asynchronously
+
+        const state = createInitialSiteState(); // Create initial state
+        const elements = getCarDetailsDOMElements(); // Get DOM elements specific to car details
+
+        // Load car details for a used car using the dynamically generated folder name
+        state.currentCarData = await loadCarDetails(`listings/${state.carId}`, false);
+
+        const { currentCarData } = state;
+
+        if (currentCarData) {
+            setupUI(currentCarData, state, elements);
+        }
+    }
+
+    function setupUI(currentCarData, state, elements) {
+        populateCarSections(elements, currentCarData, false);
+        fetchFinanceData(elements, currentCarData); // Consider renaming for clarity
+        initializeCheckboxes(currentCarData);
+        setupEventListeners(state, currentCarData);
+        initializeOverviewDetails(currentCarData, false); // Defaults to isNewCar = false
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        initializeHistoryDetails(currentCarData, false); // Defaults to isNewCar = false ////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+        initializeImageGallery(currentCarData, 'vehicle', false, state, 'listings'); // Uses listings-nuevos
+    }
+
+    /**
+     * Sets up event listeners for various UI components.
+     * @param {Object} state - The state object.
+     * @param {Object} currentCarData - The current car data object.
+     */
+    function setupEventListeners(state, currentCarData) {
+        const { brand, model, version, rawPrice, rawFinancePrice } = currentCarData;
+        const carReference = `${brand} ${model} ${version}`;
+
+        // Set up event listeners and MutationObserver
+        setupButtonEventListener(carReference, currentCarData);
+        setupCheckboxEventListeners(state, rawPrice, rawFinancePrice);
+    }
+</script>

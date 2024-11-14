@@ -1,0 +1,61 @@
+/* futura-fonts.css */
+/* Futura Font Family */
+@font-face {
+    font-family: 'MyCustomFutura';
+    src: url('../fonts/FuturaPTBook.woff2') format('woff2'), /* Super modern browsers */
+         url('../fonts/FuturaPTBook.woff') format('woff'),   /* Modern browsers */
+         url('../fonts/FuturaPTBook.otf') format('opentype'); /* Fallback for older browsers */
+    font-weight: 300; /* Light */
+    font-style: normal;
+    font-display: swap; /* Improve loading performance */
+}
+
+@font-face {
+    font-family: 'MyCustomFutura';
+    src: url('../fonts/FuturaPTBookOblique.woff2') format('woff2'),
+         url('../fonts/FuturaPTBookOblique.woff') format('woff'),
+         url('../fonts/FuturaPTBookOblique.otf') format('opentype');
+    font-weight: 300; /* Light */
+    font-style: italic;
+    font-display: swap; /* Improve loading performance */
+}
+
+@font-face {
+    font-family: 'MyCustomFutura';
+    src: url('../fonts/FuturaPTDemi.woff2') format('woff2'),
+         url('../fonts/FuturaPTDemi.woff') format('woff'),
+         url('../fonts/FuturaPTDemi.otf') format('opentype');
+    font-weight: 500; /* Demi/Bold */
+    font-style: normal;
+    font-display: swap; /* Improve loading performance */
+}
+
+@font-face {
+    font-family: 'MyCustomFutura';
+    src: url('../fonts/FuturaPTDemiOblique.woff2') format('woff2'),
+         url('../fonts/FuturaPTDemiOblique.woff') format('woff'),
+         url('../fonts/FuturaPTDemiOblique.otf') format('opentype');
+    font-weight: 500; /* Demi/Bold */
+    font-style: italic;
+    font-display: swap; /* Improve loading performance */
+}
+
+@font-face {
+    font-family: 'MyCustomFutura';
+    src: url('../fonts/FuturaPTBold.woff2') format('woff2'),
+         url('../fonts/FuturaPTBold.woff') format('woff'),
+         url('../fonts/FuturaPTBold.otf') format('opentype');
+    font-weight: 700; /* Bold */
+    font-style: normal;
+    font-display: swap; /* Improve loading performance */
+}
+
+@font-face {
+    font-family: 'MyCustomFutura';
+    src: url('../fonts/FuturaPTBoldOblique.woff2') format('woff2'),
+         url('../fonts/FuturaPTBoldOblique.woff') format('woff'),
+         url('../fonts/FuturaPTBoldOblique.otf') format('opentype');
+    font-weight: 700; /* Bold */
+    font-style: italic;
+    font-display: swap; /* Improve loading performance */
+}

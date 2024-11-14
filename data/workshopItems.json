@@ -1,0 +1,87 @@
+[
+    {
+        "title": "REVISIÓN DEL FABRICANTE",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/ap_2018_atelier_diagnostique_workshop_diagnostic_0012(2).jpg",
+        "buttonId": "manufacturerReview"
+    },
+    {
+        "title": "CAMBIO DE ACEITE",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/ap_2018_atelier_vidange_workshop_drain_0014(2).jpg",
+        "buttonId": "oilChange"
+    },
+    {
+        "title": "FRENOS",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/ap_2020_brakes_13(3).jpg",
+        "buttonId": "brakes"
+    },
+    {
+        "title": "BATERÍA",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/ap_2018_atelier_batteries_workshop_battery_0012(7).jpg",
+        "buttonId": "battery"
+    },
+    {
+        "title": "AMORTIGUADORES",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/freno.jpg",
+        "buttonId": "shockAbsorbers"
+    },
+    {
+        "title": "LIMPIAPARABRISAS",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/ap_2020_windscreen_wiper2(3).jpg",
+        "buttonId": "windscreenWiper"
+    },
+    {
+        "title": "CLIMATIZACIÓN",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-clima.jpg",
+        "buttonId": "airConditioning"
+    },
+    {
+        "title": "KIT DE DISTRIBUCIÓN",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/distribution(2)(4).png",
+        "buttonId": "distributionKit"
+    },
+    {
+        "title": "MONTAJE Y EQUILIBRADO",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/montaje.jpg",
+        "buttonId": "assemblyAndBalance"
+    },
+    {
+        "title": "PARABRISAS",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/ap_2020_windscreen22(3).jpg",
+        "buttonId": "windshield"
+    },
+    {
+        "title": "CONTROLES ESPECÍFICOS",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-controles_espeficos_02.jpg",
+        "buttonId": "specificControls"
+    },
+    {
+        "title": "BUJÍAS",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-bujias.jpg",
+        "buttonId": "sparkPlugs"
+    },
+    {
+        "title": "ILUMINACIÓN",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-iluminacion.jpg",
+        "buttonId": "lighting"
+    },
+    {
+        "title": "TUBO DE ESCAPE",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-escape_01.jpg",
+        "buttonId": "exhaustPipe"
+    },
+    {
+        "title": "CARROCERÍA",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-carroceria_01.jpg",
+        "buttonId": "bodywork"
+    },
+    {
+        "title": "LUNAS",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-lunas.jpg",
+        "buttonId": "windows"
+    },
+    {
+        "title": "PRE-ITV",
+        "imgSrc": "https://espeugeotcmsimages.carusseldwt.com/getImage/HtmlEditorImages/country_1619693623115/405x254-edealers-apv-controles_espeficos_01.jpg",
+        "buttonId": "preMOT"
+    }
+]

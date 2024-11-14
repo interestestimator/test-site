@@ -1,0 +1,164 @@
+/* *********************** */
+/*  COLUMNS AND STICKY CSS */
+/* *********************** */
+
+.content-wrapper,
+.car-details,
+.company-details {
+    display: grid;
+    gap: 1rem; /* Space between items */
+}
+
+.content-wrapper {
+    grid-template-columns: minmax(23rem, 49rem) minmax(22rem, 30rem);
+}
+
+.car-details {
+    grid-template-columns: repeat(auto-fill, minmax(9.75rem, 1fr)); /* Automatically adjusts columns */
+}
+
+.company-details {
+    grid-template-columns: repeat(auto-fill, minmax(19.5rem, 1fr)); /* Automatically adjusts columns */
+}
+
+/* Sticky Positioning for Right Column */
+.sticky-finance {
+    position: sticky;
+    top: 1rem;
+}
+
+/* Layout for Mobile */
+@media (max-width: 768px) {
+    .content-wrapper {
+        grid-template-columns: 1fr; /* Single column layout */
+    }
+
+    .sticky-finance {
+        position: static; /* Remove sticky on mobile */
+    }
+}
+
+/* *********************** */
+/*  INTERACTIVE ELEMENTS   */
+/* *********************** */
+
+.contrast {
+    background-color: var(--accent);
+    color: var(--light-gray); 
+}
+
+.checkbox-wrapper input[type="checkbox"] {
+    display: none;
+}
+
+/* *********************** */
+/*    DROPDOWN STYLING     */
+/* *********************** */
+
+/* Hide dropdown content by default */
+.features-dropdown-content,
+.specs-dropdown-content {
+    display: none;
+}
+
+/* Show dropdown content when .show is added */
+.features-dropdown-content.show,
+.specs-dropdown-content.show {
+    display: block;
+}
+
+/* Alternate row background color for spec items */
+.spec-item:nth-child(odd) {
+    background-color: var(--light-gray);
+}
+
+/* *********************** */
+/*  GALLERY ELEMENTS       */
+/* *********************** */
+
+.nav-button-container {
+    position: absolute;                 /* Positioned absolutely within the image container */
+    top: 50%;                           /* Vertically centered */
+    transform: translateY(-50%);       /* Center adjustment */ 
+    width: calc(100% - .5rem);          /* Full width minus margin */
+}
+
+.nav-button {
+    opacity: 0.4;                      /* Initial opacity */
+    cursor: pointer;
+}
+
+.thumbnail-image {
+    width: calc(25% - 0.25rem);         /* Thumbnail width with margin adjustment */
+    opacity: 0.6;                       /* Visual effect */
+}
+
+.thumbnail-image.active {
+    opacity: 1;                         /* Full opacity for active thumbnail */
+}
+
+
+/* *********************** */
+/*    CHECKBOX STYLING     */
+/* *********************** */
+.checkbox-wrapper label {
+    cursor: pointer;
+    width: 3rem;
+    height: 2rem;
+    background: var(--dark-gray);
+    border-radius: var(--lg);
+    position: relative;
+    overflow: hidden;
+    display: block;
+}
+
+.checkbox-wrapper label::after {
+    content: '';
+    position: absolute;
+    top: 0.15rem;
+    left: 0.15rem;
+    width: 1.7rem;
+    height: 1.7rem;
+    background: var(--white);
+    border-radius: 50%; 
+    transition: transform 0.3s;
+}
+
+.checkbox-wrapper input:checked + label {
+    background: var(--accent);
+}
+
+.checkbox-wrapper input:checked + label::after {
+    transform: translateX(1rem);
+}
+
+
+
+
+/* *********************** *//* *********************** *//* *********************** *//* *********************** *//* *********************** *//* *********************** */
+.box { flex: 1; }
+
+.rangeSlider {
+    accent-color: var(--accent);
+    width: 100%;
+}
+
+#regionDropdown {
+    border: 0;
+}
+
+/* Greyscale filter */
+.greyscale {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+#googleMaps {
+    width: 100%;
+    height: 400px;
+}
+
+.value {
+    margin-left: auto;
+}
+/* *********************** *//* *********************** *//* *********************** *//* *********************** *//* *********************** *//* *********************** */
